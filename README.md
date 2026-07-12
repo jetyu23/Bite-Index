@@ -118,14 +118,3 @@ planning, **not official predictions, not for navigation**. Swell is one offshor
 a turbidity proxy. Every weight is codified judgment, clearly labelled, pending v3 validation. Moon
 factors are included at low weight and tagged LOW EVIDENCE on the site rather than hidden.
 
-## Interview talking points (why this exists)
-
-- Variable-weighting model: same inputs → 12 profiles → 12 defensible answers; demo the day where
-  rock flags red while beach stays fishable from the *same* swell number.
-- Calibration story: v1 scored everything 60+; fixed with a documented curve recentring plus an
-  empirical percentile calibration (no ML, just a CDF) so 50 means a median day by construction.
-- Hard safety override vs weighted factor — a design decision about what must never be tradeable.
-- Best-rolling-3h-window aggregation vs daily averages — why the aggregation choice is a modelling
-  choice.
-- Missing-data policy: neutral 50 + visible warning, never imputation dressed up as data.
-- Single source of truth: the methodology page renders from the exact JSON the engine scores with.
