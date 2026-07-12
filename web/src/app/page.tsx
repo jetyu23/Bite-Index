@@ -54,7 +54,12 @@ export default function Home() {
           </p>
           {(() => {
             const bestId = today.environments.reduce((a, b) => (b.score > a.score ? b : a)).id;
-            return today.environments.map((e) => <EnvRow env={e} best={e.id === bestId} key={e.id} />);
+            const ordered = [...today.environments].sort((a, b) => {
+              if (a.id === bestId) return -1;
+              if (b.id === bestId) return 1;
+              return 0;
+            });
+            return ordered.map((e) => <EnvRow env={e} best={e.id === bestId} key={e.id} />);
           })()}
         </section>
 
