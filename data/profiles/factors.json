@@ -1,0 +1,199 @@
+{
+ "_comment": "Shared factor dictionary. Every profile (environment or species) references these metric ids. 'evidence' labels how well-supported the factor is: 'strong' (physical/biological mechanism, widely documented), 'moderate' (consistent angling literature + experience), 'low' (folklore/solunar; included transparently, weighted low). Note templates are used to build plain-language 'why' strings; {v} is the formatted value.",
+ "metrics": {
+  "tide_speed": {
+   "label": "Tide flow",
+   "unit": "",
+   "fmt": "flow {v:.0%} of peak",
+   "granularity": "hour",
+   "evidence": "strong",
+   "description": "Rate of water movement, normalised 0-1 against the day's fastest flow. Moving water pushes bait and triggers feeding; slack water is generally slow fishing.",
+   "note_pos": "water moving hard",
+   "note_neg": "slack, lazy water",
+   "plain": "How hard the water is moving right now. Moving water moves bait; still water moves nothing, including fish."
+  },
+  "tide_mins_to_turn": {
+   "label": "Time to tide change",
+   "unit": "min",
+   "fmt": "{v:.0f} min to turn",
+   "granularity": "hour",
+   "evidence": "moderate",
+   "description": "Minutes until the next high or low. Many species bite in a window either side of the change.",
+   "note_pos": "right on the tide change",
+   "note_neg": "mid-tide, far from the change",
+   "plain": "How long until the tide turns. The change is a classic bite window, so being there for it beats being early to nothing."
+  },
+  "tide_range": {
+   "label": "Tidal range",
+   "unit": "m",
+   "fmt": "{v:.1f} m range",
+   "granularity": "day",
+   "evidence": "strong",
+   "description": "High-minus-low for the day. Bigger (spring) tides move more water and more bait.",
+   "note_pos": "big spring tides moving plenty of water",
+   "note_neg": "small neap tides, little water movement",
+   "plain": "The gap between today's high and low. Big range = strong flow = more happening. Small range = the harbour on decaf."
+  },
+  "light_phase": {
+   "label": "Light",
+   "unit": "",
+   "fmt": "{v}",
+   "granularity": "hour",
+   "evidence": "strong",
+   "description": "Dawn / day / dusk / night, from computed sun times. Low-light changeovers are prime feeding windows for most species.",
+   "note_pos": "low light; prime feeding window",
+   "note_neg": "bright midday sun",
+   "plain": "Dawn, day, dusk or night. Fish, like students, do their best work at dawn and dusk."
+  },
+  "moon_illum": {
+   "label": "Moon phase",
+   "unit": "",
+   "fmt": "{v:.0%} lit",
+   "granularity": "day",
+   "evidence": "low",
+   "description": "Fraction of moon illuminated. Solunar theory is weakly evidenced; the real, physical effect of the moon (bigger tides at new/full) is already captured by tidal range, so this factor carries a deliberately small weight.",
+   "note_pos": "new/full moon period",
+   "note_neg": "quarter moon",
+   "plain": "How much moon is showing. Anglers have argued about this for centuries; the fish are yet to confirm. Scored small, labelled folklore."
+  },
+  "pressure": {
+   "label": "Barometric pressure",
+   "unit": "hPa",
+   "fmt": "{v:.0f} hPa",
+   "granularity": "hour",
+   "evidence": "moderate",
+   "description": "Sea-level pressure. Settled high pressure generally correlates with steadier bites; deep lows mean unstable weather.",
+   "note_pos": "settled high pressure",
+   "note_neg": "deep low pressure system",
+   "plain": "Air pressure. Fish allegedly consult the barometer before biting. The evidence says 'maybe', so it gets a modest weight."
+  },
+  "pressure_trend": {
+   "label": "Pressure trend (24h)",
+   "unit": "hPa",
+   "fmt": "{v:+.1f} hPa/24h",
+   "granularity": "day",
+   "evidence": "moderate",
+   "description": "Change over the past 24 hours. Stable or gently falling pressure often fishes well; a sharp rise after a front is a classic shutdown.",
+   "note_pos": "steady glass",
+   "note_neg": "pressure swinging hard after a change",
+   "plain": "Which way the barometer moved in 24 hours. A falling glass before a front is the classic 'go now' signal of pub wisdom."
+  },
+  "wind_kn": {
+   "label": "Wind speed",
+   "unit": "kn",
+   "fmt": "{v:.0f} kn",
+   "granularity": "hour",
+   "evidence": "strong",
+   "description": "10 m wind speed in knots. Mostly a comfort/safety/castability factor; critical offshore.",
+   "note_pos": "light winds",
+   "note_neg": "blowing hard",
+   "plain": "Wind speed. Some chop helps; a gale helps nobody, least of all your casting."
+  },
+  "wind_onshore_kn": {
+   "label": "Onshore wind",
+   "unit": "kn",
+   "fmt": "{v:+.0f} kn onshore",
+   "granularity": "hour",
+   "evidence": "moderate",
+   "description": "Wind component blowing onto the coast (positive = onshore, negative = offshore/westerly). A light-moderate onshore stirs the surf zone and pushes bait to the beach; a strong onshore blows it out and brings weed.",
+   "note_pos": "onshore breeze stirring the wash",
+   "note_neg": "strong onshore blowing it out",
+   "plain": "How much of the wind blows straight onto the coast. Offshore grooms the surf; hard onshore turns it to washing machine."
+  },
+  "swell_m": {
+   "label": "Swell height",
+   "unit": "m",
+   "fmt": "{v:.1f} m swell",
+   "granularity": "hour",
+   "evidence": "strong",
+   "description": "Primary swell height. White water is food and cover on rocks/beaches; until it becomes dangerous or unfishable. Irrelevant inside the estuary.",
+   "note_pos": "workable wash",
+   "note_neg": "swell out of range",
+   "plain": "Swell height. The single most important number for rocks and beaches, in opposite directions."
+  },
+  "swell_period_s": {
+   "label": "Swell period",
+   "unit": "s",
+   "fmt": "{v:.0f} s period",
+   "granularity": "hour",
+   "evidence": "strong",
+   "description": "Seconds between sets. Long-period swell carries far more energy at the same height; a key hidden danger on rock platforms.",
+   "note_pos": "manageable period",
+   "note_neg": "long-period sets surging through",
+   "plain": "Seconds between swells. Long period = far more energy at the same height, and the reason a '1.6 m day' can still hose a ledge."
+  },
+  "sst_c": {
+   "label": "Water temp",
+   "unit": "\u00b0C",
+   "fmt": "{v:.1f} \u00b0C water",
+   "granularity": "day",
+   "evidence": "strong",
+   "description": "Sea surface temperature. Species presence and activity are strongly temperature-driven (e.g. kingfish switch on above ~19 \u00b0C).",
+   "note_pos": "water temp in the zone",
+   "note_neg": "water temp off the mark",
+   "plain": "Water temperature. Species have comfort bands; kingfish switch on past about 21 \u00b0C and sulk below 18."
+  },
+  "rain_24h": {
+   "label": "Rain (24h)",
+   "unit": "mm",
+   "fmt": "{v:.0f} mm/24h",
+   "granularity": "day",
+   "evidence": "moderate",
+   "description": "Rain in the last 24 hours.",
+   "note_pos": "fresh rain in the system",
+   "note_neg": "flood-level runoff",
+   "plain": "Rain in the last day. Yes, rain: water, from the sky. Here it means fresh colour pushing into the estuaries."
+  },
+  "rain_72h": {
+   "label": "Rain (72h)",
+   "unit": "mm",
+   "fmt": "{v:.0f} mm/72h",
+   "granularity": "day",
+   "evidence": "moderate",
+   "description": "Rain over the last 3 days; a turbidity/runoff proxy. Moderate runoff colours the water, washes food in and fires up estuary predators (classic mulloway trigger). Too much shuts everything down and dirties the harbour.",
+   "note_pos": "runoff has coloured the water nicely",
+   "note_neg": "system blown out with dirty flood water",
+   "plain": "Rain over the last three days. A light stain fires estuaries up; chocolate flood water shuts them down."
+  },
+  "rain_today": {
+   "label": "Rain forecast today",
+   "unit": "mm",
+   "fmt": "{v:.0f} mm forecast",
+   "granularity": "day",
+   "evidence": "moderate",
+   "description": "Forecast rain for the day itself; mostly a comfort factor, heavy rain during the session is miserable and dangerous on rocks.",
+   "note_pos": "dry session likely",
+   "note_neg": "wet session forecast",
+   "plain": "Rain falling on the day itself. Mostly a comfort score for you, slightly one for the fish."
+  },
+  "month": {
+   "label": "Season",
+   "unit": "",
+   "fmt": "{v}",
+   "granularity": "day",
+   "evidence": "strong",
+   "description": "Month of year, mapped through each species' seasonal presence curve (Sydney-specific).",
+   "note_pos": "peak season",
+   "note_neg": "off season",
+   "plain": "The calendar. Fish keep to seasons more reliably than trains keep to timetables."
+  }
+ },
+ "score_labels": [
+  {
+   "min": 80,
+   "label": "Excellent"
+  },
+  {
+   "min": 60,
+   "label": "Good"
+  },
+  {
+   "min": 40,
+   "label": "Fair"
+  },
+  {
+   "min": 0,
+   "label": "Poor"
+  }
+ ]
+}

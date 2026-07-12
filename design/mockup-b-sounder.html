@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup B — The Sounder</title>
+<style>
+  :root{
+    --bezel:#10151a; --screen:#071217; --phos:#3fe0c4; --phos-dim:#1a5a52;
+    --amber:#ffb444; --danger:#ff5340; --grid:#0e2b30; --text:#cfe8e2;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bezel);color:var(--text);font-family:var(--mono)}
+  .note{position:fixed;top:10px;right:10px;font-size:10px;background:#241512;border:1px dashed var(--danger);
+    color:var(--danger);padding:4px 8px;z-index:9}
+  .callout{font-size:10.5px;color:var(--amber);border:1px dashed #7a5a22;background:rgba(255,180,68,.06);
+    padding:5px 9px;display:inline-block;margin:10px 0}
+  .wrap{max-width:1020px;margin:0 auto;padding:22px}
+  /* echogram hero */
+  .unit{border:2px solid #26333c;border-radius:10px;background:var(--screen);overflow:hidden;position:relative}
+  .unit::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(transparent 0 3px, rgba(0,0,0,.16) 3px 4px);}
+  .plate{display:flex;justify-content:space-between;align-items:center;background:#131c22;padding:9px 14px;border-bottom:1px solid #26333c}
+  .plate b{letter-spacing:.24em;font-size:13px;color:var(--phos)}
+  .plate span{font-size:10px;color:#7fa39b;letter-spacing:.1em}
+  canvas{display:block;width:100%;height:230px}
+  .readout{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid #26333c}
+  .readout div{flex:1 1 120px;padding:8px 12px;border-right:1px solid #1a252c;font-size:11.5px}
+  .readout b{display:block;font-size:8.5px;letter-spacing:.2em;color:#6d8f88;font-weight:500}
+  .readout span{color:var(--phos)}
+  /* headline */
+  h2{font-size:clamp(20px,3.2vw,30px);font-weight:600;letter-spacing:.02em;line-height:1.3;margin:26px 0 4px;color:#eafffa;max-width:34ch}
+  h2 .warn{color:var(--danger)}
+  /* dials */
+  .dials{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0 4px}
+  .dial{background:#0d181e;border:1px solid #26333c;border-radius:10px;padding:12px 8px;text-align:center;transition:.15s}
+  .dial:hover{border-color:var(--phos-dim);transform:translateY(-2px)}
+  .dial svg{width:84px;height:84px}
+  .dial .lbl{font-size:10px;letter-spacing:.14em;color:#9fc0b9;margin-top:6px}
+  .dial .st{font-size:8.5px;letter-spacing:.22em}
+  .ok{color:var(--phos)} .mid{color:var(--amber)} .bad{color:var(--danger)}
+  /* contact cards */
+  h3{letter-spacing:.24em;font-size:11px;color:#9fc0b9;margin:30px 0 10px;font-weight:600}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:14px;perspective:800px}
+  .card{background:linear-gradient(160deg,#0e1a20,#0a141a);border:1px solid #26333c;border-radius:12px;padding:14px;position:relative;
+    transition:transform .18s, box-shadow .18s;cursor:pointer}
+  .card:hover{transform:rotateX(5deg) translateY(-5px);box-shadow:0 14px 30px rgba(63,224,196,.14)}
+  .card.gold{border-color:#8a6a1e;background:linear-gradient(160deg,#161409,#0a141a)}
+  .card.gold:hover{box-shadow:0 14px 30px rgba(255,180,68,.2)}
+  .rank{position:absolute;top:10px;right:12px;font-size:10px;color:#6d8f88;letter-spacing:.2em}
+  .fish{font-size:15.5px;color:#eafffa;font-weight:600;letter-spacing:.03em}
+  .hab{display:inline-block;font-size:9px;letter-spacing:.16em;border:1px solid #2c4a45;border-radius:4px;padding:2px 6px;margin:7px 0;color:var(--phos)}
+  .big{font-size:34px;font-weight:600;line-height:1;margin:4px 0 2px}
+  .tier{font-size:8.5px;letter-spacing:.26em}
+  .why{font-size:10.5px;color:#8fb0a8;line-height:1.5;margin-top:6px}
+  .stat{height:3px;background:#152229;border-radius:2px;margin-top:8px;position:relative}
+  .stat i{position:absolute;left:0;top:0;bottom:0;background:currentColor;border-radius:2px}
+  .stat u{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:#4a6a63}
+  /* gamified strip */
+  .quests{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 8px}
+  .q{border:1px dashed #2c4a45;border-radius:9px;padding:10px 13px;font-size:11px;color:#9fc0b9}
+  .q b{color:var(--amber);letter-spacing:.08em}
+  footer{margin-top:34px;font-size:9.5px;color:#5d7a74;letter-spacing:.08em}
+</style>
+</head>
+<body>
+<div class="note">MOCKUP B · mid-fidelity · not the real site</div>
+<div class="wrap">
+
+  <div class="unit">
+    <div class="plate"><b>BITE INDEX · SOUNDER</b><span>SYDNEY −33.87 151.21 · THU 09 JUL · CH 200 kHz</span></div>
+    <canvas id="echo" width="1000" height="230" aria-label="Animated echo sounder trace with fish arches"></canvas>
+    <div class="readout">
+      <div><b>TIDE</b><span>H 14:48 · L 21:19</span></div>
+      <div><b>SWELL</b><span>1.9 m @ 8 s</span></div>
+      <div><b>WIND</b><span>W 8 kn</span></div>
+      <div><b>PRESS</b><span>1028.7 ↓</span></div>
+      <div><b>WATER</b><span>19.4 °C</span></div>
+      <div><b>MOON</b><span>◐ 33%</span></div>
+    </div>
+  </div>
+  <span class="callout">the background IS the subject: a live echo-sounder trace, fish arches drifting through. replaces the contour chart</span>
+
+  <h2>Beach first today. Estuary workable on the run-out. <span class="warn">Rocks marginal.</span></h2>
+
+  <div class="dials">
+    <!-- dial: circumference 2πr, r=34 → 213.6 -->
+    <div class="dial"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="#152229" stroke-width="7"/><circle cx="42" cy="42" r="34" fill="none" stroke="#3fe0c4" stroke-width="7" stroke-linecap="round" stroke-dasharray="134.6 213.6" transform="rotate(-90 42 42)"/><text x="42" y="49" text-anchor="middle" font-size="21" fill="#eafffa" font-family="IBM Plex Mono" font-weight="600">63</text></svg><div class="lbl">BEACH</div><div class="st ok">GOOD</div></div>
+    <div class="dial"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="#152229" stroke-width="7"/><circle cx="42" cy="42" r="34" fill="none" stroke="#3fe0c4" stroke-width="7" stroke-linecap="round" stroke-dasharray="123.9 213.6" transform="rotate(-90 42 42)"/><text x="42" y="49" text-anchor="middle" font-size="21" fill="#eafffa" font-family="IBM Plex Mono" font-weight="600">58</text></svg><div class="lbl">ESTUARY</div><div class="st ok">GOOD</div></div>
+    <div class="dial"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="#152229" stroke-width="7"/><circle cx="42" cy="42" r="34" fill="none" stroke="#ffb444" stroke-width="7" stroke-linecap="round" stroke-dasharray="111.1 213.6" transform="rotate(-90 42 42)"/><text x="42" y="49" text-anchor="middle" font-size="21" fill="#eafffa" font-family="IBM Plex Mono" font-weight="600">52</text></svg><div class="lbl">HARBOUR</div><div class="st mid">FAIR</div></div>
+    <div class="dial"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="#152229" stroke-width="7"/><circle cx="42" cy="42" r="34" fill="none" stroke="#ffb444" stroke-width="7" stroke-linecap="round" stroke-dasharray="100.4 213.6" transform="rotate(-90 42 42)"/><text x="42" y="49" text-anchor="middle" font-size="21" fill="#eafffa" font-family="IBM Plex Mono" font-weight="600">47</text></svg><div class="lbl">OFFSHORE</div><div class="st mid">FAIR</div></div>
+    <div class="dial"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="#152229" stroke-width="7"/><circle cx="42" cy="42" r="34" fill="none" stroke="#ff5340" stroke-width="7" stroke-linecap="round" stroke-dasharray="72.6 213.6" transform="rotate(-90 42 42)"/><text x="42" y="49" text-anchor="middle" font-size="21" fill="#eafffa" font-family="IBM Plex Mono" font-weight="600">34</text></svg><div class="lbl">ROCK</div><div class="st bad">POOR</div></div>
+  </div>
+  <span class="callout">conceding the dial from your image-4: works here as instrument bezels · hover lifts each unit</span>
+
+  <h3>CONTACTS — TODAY'S TARGETS</h3>
+  <div class="cards">
+    <div class="card gold"><span class="rank">№1</span><div class="fish">Tailor</div><span class="hab">BEACH GUTTERS</span>
+      <div class="big mid" style="color:var(--amber)">68</div><div class="tier" style="color:var(--amber)">★ PRIME CONTACT</div>
+      <div class="why">Stirred wash and bait in the gutters. Dawn and dusk windows.</div>
+      <div class="stat mid" style="color:var(--amber)"><i style="width:68%"></i><u></u></div></div>
+    <div class="card"><span class="rank">№2</span><div class="fish">Mulloway</div><span class="hab">ESTUARY HOLES</span>
+      <div class="big ok">61</div><div class="tier ok">SOLID CONTACT</div>
+      <div class="why">Run-out after dark, light stain in the water. Dusk → 22:30.</div>
+      <div class="stat ok"><i style="width:61%"></i><u></u></div></div>
+    <div class="card"><span class="rank">№3</span><div class="fish">Bream</div><span class="hab">HARBOUR STRUCTURE</span>
+      <div class="big ok">57</div><div class="tier ok">SOLID CONTACT</div>
+      <div class="why">Pylons on the tide change; slight stain suits them.</div>
+      <div class="stat ok"><i style="width:57%"></i><u></u></div></div>
+    <div class="card"><span class="rank">№7</span><div class="fish">Kingfish</div><span class="hab">HARBOUR REEFS</span>
+      <div class="big bad">22</div><div class="tier bad">WEAK RETURN</div>
+      <div class="why">19.4° is under their band. Honest low score, no padding.</div>
+      <div class="stat bad"><i style="width:22%"></i><u></u></div></div>
+  </div>
+  <span class="callout">card hover = lift + glow (your “hovering stuff”). tier styling nods to TCG rarity without saying so out loud</span>
+
+  <div class="quests">
+    <div class="q"><b>LOG A SESSION</b> · your catches vs the published score → the v3 validation dataset</div>
+    <div class="q"><b>STREAK 4</b> · four sessions logged this month</div>
+    <div class="q"><b>BADGE</b> · first mulloway pending…</div>
+  </div>
+  <span class="callout">gamification with a job: every “quest” feeds the model-validation write-up, it is not decoration</span>
+
+  <footer>WEATHER: OPEN-METEO · SCORES PERCENTILE-CALIBRATED, MEDIAN DAY = 50 (tick on every bar) · FULL WEIGHTS IN METHODOLOGY</footer>
+</div>
+
+<script>
+(function(){
+  const c=document.getElementById('echo'),x=c.getContext('2d');
+  const W=c.width,H=c.height;let bottom=170,t=0;const arches=[];
+  x.fillStyle='#071217';x.fillRect(0,0,W,H);
+  function col(){
+    // scroll left 2px
+    x.drawImage(c,2,0,W-2,H,0,0,W-2,H);
+    x.fillStyle='#071217';x.fillRect(W-2,0,2,H);
+    // depth grid dots
+    x.fillStyle='#0e2b30';for(let y=30;y<H;y+=40){x.fillRect(W-2,y,2,1);}
+    // wandering bottom profile + hard-return band
+    bottom+=Math.sin(t*0.02)*0.6+(Math.random()-0.5)*1.4;
+    bottom=Math.max(120,Math.min(205,bottom));
+    const g=x.createLinearGradient(0,bottom,0,H);
+    g.addColorStop(0,'#3fe0c4');g.addColorStop(0.12,'#1a5a52');g.addColorStop(1,'#0b1d1c');
+    x.fillStyle=g;x.fillRect(W-2,bottom,2,H-bottom);
+    // water-column speckle
+    for(let i=0;i<4;i++){const y=20+Math.random()*(bottom-30);
+      x.fillStyle='rgba(63,224,196,'+(0.05+Math.random()*0.12)+')';x.fillRect(W-2,y,2,1.5);}
+    // spawn fish arch occasionally
+    if(Math.random()<0.02)arches.push({x:W+8,y:40+Math.random()*(bottom-80),r:7+Math.random()*10});
+    // draw arches at their (scrolling) positions
+    x.lineWidth=2.2;
+    for(let i=arches.length-1;i>=0;i--){const a=arches[i];a.x-=2;
+      if(a.x<-20){arches.splice(i,1);continue;}
+      x.strokeStyle='rgba(255,180,68,0.9)';
+      x.beginPath();x.arc(a.x,a.y+a.r,a.r,Math.PI*1.15,Math.PI*1.85);x.stroke();}
+    t++;requestAnimationFrame(col);
+  }
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){col();}
+  else{ // static frame for reduced motion
+    x.fillStyle='#1a5a52';x.fillRect(0,168,W,H-168);
+    x.fillStyle='#3fe0c4';x.fillRect(0,168,W,3);
+    x.strokeStyle='rgba(255,180,68,0.9)';x.lineWidth=2.2;
+    [[180,90,12],[430,120,9],[700,70,14]].forEach(function(a){
+      x.beginPath();x.arc(a[0],a[1]+a[2],a[2],Math.PI*1.15,Math.PI*1.85);x.stroke();});
+  }
+})();
+</script>
+</body>
+</html>

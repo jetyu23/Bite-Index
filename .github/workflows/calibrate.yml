@@ -1,0 +1,29 @@
+name: calibrate
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # 1st of each month, 19:00 UTC — refresh the percentile calibration as history accumulates
+    - cron: "0 19 1 * *"
+
+permissions:
+  contents: write
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r engine/requirements.txt
+      - name: Build percentile calibration from history
+        run: python engine/calibrate.py --days 365
+      - name: Commit calibration
+        run: |
+          git config user.name "bite-index-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/profiles/calibration.json
+          git diff --cached --quiet && echo "no changes" || git commit -m "calibration: refresh ($(date -u +%F))"
+          git push

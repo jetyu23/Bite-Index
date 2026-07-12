@@ -1,0 +1,3527 @@
+{
+ "generated_at": "2026-07-08T16:46+10:00",
+ "source": "sample",
+ "warnings": [
+  "SAMPLE DATA \u2014 not a real forecast."
+ ],
+ "location": {
+  "name": "Sydney",
+  "lat": -33.8688,
+  "lon": 151.2093
+ },
+ "score_labels": [
+  {
+   "min": 80,
+   "label": "Excellent"
+  },
+  {
+   "min": 60,
+   "label": "Good"
+  },
+  {
+   "min": 40,
+   "label": "Fair"
+  },
+  {
+   "min": 0,
+   "label": "Poor"
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-07-08",
+   "weekday": "Wed",
+   "headline": "Get out there \u2014 the rock is firing. Top target: Mulloway (jewfish) (83).",
+   "summary": {
+    "sunrise": "07:00",
+    "sunset": "16:57",
+    "moon_name": "Last quarter",
+    "moon_illum": 0.43,
+    "tide_events": [
+     {
+      "time": "03:10",
+      "type": "high",
+      "height": 0.72
+     },
+     {
+      "time": "09:32",
+      "type": "low",
+      "height": -0.6
+     },
+     {
+      "time": "15:31",
+      "type": "high",
+      "height": 0.48
+     },
+     {
+      "time": "21:31",
+      "type": "low",
+      "height": -0.6
+     }
+    ],
+    "tide_range": 1.31,
+    "swell_max": 1.4,
+    "swell_period": 9.1,
+    "wind_max_kn": 17.0,
+    "pressure": 1012.1,
+    "pressure_trend": -3.4,
+    "rain_24h": 9.0,
+    "rain_72h": 23.0,
+    "rain_today": 0.0,
+    "sst": 17.9
+   },
+   "tide_curve": [
+    {
+     "t": "00:00",
+     "h": 0.048
+    },
+    {
+     "t": "01:00",
+     "h": 0.365
+    },
+    {
+     "t": "02:00",
+     "h": 0.608
+    },
+    {
+     "t": "03:00",
+     "h": 0.717
+    },
+    {
+     "t": "04:00",
+     "h": 0.665
+    },
+    {
+     "t": "05:00",
+     "h": 0.466
+    },
+    {
+     "t": "06:00",
+     "h": 0.168
+    },
+    {
+     "t": "07:00",
+     "h": -0.156
+    },
+    {
+     "t": "08:00",
+     "h": -0.428
+    },
+    {
+     "t": "09:00",
+     "h": -0.583
+    },
+    {
+     "t": "10:00",
+     "h": -0.589
+    },
+    {
+     "t": "11:00",
+     "h": -0.449
+    },
+    {
+     "t": "12:00",
+     "h": -0.205
+    },
+    {
+     "t": "13:00",
+     "h": 0.077
+    },
+    {
+     "t": "14:00",
+     "h": 0.322
+    },
+    {
+     "t": "15:00",
+     "h": 0.464
+    },
+    {
+     "t": "16:00",
+     "h": 0.467
+    },
+    {
+     "t": "17:00",
+     "h": 0.331
+    },
+    {
+     "t": "18:00",
+     "h": 0.092
+    },
+    {
+     "t": "19:00",
+     "h": -0.188
+    },
+    {
+     "t": "20:00",
+     "h": -0.434
+    },
+    {
+     "t": "21:00",
+     "h": -0.58
+    },
+    {
+     "t": "22:00",
+     "h": -0.584
+    },
+    {
+     "t": "23:00",
+     "h": -0.443
+    }
+   ],
+   "environments": [
+    {
+     "id": "rock",
+     "name": "Rock",
+     "tagline": "Ledges and headland washes",
+     "score": 81,
+     "label": "Excellent",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.2 m swell",
+       "subscore": 86,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 94% of peak",
+       "subscore": 88,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 78,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "-7 kn onshore",
+       "subscore": 84,
+       "weight_pct": 10,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.3 m range",
+       "subscore": 75,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "big spring tides moving plenty of water"
+      }
+     ]
+    },
+    {
+     "id": "beach",
+     "name": "Beach",
+     "tagline": "Gutters, banks and the surf zone",
+     "score": 81,
+     "label": "Excellent",
+     "best_window": "4pm\u20137pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.4 m swell",
+       "subscore": 86,
+       "weight_pct": 24,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 91,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "+8 kn onshore",
+       "subscore": 80,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 59% of peak",
+       "subscore": 76,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "estuary",
+     "name": "Estuary",
+     "tagline": "Rivers, bays and the brackish reaches",
+     "score": 81,
+     "label": "Excellent",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 94% of peak",
+       "subscore": 89,
+       "weight_pct": 22,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "23 mm/72h",
+       "subscore": 86,
+       "weight_pct": 16,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "9 kn",
+       "subscore": 79,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.3 m range",
+       "subscore": 77,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "big spring tides moving plenty of water"
+      }
+     ]
+    },
+    {
+     "id": "harbour",
+     "name": "Harbour & wharf",
+     "tagline": "Structure, pylons and deep protected water",
+     "score": 79,
+     "label": "Good",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 94% of peak",
+       "subscore": 89,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 86,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "9 kn",
+       "subscore": 81,
+       "weight_pct": 13,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.9 \u00b0C water",
+       "subscore": 74,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.3 m range",
+       "subscore": 75,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "big spring tides moving plenty of water"
+      }
+     ]
+    },
+    {
+     "id": "boat",
+     "name": "Boat & offshore",
+     "tagline": "Outside the Heads \u2014 reefs, FADs and open water",
+     "score": 77,
+     "label": "Good",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "10 kn",
+       "subscore": 82,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.2 m swell",
+       "subscore": 78,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 77,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.9 \u00b0C water",
+       "subscore": 67,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      }
+     ]
+    }
+   ],
+   "species": [
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "score": 83,
+     "label": "Excellent",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "12am\u20133am",
+     "reason": "Estuary, 12am\u20133am \u2014 low light \u2014 prime feeding window; runoff has coloured the water nicely."
+    },
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "score": 82,
+     "label": "Excellent",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "4pm\u20137pm",
+     "reason": "Beach, 4pm\u20137pm \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "score": 80,
+     "label": "Excellent",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 peak season; water moving hard."
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "score": 79,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "6am\u20139am",
+     "reason": "Estuary, 6am\u20139am \u2014 water moving hard; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "score": 78,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7pm\u201310pm",
+     "reason": "Harbour & wharf, 7pm\u201310pm \u2014 low light \u2014 prime feeding window; light winds."
+    },
+    {
+     "id": "squid",
+     "name": "Southern calamari",
+     "score": 76,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "score": 72,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7am\u201310am",
+     "reason": "Harbour & wharf, 7am\u201310am \u2014 low light \u2014 prime feeding window; water moving hard."
+    }
+   ]
+  },
+  {
+   "date": "2026-07-09",
+   "weekday": "Thu",
+   "headline": "Get out there \u2014 the rock is firing. Top target: Mulloway (jewfish) (81).",
+   "summary": {
+    "sunrise": "07:00",
+    "sunset": "16:57",
+    "moon_name": "Last quarter",
+    "moon_illum": 0.33,
+    "tide_events": [
+     {
+      "time": "03:55",
+      "type": "high",
+      "height": 0.68
+     },
+     {
+      "time": "10:14",
+      "type": "low",
+      "height": -0.54
+     },
+     {
+      "time": "16:10",
+      "type": "high",
+      "height": 0.45
+     },
+     {
+      "time": "22:15",
+      "type": "low",
+      "height": -0.58
+     }
+    ],
+    "tide_range": 1.26,
+    "swell_max": 1.1,
+    "swell_period": 9.0,
+    "wind_max_kn": 16.0,
+    "pressure": 1019.7,
+    "pressure_trend": 8.1,
+    "rain_24h": 0.0,
+    "rain_72h": 23.0,
+    "rain_today": 0.0,
+    "sst": 17.8
+   },
+   "tide_curve": [
+    {
+     "t": "00:00",
+     "h": -0.186
+    },
+    {
+     "t": "01:00",
+     "h": 0.125
+    },
+    {
+     "t": "02:00",
+     "h": 0.416
+    },
+    {
+     "t": "03:00",
+     "h": 0.618
+    },
+    {
+     "t": "04:00",
+     "h": 0.681
+    },
+    {
+     "t": "05:00",
+     "h": 0.594
+    },
+    {
+     "t": "06:00",
+     "h": 0.378
+    },
+    {
+     "t": "07:00",
+     "h": 0.089
+    },
+    {
+     "t": "08:00",
+     "h": -0.203
+    },
+    {
+     "t": "09:00",
+     "h": -0.428
+    },
+    {
+     "t": "10:00",
+     "h": -0.532
+    },
+    {
+     "t": "11:00",
+     "h": -0.496
+    },
+    {
+     "t": "12:00",
+     "h": -0.335
+    },
+    {
+     "t": "13:00",
+     "h": -0.095
+    },
+    {
+     "t": "14:00",
+     "h": 0.158
+    },
+    {
+     "t": "15:00",
+     "h": 0.355
+    },
+    {
+     "t": "16:00",
+     "h": 0.445
+    },
+    {
+     "t": "17:00",
+     "h": 0.402
+    },
+    {
+     "t": "18:00",
+     "h": 0.237
+    },
+    {
+     "t": "19:00",
+     "h": -0.007
+    },
+    {
+     "t": "20:00",
+     "h": -0.267
+    },
+    {
+     "t": "21:00",
+     "h": -0.476
+    },
+    {
+     "t": "22:00",
+     "h": -0.578
+    },
+    {
+     "t": "23:00",
+     "h": -0.544
+    }
+   ],
+   "environments": [
+    {
+     "id": "rock",
+     "name": "Rock",
+     "tagline": "Ledges and headland washes",
+     "score": 82,
+     "label": "Excellent",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.9 m swell",
+       "subscore": 92,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 83,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 86% of peak",
+       "subscore": 86,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "-8 kn onshore",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 79,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "beach",
+     "name": "Beach",
+     "tagline": "Gutters, banks and the surf zone",
+     "score": 76,
+     "label": "Good",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 87,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.9 m swell",
+       "subscore": 74,
+       "weight_pct": 24,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 97% of peak",
+       "subscore": 88,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "-6 kn onshore",
+       "subscore": 71,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "8 s period",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "estuary",
+     "name": "Estuary",
+     "tagline": "Rivers, bays and the brackish reaches",
+     "score": 80,
+     "label": "Excellent",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 97% of peak",
+       "subscore": 89,
+       "weight_pct": 22,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "23 mm/72h",
+       "subscore": 86,
+       "weight_pct": 16,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "8 kn",
+       "subscore": 82,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.3 m range",
+       "subscore": 75,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "big spring tides moving plenty of water"
+      }
+     ]
+    },
+    {
+     "id": "harbour",
+     "name": "Harbour & wharf",
+     "tagline": "Structure, pylons and deep protected water",
+     "score": 78,
+     "label": "Good",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 97% of peak",
+       "subscore": 89,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 86,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "8 kn",
+       "subscore": 82,
+       "weight_pct": 13,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.8 \u00b0C water",
+       "subscore": 74,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1019 hPa",
+       "subscore": 84,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      }
+     ]
+    },
+    {
+     "id": "boat",
+     "name": "Boat & offshore",
+     "tagline": "Outside the Heads \u2014 reefs, FADs and open water",
+     "score": 80,
+     "label": "Excellent",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "8 kn",
+       "subscore": 86,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.9 m swell",
+       "subscore": 86,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1019 hPa",
+       "subscore": 84,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 74,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    }
+   ],
+   "species": [
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "score": 81,
+     "label": "Excellent",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "7pm\u201310pm",
+     "reason": "Estuary, 7pm\u201310pm \u2014 low light \u2014 prime feeding window; runoff has coloured the water nicely."
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "score": 78,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "6am\u20139am",
+     "reason": "Estuary, 6am\u20139am \u2014 water moving hard; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "score": 78,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "6am\u20139am",
+     "reason": "Beach, 6am\u20139am \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "score": 78,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7am\u201310am",
+     "reason": "Harbour & wharf, 7am\u201310am \u2014 peak season; water moving hard."
+    },
+    {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "score": 77,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "5am\u20138am",
+     "reason": "Harbour & wharf, 5am\u20138am \u2014 light winds; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "squid",
+     "name": "Southern calamari",
+     "score": 76,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7am\u201310am",
+     "reason": "Harbour & wharf, 7am\u201310am \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "score": 70,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7am\u201310am",
+     "reason": "Harbour & wharf, 7am\u201310am \u2014 low light \u2014 prime feeding window; water moving hard."
+    }
+   ]
+  },
+  {
+   "date": "2026-07-10",
+   "weekday": "Fri",
+   "headline": "A solid day: beach is the pick. Top target: Tailor (80).",
+   "summary": {
+    "sunrise": "07:00",
+    "sunset": "16:57",
+    "moon_name": "Waning crescent",
+    "moon_illum": 0.23,
+    "tide_events": [
+     {
+      "time": "04:42",
+      "type": "high",
+      "height": 0.62
+     },
+     {
+      "time": "11:00",
+      "type": "low",
+      "height": -0.46
+     },
+     {
+      "time": "16:53",
+      "type": "high",
+      "height": 0.41
+     },
+     {
+      "time": "23:02",
+      "type": "low",
+      "height": -0.55
+     }
+    ],
+    "tide_range": 1.17,
+    "swell_max": 1.6,
+    "swell_period": 9.0,
+    "wind_max_kn": 19.0,
+    "pressure": 1019.9,
+    "pressure_trend": 2.8,
+    "rain_24h": 0.0,
+    "rain_72h": 9.0,
+    "rain_today": 0.0,
+    "sst": 17.7
+   },
+   "tide_curve": [
+    {
+     "t": "00:00",
+     "h": -0.378
+    },
+    {
+     "t": "01:00",
+     "h": -0.119
+    },
+    {
+     "t": "02:00",
+     "h": 0.173
+    },
+    {
+     "t": "03:00",
+     "h": 0.429
+    },
+    {
+     "t": "04:00",
+     "h": 0.589
+    },
+    {
+     "t": "05:00",
+     "h": 0.618
+    },
+    {
+     "t": "06:00",
+     "h": 0.511
+    },
+    {
+     "t": "07:00",
+     "h": 0.298
+    },
+    {
+     "t": "08:00",
+     "h": 0.033
+    },
+    {
+     "t": "09:00",
+     "h": -0.218
+    },
+    {
+     "t": "10:00",
+     "h": -0.395
+    },
+    {
+     "t": "11:00",
+     "h": -0.458
+    },
+    {
+     "t": "12:00",
+     "h": -0.396
+    },
+    {
+     "t": "13:00",
+     "h": -0.231
+    },
+    {
+     "t": "14:00",
+     "h": -0.01
+    },
+    {
+     "t": "15:00",
+     "h": 0.206
+    },
+    {
+     "t": "16:00",
+     "h": 0.358
+    },
+    {
+     "t": "17:00",
+     "h": 0.405
+    },
+    {
+     "t": "18:00",
+     "h": 0.333
+    },
+    {
+     "t": "19:00",
+     "h": 0.158
+    },
+    {
+     "t": "20:00",
+     "h": -0.075
+    },
+    {
+     "t": "21:00",
+     "h": -0.308
+    },
+    {
+     "t": "22:00",
+     "h": -0.482
+    },
+    {
+     "t": "23:00",
+     "h": -0.55
+    }
+   ],
+   "environments": [
+    {
+     "id": "rock",
+     "name": "Rock",
+     "tagline": "Ledges and headland washes",
+     "score": 74,
+     "label": "Good",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 94% of peak",
+       "subscore": 89,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 83,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.5 m swell",
+       "subscore": 63,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "-11 kn onshore",
+       "subscore": 84,
+       "weight_pct": 10,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 76,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "beach",
+     "name": "Beach",
+     "tagline": "Gutters, banks and the surf zone",
+     "score": 79,
+     "label": "Good",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.5 m swell",
+       "subscore": 88,
+       "weight_pct": 24,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 87,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 87% of peak",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "-9 kn onshore",
+       "subscore": 70,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "estuary",
+     "name": "Estuary",
+     "tagline": "Rivers, bays and the brackish reaches",
+     "score": 77,
+     "label": "Good",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 87% of peak",
+       "subscore": 87,
+       "weight_pct": 22,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "9 mm/72h",
+       "subscore": 75,
+       "weight_pct": 16,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "11 kn",
+       "subscore": 75,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1021 hPa",
+       "subscore": 82,
+       "weight_pct": 7,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      }
+     ]
+    },
+    {
+     "id": "harbour",
+     "name": "Harbour & wharf",
+     "tagline": "Structure, pylons and deep protected water",
+     "score": 78,
+     "label": "Good",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 94% of peak",
+       "subscore": 89,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 83,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "11 kn",
+       "subscore": 79,
+       "weight_pct": 13,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.7 \u00b0C water",
+       "subscore": 73,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "9 mm/72h",
+       "subscore": 79,
+       "weight_pct": 8,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      }
+     ]
+    },
+    {
+     "id": "boat",
+     "name": "Boat & offshore",
+     "tagline": "Outside the Heads \u2014 reefs, FADs and open water",
+     "score": 74,
+     "label": "Good",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "11 kn",
+       "subscore": 77,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.5 m swell",
+       "subscore": 66,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 75,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1021 hPa",
+       "subscore": 83,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      }
+     ]
+    }
+   ],
+   "species": [
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "score": 80,
+     "label": "Excellent",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "6am\u20139am",
+     "reason": "Beach, 6am\u20139am \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "score": 79,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "8pm\u201311pm",
+     "reason": "Estuary, 8pm\u201311pm \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "score": 79,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7am\u201310am",
+     "reason": "Harbour & wharf, 7am\u201310am \u2014 peak season; water moving hard."
+    },
+    {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "score": 78,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 low light \u2014 prime feeding window; light winds."
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "score": 77,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "7am\u201310am",
+     "reason": "Estuary, 7am\u201310am \u2014 water moving hard; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "squid",
+     "name": "Southern calamari",
+     "score": 76,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 runoff has coloured the water nicely; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "score": 71,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7am\u201310am",
+     "reason": "Harbour & wharf, 7am\u201310am \u2014 water moving hard; low light \u2014 prime feeding window."
+    }
+   ]
+  },
+  {
+   "date": "2026-07-11",
+   "weekday": "Sat",
+   "headline": "A solid day: harbour & wharf is the pick. Top target: Silver trevally (74). Stay off the rocks \u2014 swell is at dangerous levels.",
+   "summary": {
+    "sunrise": "07:00",
+    "sunset": "16:57",
+    "moon_name": "Waning crescent",
+    "moon_illum": 0.15,
+    "tide_events": [
+     {
+      "time": "05:34",
+      "type": "high",
+      "height": 0.55
+     },
+     {
+      "time": "11:50",
+      "type": "low",
+      "height": -0.38
+     },
+     {
+      "time": "17:42",
+      "type": "high",
+      "height": 0.37
+     },
+     {
+      "time": "23:57",
+      "type": "low",
+      "height": -0.51
+     }
+    ],
+    "tide_range": 1.04,
+    "swell_max": 2.8,
+    "swell_period": 12.4,
+    "wind_max_kn": 29.0,
+    "pressure": 1012.3,
+    "pressure_trend": -7.8,
+    "rain_24h": 0.0,
+    "rain_72h": 0.0,
+    "rain_today": 0.0,
+    "sst": 17.6
+   },
+   "tide_curve": [
+    {
+     "t": "00:00",
+     "h": -0.494
+    },
+    {
+     "t": "01:00",
+     "h": -0.325
+    },
+    {
+     "t": "02:00",
+     "h": -0.08
+    },
+    {
+     "t": "03:00",
+     "h": 0.183
+    },
+    {
+     "t": "04:00",
+     "h": 0.404
+    },
+    {
+     "t": "05:00",
+     "h": 0.533
+    },
+    {
+     "t": "06:00",
+     "h": 0.542
+    },
+    {
+     "t": "07:00",
+     "h": 0.434
+    },
+    {
+     "t": "08:00",
+     "h": 0.239
+    },
+    {
+     "t": "09:00",
+     "h": 0.008
+    },
+    {
+     "t": "10:00",
+     "h": -0.203
+    },
+    {
+     "t": "11:00",
+     "h": -0.342
+    },
+    {
+     "t": "12:00",
+     "h": -0.378
+    },
+    {
+     "t": "13:00",
+     "h": -0.308
+    },
+    {
+     "t": "14:00",
+     "h": -0.153
+    },
+    {
+     "t": "15:00",
+     "h": 0.042
+    },
+    {
+     "t": "16:00",
+     "h": 0.223
+    },
+    {
+     "t": "17:00",
+     "h": 0.341
+    },
+    {
+     "t": "18:00",
+     "h": 0.362
+    },
+    {
+     "t": "19:00",
+     "h": 0.279
+    },
+    {
+     "t": "20:00",
+     "h": 0.109
+    },
+    {
+     "t": "21:00",
+     "h": -0.105
+    },
+    {
+     "t": "22:00",
+     "h": -0.313
+    },
+    {
+     "t": "23:00",
+     "h": -0.461
+    }
+   ],
+   "environments": [
+    {
+     "id": "rock",
+     "name": "Rock",
+     "tagline": "Ledges and headland washes",
+     "score": 15,
+     "label": "Poor",
+     "best_window": "7am\u201310am",
+     "safety_flag": true,
+     "safety_message": "Swell is beyond safe limits for rock platforms today. Stay off the stones \u2014 no fish is worth it. Lifejackets are mandatory on many declared NSW rock platforms.",
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "2.6 m swell",
+       "subscore": 6,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "swell out of range"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 83,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 84% of peak",
+       "subscore": 86,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "-21 kn onshore",
+       "subscore": 74,
+       "weight_pct": 10,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1013 hPa",
+       "subscore": 77,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      }
+     ]
+    },
+    {
+     "id": "beach",
+     "name": "Beach",
+     "tagline": "Gutters, banks and the surf zone",
+     "score": 66,
+     "label": "Good",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 87,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 60% of peak",
+       "subscore": 75,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "13 s period",
+       "subscore": 69,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "rain_today",
+       "label": "Rain forecast today",
+       "value": "0 mm forecast",
+       "subscore": 80,
+       "weight_pct": 5,
+       "evidence": "moderate",
+       "note": "dry session likely"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "-21 kn onshore",
+       "subscore": 59,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": ""
+      }
+     ]
+    },
+    {
+     "id": "estuary",
+     "name": "Estuary",
+     "tagline": "Rivers, bays and the brackish reaches",
+     "score": 69,
+     "label": "Good",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 84% of peak",
+       "subscore": 86,
+       "weight_pct": 22,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 79,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1013 hPa",
+       "subscore": 76,
+       "weight_pct": 7,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.0 m range",
+       "subscore": 67,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "big spring tides moving plenty of water"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.6 \u00b0C water",
+       "subscore": 75,
+       "weight_pct": 6,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      }
+     ]
+    },
+    {
+     "id": "harbour",
+     "name": "Harbour & wharf",
+     "tagline": "Structure, pylons and deep protected water",
+     "score": 72,
+     "label": "Good",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 84% of peak",
+       "subscore": 86,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 83,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.6 \u00b0C water",
+       "subscore": 72,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "0 mm/72h",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1013 hPa",
+       "subscore": 75,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      }
+     ]
+    },
+    {
+     "id": "boat",
+     "name": "Boat & offshore",
+     "tagline": "Outside the Heads \u2014 reefs, FADs and open water",
+     "score": 46,
+     "label": "Fair",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "21 kn",
+       "subscore": 13,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "blowing hard"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "2.6 m swell",
+       "subscore": 26,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "swell out of range"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "12 s period",
+       "subscore": 84,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 84% of peak",
+       "subscore": 80,
+       "weight_pct": 6,
+       "evidence": "strong",
+       "note": "water moving hard"
+      }
+     ]
+    }
+   ],
+   "species": [
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "score": 74,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7am\u201310am",
+     "reason": "Harbour & wharf, 7am\u201310am \u2014 peak season; water moving hard."
+    },
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "score": 73,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "9pm\u201312am",
+     "reason": "Estuary, 9pm\u201312am \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "squid",
+     "name": "Southern calamari",
+     "score": 72,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 runoff has coloured the water nicely; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "score": 72,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 low light \u2014 prime feeding window; runoff has coloured the water nicely."
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "score": 70,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "7am\u201310am",
+     "reason": "Estuary, 7am\u201310am \u2014 water moving hard; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "score": 70,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "6am\u20139am",
+     "reason": "Beach, 6am\u20139am \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "score": 66,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "7am\u201310am",
+     "reason": "Harbour & wharf, 7am\u201310am \u2014 low light \u2014 prime feeding window; water moving hard."
+    }
+   ]
+  },
+  {
+   "date": "2026-07-12",
+   "weekday": "Sun",
+   "headline": "A solid day: beach is the pick. Top target: Tailor (77). Stay off the rocks \u2014 swell is at dangerous levels.",
+   "summary": {
+    "sunrise": "07:00",
+    "sunset": "16:57",
+    "moon_name": "Waning crescent",
+    "moon_illum": 0.08,
+    "tide_events": [
+     {
+      "time": "06:34",
+      "type": "high",
+      "height": 0.48
+     },
+     {
+      "time": "12:47",
+      "type": "low",
+      "height": -0.31
+     },
+     {
+      "time": "18:38",
+      "type": "high",
+      "height": 0.34
+     }
+    ],
+    "tide_range": 0.99,
+    "swell_max": 2.4,
+    "swell_period": 9.0,
+    "wind_max_kn": 24.0,
+    "pressure": 1012.1,
+    "pressure_trend": -2.8,
+    "rain_24h": 0.0,
+    "rain_72h": 0.0,
+    "rain_today": 0.0,
+    "sst": 17.4
+   },
+   "tide_curve": [
+    {
+     "t": "00:00",
+     "h": -0.513
+    },
+    {
+     "t": "01:00",
+     "h": -0.453
+    },
+    {
+     "t": "02:00",
+     "h": -0.295
+    },
+    {
+     "t": "03:00",
+     "h": -0.074
+    },
+    {
+     "t": "04:00",
+     "h": 0.161
+    },
+    {
+     "t": "05:00",
+     "h": 0.355
+    },
+    {
+     "t": "06:00",
+     "h": 0.466
+    },
+    {
+     "t": "07:00",
+     "h": 0.473
+    },
+    {
+     "t": "08:00",
+     "h": 0.378
+    },
+    {
+     "t": "09:00",
+     "h": 0.209
+    },
+    {
+     "t": "10:00",
+     "h": 0.01
+    },
+    {
+     "t": "11:00",
+     "h": -0.169
+    },
+    {
+     "t": "12:00",
+     "h": -0.285
+    },
+    {
+     "t": "13:00",
+     "h": -0.312
+    },
+    {
+     "t": "14:00",
+     "h": -0.246
+    },
+    {
+     "t": "15:00",
+     "h": -0.108
+    },
+    {
+     "t": "16:00",
+     "h": 0.063
+    },
+    {
+     "t": "17:00",
+     "h": 0.22
+    },
+    {
+     "t": "18:00",
+     "h": 0.319
+    },
+    {
+     "t": "19:00",
+     "h": 0.332
+    },
+    {
+     "t": "20:00",
+     "h": 0.253
+    },
+    {
+     "t": "21:00",
+     "h": 0.097
+    },
+    {
+     "t": "22:00",
+     "h": -0.1
+    },
+    {
+     "t": "23:00",
+     "h": -0.291
+    }
+   ],
+   "environments": [
+    {
+     "id": "rock",
+     "name": "Rock",
+     "tagline": "Ledges and headland washes",
+     "score": 15,
+     "label": "Poor",
+     "best_window": "3pm\u20136pm",
+     "safety_flag": true,
+     "safety_message": "Swell is beyond safe limits for rock platforms today. Stay off the stones \u2014 no fish is worth it. Lifejackets are mandatory on many declared NSW rock platforms.",
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "2.1 m swell",
+       "subscore": 17,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "swell out of range"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 83,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 72% of peak",
+       "subscore": 81,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 76,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1013 hPa",
+       "subscore": 78,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      }
+     ]
+    },
+    {
+     "id": "beach",
+     "name": "Beach",
+     "tagline": "Gutters, banks and the surf zone",
+     "score": 75,
+     "label": "Good",
+     "best_window": "8pm\u201311pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "2.0 m swell",
+       "subscore": 77,
+       "weight_pct": 24,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "night",
+       "subscore": 72,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 77% of peak",
+       "subscore": 83,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "+11 kn onshore",
+       "subscore": 71,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "estuary",
+     "name": "Estuary",
+     "tagline": "Rivers, bays and the brackish reaches",
+     "score": 72,
+     "label": "Good",
+     "best_window": "9pm\u201312am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 85% of peak",
+       "subscore": 87,
+       "weight_pct": 22,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "night",
+       "subscore": 74,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1015 hPa",
+       "subscore": 80,
+       "weight_pct": 7,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      },
+      {
+       "metric": "pressure_trend",
+       "label": "Pressure trend (24h)",
+       "value": "-2.8 hPa/24h",
+       "subscore": 78,
+       "weight_pct": 7,
+       "evidence": "moderate",
+       "note": "steady glass"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.0 m range",
+       "subscore": 65,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "big spring tides moving plenty of water"
+      }
+     ]
+    },
+    {
+     "id": "harbour",
+     "name": "Harbour & wharf",
+     "tagline": "Structure, pylons and deep protected water",
+     "score": 73,
+     "label": "Good",
+     "best_window": "9pm\u201312am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 85% of peak",
+       "subscore": 87,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "night",
+       "subscore": 68,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.4 \u00b0C water",
+       "subscore": 71,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "0 mm/72h",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "16 kn",
+       "subscore": 64,
+       "weight_pct": 13,
+       "evidence": "strong",
+       "note": "light winds"
+      }
+     ]
+    },
+    {
+     "id": "boat",
+     "name": "Boat & offshore",
+     "tagline": "Outside the Heads \u2014 reefs, FADs and open water",
+     "score": 57,
+     "label": "Fair",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "2.3 m swell",
+       "subscore": 35,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "swell out of range"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 75,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.4 \u00b0C water",
+       "subscore": 63,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 58% of peak",
+       "subscore": 73,
+       "weight_pct": 6,
+       "evidence": "strong",
+       "note": "water moving hard"
+      }
+     ]
+    }
+   ],
+   "species": [
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "score": 77,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "4pm\u20137pm",
+     "reason": "Beach, 4pm\u20137pm \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "score": 76,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "10pm\u20131am",
+     "reason": "Estuary, 10pm\u20131am \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "score": 76,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "3pm\u20136pm",
+     "reason": "Harbour & wharf, 3pm\u20136pm \u2014 peak season; water moving hard."
+    },
+    {
+     "id": "squid",
+     "name": "Southern calamari",
+     "score": 74,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "4pm\u20137pm",
+     "reason": "Harbour & wharf, 4pm\u20137pm \u2014 runoff has coloured the water nicely; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "score": 74,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "8pm\u201311pm",
+     "reason": "Harbour & wharf, 8pm\u201311pm \u2014 low light \u2014 prime feeding window; runoff has coloured the water nicely."
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "score": 72,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "8pm\u201311pm",
+     "reason": "Estuary, 8pm\u201311pm \u2014 water moving hard; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "score": 66,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "8am\u201311am",
+     "reason": "Harbour & wharf, 8am\u201311am \u2014 water moving hard; low light \u2014 prime feeding window."
+    }
+   ]
+  },
+  {
+   "date": "2026-07-13",
+   "weekday": "Mon",
+   "headline": "Get out there \u2014 the boat & offshore is firing. Top target: Tailor (78).",
+   "summary": {
+    "sunrise": "07:00",
+    "sunset": "16:57",
+    "moon_name": "New moon",
+    "moon_illum": 0.03,
+    "tide_events": [
+     {
+      "time": "01:01",
+      "type": "low",
+      "height": -0.48
+     },
+     {
+      "time": "07:41",
+      "type": "high",
+      "height": 0.43
+     },
+     {
+      "time": "13:51",
+      "type": "low",
+      "height": -0.27
+     },
+     {
+      "time": "19:43",
+      "type": "high",
+      "height": 0.33
+     }
+    ],
+    "tide_range": 0.91,
+    "swell_max": 0.9,
+    "swell_period": 9.0,
+    "wind_max_kn": 12.0,
+    "pressure": 1019.8,
+    "pressure_trend": 8.0,
+    "rain_24h": 0.0,
+    "rain_72h": 0.0,
+    "rain_today": 0.0,
+    "sst": 17.3
+   },
+   "tide_curve": [
+    {
+     "t": "00:00",
+     "h": -0.43
+    },
+    {
+     "t": "01:00",
+     "h": -0.482
+    },
+    {
+     "t": "02:00",
+     "h": -0.434
+    },
+    {
+     "t": "03:00",
+     "h": -0.296
+    },
+    {
+     "t": "04:00",
+     "h": -0.098
+    },
+    {
+     "t": "05:00",
+     "h": 0.116
+    },
+    {
+     "t": "06:00",
+     "h": 0.298
+    },
+    {
+     "t": "07:00",
+     "h": 0.408
+    },
+    {
+     "t": "08:00",
+     "h": 0.426
+    },
+    {
+     "t": "09:00",
+     "h": 0.351
+    },
+    {
+     "t": "10:00",
+     "h": 0.206
+    },
+    {
+     "t": "11:00",
+     "h": 0.029
+    },
+    {
+     "t": "12:00",
+     "h": -0.134
+    },
+    {
+     "t": "13:00",
+     "h": -0.243
+    },
+    {
+     "t": "14:00",
+     "h": -0.273
+    },
+    {
+     "t": "15:00",
+     "h": -0.218
+    },
+    {
+     "t": "16:00",
+     "h": -0.095
+    },
+    {
+     "t": "17:00",
+     "h": 0.062
+    },
+    {
+     "t": "18:00",
+     "h": 0.211
+    },
+    {
+     "t": "19:00",
+     "h": 0.31
+    },
+    {
+     "t": "20:00",
+     "h": 0.33
+    },
+    {
+     "t": "21:00",
+     "h": 0.262
+    },
+    {
+     "t": "22:00",
+     "h": 0.118
+    },
+    {
+     "t": "23:00",
+     "h": -0.07
+    }
+   ],
+   "environments": [
+    {
+     "id": "rock",
+     "name": "Rock",
+     "tagline": "Ledges and headland washes",
+     "score": 79,
+     "label": "Good",
+     "best_window": "3pm\u20136pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.9 m swell",
+       "subscore": 93,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 83,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 68% of peak",
+       "subscore": 80,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 76,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "+10 kn onshore",
+       "subscore": 69,
+       "weight_pct": 10,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      }
+     ]
+    },
+    {
+     "id": "beach",
+     "name": "Beach",
+     "tagline": "Gutters, banks and the surf zone",
+     "score": 77,
+     "label": "Good",
+     "best_window": "4pm\u20137pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 91,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.9 m swell",
+       "subscore": 75,
+       "weight_pct": 24,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "+7 kn onshore",
+       "subscore": 83,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 74% of peak",
+       "subscore": 82,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "10 s period",
+       "subscore": 77,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "estuary",
+     "name": "Estuary",
+     "tagline": "Rivers, bays and the brackish reaches",
+     "score": 73,
+     "label": "Good",
+     "best_window": "4am\u20137am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 96% of peak",
+       "subscore": 89,
+       "weight_pct": 22,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "5 kn",
+       "subscore": 84,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "night",
+       "subscore": 74,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1018 hPa",
+       "subscore": 84,
+       "weight_pct": 7,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.4 \u00b0C water",
+       "subscore": 74,
+       "weight_pct": 6,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      }
+     ]
+    },
+    {
+     "id": "harbour",
+     "name": "Harbour & wharf",
+     "tagline": "Structure, pylons and deep protected water",
+     "score": 75,
+     "label": "Good",
+     "best_window": "4pm\u20137pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 74% of peak",
+       "subscore": 84,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 83,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "8 kn",
+       "subscore": 81,
+       "weight_pct": 13,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.3 \u00b0C water",
+       "subscore": 70,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "0 mm/72h",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      }
+     ]
+    },
+    {
+     "id": "boat",
+     "name": "Boat & offshore",
+     "tagline": "Outside the Heads \u2014 reefs, FADs and open water",
+     "score": 81,
+     "label": "Excellent",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "5 kn",
+       "subscore": 93,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.8 m swell",
+       "subscore": 87,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "10 s period",
+       "subscore": 76,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1019 hPa",
+       "subscore": 84,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      }
+     ]
+    }
+   ],
+   "species": [
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "score": 78,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "4pm\u20137pm",
+     "reason": "Beach, 4pm\u20137pm \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "squid",
+     "name": "Southern calamari",
+     "score": 78,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 runoff has coloured the water nicely; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "score": 76,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "4pm\u20137pm",
+     "reason": "Harbour & wharf, 4pm\u20137pm \u2014 peak season; water moving hard."
+    },
+    {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "score": 76,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 light winds; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "score": 75,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "11pm\u20132am",
+     "reason": "Estuary, 11pm\u20132am \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "score": 73,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "4pm\u20137pm",
+     "reason": "Estuary, 4pm\u20137pm \u2014 water moving hard; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "score": 66,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "10am\u20131pm",
+     "reason": "Harbour & wharf, 10am\u20131pm \u2014 water moving hard; low light \u2014 prime feeding window."
+    }
+   ]
+  },
+  {
+   "date": "2026-07-14",
+   "weekday": "Tue",
+   "headline": "Get out there \u2014 the rock is firing. Top target: Tailor (78).",
+   "summary": {
+    "sunrise": "07:00",
+    "sunset": "16:57",
+    "moon_name": "New moon",
+    "moon_illum": 0.01,
+    "tide_events": [
+     {
+      "time": "02:11",
+      "type": "low",
+      "height": -0.47
+     },
+     {
+      "time": "08:52",
+      "type": "high",
+      "height": 0.41
+     },
+     {
+      "time": "14:57",
+      "type": "low",
+      "height": -0.27
+     },
+     {
+      "time": "20:52",
+      "type": "high",
+      "height": 0.36
+     }
+    ],
+    "tide_range": 0.88,
+    "swell_max": 1.2,
+    "swell_period": 9.1,
+    "wind_max_kn": 17.0,
+    "pressure": 1019.9,
+    "pressure_trend": 2.8,
+    "rain_24h": 0.0,
+    "rain_72h": 0.0,
+    "rain_today": 0.0,
+    "sst": 17.3
+   },
+   "tide_curve": [
+    {
+     "t": "00:00",
+     "h": -0.259
+    },
+    {
+     "t": "01:00",
+     "h": -0.405
+    },
+    {
+     "t": "02:00",
+     "h": -0.472
+    },
+    {
+     "t": "03:00",
+     "h": -0.443
+    },
+    {
+     "t": "04:00",
+     "h": -0.324
+    },
+    {
+     "t": "05:00",
+     "h": -0.14
+    },
+    {
+     "t": "06:00",
+     "h": 0.067
+    },
+    {
+     "t": "07:00",
+     "h": 0.252
+    },
+    {
+     "t": "08:00",
+     "h": 0.373
+    },
+    {
+     "t": "09:00",
+     "h": 0.407
+    },
+    {
+     "t": "10:00",
+     "h": 0.349
+    },
+    {
+     "t": "11:00",
+     "h": 0.218
+    },
+    {
+     "t": "12:00",
+     "h": 0.049
+    },
+    {
+     "t": "13:00",
+     "h": -0.114
+    },
+    {
+     "t": "14:00",
+     "h": -0.23
+    },
+    {
+     "t": "15:00",
+     "h": -0.269
+    },
+    {
+     "t": "16:00",
+     "h": -0.223
+    },
+    {
+     "t": "17:00",
+     "h": -0.104
+    },
+    {
+     "t": "18:00",
+     "h": 0.056
+    },
+    {
+     "t": "19:00",
+     "h": 0.213
+    },
+    {
+     "t": "20:00",
+     "h": 0.326
+    },
+    {
+     "t": "21:00",
+     "h": 0.36
+    },
+    {
+     "t": "22:00",
+     "h": 0.302
+    },
+    {
+     "t": "23:00",
+     "h": 0.161
+    }
+   ],
+   "environments": [
+    {
+     "id": "rock",
+     "name": "Rock",
+     "tagline": "Ledges and headland washes",
+     "score": 82,
+     "label": "Excellent",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.0 m swell",
+       "subscore": 94,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 78% of peak",
+       "subscore": 83,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 78,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "-8 kn onshore",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 77,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "beach",
+     "name": "Beach",
+     "tagline": "Gutters, banks and the surf zone",
+     "score": 77,
+     "label": "Good",
+     "best_window": "4pm\u20137pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 91,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.0 m swell",
+       "subscore": 76,
+       "weight_pct": 24,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "+11 kn onshore",
+       "subscore": 78,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 71% of peak",
+       "subscore": 81,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "10 s period",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      }
+     ]
+    },
+    {
+     "id": "estuary",
+     "name": "Estuary",
+     "tagline": "Rivers, bays and the brackish reaches",
+     "score": 74,
+     "label": "Good",
+     "best_window": "5am\u20138am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 100% of peak",
+       "subscore": 90,
+       "weight_pct": 22,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "night",
+       "subscore": 79,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "9 kn",
+       "subscore": 78,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1021 hPa",
+       "subscore": 82,
+       "weight_pct": 7,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.3 \u00b0C water",
+       "subscore": 74,
+       "weight_pct": 6,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      }
+     ]
+    },
+    {
+     "id": "harbour",
+     "name": "Harbour & wharf",
+     "tagline": "Structure, pylons and deep protected water",
+     "score": 77,
+     "label": "Good",
+     "best_window": "6am\u20139am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 78% of peak",
+       "subscore": 83,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "water moving hard"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 86,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "10 kn",
+       "subscore": 81,
+       "weight_pct": 13,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "17.3 \u00b0C water",
+       "subscore": 70,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "0 mm/72h",
+       "subscore": 78,
+       "weight_pct": 8,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      }
+     ]
+    },
+    {
+     "id": "boat",
+     "name": "Boat & offshore",
+     "tagline": "Outside the Heads \u2014 reefs, FADs and open water",
+     "score": 79,
+     "label": "Good",
+     "best_window": "7am\u201310am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "8 kn",
+       "subscore": 83,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.0 m swell",
+       "subscore": 85,
+       "weight_pct": 20,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 85,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "low light \u2014 prime feeding window"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 75,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1021 hPa",
+       "subscore": 83,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      }
+     ]
+    }
+   ],
+   "species": [
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "score": 78,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "4pm\u20137pm",
+     "reason": "Beach, 4pm\u20137pm \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "score": 78,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 peak season; water moving hard."
+    },
+    {
+     "id": "squid",
+     "name": "Southern calamari",
+     "score": 78,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 runoff has coloured the water nicely; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "score": 78,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 low light \u2014 prime feeding window; light winds."
+    },
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "score": 76,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "6pm\u20139pm",
+     "reason": "Estuary, 6pm\u20139pm \u2014 low light \u2014 prime feeding window; peak season."
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "score": 74,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "5am\u20138am",
+     "reason": "Estuary, 5am\u20138am \u2014 water moving hard; low light \u2014 prime feeding window."
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "score": 68,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "6am\u20139am",
+     "reason": "Harbour & wharf, 6am\u20139am \u2014 water moving hard; low light \u2014 prime feeding window."
+    }
+   ]
+  }
+ ]
+}

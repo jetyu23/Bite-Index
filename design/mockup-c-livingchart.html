@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup C — Living Chart (working demo)</title>
+<style>
+  :root{
+    --paper:#ecf2ef; --surface:#f8fbf9; --ink:#16232b; --soft:#51646a; --line:#c9d8d3;
+    --teal:#0f6e73; --buoy:#ba3b1e; --good:#33774f; --fair:#a67c24;
+    --sans:"Archivo",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;color:var(--ink);font-family:var(--sans)}
+  #water,#fish{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1}
+  .note{position:fixed;top:10px;right:10px;font-family:var(--mono);font-size:10px;background:#fff;
+    border:1px dashed var(--buoy);color:var(--buoy);padding:4px 8px;z-index:9}
+  .hint{position:fixed;bottom:14px;left:14px;font-family:var(--mono);font-size:11px;color:var(--teal);
+    background:var(--surface);border:1px dashed var(--teal);padding:6px 10px;z-index:9}
+  .callout{font-family:var(--mono);font-size:10.5px;color:var(--teal);border:1px dashed var(--teal);
+    background:rgba(15,110,115,.06);padding:5px 9px;display:inline-block;margin:10px 0}
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 22px 90px}
+  .brand{font-weight:800;letter-spacing:.14em;font-size:17px}.brand span{color:var(--teal)}
+  .dateline{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--soft);margin:26px 0 8px}
+  h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:0;max-width:24ch;letter-spacing:-0.015em}
+  h1 .dim{color:var(--soft)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+  .chip{font-family:var(--mono);font-size:12px;background:var(--surface);border:1px solid var(--line);
+    border-radius:999px;padding:5px 11px}
+  /* tide card — the contrast fix */
+  .tidecard{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--teal);
+    border-radius:12px;box-shadow:0 8px 22px rgba(22,35,43,.08);padding:16px 18px 10px;margin:20px 0}
+  .tidecard .cap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--soft)}
+  .tidecard svg{width:100%;height:auto;display:block}
+  h2{font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--soft);margin:34px 0 12px}
+  .rows .row{display:grid;grid-template-columns:1fr 110px;gap:14px;align-items:baseline;background:var(--surface);
+    border:1px solid var(--line);border-radius:10px;padding:13px 16px;margin-bottom:10px;transition:.15s}
+  .rows .row:hover{transform:translateX(4px);border-color:var(--teal)}
+  .nm{font-weight:700;font-size:18px}
+  .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;border:1px solid var(--line);
+    border-radius:4px;padding:2px 7px;margin-left:9px;vertical-align:2px;color:var(--soft);background:#fff}
+  .win{font-family:var(--mono);font-size:11px;color:var(--soft);margin-left:9px}
+  .why{display:block;font-size:13.5px;color:var(--soft);margin-top:3px}
+  .sc{text-align:right;font-family:var(--mono)}
+  .sc b{display:block;font-size:30px;font-weight:600;line-height:1}
+  .sc i{font-style:normal;font-size:9px;letter-spacing:.2em;font-weight:600}
+  .g{color:var(--good)}.f{color:var(--fair)}.p{color:var(--buoy)}.t{color:var(--teal)}
+  .meter{grid-column:1/-1;height:4px;background:var(--line);border-radius:2px;position:relative;margin-top:4px}
+  .meter i{position:absolute;left:0;top:0;bottom:0;background:currentColor;border-radius:2px}
+  .meter u{position:absolute;left:50%;top:-3px;bottom:-3px;width:1.5px;background:var(--ink);opacity:.5}
+</style>
+</head>
+<body>
+<canvas id="water" aria-hidden="true"></canvas>
+<canvas id="fish" aria-hidden="true"></canvas>
+<div class="note">MOCKUP C · working demo · move + click on the page</div>
+<div class="hint">background: cursor bends the water · click = splash · the fish keep their distance</div>
+
+<div class="wrap">
+  <div class="brand">BITE<span> INDEX</span></div>
+  <p class="dateline">THU, 09 JULY · SYDNEY · SCORED 0–100 · MEDIAN DAY = 50</p>
+  <h1>Beach first today. Estuary workable on the run-out; <span class="dim">give the rocks a miss.</span></h1>
+
+  <div class="chips">
+    <span class="chip">tides H 01:54 · L 08:05 · H 14:48 · L 21:19</span>
+    <span class="chip">swell 1.9 m @ 8 s</span>
+    <span class="chip">wind W 8 kn</span>
+    <span class="chip">1028.7 hPa ↓</span>
+    <span class="chip">rain 72h 14.8 mm</span>
+    <span class="chip">water 19.4 °C</span>
+    <span class="chip">◐ 33%</span>
+  </div>
+
+  <div class="tidecard">
+    <div class="cap">TIDAL CURVE · FORT DENISON AREA · NOT FOR NAVIGATION</div>
+    <svg viewBox="0 0 900 120">
+      <rect x="0" y="6" width="228" height="86" fill="#16232b" opacity=".06"/>
+      <rect x="638" y="6" width="262" height="86" fill="#16232b" opacity=".06"/>
+      <path d="M0,48 C60,26 110,26 170,56 C230,86 280,98 340,90 C420,80 470,40 540,30 C610,22 660,40 730,72 C790,96 850,96 900,84"
+        fill="none" stroke="#16232b" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="120" cy="32" r="4" fill="#0f6e73"/><text x="120" y="20" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#16232b">H 01:54</text>
+      <circle cx="330" cy="93" r="4" fill="#fff" stroke="#0f6e73" stroke-width="2"/><text x="330" y="112" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#16232b">L 08:05</text>
+      <circle cx="560" cy="29" r="4" fill="#0f6e73"/><text x="560" y="17" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#16232b">H 14:48</text>
+      <circle cx="800" cy="95" r="4" fill="#fff" stroke="#0f6e73" stroke-width="2"/><text x="800" y="114" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#16232b">L 21:19</text>
+    </svg>
+  </div>
+  <span class="callout">contrast fixed: curve promoted onto a raised card, ink stroke 3px, teal reserved for the event markers</span>
+
+  <h2>WHERE TO FISH TODAY</h2>
+  <div class="rows">
+    <div class="row"><div><span class="nm">Beach</span><span class="tag">GUTTERS &amp; BANKS</span><span class="win">best 4pm–7pm</span>
+      <span class="why">Workable wash from the southerly; wind offshore all afternoon.</span></div>
+      <div class="sc g"><b>63</b><i>GOOD</i></div>
+      <div class="meter g"><i style="width:63%"></i><u></u></div></div>
+    <div class="row"><div><span class="nm">Estuary</span><span class="tag">RIVERS &amp; REACHES</span><span class="win">best 4pm–7pm</span>
+      <span class="why">Light stain from midweek rain; strong water movement on the run-out.</span></div>
+      <div class="sc g"><b>58</b><i>GOOD</i></div>
+      <div class="meter g"><i style="width:58%"></i><u></u></div></div>
+    <div class="row"><div><span class="nm">Harbour &amp; wharf</span><span class="tag">PYLONS &amp; EDGES</span><span class="win">best 4pm–7pm</span>
+      <span class="why">Protected and steady. Nothing special, nothing wrong.</span></div>
+      <div class="sc f"><b>52</b><i>FAIR</i></div>
+      <div class="meter f"><i style="width:52%"></i><u></u></div></div>
+    <div class="row"><div><span class="nm">Rock</span><span class="tag">LEDGES &amp; WASHES</span><span class="win">marginal all day</span>
+      <span class="why">Short-period swell pushing onto exposed ledges. Experienced hands only.</span></div>
+      <div class="sc p"><b>34</b><i>POOR</i></div>
+      <div class="meter p"><i style="width:34%"></i><u></u></div></div>
+  </div>
+  <span class="callout">tick = calibrated median day (50) · habitat tags + windows adopted from your image-2 direction</span>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------- water: 2-buffer ripple sim, low-res, upscaled ---------- */
+  const wc=document.getElementById('water'),wx=wc.getContext('2d');
+  const GW=190,GH=118;               // sim grid
+  let prev=new Float32Array(GW*GH),cur=new Float32Array(GW*GH);
+  const img=wx.createImageData ? null : null;
+  const off=document.createElement('canvas');off.width=GW;off.height=GH;
+  const ox=off.getContext('2d');const id=ox.createImageData(GW,GH);
+  // paper base + teal-shadow shading
+  const P=[236,242,239], DK=[136,176,172];
+  let mx=-999,my=-999;
+  function size(){wc.width=innerWidth;wc.height=innerHeight;
+    const f=document.getElementById('fish');f.width=innerWidth;f.height=innerHeight;}
+  size();addEventListener('resize',size);
+  function disturb(gx,gy,s,r){for(let j=-r;j<=r;j++)for(let i=-r;i<=r;i++){
+    const x=gx+i,y=gy+j;if(x<1||y<1||x>=GW-1||y>=GH-1)continue;
+    if(i*i+j*j<=r*r)cur[y*GW+x]+=s;}}
+  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;
+    disturb((e.clientX/innerWidth*GW)|0,(e.clientY/innerHeight*GH)|0,reduced?60:26,1);});
+  addEventListener('pointerdown',e=>{
+    disturb((e.clientX/innerWidth*GW)|0,(e.clientY/innerHeight*GH)|0,340,3);});
+  function waterStep(){
+    for(let y=1;y<GH-1;y++){const r=y*GW;
+      for(let x=1;x<GW-1;x++){const i=r+x;
+        let v=((prev[i-1]+prev[i+1]+prev[i-GW]+prev[i+GW])/2-cur[i])*0.985;
+        cur[i]=v;}}
+    const t=prev;prev=cur;cur=t;
+    // render
+    const d=id.data;
+    for(let i=0,p=0;i<GW*GH;i++,p+=4){
+      const h=prev[i];             // -amp..amp
+      const k=Math.max(-30,Math.min(30,h))/30;   // -1..1
+      // trough = darker teal-grey, crest = lighter paper
+      const m=k<0?-k:0, l=k>0?k:0;
+      d[p]  =P[0]+(DK[0]-P[0])*m + (255-P[0])*l*0.5;
+      d[p+1]=P[1]+(DK[1]-P[1])*m + (255-P[1])*l*0.5;
+      d[p+2]=P[2]+(DK[2]-P[2])*m + (255-P[2])*l*0.5;
+      d[p+3]=255;
+    }
+    ox.putImageData(id,0,0);
+    wx.imageSmoothingEnabled=true;
+    wx.drawImage(off,0,0,GW,GH,0,0,wc.width,wc.height);
+  }
+  /* ---------- fish: wander + flee cursor ---------- */
+  const fc=document.getElementById('fish'),fx=fc.getContext('2d');
+  const fish=[];for(let i=0;i<7;i++)fish.push({
+    x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+    a:Math.random()*Math.PI*2,s:0.5+Math.random()*0.5,len:16+Math.random()*14,wag:Math.random()*10});
+  function fishStep(){
+    fx.clearRect(0,0,fc.width,fc.height);
+    for(const f of fish){
+      f.a+=(Math.random()-0.5)*0.08;              // wander
+      const dx=f.x-mx,dy=f.y-my,d=Math.hypot(dx,dy);
+      if(d<150){const flee=Math.atan2(dy,dx);      // flee cursor
+        let diff=flee-f.a;while(diff>Math.PI)diff-=2*Math.PI;while(diff<-Math.PI)diff+=2*Math.PI;
+        f.a+=diff*0.18; f.s=Math.min(3.4,f.s+0.28);
+        disturb((f.x/innerWidth*GW)|0,(f.y/innerHeight*GH)|0,10,1); // wake!
+      } else f.s=Math.max(0.55,f.s*0.975);
+      f.x+=Math.cos(f.a)*f.s; f.y+=Math.sin(f.a)*f.s; f.wag+=0.25+f.s*0.12;
+      if(f.x<-40)f.x=innerWidth+40; if(f.x>innerWidth+40)f.x=-40;
+      if(f.y<-40)f.y=innerHeight+40; if(f.y>innerHeight+40)f.y=-40;
+      // draw silhouette
+      fx.save();fx.translate(f.x,f.y);fx.rotate(f.a);
+      fx.fillStyle='rgba(22,35,43,0.16)';
+      const L=f.len,wob=Math.sin(f.wag)*L*0.12;
+      fx.beginPath();
+      fx.moveTo(L*0.6,0);
+      fx.quadraticCurveTo(0,-L*0.28, -L*0.5, wob*0.4);
+      fx.lineTo(-L*0.85, -L*0.3+wob);
+      fx.lineTo(-L*0.7, wob*0.5);
+      fx.lineTo(-L*0.85, L*0.3+wob);
+      fx.lineTo(-L*0.5, wob*0.4);
+      fx.quadraticCurveTo(0, L*0.28, L*0.6,0);
+      fx.fill();fx.restore();
+    }
+  }
+  function loop(){waterStep();fishStep();requestAnimationFrame(loop);}
+  if(!reduced){loop();}
+  else{ // reduced motion: flat paper, static fish, ripples only on click
+    wx.fillStyle='rgb(236,242,239)';wx.fillRect(0,0,wc.width,wc.height);
+    fishStep();
+    addEventListener('pointerdown',()=>{for(let i=0;i<40;i++)waterStep();fishStep();});
+  }
+})();
+</script>
+</body>
+</html>

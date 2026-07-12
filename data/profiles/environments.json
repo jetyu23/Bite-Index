@@ -1,0 +1,1300 @@
+{
+ "_comment": "Environment profiles. Each factor: metric id, weight (relative; the engine normalises), response ('curve' = piecewise-linear points [[x, score 0-100], ...] interpolated and clamped at the ends; 'table' = category -> score), and a written justification. 'window' = local hours [start, end) the environment is realistically fished and scored over; the day's score is the best rolling 3-hour average inside it. 'safety' (rock only) is a hard override, applied after scoring, that caps the score and raises a flag regardless of every other factor.",
+ "environments": [
+  {
+   "id": "rock",
+   "name": "Rock",
+   "tagline": "Ledges and headland washes",
+   "window": [
+    4,
+    22
+   ],
+   "safety": {
+    "metric_max_swell_m": 2.0,
+    "long_period_swell_m": 1.6,
+    "long_period_s": 13,
+    "cap": 15,
+    "message": "Swell is beyond safe limits for rock platforms today. Stay off the stones; no fish is worth it. Lifejackets are mandatory on many declared NSW rock platforms."
+   },
+   "factors": [
+    {
+     "metric": "swell_m",
+     "weight": 30,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       38.0
+      ],
+      [
+       0.5,
+       68.0
+      ],
+      [
+       1.0,
+       90.0
+      ],
+      [
+       1.4,
+       60.5
+      ],
+      [
+       1.8,
+       22.0
+      ],
+      [
+       2.2,
+       7.0
+      ],
+      [
+       3.0,
+       2
+      ]
+     ],
+     "justification": "The defining rock variable. Some wash (0.7\u20131.2 m) oxygenates the zone, dislodges food and gives fish cover; flat, glassy days fish poorly off the stones. Above ~1.5 m the platform becomes unfishable, then lethal. This factor doubles as the safety signal: a low rock score IS the warning."
+    },
+    {
+     "metric": "swell_period_s",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       5,
+       60.5
+      ],
+      [
+       8,
+       76.0
+      ],
+      [
+       11,
+       42.6
+      ],
+      [
+       14,
+       17.0
+      ],
+      [
+       17,
+       7.0
+      ]
+     ],
+     "justification": "Energy scales with period at the same height; a 1.5 m swell at 14 s surges much further up a platform than 1.5 m at 8 s. Long-period days are the classic 'looked fine, got washed in' trap."
+    },
+    {
+     "metric": "wind_onshore_kn",
+     "weight": 10,
+     "type": "curve",
+     "points": [
+      [
+       -25,
+       53.0
+      ],
+      [
+       -8,
+       76.0
+      ],
+      [
+       0,
+       76.0
+      ],
+      [
+       8,
+       60.5
+      ],
+      [
+       15,
+       38.0
+      ],
+      [
+       22,
+       14.5
+      ],
+      [
+       30,
+       4.5
+      ]
+     ],
+     "justification": "A light offshore or neutral wind keeps the face fishable; a strong onshore adds wind chop on top of swell and makes ledges wet and slippery well beyond what the swell number suggests."
+    },
+    {
+     "metric": "tide_speed",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       27.3
+      ],
+      [
+       0.4,
+       53.0
+      ],
+      [
+       0.8,
+       80.8
+      ],
+      [
+       1.0,
+       86.4
+      ]
+     ],
+     "justification": "Moving water concentrates the washes and gets pelagics and drummer feeding along the edges."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 14,
+     "type": "table",
+     "map": {
+      "dawn": 90.0,
+      "day": 42.6,
+      "dusk": 90.0,
+      "night": 27.3
+     },
+     "justification": "Dawn and dusk are the reliable bite windows off the rocks (tailor, salmon, kings at first light). Night rock fishing is productive for some species but the safety margin shrinks, so it is not scored as a peak."
+    },
+    {
+     "metric": "tide_range",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0.8,
+       38.0
+      ],
+      [
+       1.3,
+       60.5
+      ],
+      [
+       1.9,
+       76.0
+      ]
+     ],
+     "justification": "Bigger tides push more water through the washes. Springs generally beat neaps off the stones."
+    },
+    {
+     "metric": "pressure",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       22.0
+      ],
+      [
+       1008,
+       47.2
+      ],
+      [
+       1016,
+       76.0
+      ],
+      [
+       1026,
+       68.0
+      ],
+      [
+       1035,
+       47.2
+      ]
+     ],
+     "justification": "Settled highs mean stable seas and steadier fishing; deep lows usually arrive with the exact swell and wind that close the rocks anyway."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       27.3
+      ],
+      [
+       -3,
+       65.0
+      ],
+      [
+       0,
+       68.0
+      ],
+      [
+       3,
+       47.2
+      ],
+      [
+       10,
+       22.0
+      ]
+     ],
+     "justification": "A slow fall ahead of a change often fires the bite; a sharp post-frontal rise is a well-known shutdown across species."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       53.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       53.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Solunar folklore, kept small and transparent. The moon's real effect (bigger tides) is already counted in tidal range."
+    },
+    {
+     "metric": "rain_today",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       68.0
+      ],
+      [
+       5,
+       60.5
+      ],
+      [
+       15,
+       38.0
+      ],
+      [
+       35,
+       17.0
+      ]
+     ],
+     "justification": "Heavy rain during the session makes platforms slippery and visibility poor; a comfort and safety discount, not a bite factor."
+    }
+   ],
+   "tag": "LEDGES & WASHES"
+  },
+  {
+   "id": "beach",
+   "name": "Beach",
+   "tagline": "Gutters, banks and the surf zone",
+   "window": [
+    4,
+    23
+   ],
+   "factors": [
+    {
+     "metric": "swell_m",
+     "weight": 24,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       19.5
+      ],
+      [
+       0.7,
+       47.2
+      ],
+      [
+       1.2,
+       76.0
+      ],
+      [
+       1.8,
+       84.0
+      ],
+      [
+       2.4,
+       42.6
+      ],
+      [
+       3.0,
+       14.5
+      ],
+      [
+       4.0,
+       4.5
+      ]
+     ],
+     "justification": "The inverse of the rock story and the reason one all-Sydney score is meaningless: the same 2 m swell that closes the rocks builds the white water and defined gutters that tailor and salmon hunt in. Dead flat surf fishes poorly; 1\u20132 m is the sweet spot; past ~2.5 m the banks wash out."
+    },
+    {
+     "metric": "wind_onshore_kn",
+     "weight": 15,
+     "type": "curve",
+     "points": [
+      [
+       -25,
+       38.0
+      ],
+      [
+       -10,
+       53.0
+      ],
+      [
+       0,
+       60.5
+      ],
+      [
+       8,
+       76.0
+      ],
+      [
+       15,
+       53.0
+      ],
+      [
+       22,
+       19.5
+      ],
+      [
+       30,
+       7.0
+      ]
+     ],
+     "justification": "A moderate onshore stirs the surf zone, pushes bait to the beach and puts oxygen and colour in the water. A hard onshore means weed, unmanageable sweep and casting into a wall."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 16,
+     "type": "table",
+     "map": {
+      "dawn": 90.0,
+      "day": 32.7,
+      "dusk": 96,
+      "night": 56.0
+     },
+     "justification": "Dusk into dark is the classic beach session (tailor at last light, mulloway and gummies after dark). Bright midday sun over shallow sand is the worst window."
+    },
+    {
+     "metric": "tide_speed",
+     "weight": 10,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       32.7
+      ],
+      [
+       0.4,
+       56.0
+      ],
+      [
+       0.8,
+       77.6
+      ],
+      [
+       1.0,
+       84.0
+      ]
+     ],
+     "justification": "A making or running tide moves food through the gutters; the top of the tide also lets you fish gutters that are too shallow at low."
+    },
+    {
+     "metric": "tide_range",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0.8,
+       38.0
+      ],
+      [
+       1.4,
+       60.5
+      ],
+      [
+       2.0,
+       76.0
+      ]
+     ],
+     "justification": "Bigger tides flush the gutters harder and give a stronger run-in session in the evening."
+    },
+    {
+     "metric": "swell_period_s",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       5,
+       42.6
+      ],
+      [
+       8,
+       68.0
+      ],
+      [
+       12,
+       56.0
+      ],
+      [
+       16,
+       32.7
+      ]
+     ],
+     "justification": "Mid-period swell breaks cleanly and shapes gutters; very long period dumps and sweeps."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       27.3
+      ],
+      [
+       -3,
+       65.0
+      ],
+      [
+       0,
+       68.0
+      ],
+      [
+       3,
+       47.2
+      ],
+      [
+       10,
+       22.0
+      ]
+     ],
+     "justification": "Same logic as everywhere: gentle fall good, sharp post-front rise poor."
+    },
+    {
+     "metric": "pressure",
+     "weight": 5,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       27.3
+      ],
+      [
+       1008,
+       47.2
+      ],
+      [
+       1016,
+       71.2
+      ],
+      [
+       1030,
+       60.5
+      ]
+     ],
+     "justification": "Settled weather generally means a fishable, predictable beach."
+    },
+    {
+     "metric": "rain_today",
+     "weight": 5,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       68.0
+      ],
+      [
+       5,
+       60.5
+      ],
+      [
+       15,
+       40.8
+      ],
+      [
+       35,
+       18.0
+      ]
+     ],
+     "justification": "Comfort factor; an exposed beach in driving rain is a short session."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       53.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       53.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
+    }
+   ],
+   "tag": "GUTTERS & BANKS"
+  },
+  {
+   "id": "estuary",
+   "name": "Estuary",
+   "tagline": "Rivers, bays and the brackish reaches",
+   "window": [
+    4,
+    24
+   ],
+   "factors": [
+    {
+     "metric": "tide_speed",
+     "weight": 22,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       22.0
+      ],
+      [
+       0.3,
+       44.5
+      ],
+      [
+       0.6,
+       71.2
+      ],
+      [
+       1.0,
+       86.4
+      ]
+     ],
+     "justification": "In sheltered water the tide IS the weather. Run-out especially drains bait off the flats and out of the mangroves past waiting predators. Slack water is the classic dead hour."
+    },
+    {
+     "metric": "rain_72h",
+     "weight": 16,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       40.8
+      ],
+      [
+       8,
+       59.0
+      ],
+      [
+       25,
+       80.8
+      ],
+      [
+       50,
+       56.0
+      ],
+      [
+       90,
+       22.0
+      ],
+      [
+       150,
+       9.5
+      ]
+     ],
+     "justification": "The estuary's signature factor. 10\u201340 mm over a few days colours the water, flushes prawns and baitfish down and switches on mulloway and bream. Flood-level rain (>80 mm) blows the system out with fresh, dirty water and shuts it down."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 14,
+     "type": "table",
+     "map": {
+      "dawn": 84.0,
+      "day": 40.8,
+      "dusk": 86.4,
+      "night": 59.0
+     },
+     "justification": "Low light beats bright sun over shallow, clear estuary water; after-dark is productive around lit structure."
+    },
+    {
+     "metric": "wind_kn",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       80.8
+      ],
+      [
+       8,
+       71.2
+      ],
+      [
+       15,
+       46.3
+      ],
+      [
+       25,
+       22.0
+      ],
+      [
+       35,
+       11.0
+      ]
+     ],
+     "justification": "Swell never reaches here, so wind is only about casting, boat control and finding a lee; the estuary is where you go when everything else is blown out, which is exactly why it gets its own profile."
+    },
+    {
+     "metric": "tide_range",
+     "weight": 10,
+     "type": "curve",
+     "points": [
+      [
+       0.8,
+       40.8
+      ],
+      [
+       1.4,
+       68.0
+      ],
+      [
+       2.0,
+       80.8
+      ]
+     ],
+     "justification": "Spring tides move more water through the system and make the run-out window stronger."
+    },
+    {
+     "metric": "pressure",
+     "weight": 7,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       27.3
+      ],
+      [
+       1010,
+       53.0
+      ],
+      [
+       1018,
+       76.0
+      ],
+      [
+       1030,
+       60.5
+      ]
+     ],
+     "justification": "Bream and whiting anglers widely report better sessions on settled highs; mechanism debated, correlation consistent."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 7,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       27.3
+      ],
+      [
+       -3,
+       65.0
+      ],
+      [
+       0,
+       68.0
+      ],
+      [
+       3,
+       47.2
+      ],
+      [
+       10,
+       22.0
+      ]
+     ],
+     "justification": "Sharp swings shut shallow-water fish down harder than deep-water fish."
+    },
+    {
+     "metric": "sst_c",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       12,
+       27.3
+      ],
+      [
+       16,
+       50.0
+      ],
+      [
+       20,
+       76.0
+      ],
+      [
+       24,
+       71.2
+      ],
+      [
+       27,
+       56.0
+      ]
+     ],
+     "justification": "Coastal SST is only a rough proxy for estuary temperature, but warm-water months lift overall activity."
+    },
+    {
+     "metric": "tide_mins_to_turn",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       76.0
+      ],
+      [
+       60,
+       60.5
+      ],
+      [
+       180,
+       40.8
+      ],
+      [
+       360,
+       32.7
+      ]
+     ],
+     "justification": "The hour either side of the change concentrates the bite around structure even as flow slows."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       53.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       53.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
+    }
+   ],
+   "tag": "RIVERS & REACHES"
+  },
+  {
+   "id": "harbour",
+   "name": "Harbour & wharf",
+   "tagline": "Structure, pylons and deep protected water",
+   "window": [
+    4,
+    24
+   ],
+   "factors": [
+    {
+     "metric": "tide_speed",
+     "weight": 20,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       24.1
+      ],
+      [
+       0.3,
+       46.3
+      ],
+      [
+       0.6,
+       71.2
+      ],
+      [
+       1.0,
+       86.4
+      ]
+     ],
+     "justification": "Harbour fishing is structure fishing, and structure only works when current pushes bait past it. Markers, moorings and pylons all fire on the run."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 16,
+     "type": "table",
+     "map": {
+      "dawn": 90.0,
+      "day": 42.6,
+      "dusk": 84.0,
+      "night": 50.0
+     },
+     "justification": "First light around harbour structure is the premium window (kingfish especially). Lit wharves keep producing after dark."
+    },
+    {
+     "metric": "wind_kn",
+     "weight": 13,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       84.0
+      ],
+      [
+       10,
+       68.0
+      ],
+      [
+       18,
+       42.6
+      ],
+      [
+       28,
+       19.5
+      ],
+      [
+       38,
+       9.5
+      ]
+     ],
+     "justification": "Protected water, so wind is about comfort and casting; and there is nearly always a lee shore somewhere in Sydney Harbour, which keeps this environment's floor high."
+    },
+    {
+     "metric": "sst_c",
+     "weight": 11,
+     "type": "curve",
+     "points": [
+      [
+       13,
+       27.3
+      ],
+      [
+       17,
+       50.0
+      ],
+      [
+       19,
+       71.2
+      ],
+      [
+       23,
+       84.0
+      ],
+      [
+       27,
+       65.0
+      ]
+     ],
+     "justification": "The harbour's headline species (kingfish) is strongly temperature-gated: bites switch on reliably once water passes ~19 \u00b0C."
+    },
+    {
+     "metric": "tide_mins_to_turn",
+     "weight": 7,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       80.8
+      ],
+      [
+       60,
+       62.0
+      ],
+      [
+       180,
+       40.8
+      ],
+      [
+       360,
+       32.7
+      ]
+     ],
+     "justification": "The change is a classic kingfish and trevally trigger around markers and deep holes."
+    },
+    {
+     "metric": "rain_72h",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       65.0
+      ],
+      [
+       15,
+       68.0
+      ],
+      [
+       40,
+       44.5
+      ],
+      [
+       90,
+       19.5
+      ],
+      [
+       150,
+       11.0
+      ]
+     ],
+     "justification": "A little runoff is fine; big rain sends a dirty stormwater plume through the harbour and pushes clean-water species out."
+    },
+    {
+     "metric": "tide_range",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0.8,
+       40.8
+      ],
+      [
+       1.4,
+       65.0
+      ],
+      [
+       2.0,
+       77.6
+      ]
+     ],
+     "justification": "More range, more current past the structure."
+    },
+    {
+     "metric": "pressure",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       30.5
+      ],
+      [
+       1010,
+       53.0
+      ],
+      [
+       1018,
+       74.4
+      ],
+      [
+       1030,
+       62.0
+      ]
+     ],
+     "justification": "Settled weather correlation, as elsewhere."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       27.3
+      ],
+      [
+       -3,
+       65.0
+      ],
+      [
+       0,
+       68.0
+      ],
+      [
+       3,
+       47.2
+      ],
+      [
+       10,
+       22.0
+      ]
+     ],
+     "justification": "Post-frontal sharp rises are slow days on the harbour too."
+    },
+    {
+     "metric": "swell_m",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       71.2
+      ],
+      [
+       1.0,
+       68.0
+      ],
+      [
+       2.0,
+       56.0
+      ],
+      [
+       3.5,
+       40.8
+      ]
+     ],
+     "justification": "Large swell pushes surge and colour inside the Heads and can unsettle the lower harbour; a minor effect only."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 2,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       53.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       53.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
+    }
+   ],
+   "tag": "PYLONS & EDGES"
+  },
+  {
+   "id": "boat",
+   "name": "Boat & offshore",
+   "tagline": "Outside the Heads; reefs, FADs and open water",
+   "window": [
+    4,
+    19
+   ],
+   "factors": [
+    {
+     "metric": "wind_kn",
+     "weight": 30,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       96
+      ],
+      [
+       6,
+       86.4
+      ],
+      [
+       10,
+       68.0
+      ],
+      [
+       14,
+       40.8
+      ],
+      [
+       18,
+       18.0
+      ],
+      [
+       22,
+       8.0
+      ],
+      [
+       28,
+       2
+      ]
+     ],
+     "justification": "The gatekeeper offshore. Under 10 kn is pleasant, 10\u201315 workable, over 18\u201320 is a safety and seasickness problem regardless of how good everything else looks. Weighted heaviest for that reason."
+    },
+    {
+     "metric": "swell_m",
+     "weight": 20,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       90.0
+      ],
+      [
+       1.0,
+       76.0
+      ],
+      [
+       1.5,
+       50.0
+      ],
+      [
+       2.0,
+       27.3
+      ],
+      [
+       2.8,
+       11.0
+      ],
+      [
+       4.0,
+       2
+      ]
+     ],
+     "justification": "Combined with wind this decides whether the day is comfortable, fishable or cancelled. Bar crossings and anchoring on reef both degrade fast past 2 m."
+    },
+    {
+     "metric": "sst_c",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       15,
+       22.0
+      ],
+      [
+       18,
+       50.0
+      ],
+      [
+       20,
+       74.4
+      ],
+      [
+       24,
+       86.4
+      ],
+      [
+       27,
+       68.0
+      ]
+     ],
+     "justification": "Offshore is where SST matters most; EAC pulses of warm water bring kingfish, dolphinfish and the pelagic season with them."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 10,
+     "type": "table",
+     "map": {
+      "dawn": 86.4,
+      "day": 56.0,
+      "dusk": 68.0,
+      "night": 27.3
+     },
+     "justification": "Dawn starts are standard offshore practice; calmest sea state of the day and the best bite. Scored window ends earlier because afternoon sea breeze typically ends the day."
+    },
+    {
+     "metric": "swell_period_s",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       5,
+       32.7
+      ],
+      [
+       8,
+       56.0
+      ],
+      [
+       12,
+       76.0
+      ],
+      [
+       16,
+       68.0
+      ]
+     ],
+     "justification": "Opposite sign to the rocks: at sea, long-period swell is a comfortable roll while short-period wind chop is what beats a trailer boat up."
+    },
+    {
+     "metric": "tide_speed",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       38.0
+      ],
+      [
+       0.5,
+       60.5
+      ],
+      [
+       1.0,
+       76.0
+      ]
+     ],
+     "justification": "Current matters on the reefs and around the change, though less dominant than inshore."
+    },
+    {
+     "metric": "pressure",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       19.5
+      ],
+      [
+       1010,
+       47.2
+      ],
+      [
+       1018,
+       76.0
+      ],
+      [
+       1030,
+       65.0
+      ]
+     ],
+     "justification": "A big settled high is exactly the forecast that makes an offshore day possible at all."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 5,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       19.5
+      ],
+      [
+       -3,
+       56.0
+      ],
+      [
+       0,
+       71.2
+      ],
+      [
+       3,
+       50.0
+      ],
+      [
+       10,
+       24.1
+      ]
+     ],
+     "justification": "A fast fall offshore means the window is closing; plan around it."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       53.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       53.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
+    }
+   ],
+   "tag": "REEFS & OPEN WATER"
+  }
+ ]
+}

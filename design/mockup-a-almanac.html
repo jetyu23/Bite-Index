@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup A — The Angler's Almanac</title>
+<style>
+  :root{
+    --paper:#f1ece0; --ink:#1c2a33; --rule:#b9ae95; --rule-soft:#d4cbb6;
+    --stamp:#23486b; --signal:#b3402a; --sea:#2e6b54; --fair:#a07a24;
+    --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+    background-image:repeating-linear-gradient(transparent 0 27px, rgba(28,42,51,.045) 27px 28px);}
+  .wrap{max-width:980px;margin:0 auto;padding:26px 24px 80px}
+  .note{position:fixed;top:10px;right:10px;font-family:var(--mono);font-size:10px;background:#fff8e6;
+    border:1px dashed var(--signal);color:var(--signal);padding:4px 8px;z-index:9}
+  .callout{font-family:var(--mono);font-size:10.5px;color:var(--stamp);border:1px dashed var(--stamp);
+    background:rgba(35,72,107,.05);padding:5px 9px;display:inline-block;margin:8px 0}
+  /* masthead */
+  .mast{border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);text-align:center;padding:14px 0 10px;position:relative}
+  .mast h1{margin:0;font-size:44px;letter-spacing:.06em;font-weight:700}
+  .mast h1 em{font-style:normal;color:var(--stamp)}
+  .edition{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;margin-top:6px;color:#4c5a60}
+  .mast::after{content:"";display:block;border-bottom:3px solid var(--ink);margin-top:10px}
+  .stamp{position:absolute;right:6px;top:16px;transform:rotate(7deg);border:2px solid var(--signal);color:var(--signal);
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:4px 7px;opacity:.85}
+  /* headline */
+  .lede{padding:30px 0 6px;border-bottom:1px solid var(--rule)}
+  .lede h2{font-size:clamp(28px,4.4vw,42px);line-height:1.14;margin:0;max-width:22ch;font-weight:600}
+  .lede h2 .dim{color:#5a6a70}
+  /* conditions log table */
+  .log{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--rule);border-top:1px solid var(--rule);margin:22px 0 8px}
+  .log div{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:9px 12px 10px}
+  .log b{display:block;font-family:var(--mono);font-weight:500;font-size:9.5px;letter-spacing:.18em;color:#6b7a80;margin-bottom:3px}
+  .log span{font-family:var(--mono);font-size:13.5px}
+  /* chart inset */
+  .inset{border:2px solid var(--ink);background:#faf7ee;margin:22px 0;padding:14px 16px 8px;position:relative}
+  .inset .cap{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:#6b7a80}
+  .inset svg{width:100%;height:auto;display:block}
+  /* ledgers */
+  h3.sec{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.22em;margin:34px 0 4px;color:var(--ink)}
+  h3.sec::after{content:"";display:block;border-bottom:2px solid var(--ink);margin-top:6px}
+  .row{display:grid;grid-template-columns:1fr 120px;gap:14px;align-items:baseline;padding:13px 2px;border-bottom:1px solid var(--rule-soft)}
+  .row:hover{background:rgba(35,72,107,.045)}
+  .row .name{font-size:21px;font-weight:600}
+  .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;border:1px solid var(--rule);padding:2px 7px;margin-left:10px;
+    vertical-align:3px;color:#4c5a60;background:#faf7ee}
+  .win{font-family:var(--mono);font-size:11px;color:#4c5a60;margin-left:10px}
+  .why{display:block;font-size:14.5px;color:#44535a;margin-top:3px;font-style:italic}
+  .score{text-align:right}
+  .score b{display:block;font-size:34px;font-weight:600;line-height:1}
+  .score i{font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:.2em}
+  .g{color:var(--sea)} .f{color:var(--fair)} .p{color:var(--signal)}
+  .meter{grid-column:1/-1;height:3px;background:var(--rule-soft);position:relative;margin-top:2px}
+  .meter i{position:absolute;left:0;top:0;bottom:0;background:currentColor}
+  .meter u{position:absolute;left:50%;top:-3px;bottom:-3px;width:1.5px;background:var(--ink);opacity:.55}
+  .safety{border:1.5px solid var(--signal);color:var(--signal);background:rgba(179,64,42,.06);
+    font-family:var(--serif);padding:10px 14px;margin:14px 0;font-size:15px}
+  footer{margin-top:44px;border-top:3px double var(--ink);padding-top:10px;font-family:var(--mono);font-size:10px;color:#6b7a80;letter-spacing:.06em}
+  @media(max-width:720px){.log{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr 84px}}
+</style>
+</head>
+<body>
+<div class="note">MOCKUP A · mid-fidelity · not the real site</div>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="stamp">CALIBRATED<br>MEDIAN DAY = 50</div>
+    <h1>THE BITE <em>INDEX</em></h1>
+    <div class="edition">SYDNEY EDITION · No. 214 · THURSDAY 9 JULY 2026 · CONDITIONS SCORED 0–100</div>
+  </header>
+
+  <section class="lede">
+    <h2>A beach-first day. Estuary workable on the run-out; <span class="dim">give the rocks a miss.</span></h2>
+    <span class="callout">headline is composed from the score spread, no longer one template per tier · em dashes removed from site copy</span>
+  </section>
+
+  <section>
+    <div class="log">
+      <div><b>TIDE</b><span>H 01:54 · L 08:05 · H 14:48 · L 21:19</span></div>
+      <div><b>WIND</b><span>W 8 kn, easing</span></div>
+      <div><b>SWELL</b><span>1.9 m @ 8 s S</span></div>
+      <div><b>PRESSURE</b><span>1028.7 hPa · −1.9/24h</span></div>
+      <div><b>RAIN 72H</b><span>14.8 mm · runoff light</span></div>
+      <div><b>WATER</b><span>19.4 °C inshore</span></div>
+      <div><b>MOON</b><span>last quarter · 33%</span></div>
+      <div><b>SUN</b><span>06:59 → 17:00</span></div>
+    </div>
+    <span class="callout">your image-3 grid, set as a ruled logbook table</span>
+  </section>
+
+  <div class="inset">
+    <div class="cap">TIDAL CURVE · FORT DENISON AREA · MODEL-DERIVED, NOT FOR NAVIGATION</div>
+    <svg viewBox="0 0 900 130">
+      <rect x="0" y="8" width="230" height="94" fill="#1c2a33" opacity=".06"/>
+      <rect x="640" y="8" width="260" height="94" fill="#1c2a33" opacity=".06"/>
+      <path d="M0,52 C60,30 110,30 170,60 C230,90 280,104 340,96 C420,86 470,44 540,34 C610,26 660,44 730,76 C790,102 850,102 900,88"
+            fill="none" stroke="#1c2a33" stroke-width="3"/>
+      <circle cx="120" cy="36" r="4" fill="#1c2a33"/><text x="120" y="24" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1c2a33">H 01:54</text>
+      <circle cx="330" cy="99" r="4" fill="#faf7ee" stroke="#1c2a33" stroke-width="2"/><text x="330" y="120" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1c2a33">L 08:05</text>
+      <circle cx="560" cy="33" r="4" fill="#1c2a33"/><text x="560" y="21" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1c2a33">H 14:48</text>
+      <circle cx="800" cy="101" r="4" fill="#faf7ee" stroke="#1c2a33" stroke-width="2"/><text x="800" y="122" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" font-weight="600" fill="#1c2a33">L 21:19</text>
+    </svg>
+    <span class="callout">curve fixed: raised inset panel, 3px ink stroke, no more blending into the background</span>
+  </div>
+
+  <h3 class="sec">THE LEDGER — WHERE TO FISH</h3>
+  <div class="row"><div><span class="name">Beach</span><span class="tag">GUTTERS &amp; BANKS</span><span class="win">best 4pm–7pm</span>
+      <span class="why">Workable wash from the southerly swell; wind offshore all afternoon.</span></div>
+    <div class="score g"><b>63</b><i>GOOD</i></div>
+    <div class="meter g"><i style="width:63%"></i><u title="median day"></u></div></div>
+  <div class="row"><div><span class="name">Estuary</span><span class="tag">RIVERS &amp; BRACKISH REACHES</span><span class="win">best 4pm–7pm</span>
+      <span class="why">Light stain from midweek rain; water moving hard on the run-out.</span></div>
+    <div class="score g"><b>58</b><i>GOOD</i></div>
+    <div class="meter g"><i style="width:58%"></i><u></u></div></div>
+  <div class="row"><div><span class="name">Harbour &amp; wharf</span><span class="tag">PYLONS &amp; DEEP EDGES</span><span class="win">best 4pm–7pm</span>
+      <span class="why">Protected and steady; nothing special, nothing wrong.</span></div>
+    <div class="score f"><b>52</b><i>FAIR</i></div>
+    <div class="meter f"><i style="width:52%"></i><u></u></div></div>
+  <div class="row"><div><span class="name">Boat &amp; offshore</span><span class="tag">REEFS &amp; OPEN WATER</span><span class="win">best 7am–10am</span>
+      <span class="why">Comfortable early, sloppier as the sea builds mid-morning.</span></div>
+    <div class="score f"><b>47</b><i>FAIR</i></div>
+    <div class="meter f"><i style="width:47%"></i><u></u></div></div>
+  <div class="row"><div><span class="name">Rock</span><span class="tag">LEDGES &amp; WASHES</span><span class="win">marginal all day</span>
+      <span class="why">Swell short and pushy on exposed ledges. Fishable for the experienced only.</span></div>
+    <div class="score p"><b>34</b><i>POOR</i></div>
+    <div class="meter p"><i style="width:34%"></i><u></u></div></div>
+  <span class="callout">tick on every meter = the calibrated median day (50). scores now spread honestly: a flat day reads flat</span>
+
+  <div class="safety">⚠ If swell crosses the safety threshold, this row prints in red with the score capped. Safety is typeset as the only red on the page, so it cannot be missed.</div>
+
+  <h3 class="sec">WHAT TO CHASE</h3>
+  <div class="row"><div><span class="name">1 · Tailor</span><span class="tag">BEACH GUTTERS</span><span class="win">dawn &amp; dusk</span>
+      <span class="why">Stirred white water and bait in the gutters after the blow.</span></div>
+    <div class="score g"><b>68</b><i>GOOD</i></div></div>
+  <div class="row"><div><span class="name">2 · Mulloway (jewfish)</span><span class="tag">ESTUARY HOLES</span><span class="win">dusk → 22:30</span>
+      <span class="why">Run-out tide after dark with a touch of colour in the water.</span></div>
+    <div class="score g"><b>61</b><i>GOOD</i></div></div>
+  <div class="row"><div><span class="name">3 · Bream</span><span class="tag">HARBOUR STRUCTURE</span><span class="win">tide change</span>
+      <span class="why">Slight stain suits them; work the pylons on the turn.</span></div>
+    <div class="score f"><b>57</b><i>FAIR</i></div></div>
+  <div class="row" style="border-bottom:none"><div><span class="name">7 · Yellowtail kingfish</span><span class="tag">HARBOUR REEFS</span><span class="win">change of tide</span>
+      <span class="why">19.4° is below their comfort band. An honest 22, not a padded 48.</span></div>
+    <div class="score p"><b>22</b><i>POOR</i></div></div>
+  <span class="callout">your image-2 layout, adopted: habitat tags + window + reason per species. “More species coming — the model is config, adding one is a pull request.”</span>
+
+  <footer>WEATHER BY OPEN-METEO · SCORES CALIBRATED AGAINST 12 MONTHS OF SYDNEY DAYS · FULL WEIGHTS PUBLISHED IN THE METHODOLOGY · GLOSSARY: EVERY TERM ON THIS PAGE, EXPLAINED</footer>
+</div>
+</body>
+</html>

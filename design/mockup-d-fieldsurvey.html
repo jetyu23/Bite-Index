@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup D — The Field Survey (combined)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#eae4d0; --paper-hi:#f4f0e1; --ink:#26251c; --soft:#5d5946; --rule:#b7ad8f; --rule-soft:#d4cdb6;
+    --stencil:#3a5a6b; --red:#a6402c; --olive:#4c7a45; --ochre:#a87f2c;
+    --screen:#12180f; --phos:#ffb44d; --phos-dim:#7d5a28;
+    --disp:"Archivo",system-ui,sans-serif; --type:"Courier Prime","Courier New",monospace; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;color:var(--ink);font-family:var(--type);position:relative;
+    background:
+      radial-gradient(circle 90px at 88% 60px, rgba(120,90,40,.10) 58px, rgba(120,90,40,.16) 60px, transparent 63px),
+      linear-gradient(rgba(38,37,28,.05), transparent 7px),
+      var(--paper);}
+  /* horizontal fold crease */
+  body::after{content:"";position:absolute;left:0;right:0;top:47%;height:8px;pointer-events:none;
+    background:linear-gradient(rgba(38,37,28,.07), transparent);}
+  #fish{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:26px 24px 90px}
+  .note{position:fixed;top:10px;right:10px;font-family:var(--mono);font-size:10px;background:var(--paper-hi);
+    border:1px dashed var(--red);color:var(--red);padding:4px 8px;z-index:9}
+  .hint{position:fixed;bottom:14px;left:14px;font-family:var(--mono);font-size:10.5px;color:var(--stencil);
+    background:var(--paper-hi);border:1px dashed var(--stencil);padding:6px 10px;z-index:9}
+  .callout{font-family:var(--mono);font-size:10.5px;color:var(--stencil);border:1px dashed var(--stencil);
+    background:rgba(58,90,107,.06);padding:5px 9px;display:inline-block;margin:9px 0}
+  /* masthead */
+  .classbar{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;
+    border:1.5px solid var(--ink);padding:5px 10px;margin-bottom:14px}
+  .mast{border-bottom:3px double var(--ink);padding-bottom:12px;position:relative}
+  .mast h1{font-family:var(--disp);font-weight:800;font-size:40px;letter-spacing:.1em;margin:0}
+  .mast h1 span{color:var(--stencil)}
+  .mast .sub{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--soft);margin-top:4px}
+  .stamp{position:absolute;right:0;top:2px;transform:rotate(6deg);border:2.5px solid var(--red);color:var(--red);
+    font-family:var(--mono);font-weight:600;font-size:10px;letter-spacing:.12em;padding:5px 9px;opacity:.8}
+  .stamp.b{right:150px;transform:rotate(-4deg);border-color:var(--stencil);color:var(--stencil);opacity:.65}
+  /* headline typed */
+  .lede{margin:24px 0 6px;font-size:24px;line-height:1.45;max-width:60ch}
+  .lede b{background:rgba(76,122,69,.16)}
+  .lede .p{background:rgba(166,64,44,.14)}
+  /* conditions log w/ icons */
+  .log{display:grid;grid-template-columns:repeat(4,1fr);border-left:1.5px solid var(--rule);border-top:1.5px solid var(--rule);margin:18px 0 4px;background:var(--paper-hi)}
+  .log>div{border-right:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);padding:9px 11px;display:flex;gap:9px;align-items:flex-start}
+  .log svg{width:17px;height:17px;flex:0 0 17px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+  .log b{display:block;font-family:var(--mono);font-weight:500;font-size:8.5px;letter-spacing:.2em;color:var(--soft)}
+  .log span{font-family:var(--mono);font-size:12.5px}
+  /* CRT instrument inset */
+  .instr{border:3px solid #2c2a20;border-radius:8px;background:#1a1912;padding:10px;margin:22px 0 4px;
+    box-shadow:inset 0 0 0 2px #3a382c, 0 10px 24px rgba(38,37,28,.25);position:relative}
+  .instr .screwrow{display:flex;justify-content:space-between;font-size:9px;color:#6b6754;padding:0 2px 6px;font-family:var(--mono);letter-spacing:.18em}
+  .crt{position:relative;background:var(--screen);border-radius:4px;overflow:hidden}
+  .crt::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(transparent 0 3px, rgba(0,0,0,.22) 3px 4px);}
+  .crt svg{display:block;width:100%;height:auto}
+  .sweep{position:absolute;top:0;bottom:0;width:46px;pointer-events:none;
+    background:linear-gradient(90deg, transparent, rgba(255,180,77,.16), rgba(255,180,77,.32));
+    animation:sw 7s linear infinite}
+  @keyframes sw{from{left:-8%}to{left:104%}}
+  @media(prefers-reduced-motion: reduce){.sweep{animation:none;display:none}}
+  .legend{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:#8a8468;padding:7px 4px 0;display:flex;gap:18px;flex-wrap:wrap}
+  .legend i{color:var(--phos);font-style:normal}
+  /* section heads */
+  h2{font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:.26em;margin:36px 0 2px}
+  h2::after{content:"";display:block;border-bottom:2px solid var(--ink);margin-top:6px}
+  .sechint{font-family:var(--mono);font-size:10px;color:var(--soft);letter-spacing:.06em;margin:6px 0 12px}
+  /* ledger rows (from mockup C, adapted to paper) */
+  .row{display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:baseline;background:var(--paper-hi);
+    border:1.5px solid var(--rule);padding:13px 16px;margin-bottom:10px;transition:.14s;position:relative}
+  .row:hover{transform:translateX(4px);border-color:var(--ink)}
+  .nm{font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.02em}
+  .rk{font-family:var(--mono);color:var(--soft);font-size:12px;margin-right:8px}
+  .tag{font-family:var(--mono);font-size:9px;letter-spacing:.14em;border:1px solid var(--rule);padding:2.5px 7px;margin-left:9px;
+    vertical-align:2.5px;color:var(--soft);background:var(--paper)}
+  .win{font-family:var(--mono);font-size:10.5px;color:var(--soft);margin-left:9px}
+  .why{display:block;font-size:14.5px;color:#4a463a;margin-top:4px}
+  .sc{text-align:right;font-family:var(--mono)}
+  .sc b{display:block;font-size:31px;font-weight:600;line-height:1}
+  .sc i{font-style:normal;font-size:8.5px;letter-spacing:.24em;font-weight:600}
+  .g{color:var(--olive)}.f{color:var(--ochre)}.p{color:var(--red)}
+  .meter{grid-column:1/-1;height:4px;background:var(--rule-soft);position:relative;margin-top:5px}
+  .meter i{position:absolute;left:0;top:0;bottom:0;background:currentColor}
+  .meter u{position:absolute;left:50%;top:-3.5px;bottom:-3.5px;width:1.5px;background:var(--ink);opacity:.55}
+  .safety{border:2px solid var(--red);color:var(--red);background:rgba(166,64,44,.07);padding:11px 14px;margin:14px 0;
+    font-size:14.5px;font-weight:700}
+  /* field log strip */
+  .fieldlog{border:1.5px dashed var(--ink);background:var(--paper-hi);padding:16px 18px;margin:16px 0 4px}
+  .fieldlog h3{font-family:var(--disp);letter-spacing:.24em;font-size:12px;margin:0 0 10px}
+  .flrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:13px}
+  .flrow .box{border:1.5px solid var(--rule);background:var(--paper);padding:7px 11px}
+  .flrow .box b{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--soft);display:block}
+  .badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;border:2px solid var(--olive);color:var(--olive);
+    border-radius:50%;width:58px;height:58px;display:inline-flex;align-items:center;justify-content:center;text-align:center;transform:rotate(-6deg)}
+  .badge.pend{border-style:dashed;color:var(--soft);border-color:var(--rule)}
+  footer{margin-top:44px;border-top:3px double var(--ink);padding-top:9px;font-family:var(--mono);font-size:9.5px;color:var(--soft);letter-spacing:.1em}
+  @media(max-width:720px){.log{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr 88px}.mast h1{font-size:30px}.stamp.b{display:none}}
+</style>
+</head>
+<body>
+<canvas id="fish" aria-hidden="true"></canvas>
+<div class="note">MOCKUP D · combined · working demo</div>
+<div class="hint">fish are the 7 species — different shapes, they keep 140px from your cursor · no water sim (cut as too distracting)</div>
+
+<div class="wrap">
+  <div class="classbar"><span>FOR ALL HANDS</span><span>SYDNEY STATION · SURVEY No. 214</span><span>THU 09 JUL 2026</span></div>
+
+  <header class="mast">
+    <div class="stamp">CALIBRATED<br>MEDIAN DAY = 50</div>
+    <div class="stamp b">FORECAST —<br>TRUST BUT VERIFY</div>
+    <h1>BITE <span>INDEX</span></h1>
+    <div class="sub">DAILY FIELD SURVEY OF FISHING CONDITIONS · SCORED 0–100 · FULL WEIGHTS PUBLISHED</div>
+  </header>
+
+  <p class="lede">Beach first today: <b>workable wash, wind offshore by afternoon.</b> Estuary holds on the run-out.
+  Harbour steady. <span class="p">Rocks marginal; experienced hands only.</span></p>
+  <span class="callout">headline typed like a bulletin, composed from the score spread — no em dashes, no templates</span>
+
+  <div class="log">
+    <div><svg viewBox="0 0 24 24"><path d="M2 14c3-5 6-5 9 0s6 5 9 0"/><path d="M2 19h20" opacity=".4"/></svg><div><b>TIDE</b><span>H 01:54 · L 08:05 · H 14:48 · L 21:19</span></div></div>
+    <div><svg viewBox="0 0 24 24"><path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 13h15a3 3 0 1 1-3 3"/><path d="M3 18h7"/></svg><div><b>WIND</b><span>W 8 kn, easing</span></div></div>
+    <div><svg viewBox="0 0 24 24"><path d="M2 16c2-7 5-9 8-6 2 2 1 4 4 4 2 0 3-2 8-8"/><path d="M2 20h20" opacity=".4"/></svg><div><b>SWELL</b><span>1.9 m @ 8 s S</span></div></div>
+    <div><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 13l4-4"/><path d="M9 3h6"/></svg><div><b>PRESSURE</b><span>1028.7 hPa · −1.9/24h</span></div></div>
+    <div><svg viewBox="0 0 24 24"><path d="M8 3c-2 4-4 6-4 9a4 4 0 0 0 8 0c0-3-2-5-4-9z"/><path d="M17 10c-1.4 2.6-2.6 4-2.6 6a2.6 2.6 0 0 0 5.2 0c0-2-1.2-3.4-2.6-6z"/></svg><div><b>RAIN 72H</b><span>14.8 mm · light runoff</span></div></div>
+    <div><svg viewBox="0 0 24 24"><path d="M10 3v10a4 4 0 1 0 4 0V3z"/><path d="M10 7h4" opacity=".5"/></svg><div><b>WATER</b><span>19.4 °C inshore</span></div></div>
+    <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16 6.5 6.5 0 0 1 0-16z" fill="#26251c" stroke="none"/></svg><div><b>MOON</b><span>last quarter · 33%</span></div></div>
+    <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2 2M17.5 17.5l2 2M19.5 4.5l-2 2M6.5 17.5l-2 2"/></svg><div><b>SUN</b><span>06:59 → 17:00</span></div></div>
+  </div>
+  <span class="callout">icons added per your note — one stroke style, drawn for this page</span>
+
+  <div class="instr">
+    <div class="screwrow"><span>⊗</span><span>TIDAL TRACE · FORT DENISON REF · UNIT 03 (SALVAGED)</span><span>⊗</span></div>
+    <div class="crt">
+      <div class="sweep"></div>
+      <svg viewBox="0 0 900 150">
+        <g stroke="#243020" stroke-width="1"><path d="M0 30h900M0 70h900M0 110h900" opacity=".5"/>
+          <path d="M150 0v150M300 0v150M450 0v150M600 0v150M750 0v150" opacity=".35"/></g>
+        <path d="M0,58 C60,34 110,34 170,66 C230,98 280,112 340,104 C420,92 470,48 540,38 C610,30 660,48 730,84 C790,112 850,112 900,98"
+          fill="none" stroke="#ffb44d" stroke-width="2.5" style="filter:drop-shadow(0 0 5px rgba(255,180,77,.75))"/>
+        <g font-family="IBM Plex Mono" font-size="11.5" font-weight="600" fill="#ffb44d">
+          <path d="M116 32 l4 -7 4 7z" fill="#ffb44d"/><text x="120" y="22" text-anchor="middle">H 01:54</text>
+          <path d="M326 116 l4 7 4 -7z" fill="#ffb44d"/><text x="330" y="138" text-anchor="middle">L 08:05</text>
+          <path d="M556 30 l4 -7 4 7z" fill="#ffb44d"/><text x="560" y="20" text-anchor="middle">H 14:48</text>
+          <path d="M796 112 l4 7 4 -7z" fill="#ffb44d"/><text x="800" y="134" text-anchor="middle">L 21:19</text>
+        </g>
+        <g font-family="IBM Plex Mono" font-size="9" fill="#5d6b4a">
+          <text x="8" y="146">12AM</text><text x="440" y="146">12PM</text><text x="868" y="146">12AM</text>
+        </g>
+      </svg>
+    </div>
+    <div class="legend"><span><i>▲▼</i> HIGH / LOW WATER</span><span><i>—</i> PREDICTED HEIGHT, NEXT 24 H</span><span><i>▮</i> SWEEP = LIVE FEED</span><span>NOT FOR NAVIGATION</span></div>
+  </div>
+  <span class="callout">the instrument now shows the actual tide curve — real information in the phosphor style, labelled so nobody has to guess. one piece of “alternate-reality tech” set into the paper; everything else stays print</span>
+
+  <h2>THE LEDGER — WHERE TO FISH</h2>
+  <p class="sechint">all five grounds surveyed daily · tick on every meter marks the calibrated median day (50) · tap a row for the factor breakdown</p>
+
+  <div class="row"><div><span class="nm">Beach</span><span class="tag">GUTTERS &amp; BANKS</span><span class="win">best 4pm–7pm</span>
+    <span class="why">Workable wash from the southerly; wind swings offshore after lunch and cleans it up.</span></div>
+    <div class="sc g"><b>63</b><i>GOOD</i></div><div class="meter g"><i style="width:63%"></i><u></u></div></div>
+  <div class="row"><div><span class="nm">Estuary</span><span class="tag">RIVERS &amp; REACHES</span><span class="win">best 4pm–7pm</span>
+    <span class="why">Light stain from midweek rain; strong water movement on the run-out.</span></div>
+    <div class="sc g"><b>58</b><i>GOOD</i></div><div class="meter g"><i style="width:58%"></i><u></u></div></div>
+  <div class="row"><div><span class="nm">Harbour &amp; wharf</span><span class="tag">PYLONS &amp; EDGES</span><span class="win">best 4pm–7pm</span>
+    <span class="why">Protected and steady. Nothing special, nothing wrong.</span></div>
+    <div class="sc f"><b>52</b><i>FAIR</i></div><div class="meter f"><i style="width:52%"></i><u></u></div></div>
+  <div class="row"><div><span class="nm">Boat &amp; offshore</span><span class="tag">REEFS &amp; OPEN WATER</span><span class="win">best 7am–10am</span>
+    <span class="why">Comfortable early; sea builds and turns it sloppy by mid-morning.</span></div>
+    <div class="sc f"><b>47</b><i>FAIR</i></div><div class="meter f"><i style="width:47%"></i><u></u></div></div>
+  <div class="row"><div><span class="nm">Rock</span><span class="tag">LEDGES &amp; WASHES</span><span class="win">marginal all day</span>
+    <span class="why">Short-period swell pushing onto exposed ledges. Fishable for experienced hands, no one else.</span></div>
+    <div class="sc p"><b>34</b><i>POOR</i></div><div class="meter p"><i style="width:34%"></i><u></u></div></div>
+
+  <div class="safety">⚠ WHEN SWELL CROSSES THE SAFETY LINE THIS ROW PRINTS IN RED AND THE SCORE IS CAPPED. THE ONLY RED INK ON THIS PAPER IS SAFETY INK.</div>
+
+  <h2>WHAT TO CHASE — CONTACT LIST</h2>
+  <p class="sechint">each species scored on its own profile, then ranked · full seven shown, nothing hidden · more species to be added: the model is config, a new fish is one file</p>
+
+  <div class="row"><div><span class="rk">01</span><span class="nm">Tailor</span><span class="tag">BEACH GUTTERS</span><span class="win">dawn &amp; dusk</span>
+    <span class="why">Stirred white water and bait schooled in the gutters after the blow.</span></div>
+    <div class="sc g"><b>68</b><i>GOOD</i></div><div class="meter g"><i style="width:68%"></i><u></u></div></div>
+  <div class="row"><div><span class="rk">02</span><span class="nm">Mulloway (jewfish)</span><span class="tag">ESTUARY HOLES</span><span class="win">dusk → 22:30</span>
+    <span class="why">Run-out tide after dark with a touch of colour in the water.</span></div>
+    <div class="sc g"><b>61</b><i>GOOD</i></div><div class="meter g"><i style="width:61%"></i><u></u></div></div>
+  <div class="row"><div><span class="rk">03</span><span class="nm">Bream</span><span class="tag">HARBOUR STRUCTURE</span><span class="win">tide change</span>
+    <span class="why">Slight stain suits them; work the pylons on the turn.</span></div>
+    <div class="sc f"><b>57</b><i>FAIR</i></div><div class="meter f"><i style="width:57%"></i><u></u></div></div>
+  <div class="row"><div><span class="rk">04</span><span class="nm">Silver trevally</span><span class="tag">WHARF PYLONS</span><span class="win">change of light</span>
+    <span class="why">Making tide pushing bait against structure; cool water is fine by them.</span></div>
+    <div class="sc f"><b>51</b><i>FAIR</i></div><div class="meter f"><i style="width:51%"></i><u></u></div></div>
+  <div class="row"><div><span class="rk">05</span><span class="nm">Southern calamari</span><span class="tag">HARBOUR WEED BEDS</span><span class="win">last hour of light</span>
+    <span class="why">Water a little stirred for squid; the last light window still worth a cast.</span></div>
+    <div class="sc f"><b>49</b><i>FAIR</i></div><div class="meter f"><i style="width:49%"></i><u></u></div></div>
+  <div class="row"><div><span class="rk">06</span><span class="nm">Yellowtail (yakkas)</span><span class="tag">HARBOUR</span><span class="win">any</span>
+    <span class="why">Reliable bait species; a fair day to jig a tankful.</span></div>
+    <div class="sc f"><b>47</b><i>FAIR</i></div><div class="meter f"><i style="width:47%"></i><u></u></div></div>
+  <div class="row"><div><span class="rk">07</span><span class="nm">Yellowtail kingfish</span><span class="tag">HARBOUR REEFS</span><span class="win">change of tide</span>
+    <span class="why">19.4° sits under their comfort band. An honest 22, not a padded 48.</span></div>
+    <div class="sc p"><b>22</b><i>POOR</i></div><div class="meter p"><i style="width:22%"></i><u></u></div></div>
+
+  <h2>FIELD LOG</h2>
+  <p class="sechint">the validation loop, worn like a game: sessions feed the write-up, the write-up justifies weight changes. weights never move on their own.</p>
+  <div class="fieldlog">
+    <h3>LOG TODAY'S SESSION</h3>
+    <div class="flrow">
+      <span class="box"><b>GROUND</b>Beach — Maroubra end</span>
+      <span class="box"><b>RESULT</b>2 tailor, 1 dropped</span>
+      <span class="box"><b>VS SCORE 63</b>about right ▸</span>
+      <span class="box"><b>EXPERIENCE</b>novice · <u>regular</u> · old salt</span>
+      <span class="badge">STREAK<br>4</span>
+      <span class="badge pend">FIRST<br>JEWIE</span>
+    </div>
+  </div>
+  <span class="callout">your idea, kept: every log carries an experience tag so a novice blank on a good day doesn't read as model error. public logs come later, as a separate low-trust stratum; v3 validation runs on the keeper's own log first</span>
+
+  <footer>WEATHER: OPEN-METEO · SCORES PERCENTILE-CALIBRATED, MEDIAN DAY = 50 · EVERY WEIGHT + JUSTIFICATION IN THE METHODOLOGY · GLOSSARY COVERS EVERY TERM ON THIS PAPER · SURVEY ENDS</footer>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const c=document.getElementById('fish'),x=c.getContext('2d');
+  let W,H;function size(){W=c.width=innerWidth;H=c.height=innerHeight;}size();addEventListener('resize',size);
+  let mx=-9999,my=-9999;
+  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;});
+  addEventListener('pointerleave',()=>{mx=my=-9999;});
+
+  // seven silhouettes — one per species, different bodies
+  const KINDS=['fusiform','fusiform','deep','long','squid','small','small'];
+  const fish=KINDS.map((k,i)=>({k, x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    a:Math.random()*6.28, s:(k==='squid'?0.35:0.5)+Math.random()*0.4,
+    L:{fusiform:26,deep:20,long:32,squid:22,small:13}[k]+Math.random()*5, wag:Math.random()*9}));
+
+  function draw(f){
+    x.save();x.translate(f.x,f.y);x.rotate(f.a);
+    x.fillStyle='rgba(38,37,28,0.15)';x.strokeStyle='rgba(38,37,28,0.15)';
+    const L=f.L,w=Math.sin(f.wag)*L*0.12;
+    x.beginPath();
+    if(f.k==='squid'){
+      // mantle forward, tentacles trailing
+      x.moveTo(L*0.75,0);x.quadraticCurveTo(L*0.2,-L*0.3,-L*0.15,-L*0.16);
+      x.lineTo(-L*0.15,L*0.16);x.quadraticCurveTo(L*0.2,L*0.3,L*0.75,0);x.fill();
+      x.lineWidth=1.6;
+      for(let t=-1.5;t<=1.5;t++){x.beginPath();x.moveTo(-L*0.14,t*L*0.09);
+        x.quadraticCurveTo(-L*0.55,t*L*0.12+w*0.4,-L*0.9,t*L*0.2+w);x.stroke();}
+    }else{
+      const dep={fusiform:0.28,deep:0.46,long:0.2,small:0.3}[f.k];
+      x.moveTo(L*0.62,0);
+      x.quadraticCurveTo(0,-L*dep,-L*0.5,w*0.4);
+      x.lineTo(-L*0.88,-L*0.3+w);x.lineTo(-L*0.7,w*0.5);x.lineTo(-L*0.88,L*0.3+w);
+      x.lineTo(-L*0.5,w*0.4);
+      x.quadraticCurveTo(0,L*dep,L*0.62,0);x.fill();
+      if(f.k==='deep'){ // dorsal spike, bream-ish
+        x.beginPath();x.moveTo(0,-L*dep);x.lineTo(L*0.15,-L*(dep+0.2));x.lineTo(L*0.28,-L*dep);x.fill();}
+    }
+    x.restore();
+  }
+  function step(){
+    x.clearRect(0,0,W,H);
+    for(const f of fish){
+      f.a+=(Math.random()-0.5)*0.07;
+      const dx=f.x-mx,dy=f.y-my,d=Math.hypot(dx,dy);
+      if(d<140){const flee=Math.atan2(dy,dx);
+        let diff=flee-f.a;while(diff>Math.PI)diff-=6.283;while(diff<-Math.PI)diff+=6.283;
+        f.a+=diff*0.16;f.s=Math.min(f.k==='squid'?4.2:3.2,f.s+0.3);   // squid jet!
+      }else f.s=Math.max(f.k==='squid'?0.35:0.5,f.s*0.972);
+      f.x+=Math.cos(f.a)*f.s;f.y+=Math.sin(f.a)*f.s;f.wag+=0.22+f.s*0.12;
+      if(f.x<-50)f.x=W+50;if(f.x>W+50)f.x=-50;if(f.y<-50)f.y=H+50;if(f.y>H+50)f.y=-50;
+      draw(f);
+    }
+    if(!reduced)requestAnimationFrame(step);
+  }
+  step(); // reduced motion: renders one static school, no loop
+})();
+</script>
+</body>
+</html>
