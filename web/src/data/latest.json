@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-11T15:04+10:00",
+ "generated_at": "2026-07-12T15:09+10:00",
  "source": "sample",
  "calibration": {
   "applied": false,
@@ -34,14 +34,14 @@
  ],
  "days": [
   {
-   "date": "2026-07-11",
-   "weekday": "Sat",
+   "date": "2026-07-12",
+   "weekday": "Sun",
    "headline": "Rock first today: workable wash. Beach holds too. Top target: Mulloway (jewfish) (73).",
    "summary": {
     "sunrise": "07:00",
     "sunset": "16:57",
     "moon_name": "Waning crescent",
-    "moon_illum": 0.15,
+    "moon_illum": 0.08,
     "tide_events": [
      {
       "time": "03:10",
@@ -556,14 +556,14 @@
    ]
   },
   {
-   "date": "2026-07-12",
-   "weekday": "Sun",
+   "date": "2026-07-13",
+   "weekday": "Mon",
    "headline": "Rock first today: workable wash. Estuary holds too. Top target: Mulloway (jewfish) (72).",
    "summary": {
     "sunrise": "07:00",
     "sunset": "16:57",
-    "moon_name": "Waning crescent",
-    "moon_illum": 0.08,
+    "moon_name": "New moon",
+    "moon_illum": 0.03,
     "tide_events": [
      {
       "time": "03:55",
@@ -1078,14 +1078,14 @@
    ]
   },
   {
-   "date": "2026-07-13",
-   "weekday": "Mon",
+   "date": "2026-07-14",
+   "weekday": "Tue",
    "headline": "Beach first today: workable wash. Harbour holds too. Top target: Tailor (70).",
    "summary": {
     "sunrise": "07:00",
     "sunset": "16:57",
     "moon_name": "New moon",
-    "moon_illum": 0.03,
+    "moon_illum": 0.01,
     "tide_events": [
      {
       "time": "04:42",
@@ -1600,14 +1600,14 @@
    ]
   },
   {
-   "date": "2026-07-14",
-   "weekday": "Tue",
+   "date": "2026-07-15",
+   "weekday": "Wed",
    "headline": "Harbour first today: water moving hard. Estuary is workable. Stay off the rocks: swell is over the safety line. Top target: Mulloway (jewfish) (62).",
    "summary": {
     "sunrise": "07:00",
     "sunset": "16:57",
     "moon_name": "New moon",
-    "moon_illum": 0.01,
+    "moon_illum": 0.0,
     "tide_events": [
      {
       "time": "05:34",
@@ -2122,14 +2122,14 @@
    ]
   },
   {
-   "date": "2026-07-15",
-   "weekday": "Wed",
+   "date": "2026-07-16",
+   "weekday": "Thu",
    "headline": "Beach first today: low light; prime feeding window. Harbour holds too. Stay off the rocks: swell is over the safety line. Top target: Mulloway (jewfish) (64).",
    "summary": {
     "sunrise": "07:00",
     "sunset": "16:57",
     "moon_name": "New moon",
-    "moon_illum": 0.0,
+    "moon_illum": 0.02,
     "tide_events": [
      {
       "time": "06:34",
@@ -2639,14 +2639,14 @@
    ]
   },
   {
-   "date": "2026-07-16",
-   "weekday": "Thu",
+   "date": "2026-07-17",
+   "weekday": "Fri",
    "headline": "Offshore first today: light winds. Rock holds too. Top target: Tailor (66).",
    "summary": {
     "sunrise": "07:00",
     "sunset": "16:57",
-    "moon_name": "New moon",
-    "moon_illum": 0.02,
+    "moon_name": "Waxing crescent",
+    "moon_illum": 0.06,
     "tide_events": [
      {
       "time": "01:01",
@@ -2844,8 +2844,8 @@
      "name": "Beach",
      "tagline": "Gutters, banks and the surf zone",
      "tag": "GUTTERS & BANKS",
-     "score": 65,
-     "raw_score": 65,
+     "score": 64,
+     "raw_score": 64,
      "reason": "Low light; prime feeding window; onshore breeze stirring the wash.",
      "label": "Good",
      "best_window": "4pm\u20137pm",
@@ -3161,14 +3161,14 @@
    ]
   },
   {
-   "date": "2026-07-17",
-   "weekday": "Fri",
+   "date": "2026-07-18",
+   "weekday": "Sat",
    "headline": "Rock first today: workable wash. Offshore holds too. Top target: Tailor (67).",
    "summary": {
     "sunrise": "07:00",
     "sunset": "16:57",
     "moon_name": "Waxing crescent",
-    "moon_illum": 0.06,
+    "moon_illum": 0.12,
     "tide_events": [
      {
       "time": "02:11",
@@ -3426,8 +3426,8 @@
      "name": "Estuary",
      "tagline": "Rivers, bays and the brackish reaches",
      "tag": "RIVERS & REACHES",
-     "score": 62,
-     "raw_score": 62,
+     "score": 61,
+     "raw_score": 61,
      "reason": "Water moving hard; low light; prime feeding window.",
      "label": "Good",
      "best_window": "5am\u20138am",
@@ -3662,7 +3662,7 @@
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
-     "score": 62,
+     "score": 61,
      "label": "Good",
      "environment": "estuary",
      "environment_name": "Estuary",

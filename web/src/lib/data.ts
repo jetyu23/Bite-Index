@@ -25,3 +25,12 @@ export function fmtDate(iso: string): string {
     .toLocaleDateString("en-AU", { weekday: "short", day: "2-digit", month: "short" })
     .toUpperCase();
 }
+
+export function shortEnv(name: string): string {
+  if (name.toLowerCase().startsWith("boat")) return "Offshore";
+  return name.split(" & ")[0];
+}
+
+export function dayNum(iso: string): string {
+  return String(new Date(iso + "T00:00:00").getDate());
+}

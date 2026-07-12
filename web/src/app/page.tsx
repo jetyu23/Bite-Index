@@ -1,7 +1,9 @@
 import Link from "next/link";
 import CondLog from "@/components/CondLog";
+import ContactList from "@/components/ContactList";
 import EnvRow from "@/components/EnvRow";
 import TideInstrument from "@/components/TideInstrument";
+import WeekAhead from "@/components/WeekAhead";
 import { fmtDate, site, tier } from "@/lib/data";
 
 export default function Home() {
@@ -63,48 +65,13 @@ export default function Home() {
             <Link href="/species">rigging guide for every contact</Link> · more species to be added: a new fish is
             one config file, no code
           </p>
-          {today.species.map((sp, i) => {
-            const t = tier(sp.score);
-            return (
-              <div className={`row tb-${t[0]}`} key={sp.id}>
-                {i === 0 && <div className="rstamp ochre">PRIME CONTACT</div>}
-                <div>
-                  <span className="rk">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="nm"><Link href={`/species#${sp.id}`}>{sp.name}</Link></span>
-                  <span className={`tag c-${sp.environment}`}>{sp.tag || sp.environment_name.toUpperCase()}</span>
-                  <span className="win">{sp.best_window}</span>
-                  <span className="why">{sp.reason}</span>
-                </div>
-                <div className={`sc ${t[0]}`}>
-                  <b>{sp.score}</b>
-                  <i>{sp.label.toUpperCase()}</i>
-                </div>
-                <div className={`meter ${t[0]}`}>
-                  <i style={{ width: `${sp.score}%` }} />
-                  <u title="calibrated median day (50)" />
-                </div>
-              </div>
-            );
-          })}
+          <ContactList species={today.species} />
         </section>
 
         <section aria-labelledby="ol-h">
           <h2 className="sec" id="ol-h"><span className="tick" style={{ background: "var(--blue)" }} />THE WEEK AHEAD</h2>
-          <p className="sechint">best ground per day, from the same engine</p>
-          <div className="outlook">
-            {site.days.map((d) => {
-              const best = d.environments.reduce((a, b) => (b.score > a.score ? b : a));
-              const rockFlag = d.environments.some((e) => e.safety_flag);
-              return (
-                <div className="o-day" key={d.date}>
-                  <div className="o-wd">{d.weekday.toUpperCase()}</div>
-                  <div className={`o-score ${tier(best.score)[0]}`}>{best.score}</div>
-                  <div className="o-env">{best.name.split(" & ")[0].toUpperCase()}</div>
-                  {rockFlag && <div className="o-flag">ROCKS ✕</div>}
-                </div>
-              );
-            })}
-          </div>
+          <p className="sechint">each day shows all five grounds as bars (rock · beach · estuary · harbour · offshore) so you can read its shape at a glance; the call-out is the best ground. dashed line = median day.</p>
+          <WeekAhead days={site.days} />
         </section>
 
         <section aria-labelledby="fl-h">

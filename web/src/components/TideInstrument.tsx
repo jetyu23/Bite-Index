@@ -1,10 +1,10 @@
 import type { TideEvent } from "@/lib/types";
 
 const W = 900;
-const H = 150;
+const H = 168;
 const PAD_X = 6;
-const PAD_TOP = 24;
-const PAD_BOT = 22;
+const PAD_TOP = 30;
+const PAD_BOT = 34;
 
 function minsOf(t: string): number {
   const [h, m] = t.split(":").map(Number);
@@ -79,7 +79,7 @@ export default function TideInstrument({
                 return (
                   <g key={e.time + e.type} fill="#ffb44d" fontFamily="IBM Plex Mono, monospace" fontSize="11.5" fontWeight="600">
                     <path d={hi ? `M${ex - 4} ${ey - 7} l4 -7 4 7z` : `M${ex - 4} ${ey + 7} l4 7 4 -7z`} />
-                    <text x={ex} y={hi ? ey - 17 : ey + 26} textAnchor="middle">
+                    <text x={ex} y={hi ? ey - 15 : ey + 22} textAnchor="middle">
                       {hi ? "H" : "L"} {e.time}
                     </text>
                   </g>
