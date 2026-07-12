@@ -72,24 +72,6 @@ year accumulates; the calibration window is printed in the site footer, and the 
 `calibrate` workflow refreshes it automatically. Until calibration exists, the recentred raw
 scale is used and the footer says so.
 
-## Deploy runbook (~15 minutes, $0)
-
-1. Push this repo to GitHub (public repo keeps Actions free/unlimited).
-2. Repo → Actions → enable workflows. Run **daily-score** once manually (`workflow_dispatch`) and
-   check the validation checklist above in the run logs.
-3. Vercel → New Project → import the repo:
-   - **Root Directory: `web`** and enable "Include source files outside of the Root Directory"
-     (Settings → General) — not strictly needed since all data is copied inside `web/src/data`,
-     but harmless and future-proof.
-   - Framework preset: Next.js. No env vars. Deploy.
-4. Done. Each morning the Action commits fresh JSON; the push triggers a Vercel rebuild.
-
-**Gotchas**
-- GitHub disables cron workflows after ~60 days without repo activity. The daily bot commit itself
-  counts as activity, but if the Action ever fails for 60 days it will stop — you'll get an email;
-  re-enable with one click.
-- Vercel Hobby and Open-Meteo's free tier are both **non-commercial** licences. Fine for a
-  portfolio; revisit both if this ever earns money.
 
 ## Costs
 
