@@ -27,7 +27,11 @@ export default function ContactList({ species }: { species: SpeciesResult[] }) {
               <div className={`pod-tag ${envClass(sp.environment)}`}>{sp.tag || shortEnv(sp.environment_name).toUpperCase()}</div>
               <div className="pod-win">{sp.best_window}</div>
               <div className={`pod-bar ${t}`}><i style={{ width: `${sp.score}%` }} /></div>
-              <div className={`pod-score ${t}`}>{sp.score}<span>{sp.label}</span></div>
+              <div className={`pod-score ${t}`}>
+                {sp.score}
+                <span>{sp.label}</span>
+                {sp.percentile != null && <span className="pctl">top {100 - sp.percentile}% of days</span>}
+              </div>
               <div className="pod-why">{sp.reason}</div>
             </Link>
           );
@@ -45,7 +49,12 @@ export default function ContactList({ species }: { species: SpeciesResult[] }) {
                 <td><span className={`tag ${envClass(sp.environment)}`}>{sp.tag || shortEnv(sp.environment_name).toUpperCase()}</span></td>
                 <td className="ct-win">{sp.best_window}</td>
                 <td className="ct-bar"><span className={`minibar ${t}`}><i style={{ width: `${sp.score}%` }} /></span></td>
-                <td className={`ct-sc ${t}`}>{sp.score}</td>
+                <td
+                  className={`ct-sc ${t}`}
+                  title={sp.percentile != null ? `better than ${sp.percentile}% of days on record` : undefined}
+                >
+                  {sp.score}
+                </td>
               </tr>
             );
           })}

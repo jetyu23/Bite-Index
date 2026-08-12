@@ -19,11 +19,16 @@ export default function EnvRow({ env, best }: { env: EnvResult; best?: boolean }
       <div className={`sc ${t[0]}`}>
         <b>{env.score}</b>
         <i>{env.label.toUpperCase()}</i>
+        {env.percentile != null && (
+          <span className="pctl">better than {env.percentile}% of days on record</span>
+        )}
       </div>
       {env.safety_flag && env.safety_message && <div className="safety-inline">⚠ {env.safety_message}</div>}
       <div className={`meter ${t[0]}`}>
         <i style={{ width: `${env.score}%` }} />
-        <u title="calibrated median day (50)" />
+        {env.raw_median != null && (
+          <u style={{ left: `${env.raw_median}%` }} title={`this ground's typical (median) raw score: ${env.raw_median}`} />
+        )}
       </div>
       <details className="why-details">
         <summary>WHY THIS SCORE</summary>

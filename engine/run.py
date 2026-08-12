@@ -61,8 +61,22 @@ def run(live: bool) -> dict:
             if res is None:
                 continue
             raw = res["score"]
-            res["score"] = round(scoring.calibrate(calib, env["id"], raw))
+            # percentile is derived from the uncapped raw score, before safety
+            # mutates res["score"] below. res["score"] itself keeps its prior
+            # meaning (calibrated-or-raw) unchanged, because score_species_day
+            # still reads it via env_results_by_id to pick each species' best
+            # ground on a scale that's comparable across profiles.
+            percentile = round(scoring.calibrate(calib, env["id"], raw)) if calib else None
+            res["score"] = percentile if percentile is not None else raw
             res = scoring.apply_safety(env, res, day, norm)
+            if res["safety_flag"]:
+                # A capped, dangerous day isn't meaningfully "better or worse
+                # than X% of days" -- suppress the percentile rather than
+                # show a rank next to a score that's been overridden anyway.
+                raw_display = min(raw, env["safety"]["cap"])
+                percentile = None
+            else:
+                raw_display = raw
             window = scoring.humanize_window(res["best_window"])
             drivers_out = [
                 {
@@ -76,15 +90,17 @@ def run(live: bool) -> dict:
                 }
                 for d in res["drivers"][:5]
             ]
+            dist = calib.get("profiles", {}).get(env["id"]) if calib else None
             entry = {
                 "id": env["id"],
                 "name": env["name"],
                 "tagline": env["tagline"],
                 "tag": env.get("tag", ""),
-                "score": res["score"],
-                "raw_score": raw,
+                "score": raw_display,
+                "percentile": percentile,
+                "raw_median": dist[len(dist) // 2] if dist else None,
                 "reason": scoring.env_summary(res["drivers"], metric_defs),
-                "label": scoring.score_label(res["score"], labels),
+                "label": scoring.score_label(raw_display, labels),
                 "best_window": window,
                 "safety_flag": res["safety_flag"],
                 "safety_message": res["safety_message"],
@@ -103,6 +119,16 @@ def run(live: bool) -> dict:
             )
             if res is None:
                 continue
+            # Displayed score is the species' own raw profile score -- the one
+            # thing calibration.json's per-species distribution was actually
+            # built from (calibrate.py never blends in an environment score).
+            # Ranking "top targets" still uses the blended, calibrated value
+            # (res["score"]) as a private sort key: raw scores aren't on a
+            # comparable scale across different species profiles, so ranking
+            # by raw would just favour whichever species has the highest
+            # natural raw baseline, not the best day.
+            own_raw = res["raw_score"]
+            own_percentile = round(scoring.calibrate(calib, sp["id"], own_raw)) if calib else None
             window = scoring.humanize_window(res["best_window"])
             reason = scoring.build_reason(res["drivers"], env_names[res["environment"]], window, metric_defs)
             sp_results.append(
@@ -110,15 +136,24 @@ def run(live: bool) -> dict:
                     "id": sp["id"],
                     "name": sp["name"],
                     "tag": sp.get("tag", ""),
-                    "score": res["score"],
-                    "label": scoring.score_label(res["score"], labels),
+                    "score": own_raw,
+                    "percentile": own_percentile,
+                    "label": scoring.score_label(own_raw, labels),
                     "environment": res["environment"],
                     "environment_name": env_names[res["environment"]],
                     "best_window": window,
                     "reason": reason,
+                    # Not displayed as a headline number: the calibrated,
+                    # environment-blended value this list is actually sorted
+                    # by. Raw scores aren't comparable across species profiles,
+                    # so ranking by the displayed raw "score" would just
+                    # favour whichever species has the highest natural raw
+                    # baseline. Kept in the output rather than discarded,
+                    # same "nothing hidden" reasoning as raw_drivers.
+                    "rank_score": res["score"],
                 }
             )
-        sp_results.sort(key=lambda s: -s["score"])
+        sp_results.sort(key=lambda s: -s["rank_score"])
 
         headline = scoring.build_headline(env_results, sp_results, metric_defs) if env_results else "No data for today."
         for e in env_results:

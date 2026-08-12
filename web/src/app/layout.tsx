@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "A free daily survey of Sydney fishing: transparent 0-100 scores for rock, beach, estuary, harbour and offshore, the best species to target today, and how to rig for them. Every weight in the model is published.",
   openGraph: {
     title: "Bite Index · Sydney fishing conditions, scored daily",
-    description: "Transparent scores for five fishing grounds and seven species. Median day = 50. Every weight published.",
+    description: "Transparent raw scores for five fishing grounds and seven species, ranked against history. Every weight published.",
     type: "website",
   },
 };
@@ -65,8 +65,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p className="mono">
               WEATHER BY <a href="https://open-meteo.com/" rel="noopener">OPEN-METEO</a> · GENERATED {site.generated_at} · SOURCE: {site.source.toUpperCase()} ·{" "}
               {cal?.applied
-                ? `CALIBRATED AGAINST ${cal.n_days} DAYS (MEDIAN DAY = 50)`
-                : "CALIBRATION PENDING: RECENTRED RAW SCORES IN USE"}{" "}
+                ? `SCORES ARE RAW; PERCENTILE SHOWN IS RANKED AGAINST ${cal.n_days} DAYS ON RECORD`
+                : "CALIBRATION PENDING: NO PERCENTILE RANK YET, RAW SCORES ONLY"}{" "}
               · SURVEY ENDS
             </p>
           </div>

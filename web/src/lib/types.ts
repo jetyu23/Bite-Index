@@ -13,8 +13,13 @@ export interface EnvResult {
   name: string;
   tagline: string;
   tag?: string;
+  /** Raw, uncalibrated 0-100 score -- what the headline number and tier label describe. */
   score: number;
-  raw_score?: number;
+  /** This ground's percentile rank vs. its own historical distribution, 1-99. Null when
+   *  no calibration exists yet, or when a safety cap overrides normal scoring. */
+  percentile: number | null;
+  /** This ground's raw-score median day, for positioning the meter's reference tick. */
+  raw_median: number | null;
   reason: string;
   label: string;
   best_window: string;
@@ -27,12 +32,17 @@ export interface SpeciesResult {
   id: string;
   name: string;
   tag?: string;
+  /** Species' own raw, uncalibrated score -- not blended with its routed environment. */
   score: number;
+  /** Percentile rank of that raw score vs. this species' own historical distribution. */
+  percentile: number | null;
   label: string;
   environment: string;
   environment_name: string;
   best_window: string;
   reason: string;
+  /** Calibrated, environment-blended value this list is sorted by. Not a headline number. */
+  rank_score?: number;
 }
 
 export interface TideEvent {

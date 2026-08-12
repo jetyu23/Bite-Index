@@ -29,17 +29,37 @@ function Spark({ day }: { day: Day }) {
           </g>
         );
       })}
-      {/* median reference line at 50 */}
+      {/* reference line at 50, for scale -- not each ground's actual median */}
       <line x1={0} y1={H / 2} x2={W} y2={H / 2} stroke="var(--ink)" strokeWidth="0.75" strokeDasharray="2 3" opacity={0.4} />
     </svg>
   );
+}
+
+/* "Best" is picked by percentile, not raw score: raw scores aren't on a
+   comparable scale across grounds with different curve-defined baselines
+   (e.g. boat's raw ceiling sits well above harbour's), so ranking by raw
+   would just favour whichever ground runs hottest by design, not whichever
+   is actually having a relatively good day. The displayed number is still
+   that ground's raw score. */
+function rank(e: { score: number; percentile: number | null }): number {
+  return e.percentile ?? e.score;
+}
+
+/* Middle of the 5 grounds' raw scores -- "how's the whole day", as opposed to
+   "best" which answers "where should I fish". Deliberately not an average:
+   the median is a real ground's actual score, not a number nobody's ground
+   produced. */
+function overallDay(day: Day): number | null {
+  const scores = [...day.environments].map((e) => e.score).sort((a, b) => a - b);
+  return scores.length ? scores[Math.floor((scores.length - 1) / 2)] : null;
 }
 
 export default function WeekAhead({ days }: { days: Day[] }) {
   return (
     <div className="weekstrip">
       {days.map((d, i) => {
-        const best = d.environments.reduce((a, b) => (b.score > a.score ? b : a));
+        const best = d.environments.reduce((a, b) => (rank(b) > rank(a) ? b : a));
+        const overall = overallDay(d);
         const rockFlag = d.environments.some((e) => e.safety_flag);
         const t = tier(best.score)[0];
         const tideH = d.summary.tide_events.find((e) => e.type === "high");
@@ -54,6 +74,7 @@ export default function WeekAhead({ days }: { days: Day[] }) {
               <span className={`wk-best ${t}`}>{best.score}</span>
               <span className="wk-env">{shortEnv(best.name)}</span>
             </div>
+            {overall != null && <span className="wk-overall">overall day {overall}</span>}
             {rockFlag ? (
               <span className="wk-flag">⚠ ROCKS</span>
             ) : (

@@ -306,7 +306,15 @@ def env_summary(drivers: list[dict], metric_defs: dict) -> str:
 def build_headline(env_results: list[dict], species_results: list[dict], metric_defs: dict) -> str:
     """Composed bulletin, not a template: lead with the best ground, mention
     the runner-up, warn on the worst. No em dashes anywhere in site copy."""
-    ranked = sorted(env_results, key=lambda e: -e["score"])
+    # "Best" is decided by percentile (comparable across profiles with
+    # different raw baselines), not raw score -- same reason the frontend's
+    # week-strip and ledger pick a winner by percentile too. The wording
+    # below still reads the winner's raw score, unchanged.
+    def _rank(e):
+        p = e.get("percentile")
+        return p if p is not None else e["score"]
+
+    ranked = sorted(env_results, key=lambda e: -_rank(e))
     best, second, worst = ranked[0], ranked[1] if len(ranked) > 1 else None, ranked[-1]
 
     def name(e):

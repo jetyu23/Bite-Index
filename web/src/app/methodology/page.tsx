@@ -96,19 +96,18 @@ export default function MethodologyPage() {
           <li>Subscores are blended using the profile&apos;s weights (normalised to sum to 1). Missing data scores a neutral 50 and is flagged, never invented.</li>
           <li>This happens for every hour inside the profile&apos;s realistic fishing window; the day&apos;s score is the <strong>best rolling 3-hour block</strong>, which is also shown as the &ldquo;best window&rdquo;. A daily average would bury the dawn bite under the midday lull.</li>
           <li>Species scores blend the species&apos; own factor score with the score of its best environment, weighted by how strongly that species is tied to environment conditions.</li>
-          <li>Finally the raw score is <strong>calibrated to a percentile</strong>: it is looked up in the profile&apos;s own historical score distribution, so 50 means a median day and 90 means better than roughly 90% of days, by construction. Until enough live history exists the recentred raw scale (typical day tuned to ~50) is used, and the footer says which mode is active.</li>
+          <li>The <strong>raw score is what&apos;s displayed</strong> as the headline number and the tier label (Poor/Fair/Good/Excellent) describes it. Separately, that raw score is also looked up in the profile&apos;s own historical distribution to get a <strong>percentile rank</strong> ("better than 73% of days on record"), shown as a secondary line so it can&apos;t be mistaken for a quality judgement on its own. Until enough live history exists, no percentile is shown at all, and the footer says so.</li>
         </ol>
 
         <h2 style={{ margin: "30px 0 8px" }}>Calibration, in one paragraph</h2>
         <p>
-          The first version of this model scored almost every day 60-plus, which made the numbers flattering and
-          useless. The fix has two layers. First, every response curve was recentred so an unremarkable input maps
-          to about 50 rather than about 68 (one documented piecewise remap applied uniformly). Second,
-          <code> engine/calibrate.py</code> scores a long window of historical Sydney days with this exact engine
-          and stores each profile&apos;s raw-score distribution; live scores are then reported as their percentile
-          rank in that distribution. No fitting, no ML: an empirical CDF you can recompute yourself. The
-          calibration window is printed in the footer, and a winter-only window is acknowledged as skewing
-          summer species until a full year of history accumulates.
+          Raw day-to-day scores cluster more tightly than the 0&ndash;100 scale suggests, since averaging many
+          weighted factors does that by construction, not by mistake. So the raw number alone can&apos;t tell you
+          whether a score of 66 is an unusually good day or an ordinary one. <code>engine/calibrate.py</code> scores
+          a long window of historical Sydney days with this exact engine and stores each profile&apos;s raw-score
+          distribution; every live score is then also looked up in that distribution to get a percentile rank,
+          shown as a secondary line under the raw number. No fitting, no ML: an empirical CDF you can recompute
+          yourself. The calibration window is printed in the footer.
         </p>
       </div>
 

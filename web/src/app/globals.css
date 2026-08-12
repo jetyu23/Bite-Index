@@ -163,6 +163,7 @@ h2.sec::after { content: ""; display: block; border-bottom: 2px solid var(--ink)
 .sc { text-align: right; font-family: var(--mono); }
 .sc b { display: block; font-size: 1.9rem; font-weight: 600; line-height: 1; }
 .sc i { font-style: normal; font-size: 0.54rem; letter-spacing: 0.24em; font-weight: 600; }
+.pctl { display: block; font-family: var(--mono); font-size: 0.58rem; color: var(--soft); font-weight: 400; letter-spacing: 0; margin-top: 3px; white-space: nowrap; }
 .g { color: var(--olive); } .f { color: var(--ochre); } .p { color: var(--red); } .e { color: var(--blue); }
 .meter { grid-column: 1 / -1; height: 4px; background: var(--rule-soft); position: relative; margin-top: 6px; }
 .meter i { position: absolute; left: 0; top: 0; bottom: 0; background: currentColor; }
@@ -311,6 +312,7 @@ footer p { margin: 0 0 8px; max-width: 90ch; }
 .wk-foot { display: flex; align-items: baseline; gap: 6px; margin-top: 6px; }
 .wk-best { font-family: var(--mono); font-weight: 600; font-size: 1.25rem; }
 .wk-env { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; color: var(--soft); text-transform: uppercase; }
+.wk-overall { display: block; font-family: var(--mono); font-size: 0.58rem; color: var(--soft); margin-top: 2px; letter-spacing: 0.02em; }
 .wk-tide { display: block; font-family: var(--mono); font-size: 0.58rem; color: var(--soft); margin-top: 3px; letter-spacing: 0.06em; }
 .wk-flag { display: block; font-family: var(--mono); font-size: 0.58rem; font-weight: 700; color: var(--red); margin-top: 3px; letter-spacing: 0.06em; }
 .wk .g { color: var(--olive); } .wk .f { color: var(--ochre); } .wk .p { color: var(--red); } .wk .e { color: var(--blue); }
@@ -334,6 +336,7 @@ footer p { margin: 0 0 8px; max-width: 90ch; }
 .pod-win { grid-area: win; font-family: var(--mono); font-size: 0.64rem; color: var(--soft); margin-top: 5px; }
 .pod-score { grid-area: score; align-self: start; text-align: right; font-family: var(--mono); font-weight: 600; font-size: 2rem; line-height: 0.9; }
 .pod-score span { display: block; font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; }
+.pod-score .pctl { text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 0.58rem; margin-top: 2px; }
 .pod-bar { grid-area: bar; height: 4px; background: var(--rule-soft); margin-top: 9px; position: relative; }
 .pod-bar i { position: absolute; left: 0; top: 0; bottom: 0; background: currentColor; }
 .pod-bar::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1.5px; background: var(--ink); opacity: 0.5; }

@@ -49,7 +49,8 @@ def test_end_to_end() -> dict:
     d0 = days[0]
     check("5 environments", len(d0["environments"]) == 5)
     check("7 species", len(d0["species"]) == 7)
-    check("species sorted desc", all(a["score"] >= b["score"] for a, b in zip(d0["species"], d0["species"][1:])))
+    check("species sorted by rank_score desc", all(a["rank_score"] >= b["rank_score"] for a, b in zip(d0["species"], d0["species"][1:])))
+    check("species score is raw, not the sort key", any(a["rank_score"] != a["score"] for d in days for a in d["species"]))
     all_scores = [e["score"] for d in days for e in d["environments"]] + [s["score"] for d in days for s in d["species"]]
     check("scores within 0–100", all(0 <= s <= 100 for s in all_scores))
     check("tide events derived", len(d0["summary"]["tide_events"]) >= 2, str(d0["summary"]["tide_events"]))
