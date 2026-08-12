@@ -42,7 +42,11 @@ def run(live: bool) -> dict:
     norm = ingest.normalize(bundle)
     print(ingest.validation_report(norm))
 
-    calib = scoring.load_calibration(PROFILES / "calibration.json")
+    # Calibration is an empirical distribution of real Sydney conditions; sample
+    # data is a scripted synthetic demo, never part of that population, so it
+    # is never percentile-mapped against it (also keeps engine/tests.py, which
+    # runs on sample data, independent of whether calibration.json exists).
+    calib = scoring.load_calibration(PROFILES / "calibration.json") if live else None
     if calib:
         print(f"calibration: {calib['n_days']} days ({calib['window'][0]} to {calib['window'][1]}), median day = 50")
     else:

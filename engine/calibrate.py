@@ -37,7 +37,11 @@ def fetch_history(days: int) -> ingest.Normalized:
     end = date.today() - timedelta(days=2)  # archive lags ~2 days
     start = end - timedelta(days=days)
     bundle = ingest.fetch_historical(start, end)
-    return ingest.normalize(bundle)
+    norm = ingest.normalize(bundle, historical=True)
+    # fetch_historical pads the query window before `start` for lookback
+    # accuracy (rain_72h, pressure_trend); trim back to the requested window.
+    norm.days = [d for d in norm.days if d["date"] >= start]
+    return norm
 
 
 def main() -> None:

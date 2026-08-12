@@ -120,10 +120,16 @@ def fetch_historical(start: date, end: date) -> dict:
     (years of coverage); marine attempted for the same window, falling back to
     past_days=92 if the marine endpoint rejects the date range. If marine
     coverage is shorter, normalize() simply has fewer marine hours and the
-    calibration window notes the overlap."""
+    calibration window notes the overlap.
+
+    The query window is padded PAST_DAYS earlier than `start` so the first
+    real day still gets a full rain_72h/pressure_trend lookback, same as
+    fetch_live()'s past_days padding. The caller trims norm.days back to
+    `start` afterwards."""
     import requests
 
     warnings: list[str] = []
+    query_start = start - timedelta(days=PAST_DAYS)
 
     fc = requests.get(
         ARCHIVE_URL,
@@ -133,7 +139,7 @@ def fetch_historical(start: date, end: date) -> dict:
             "hourly": ",".join(FORECAST_HOURLY),
             "daily": ",".join(FORECAST_DAILY),
             "timezone": "Australia/Sydney",
-            "start_date": start.isoformat(),
+            "start_date": query_start.isoformat(),
             "end_date": end.isoformat(),
         },
         timeout=60,
@@ -150,7 +156,7 @@ def fetch_historical(start: date, end: date) -> dict:
                 "longitude": MARINE_LON,
                 "hourly": ",".join(MARINE_HOURLY),
                 "timezone": "Australia/Sydney",
-                "start_date": start.isoformat(),
+                "start_date": query_start.isoformat(),
                 "end_date": end.isoformat(),
             },
             timeout=60,
@@ -304,7 +310,7 @@ def _tide_events(times: list[datetime], heights: dict[datetime, float | None]) -
     return events
 
 
-def normalize(bundle: dict) -> Normalized:
+def normalize(bundle: dict, historical: bool = False) -> Normalized:
     warnings = list(bundle.get("warnings", []))
     fc_h = bundle["forecast"]["hourly"]
     fc_d = bundle["forecast"]["daily"]
@@ -391,8 +397,12 @@ def normalize(bundle: dict) -> Normalized:
         return pressure[best] if abs((best - target).total_seconds()) <= 3 * 3600 else None
 
     days: list[dict] = []
-    today = datetime.now(TZ).date()
-    all_dates = sorted({t.date() for t in times if t.date() >= today})[:FORECAST_DAYS]
+    if historical:
+        # Calibration scores every day in the fetched window, past or present.
+        all_dates = sorted({t.date() for t in times})
+    else:
+        today = datetime.now(TZ).date()
+        all_dates = sorted({t.date() for t in times if t.date() >= today})[:FORECAST_DAYS]
     for d in all_dates:
         anchor = datetime.combine(d, time(6), tzinfo=TZ)
         p_now, p_prev = pressure_at(anchor), pressure_at(anchor - timedelta(hours=24))
