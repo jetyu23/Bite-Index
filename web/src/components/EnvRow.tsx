@@ -2,7 +2,10 @@ import { tier } from "@/lib/data";
 import type { EnvResult } from "@/lib/types";
 
 export default function EnvRow({ env, best }: { env: EnvResult; best?: boolean }) {
-  const t = tier(env.score);
+  // Same value the server used for the "label" text (env.label), so colour
+  // and text can never disagree -- raw and calibrated cross a tier boundary
+  // at different points, and this row showed both at once for a while.
+  const t = tier(env.calibrated ?? env.score);
   return (
     <div className={`row tb-${t[0]}${env.safety_flag ? " flagged" : ""}`} id={`env-${env.id}`}>
       {env.safety_flag ? (

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "A free daily survey of Sydney fishing: transparent 0-100 scores for rock, beach, estuary, harbour and offshore, the best species to target today, and how to rig for them. Every weight in the model is published.",
   openGraph: {
     title: "Bite Index · Sydney fishing conditions, scored daily",
-    description: "Transparent raw scores for five fishing grounds and seven species, ranked against history. Every weight published.",
+    description: "Transparent raw scores for five fishing grounds and twelve species, ranked against history. Every weight published.",
     type: "website",
   },
 };

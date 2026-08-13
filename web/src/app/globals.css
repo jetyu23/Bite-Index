@@ -234,6 +234,22 @@ details.why-details[open] summary::after { content: " \2212"; }
 .badge.pend { border-style: dashed; color: var(--soft); border-color: var(--rule); }
 
 /* ------------------------------------------------------------ species page */
+.sp-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 14px 0 6px; padding: 12px; background: var(--paper-hi); border: 1.5px solid var(--rule); }
+.sp-search {
+  font-family: var(--mono); font-size: 0.8rem; padding: 6px 10px; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--ink); min-width: 200px; flex: 1 1 200px;
+}
+.sp-ctlgroup { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.sp-ctl-label { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.14em; color: var(--soft); margin-right: 2px; }
+.sp-chip {
+  font-family: var(--mono); font-size: 0.68rem; padding: 3px 9px; border: 1px solid var(--rule);
+  background: var(--paper); color: var(--soft); cursor: pointer; border-radius: 2px;
+}
+.sp-chip.active { background: var(--ink); color: var(--paper-hi); border-color: var(--ink); }
+.sp-chip:hover:not(.active) { border-color: var(--ink); color: var(--ink); }
+.sp-checkbox { display: flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 0.72rem; color: var(--soft); cursor: pointer; }
+.sp-ratings { display: flex; gap: 18px; margin: 2px 0 10px; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.02em; }
+.sp-rating-label { font-size: 0.56rem; letter-spacing: 0.12em; color: var(--soft); margin-right: 3px; }
 .species-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 16px; }
 .card { background: var(--paper-hi); border: 1.5px solid var(--rule); padding: 16px 16px 12px; }
 .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
@@ -286,6 +302,8 @@ footer p { margin: 0 0 8px; max-width: 90ch; }
   .outlook { grid-template-columns: repeat(4, 1fr); }
   .species-grid { grid-template-columns: 1fr; }
   .sp-flex { flex-direction: column; }
+  .sp-controls { flex-direction: column; align-items: stretch; }
+  .sp-search { min-width: 0; }
   .row { grid-template-columns: 1fr 84px; }
   .stamp.blue { display: none; }
 }

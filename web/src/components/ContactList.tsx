@@ -19,7 +19,7 @@ export default function ContactList({ species }: { species: SpeciesResult[] }) {
     <div className="contacts">
       <div className="podium">
         {podium.map((sp, i) => {
-          const t = tier(sp.score)[0];
+          const t = tier(sp.calibrated ?? sp.score)[0];
           return (
             <Link href={`/species#${sp.id}`} className={`pod pod-${i + 1}`} key={sp.id}>
               <div className="pod-rank">{i === 0 ? "PRIME" : `No.${i + 1}`}</div>
@@ -42,7 +42,7 @@ export default function ContactList({ species }: { species: SpeciesResult[] }) {
       <table className="ctable">
         <tbody>
           {rest.map((sp, i) => {
-            const t = tier(sp.score)[0];
+            const t = tier(sp.calibrated ?? sp.score)[0];
             return (
               <tr key={sp.id}>
                 <td className="ct-rk">{String(i + 4).padStart(2, "0")}</td>

@@ -1553,6 +1553,12 @@
    "id": "mulloway",
    "name": "Mulloway (jewfish)",
    "env_blend": 0.45,
+   "attributes": {
+    "difficulty": 5,
+    "difficulty_note": "The thousand-cast fish. Earn it.",
+    "eating_quality": 4,
+    "eating_note": "Firm, clean white flesh, especially the smaller 'soapy' school fish. A genuine reward for the wait."
+   },
    "sessions": [
     "dusk",
     "evening",
@@ -1798,6 +1804,12 @@
    "id": "kingfish",
    "name": "Yellowtail kingfish",
    "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 4,
+    "difficulty_note": "Finds sharp things to swim you into. Heavy tackle, no negotiating.",
+    "eating_quality": 3,
+    "eating_note": "Good raw as sashimi from a fresh, well-bled fish; cooked, opinions split. Bring a knife, not just a rod."
+   },
    "sessions": [
     "dawn",
     "morning",
@@ -2065,6 +2077,12 @@
    "id": "bream",
    "name": "Bream",
    "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 3,
+    "difficulty_note": "Easy to meet, genuinely hard to master. The bites get subtler as you improve.",
+    "eating_quality": 4,
+    "eating_note": "Firm, sweet, and forgiving to cook. A reliable plate fish."
+   },
    "sessions": [
     "dawn",
     "morning",
@@ -2359,6 +2377,12 @@
    "id": "tailor",
    "name": "Tailor",
    "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 2,
+    "difficulty_note": "Aggressive and not shy. The teeth do the hard work for you.",
+    "eating_quality": 3,
+    "eating_note": "Bleed it on the sand immediately or it turns strong and oily fast. Handling matters more than the fish."
+   },
    "sessions": [
     "dawn",
     "dusk"
@@ -2629,6 +2653,12 @@
    "id": "trevally",
    "name": "Silver trevally",
    "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 2,
+    "difficulty_note": "An honest fighter. No trickery required, just find the school.",
+    "eating_quality": 3,
+    "eating_note": "Solid, workmanlike eating. Not fancy, never lets you down."
+   },
    "sessions": [
     "dawn",
     "morning",
@@ -2920,6 +2950,12 @@
    "id": "squid",
    "name": "Southern calamari",
    "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 1,
+    "difficulty_note": "Ten arms, zero table manners, very forgiving of a clumsy jig technique.",
+    "eating_quality": 5,
+    "eating_note": "Calamari doesn't get fresher than five minutes out of the water. Hard to overrate."
+   },
    "sessions": [
     "dawn",
     "morning",
@@ -3213,6 +3249,12 @@
    "id": "yakkas",
    "name": "Yellowtail (yakkas)",
    "env_blend": 0.55,
+   "attributes": {
+    "difficulty": 1,
+    "difficulty_note": "The gateway fish. Bread on a hook basically works.",
+    "eating_quality": 1,
+    "eating_note": "Currency, not dinner. Their whole career is being live bait for something bigger."
+   },
    "sessions": [
     "dawn",
     "morning",
@@ -3473,6 +3515,1450 @@
     "hot_tip": "The one time bread on a hook is orthodox. Keep them lively in an aerated bucket and upgrade them into kingfish bait."
    },
    "tag": "HARBOUR"
+  },
+  {
+   "id": "salmon",
+   "name": "Australian salmon",
+   "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 1,
+    "difficulty_note": "Aggressive schooling fish that will happily hook themselves on a fast-worked slug.",
+    "eating_quality": 2,
+    "eating_note": "SOURCED: reputation is genuinely mixed -- good if bled and iced immediately when small, strong and oily if not. Mostly caught for the fight, not the fry pan."
+   },
+   "sessions": [
+    "dawn",
+    "morning",
+    "afternoon",
+    "dusk"
+   ],
+   "environments": {
+    "beach": 1.0,
+    "rock": 0.85,
+    "harbour": 0.6
+   },
+   "factors": [
+    {
+     "metric": "month",
+     "weight": 18,
+     "type": "season",
+     "season": [
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.5,
+      0.5,
+      0.55,
+      0.6,
+      0.7,
+      0.84,
+      0.9,
+      0.84
+     ],
+     "justification": "SOURCED: Sydney-specific reporting (Fishabout Sydney Harbour charters) puts the lower Harbour and Broken Bay run October to January, though the same source notes salmon have become more of a year-round proposition in recent seasons; this curve keeps a real winter presence rather than dropping to near zero."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 14,
+     "type": "table",
+     "map": {
+      "dawn": 84.0,
+      "day": 53.0,
+      "dusk": 84.0,
+      "night": 44.5
+     },
+     "justification": "GENERAL KNOWLEDGE: salmon workups (bait balls under diving birds) are classically spotted and worked at first and last light when the surface is calmest and bird activity is easiest to read, though workups genuinely happen at any hour. Not specifically sourced for Sydney; a moderate, not extreme, dawn/dusk lift."
+    },
+    {
+     "metric": "wind_onshore_kn",
+     "weight": 16,
+     "type": "curve",
+     "points": [
+      [
+       -20,
+       44.5
+      ],
+      [
+       -5,
+       56.0
+      ],
+      [
+       5,
+       65.0
+      ],
+      [
+       15,
+       71.2
+      ],
+      [
+       25,
+       47.2
+      ],
+      [
+       35,
+       17.0
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE, by analogy with tailor: salmon are a surf/whitewater species and a working onshore stirs the baitfish schools they smash. Sourced material on surf salmon technique describes fishing the wash and gutters but doesn't quantify a wind preference, so this curve is inferred from the same surf-species logic already justified for tailor, not a salmon-specific source."
+    },
+    {
+     "metric": "swell_m",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       27.3
+      ],
+      [
+       0.6,
+       47.2
+      ],
+      [
+       1.2,
+       68.0
+      ],
+      [
+       2.0,
+       56.0
+      ],
+      [
+       3.0,
+       22.0
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: sourced surf-salmon guides (Tackle Tactics, Daiwa) describe fishing active gutters and wash, implying the same moderate-swell preference as other surf-zone hunters (tailor, mulloway); no source gives an explicit swell figure for salmon specifically."
+    },
+    {
+     "metric": "tide_speed",
+     "weight": 10,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       34.8
+      ],
+      [
+       0.4,
+       56.0
+      ],
+      [
+       0.8,
+       74.4
+      ],
+      [
+       1.0,
+       77.6
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: moving water concentrates baitfish, the whole premise of a workup; not a salmon-specific citation, standard estuary/surf logic applied here."
+    },
+    {
+     "metric": "wind_kn",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       76.0
+      ],
+      [
+       10,
+       62.0
+      ],
+      [
+       18,
+       38.0
+      ],
+      [
+       28,
+       15.0
+      ]
+     ],
+     "justification": "Comfort and casting distance from rock ledges and beaches; light wind also makes a distant workup easier to spot."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       27.3
+      ],
+      [
+       -3,
+       62.0
+      ],
+      [
+       0,
+       65.0
+      ],
+      [
+       3,
+       47.2
+      ],
+      [
+       10,
+       24.1
+      ]
+     ],
+     "justification": "General settled/gentle-fall correlation, as used across every other profile; no salmon-specific source found."
+    },
+    {
+     "metric": "pressure",
+     "weight": 5,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       30.5
+      ],
+      [
+       1010,
+       53.0
+      ],
+      [
+       1018,
+       71.2
+      ],
+      [
+       1030,
+       62.0
+      ]
+     ],
+     "justification": "Settled-weather correlation, general pattern reused from the other beach/rock profiles."
+    },
+    {
+     "metric": "rain_today",
+     "weight": 4,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       65.0
+      ],
+      [
+       5,
+       59.0
+      ],
+      [
+       15,
+       40.8
+      ],
+      [
+       35,
+       20.0
+      ]
+     ],
+     "justification": "Comfort factor for exposed beach/rock sessions, not a bite factor."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       53.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       53.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
+    }
+   ],
+   "guide": {
+    "difficulty": "Easy. Aggressive and dumb about it",
+    "baits": [
+     "Whole or gang-hooked pilchard",
+     "Bluebait",
+     "Squid strip",
+     "Mackerel strip"
+    ],
+    "lures": [
+     "20-40g metal slugs, worked fast through a workup"
+    ],
+    "rigs": [
+     "Paternoster (sinker on the bottom, hook on a dropper loop above it) for bait",
+     "Casting a slug on a running rig for surface fish"
+    ],
+    "rig_diagram": "paternoster",
+    "line": "10-15 lb",
+    "leader": "20-30 lb mono",
+    "rod": "9-10' surf rod, or a 7' spin stick for lures",
+    "knots": [
+     "uni",
+     "double_uni"
+    ],
+    "season_notes": "SOURCED: lower Sydney Harbour and Broken Bay, October-January, per Sydney Harbour charter reporting; increasingly caught year-round. GENERAL KNOWLEDGE: winter runs are stronger further north (Newcastle/Lake Macquarie), a different pattern to the Sydney-specific one used for scoring.",
+    "habitat": "Surf beaches and ocean rock washes chasing bait schools; the lower Harbour and Broken Bay when baitfish are thick.",
+    "safety_note": "Workups often mean a feeding frenzy close to rock ledges in wash conditions; the same rock safety rules apply as for any ledge session.",
+    "hot_tip": "GENERAL KNOWLEDGE: bleed them immediately if you're keeping one to eat; sourced material is split on eating quality and the consistent advice is that handling, not the fish, decides whether it's good on the plate."
+   },
+   "tag": "SURF WORKUPS"
+  },
+  {
+   "id": "flathead",
+   "name": "Dusky flathead",
+   "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 1,
+    "difficulty_note": "Lies still on the sand and takes what drifts past. About as forgiving as fishing gets.",
+    "eating_quality": 5,
+    "eating_note": "One of the most popular table fish in NSW estuaries for good reason: mild, flaky, hard to get wrong in a pan."
+   },
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk"
+   ],
+   "environments": {
+    "estuary": 1.0,
+    "beach": 0.8,
+    "harbour": 0.6
+   },
+   "factors": [
+    {
+     "metric": "tide_speed",
+     "weight": 20,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       30.5
+      ],
+      [
+       0.4,
+       56.0
+      ],
+      [
+       0.8,
+       77.6
+      ],
+      [
+       1.0,
+       84.0
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: flathead are ambush predators lying on sand/mud edges (NSW DPI: found over sand, mud, gravel and seagrass, up to the tidal limit); moving water pushes bait past a lie-in-wait hunter the same way it does for every ambush feeder on this site. Tide preference itself isn't quantified in the sourced material, so this curve mirrors bream's, the closest analogue already justified on this site."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 10,
+     "type": "table",
+     "map": {
+      "dawn": 74.4,
+      "day": 62.0,
+      "dusk": 77.6,
+      "night": 56.0
+     },
+     "justification": "GENERAL KNOWLEDGE: flathead are sight-and-ambush feeders that bite well through the day, more so than most estuary species; this table is deliberately the flattest light curve on the site next to yakkas, reflecting that flathead fishing is a genuine all-day activity, not specifically sourced for Sydney but widely reported across flathead fishing guides."
+    },
+    {
+     "metric": "sst_c",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       13,
+       38.0
+      ],
+      [
+       17,
+       56.0
+      ],
+      [
+       21,
+       74.4
+      ],
+      [
+       25,
+       68.0
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: flathead are available year-round per NSW DPI with no closed season, but activity is widely reported to lift with water temperature; no specific Sydney temperature threshold was found, so this curve is a moderate, unremarkable warm-water preference, not a sharp gate."
+    },
+    {
+     "metric": "month",
+     "weight": 12,
+     "type": "season",
+     "season": [
+      0.76,
+      0.76,
+      0.8,
+      0.9,
+      0.84,
+      0.6,
+      0.53,
+      0.6,
+      0.76,
+      0.9,
+      0.84,
+      0.8
+     ],
+     "justification": "SOURCED: available all year with no closed season (NSW DPI); peak seasons reported as April-May and September-October. Winter is scored lower, not dead, since the source explicitly says year-round."
+    },
+    {
+     "metric": "rain_72h",
+     "weight": 10,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       47.2
+      ],
+      [
+       15,
+       62.0
+      ],
+      [
+       40,
+       56.0
+      ],
+      [
+       90,
+       27.3
+      ],
+      [
+       150,
+       14.5
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: a light fresh colours the water and can trigger feeding the way it does for bream and mulloway; not specifically sourced for flathead, a moderate version of the same estuary pattern used elsewhere on this site."
+    },
+    {
+     "metric": "tide_range",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0.8,
+       40.8
+      ],
+      [
+       1.4,
+       62.0
+      ],
+      [
+       2.0,
+       74.4
+      ]
+     ],
+     "justification": "More water over the sand flats and drop-offs flathead ambush from; general estuary logic, not flathead-specific."
+    },
+    {
+     "metric": "wind_kn",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       77.6
+      ],
+      [
+       12,
+       62.0
+      ],
+      [
+       20,
+       40.8
+      ],
+      [
+       30,
+       20.0
+      ]
+     ],
+     "justification": "Comfort and drift-control for soft-plastic and bait presentation over sand flats; general, not sourced."
+    },
+    {
+     "metric": "pressure",
+     "weight": 7,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       30.5
+      ],
+      [
+       1010,
+       53.0
+      ],
+      [
+       1018,
+       71.2
+      ],
+      [
+       1030,
+       60.5
+      ]
+     ],
+     "justification": "Settled-weather correlation, general pattern reused across the estuary profiles."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       27.3
+      ],
+      [
+       -3,
+       62.0
+      ],
+      [
+       0,
+       65.0
+      ],
+      [
+       3,
+       47.2
+      ],
+      [
+       10,
+       24.1
+      ]
+     ],
+     "justification": "General settled/gentle-fall correlation, not flathead-specific."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 2,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       50.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       50.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Minimal weight, disclosed."
+    }
+   ],
+   "guide": {
+    "difficulty": "Easy. The classic first flathead",
+    "baits": [
+     "Live mullet or herring",
+     "Fresh whitebait or pilchard strip",
+     "Peeled prawn"
+    ],
+    "lures": [
+     "3-4\" soft plastic paddle-tails, worked slow along the bottom"
+    ],
+    "rigs": [
+     "Running sinker to a 1/0-3/0 suicide hook",
+     "Paternoster for bait fished at anchor"
+    ],
+    "rig_diagram": "running_sinker",
+    "line": "6-10 lb braid",
+    "leader": "15-20 lb fluoro",
+    "rod": "7' 2-4 kg spin",
+    "knots": [
+     "fg",
+     "uni"
+    ],
+    "season_notes": "SOURCED (NSW DPI): available all year, no closed season, with peak seasons April-May and September-October.",
+    "habitat": "SOURCED (NSW DPI): estuaries and coastal bays over sand, mud, gravel and seagrass, from the river mouth up to the tidal limit.",
+    "safety_note": null,
+    "hot_tip": "Lift-and-drag a soft plastic right along the bottom; flathead ambush from the sand, so a lure that never leaves it gets bitten far more than one worked mid-water."
+   },
+   "tag": "SAND AMBUSH"
+  },
+  {
+   "id": "luderick",
+   "name": "Luderick (blackfish)",
+   "env_blend": 0.45,
+   "attributes": {
+    "difficulty": 5,
+    "difficulty_note": "SOURCED: a notoriously subtle bite that needs a dedicated float rig and real technique. The float dips, not screams.",
+    "eating_quality": 3,
+    "eating_note": "SOURCED: firm and sweet if bled immediately and iced; skip that step and it can pick up a weedy taste."
+   },
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon"
+   ],
+   "environments": {
+    "rock": 1.0,
+    "estuary": 0.85,
+    "harbour": 0.7
+   },
+   "factors": [
+    {
+     "metric": "month",
+     "weight": 20,
+     "type": "season",
+     "season": [
+      0.43,
+      0.43,
+      0.53,
+      0.68,
+      0.8,
+      0.9,
+      0.9,
+      0.84,
+      0.68,
+      0.53,
+      0.43,
+      0.43
+     ],
+     "justification": "SOURCED: spawning runs southern Queensland to the NSW mid coast happen in the cooler months, June to September, and fish move from the ocean into estuaries and around ocean rocks as this happens (Australian Museum, macman.id.au). Winter is scored high, not just 'present', because the source specifically ties the run to this window."
+    },
+    {
+     "metric": "tide_speed",
+     "weight": 14,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       34.8
+      ],
+      [
+       0.4,
+       60.5
+      ],
+      [
+       0.8,
+       74.4
+      ],
+      [
+       1.0,
+       71.2
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: float fishing for luderick is done in current seams beside rock ledges and weed beds; sourced rig guides describe fishing 3-4 feet of moving water but don't quantify an ideal flow rate, so this curve is a moderate estuary/rock tide-speed shape, not a hard citation."
+    },
+    {
+     "metric": "wind_onshore_kn",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       -20,
+       56.0
+      ],
+      [
+       -5,
+       71.2
+      ],
+      [
+       5,
+       68.0
+      ],
+      [
+       15,
+       44.5
+      ],
+      [
+       25,
+       20.0
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: float fishing needs a controllable drift, not chop; a hard onshore wind makes a luderick float impossible to read and control. Not specifically sourced, inferred from the float-fishing technique itself."
+    },
+    {
+     "metric": "swell_m",
+     "weight": 10,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       65.0
+      ],
+      [
+       0.6,
+       68.0
+      ],
+      [
+       1.2,
+       47.2
+      ],
+      [
+       2.0,
+       22.0
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: luderick fishing off ocean rocks needs a stable, fishable ledge; sourced material places them around rock platforms and weed beds but doesn't address swell directly, so this reuses the same 'settled beats surging' logic already justified for rock generally, at a lower weight since much luderick fishing happens in sheltered water."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 10,
+     "type": "table",
+     "map": {
+      "dawn": 62.0,
+      "day": 68.0,
+      "dusk": 62.0,
+      "night": 44.5
+     },
+     "justification": "GENERAL KNOWLEDGE: luderick float fishing is a daytime tradition (you need to see the float), unlike most of this site's dawn/dusk-favoured targets; not specifically sourced, but a direct consequence of the technique itself, so day is scored highest rather than lowest."
+    },
+    {
+     "metric": "tide_range",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0.8,
+       44.5
+      ],
+      [
+       1.4,
+       65.0
+      ],
+      [
+       2.0,
+       74.4
+      ]
+     ],
+     "justification": "Bigger tides move more water past the weed beds and ledges; general pattern, not luderick-specific."
+    },
+    {
+     "metric": "rain_72h",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       68.0
+      ],
+      [
+       20,
+       50.0
+      ],
+      [
+       60,
+       27.3
+      ],
+      [
+       120,
+       14.5
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: luderick feed by sight on weed (Australian Museum: feed mainly on green cabbage weed), so dirty water from recent rain likely hurts feeding the way it does for the other sight-feeder on this site, squid; inferred, not directly sourced for luderick."
+    },
+    {
+     "metric": "pressure",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       34.8
+      ],
+      [
+       1010,
+       53.0
+      ],
+      [
+       1018,
+       68.0
+      ],
+      [
+       1030,
+       59.0
+      ]
+     ],
+     "justification": "Settled-weather correlation, general pattern, not luderick-specific."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       30.5
+      ],
+      [
+       -3,
+       59.0
+      ],
+      [
+       0,
+       65.0
+      ],
+      [
+       3,
+       48.2
+      ],
+      [
+       10,
+       27.3
+      ]
+     ],
+     "justification": "General settled/gentle-fall correlation, not luderick-specific."
+    },
+    {
+     "metric": "wind_kn",
+     "weight": 4,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       74.4
+      ],
+      [
+       10,
+       62.0
+      ],
+      [
+       18,
+       40.8
+      ],
+      [
+       28,
+       20.0
+      ]
+     ],
+     "justification": "Comfort and float control on an ocean rock ledge in wind chop."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 2,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       50.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       50.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Minimal weight, disclosed."
+    }
+   ],
+   "guide": {
+    "difficulty": "Hard. Notoriously subtle bite, worth the trouble",
+    "baits": [
+     "Green cabbage weed (sourced from ocean rocks), wrapped around the hook shank",
+     "Bread, as a weaker fallback"
+    ],
+    "lures": [],
+    "rigs": [
+     "Standard luderick float rig: bubble float, running weight, size 8-10 long-shank hook",
+     "Newcastle rig: two hooks off one swivel, at 50cm and 80cm, for two depths at once"
+    ],
+    "rig_diagram": "float_rig",
+    "line": "4-6 lb",
+    "leader": "6-8 lb fluoro",
+    "rod": "10-13' dedicated luderick rod, light and long for float control",
+    "knots": [
+     "uni",
+     "double_uni"
+    ],
+    "season_notes": "SOURCED: the run is strongest June-September as spawning fish move from the ocean into estuaries and around ocean rocks (Australian Museum).",
+    "habitat": "SOURCED: rocky outcrops with deep drop-offs and green weed beds, ocean rocks and Sydney Harbour (multiple sourced guides).",
+    "safety_note": "Ocean rock ledges in washy conditions; the same rock safety rules apply as for any platform session.",
+    "hot_tip": "SOURCED: collect the weed fresh from the rocks you're fishing rather than buying it if you can, and rebait often; a stale, faded bunch of weed gets ignored."
+   },
+   "tag": "WEED & LEDGES"
+  },
+  {
+   "id": "whiting",
+   "name": "Sand whiting",
+   "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 3,
+    "difficulty_note": "SOURCED: small, careful mouth and a reputation as a relentless bait thief. Light gear and patience required.",
+    "eating_quality": 5,
+    "eating_note": "SOURCED: regarded as second only to King George whiting on the table. About as good as it gets."
+   },
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk"
+   ],
+   "environments": {
+    "beach": 1.0,
+    "estuary": 0.9,
+    "harbour": 0.4
+   },
+   "factors": [
+    {
+     "metric": "tide_speed",
+     "weight": 18,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       30.5
+      ],
+      [
+       0.3,
+       53.0
+      ],
+      [
+       0.6,
+       71.2
+      ],
+      [
+       1.0,
+       80.8
+      ]
+     ],
+     "justification": "SOURCED: sand whiting favour sand flats on the incoming tide and channel edges on the run-out (beachworming.com.au); moving water over the flats is when they're actively feeding, so this curve rewards flow the same way the beach and estuary profiles already do."
+    },
+    {
+     "metric": "swell_m",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       44.5
+      ],
+      [
+       0.5,
+       62.0
+      ],
+      [
+       1.0,
+       71.2
+      ],
+      [
+       1.8,
+       44.5
+      ],
+      [
+       2.8,
+       17.0
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: whiting like a gentle wash turning over the sand to expose worms and nippers, but they're not a whitewater hunter like tailor; sourced material describes fishing sand flats and gutters but doesn't quantify swell, so this is a milder version of the beach swell curve used for beach generally."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 10,
+     "type": "table",
+     "map": {
+      "dawn": 71.2,
+      "day": 62.0,
+      "dusk": 71.2,
+      "night": 47.2
+     },
+     "justification": "GENERAL KNOWLEDGE: whiting bite through the day more readily than most estuary species (sourced material notes 'all months of the year' and summer prospecting, not a specific light window), with a mild lift at the margins; not strongly gated by light, unlike mulloway or tailor."
+    },
+    {
+     "metric": "month",
+     "weight": 10,
+     "type": "season",
+     "season": [
+      0.9,
+      0.9,
+      0.84,
+      0.68,
+      0.56,
+      0.5,
+      0.5,
+      0.56,
+      0.68,
+      0.76,
+      0.84,
+      0.9
+     ],
+     "justification": "SOURCED: caught all months of the year, with summer called out as a particularly good time to prospect for them (beachworming.com.au); winter is scored lower, not closed."
+    },
+    {
+     "metric": "rain_72h",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       62.0
+      ],
+      [
+       15,
+       68.0
+      ],
+      [
+       50,
+       44.5
+      ],
+      [
+       100,
+       20.0
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: a light fresh can wash worms and nippers into the system the way it does for bream; not specifically sourced for whiting, a mild version of the same estuary logic."
+    },
+    {
+     "metric": "tide_range",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0.8,
+       44.5
+      ],
+      [
+       1.4,
+       62.0
+      ],
+      [
+       2.0,
+       71.2
+      ]
+     ],
+     "justification": "More water over the sand flats they feed on; general estuary/beach pattern."
+    },
+    {
+     "metric": "wind_onshore_kn",
+     "weight": 10,
+     "type": "curve",
+     "points": [
+      [
+       -20,
+       47.2
+      ],
+      [
+       -5,
+       59.0
+      ],
+      [
+       5,
+       65.0
+      ],
+      [
+       15,
+       50.0
+      ],
+      [
+       25,
+       24.1
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: a light onshore keeps the shallows turned over without blowing the sand flats into unfishable chop; inferred from beach-fishing logic generally, not whiting-specific."
+    },
+    {
+     "metric": "wind_kn",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       74.4
+      ],
+      [
+       10,
+       62.0
+      ],
+      [
+       18,
+       40.8
+      ],
+      [
+       28,
+       20.0
+      ]
+     ],
+     "justification": "Whiting are a finesse, light-line target (sourced gear: 6 lb leader, size 4-8 hooks); wind chop makes bite detection much harder on light gear."
+    },
+    {
+     "metric": "pressure",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       34.8
+      ],
+      [
+       1010,
+       53.0
+      ],
+      [
+       1018,
+       68.0
+      ],
+      [
+       1030,
+       59.0
+      ]
+     ],
+     "justification": "Settled-weather correlation, general pattern, not whiting-specific."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       30.5
+      ],
+      [
+       -3,
+       59.0
+      ],
+      [
+       0,
+       65.0
+      ],
+      [
+       3,
+       48.2
+      ],
+      [
+       10,
+       27.3
+      ]
+     ],
+     "justification": "General settled/gentle-fall correlation, not whiting-specific."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 4,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       53.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       53.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
+    }
+   ],
+   "guide": {
+    "difficulty": "Moderate. Small mouth, big reputation as bait thieves",
+    "baits": [
+     "Live nippers/yabbies (pumped from the sand flats at low tide)",
+     "Beach worms",
+     "Bloodworms",
+     "Pipis"
+    ],
+    "lures": [
+     "Tiny 2\" soft plastics on a jighead, cast and slow-rolled over sand"
+    ],
+    "rigs": [
+     "Running ball sinker to a size 4-8 long-shank hook, 0.5-1m light leader"
+    ],
+    "rig_diagram": "running_sinker",
+    "line": "4-6 lb",
+    "leader": "6 lb fluoro",
+    "rod": "7' 1-3 kg light spin",
+    "knots": [
+     "uni",
+     "clinch"
+    ],
+    "season_notes": "SOURCED: caught all year, summer is prime time to prospect for them (beachworming.com.au).",
+    "habitat": "SOURCED: sand flats and channel edges in estuaries, bays and surf beaches (beachworming.com.au, NSW DPI).",
+    "safety_note": null,
+    "hot_tip": "SOURCED: pump your own nippers on the sand flats at low tide with a yabbie pump; livelier bait than anything bought outfishes it."
+   },
+   "tag": "SAND FLATS"
+  },
+  {
+   "id": "snapper",
+   "name": "Snapper",
+   "env_blend": 0.5,
+   "attributes": {
+    "difficulty": 4,
+    "difficulty_note": "A quality reef fish takes structure, berley discipline and usually a boat. The small 'squire' are far easier.",
+    "eating_quality": 5,
+    "eating_note": "The benchmark NSW plate fish. If a menu says 'today's catch', this is what everyone hopes for."
+   },
+   "sessions": [
+    "dawn",
+    "morning",
+    "dusk",
+    "evening"
+   ],
+   "environments": {
+    "boat": 1.0,
+    "rock": 0.7,
+    "harbour": 0.55
+   },
+   "factors": [
+    {
+     "metric": "month",
+     "weight": 18,
+     "type": "season",
+     "season": [
+      0.68,
+      0.68,
+      0.76,
+      0.84,
+      0.68,
+      0.53,
+      0.5,
+      0.53,
+      0.76,
+      0.9,
+      0.9,
+      0.76
+     ],
+     "justification": "SOURCED: prime NSW fishing periods are reported as September-November and March-May, either side of the summer heat and winter cold (multiple sourced guides). Some sourced material also describes a distinct winter movement of snapper into deeper, more thermally stable harbour water, which is why winter isn't scored as low as a simple two-peak curve would suggest; that winter-harbour claim is the least well corroborated part of this profile (see season_notes)."
+    },
+    {
+     "metric": "sst_c",
+     "weight": 14,
+     "type": "curve",
+     "points": [
+      [
+       14,
+       44.5
+      ],
+      [
+       16,
+       56.0
+      ],
+      [
+       18,
+       71.2
+      ],
+      [
+       20,
+       62.0
+      ],
+      [
+       23,
+       50.0
+      ]
+     ],
+     "justification": "SOURCED: snapper school up in shallow water to spawn once temperature passes 18C (Australian Museum/Fishes of Australia); this curve peaks either side of that mark rather than treating warmer as always better, since snapper are a temperate-water fish, not a tropical one like kingfish."
+    },
+    {
+     "metric": "tide_mins_to_turn",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       77.6
+      ],
+      [
+       90,
+       56.0
+      ],
+      [
+       240,
+       34.8
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: reef and structure fishing everywhere on this site treats the tide change as a trigger window (kingfish, trevally); sourced snapper guides describe berley and bottom fishing on structure but don't isolate the tide change specifically, so this reuses the same logic at a comparable weight."
+    },
+    {
+     "metric": "tide_speed",
+     "weight": 10,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       34.8
+      ],
+      [
+       0.4,
+       59.0
+      ],
+      [
+       0.8,
+       74.4
+      ],
+      [
+       1.0,
+       71.2
+      ]
+     ],
+     "justification": "GENERAL KNOWLEDGE: current carries a berley trail and holds bait over reef structure; not snapper-specific, reused reef-fishing logic."
+    },
+    {
+     "metric": "light_phase",
+     "weight": 12,
+     "type": "table",
+     "map": {
+      "dawn": 84.0,
+      "day": 47.2,
+      "dusk": 74.4,
+      "night": 56.0
+     },
+     "justification": "GENERAL KNOWLEDGE: dawn is the standard start time in every sourced Sydney snapper guide, consistent with reef fishing generally on this site; night fishing over structure is also a well-known snapper technique, hence the moderate-not-low night score, though this specific point wasn't found in the sources searched."
+    },
+    {
+     "metric": "wind_kn",
+     "weight": 12,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       84.0
+      ],
+      [
+       10,
+       68.0
+      ],
+      [
+       18,
+       42.6
+      ],
+      [
+       28,
+       17.0
+      ]
+     ],
+     "justification": "Boat-handling and anchoring limit over reef structure; the same offshore-comfort logic as boat/kingfish, not snapper-specific."
+    },
+    {
+     "metric": "swell_m",
+     "weight": 8,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       80.8
+      ],
+      [
+       1.0,
+       65.0
+      ],
+      [
+       1.8,
+       42.6
+      ],
+      [
+       3.0,
+       15.0
+      ]
+     ],
+     "justification": "Anchoring and berleying over reef gets harder and less precise in a swell; general offshore logic reused from boat/kingfish."
+    },
+    {
+     "metric": "pressure",
+     "weight": 6,
+     "type": "curve",
+     "points": [
+      [
+       995,
+       27.3
+      ],
+      [
+       1010,
+       50.0
+      ],
+      [
+       1018,
+       71.2
+      ],
+      [
+       1030,
+       62.0
+      ]
+     ],
+     "justification": "Settled-weather correlation, general pattern, not snapper-specific."
+    },
+    {
+     "metric": "pressure_trend",
+     "weight": 5,
+     "type": "curve",
+     "points": [
+      [
+       -10,
+       27.3
+      ],
+      [
+       -3,
+       59.0
+      ],
+      [
+       0,
+       68.0
+      ],
+      [
+       3,
+       47.2
+      ],
+      [
+       10,
+       24.1
+      ]
+     ],
+     "justification": "General settled/gentle-fall correlation, not snapper-specific."
+    },
+    {
+     "metric": "moon_illum",
+     "weight": 3,
+     "type": "curve",
+     "points": [
+      [
+       0,
+       56.0
+      ],
+      [
+       0.5,
+       38.0
+      ],
+      [
+       1.0,
+       56.0
+      ]
+     ],
+     "justification": "LOW EVIDENCE, but new/full moon bias is persistent in snapper lore specifically (bigger tides, more current over structure); still small and disclosed."
+    }
+   ],
+   "guide": {
+    "difficulty": "Moderate to hard for a quality fish; easy for a 'squire'",
+    "baits": [
+     "Fresh squid",
+     "Pilchards",
+     "Prawns",
+     "Silver whiting or slimy mackerel strip"
+    ],
+    "lures": [
+     "Soft plastics 4-6\" on a jighead, bounced along reef structure"
+    ],
+    "rigs": [
+     "Running sinker to a 3/0-4/0 octopus/suicide hook, fished behind a berley trail"
+    ],
+    "rig_diagram": "running_sinker",
+    "line": "15-20 lb braid",
+    "leader": "20-30 lb fluoro",
+    "rod": "7' 3-6 kg spin outfit; heavier from the stones",
+    "knots": [
+     "fg",
+     "uni"
+    ],
+    "season_notes": "SOURCED: prime periods September-November and March-May. GENERAL KNOWLEDGE/LESS CERTAIN: some charter-operator sources describe a winter movement into deeper harbour water; this wasn't corroborated by NSW DPI material in the search done for this profile and should be treated as a softer claim than the spring/autumn pattern.",
+    "habitat": "SOURCED: adults on deeper offshore reefs; juveniles ('squire', 'cockney bream', 'reddies') enter bays and estuaries including Sydney Harbour (Fishes of Australia, Australian Museum).",
+    "safety_note": null,
+    "hot_tip": "Run a steady berley trail and be patient; sourced guides consistently rank berley discipline above bait choice for reef snapper."
+   },
+   "tag": "REEF STRUCTURE"
   }
  ]
 }

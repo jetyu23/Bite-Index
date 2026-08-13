@@ -412,3 +412,62 @@ clustering (6 of 7 current species sit raw 64-69, displaying calibrated
 54-65; kingfish separates only via its SST gate) or land in the same band --
 to be checked and reported once the new profiles are scored, not assumed.
 Starting on 11 now.
+
+### 2026-08-13 — priorities 11-13: five new species, card metadata, explorer UI
+**Priority 11.** Added salmon, flathead, luderick, whiting, snapper (Australian
+salmon, dusky flathead, luderick/blackfish, sand whiting, snapper) via real
+WebSearch research, not memory. Every factor justification is tagged SOURCED
+(with the finding attributed) or GENERAL KNOWLEDGE (explicitly flagged as
+inferred/analogous, not found in the search done). Full citations given to the
+user for fact-check before this ships; not assumed clean. One explicit
+uncertainty flagged in-profile: snapper's reported winter harbour movement was
+weaker-sourced (a charter-operator blog) than its spring/autumn reef pattern
+(multiple sources, consistent) -- both included, but the profile's own
+season_notes says so.
+
+**The clustering check the user asked for, answered with real data, not
+assumed.** Regenerated calibration.json with all 17 profiles across the real
+366-day history: salmon (median 62), flathead (66), luderick (63), whiting
+(64), snapper (63) -- every one lands in the exact same 60-66 raw-median band
+the original six non-gated species already occupied (mulloway 66, bream 64,
+tailor 60, trevally 61, squid 66, yakkas 66). Stdev for the new five (2.5-4.1)
+is squarely inside the existing 1.7-5.7 range too. **They do not widen the
+spread. All 17 profiles cluster except kingfish, which separates only because
+of its SST gate.** This is worth flagging plainly, as asked: a sort-by-score
+feature on the species page will mostly reorder a tightly-packed group of 16,
+not meaningfully differentiate them, on most days.
+
+**Priority 12.** Added an `attributes` block (difficulty, eating_quality,
+both 1-5, plus a short note each) to all 12 species -- explicitly never read
+by the scoring engine. Added a real regression test (`test_attributes_dont_score`)
+that mutates attributes in memory and confirms the raw score doesn't move,
+rather than trusting the schema separation to hold by convention.
+
+**Priority 13.** Extracted the species grid into a new client component
+(`SpeciesExplorer.tsx`) with search (name/tag), sort (today's score / eating
+quality / difficulty), filter (by ground, by in-season-now using each
+profile's own season array), all client-side React state over the existing
+static export -- no new dependency, no server round trip.
+
+**A real bug found and fixed while verifying, not assumed correct.** Curled
+the live rendered homepage to sanity-check the new UI and found score=66
+rendering with tier-class "excellent" (blue) next to label text "GOOD" --
+a live, shipped inconsistency. Root cause: `web/src/lib/data.ts`'s `tier()`
+still hardcoded 80/60/40 (a THIRD independent copy of the thresholds,
+missed when priority 6 moved `score_labels` to 62/48/32), AND every
+frontend call site (`EnvRow`, `ContactList`, `WeekAhead`, the new
+`SpeciesExplorer`) was passing raw score into `tier()` for the colour class
+while the server had already computed the label TEXT from `calibrated` --
+so even after fixing the threshold values, colour and text could still
+disagree because they were reading different numbers entirely. Fixed both:
+`tier()` now reads `profiles.factors.score_labels` directly (one source of
+truth, can't drift again), and every call site passes `calibrated ?? score`,
+matching exactly what the server used for the label. Re-verified against
+live rendered HTML: zero mismatches across the homepage ledger, week strip,
+contact list and species page.
+
+Verified: `engine/tests.py` passes (56 checks including the new attribute
+guard), `tsc --noEmit` and `next build` clean, dev server curl-tested for
+control presence, correct rating dots per species, and the colour/text fix
+specifically. Not committed/pushed yet -- holding for the citation
+fact-check the user explicitly asked for on the new species content.

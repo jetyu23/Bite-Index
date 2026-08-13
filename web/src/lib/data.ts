@@ -7,11 +7,16 @@ export const profiles = profilesJson as unknown as Profiles;
 
 export type Tier = "excellent" | "good" | "fair" | "poor";
 
+/* Reads the live thresholds from factors.json's score_labels rather than a
+   second hardcoded copy -- that mismatch already happened once (this
+   function stayed at 80/60/40 when score_labels moved to 62/48/32 for the
+   calibrated scale, so a card's colour and its text label could disagree
+   for a while). One source of truth now. */
 export function tier(score: number): Tier {
-  if (score >= 80) return "excellent";
-  if (score >= 60) return "good";
-  if (score >= 40) return "fair";
-  return "poor";
+  const labels = profiles.factors.score_labels;
+  const sorted = [...labels].sort((a, b) => b.min - a.min);
+  const hit = sorted.find((l) => score >= l.min) ?? sorted[sorted.length - 1];
+  return hit.label.toLowerCase() as Tier;
 }
 
 export function tierLabel(score: number): string {

@@ -2,11 +2,16 @@
 
 import { useEffect, useRef } from "react";
 
-/* The living layer of the Field Survey: silhouettes of the seven species the
-   site actually scores (plus one ray, for the floor of the page), drifting
-   behind the paper. Fine-pointer users get flee behaviour within 140px;
-   touch devices get calm drift; reduced-motion gets a single static school.
-   Ink alpha stays low so the document always wins. */
+/* The living layer of the Field Survey: silhouettes of a subset of the
+   species the site scores (plus one ray, for the floor of the page),
+   drifting behind the paper. Each hand-drawn shape is bespoke canvas path
+   art, not a generic icon, so newer species (salmon, flathead, luderick,
+   whiting, snapper) fall back to the default slim-fusiform silhouette below
+   rather than getting their own custom shape -- purely decorative, so this
+   wasn't extended for every species the way the actual scoring was. Fine-
+   pointer users get flee behaviour within 140px; touch devices get calm
+   drift; reduced-motion gets a single static school. Ink alpha stays low so
+   the document always wins. */
 
 type Kind =
   | "mulloway" | "kingfish" | "tailor" | "bream" | "trevally" | "squid" | "yakka" | "ray"

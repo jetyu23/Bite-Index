@@ -163,11 +163,20 @@ export interface SpeciesGuide {
   safety_note: string | null;
 }
 
+/** Fixed card metadata -- NEVER a scoring input. A fish isn't tastier on a Tuesday. */
+export interface SpeciesAttributes {
+  difficulty: number; // 1 (easiest) - 5 (hardest)
+  difficulty_note: string;
+  eating_quality: number; // 1 (bait, not dinner) - 5 (the good stuff)
+  eating_note: string;
+}
+
 export interface SpeciesProfile {
   id: string;
   name: string;
   tag?: string;
   env_blend: number;
+  attributes: SpeciesAttributes;
   sessions: string[];
   environments: Record<string, number>;
   factors: ProfileFactor[];

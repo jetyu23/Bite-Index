@@ -102,7 +102,7 @@ export default function MethodologyPage() {
       <div className="prose">
         <p>
           Bite Index is a <strong>transparent variable-weighting model</strong>. One set of forecast inputs is run
-          through several hand-set weighting profiles (five environments, seven species) and each profile turns
+          through several hand-set weighting profiles (five environments, twelve species) and each profile turns
           the same day into a different 0–100 score. That is the entire idea: conditions don&apos;t have one meaning,
           they have one meaning <em>per situation</em>. The swell that closes the rocks is the same swell that
           stirs the beach gutters for tailor.

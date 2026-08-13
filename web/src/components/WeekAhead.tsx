@@ -10,7 +10,7 @@ import type { Day } from "@/lib/types";
 const ORDER = ["rock", "beach", "estuary", "harbour", "boat"];
 
 function Spark({ day }: { day: Day }) {
-  const byId = new Map(day.environments.map((e) => [e.id, e.score]));
+  const byId = new Map(day.environments.map((e) => [e.id, e]));
   const W = 128;
   const H = 40;
   const gap = 5;
@@ -18,9 +18,14 @@ function Spark({ day }: { day: Day }) {
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={H} role="img" aria-label="Scores for each ground this day">
       {ORDER.map((id, i) => {
-        const v = byId.get(id) ?? 0;
+        const e = byId.get(id);
+        const v = e?.score ?? 0;
         const h = Math.max(2, (v / 100) * H);
-        const t = tier(v)[0];
+        // Bar height is raw (this is explicitly labelled a raw-score
+        // sparkline), but colour follows the same calibrated-or-raw value
+        // as the tier label everywhere else, so a bar's colour always
+        // agrees with what that ground's own row says.
+        const t = tier(e ? (e.calibrated ?? e.score) : 0)[0];
         const col = { g: "var(--olive)", f: "var(--ochre)", p: "var(--red)", e: "var(--blue)" }[t];
         return (
           <g key={id}>
@@ -61,7 +66,7 @@ export default function WeekAhead({ days }: { days: Day[] }) {
         const best = d.environments.reduce((a, b) => (rank(b) > rank(a) ? b : a));
         const overall = overallDay(d);
         const rockFlag = d.environments.some((e) => e.safety_flag);
-        const t = tier(best.score)[0];
+        const t = tier(rank(best))[0];
         const tideH = d.summary.tide_events.find((e) => e.type === "high");
         return (
           <div key={d.date} className={`wk ${i === 0 ? "today" : ""}`}>

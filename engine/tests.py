@@ -48,7 +48,7 @@ def test_end_to_end() -> dict:
     check("7 days scored", len(days) == 7, f"got {len(days)}")
     d0 = days[0]
     check("5 environments", len(d0["environments"]) == 5)
-    check("7 species", len(d0["species"]) == 7)
+    check("12 species", len(d0["species"]) == 12)
     check("species sorted by rank_score desc", all(a["rank_score"] >= b["rank_score"] for a, b in zip(d0["species"], d0["species"][1:])))
     check("species score is raw, not the sort key", any(a["rank_score"] != a["score"] for d in days for a in d["species"]))
     all_scores = [e["score"] for d in days for e in d["environments"]] + [s["score"] for d in days for s in d["species"]]
@@ -142,12 +142,34 @@ def test_profiles_valid() -> None:
                 if f.get("type") == "season":
                     check(f"{group}:{p['id']} season has 12 months", len(f["season"]) == 12)
             check(f"{group}:{p['id']} has justifications", all(bool(f.get("justification")) for f in p["factors"]))
+    for sp in species["species"]:
+        attrs = sp.get("attributes", {})
+        check(f"species:{sp['id']} has attributes", bool(attrs))
+        check(f"species:{sp['id']} difficulty in 1-5", 1 <= attrs.get("difficulty", 0) <= 5)
+        check(f"species:{sp['id']} eating_quality in 1-5", 1 <= attrs.get("eating_quality", 0) <= 5)
+        check(f"species:{sp['id']} has notes", bool(attrs.get("difficulty_note")) and bool(attrs.get("eating_note")))
+
+
+def test_attributes_dont_score() -> None:
+    """Card metadata (difficulty, eating_quality) must never reach the
+    engine: mutate it wildly, in memory, on the same profile dict, and
+    confirm the raw score doesn't move a single point."""
+    _, _, species = runner.load_profiles()
+    sample = ingest.normalize(ingest.build_sample())
+    sp = species["species"][0]
+    sessions_def = json.loads((runner.PROFILES / "factors.json").read_text())["sessions"]
+    day = sample.days[0]
+    before = scoring.score_profile_day(sp, day, sample, sessions_def)["score"]
+    sp["attributes"] = {"difficulty": 999, "eating_quality": -999, "junk": "should never be read"}
+    after = scoring.score_profile_day(sp, day, sample, sessions_def)["score"]
+    check("mutating attributes never changes a species score", before == after, f"{before} vs {after}")
 
 
 if __name__ == "__main__":
     test_interp()
     test_factor_types()
     test_profiles_valid()
+    test_attributes_dont_score()
     test_calibration()
     test_rescale()
     out = test_end_to_end()

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-13T15:12+10:00",
+ "generated_at": "2026-08-13T15:24+10:00",
  "source": "open-meteo",
  "calibration": {
   "applied": true,
@@ -37,7 +37,7 @@
   {
    "date": "2026-08-13",
    "weekday": "Thu",
-   "headline": "The rock is firing today: workable wash. Offshore holds too. Top target: Southern calamari (69).",
+   "headline": "The rock is firing today: workable wash. Offshore holds too. Top target: Luderick (blackfish) (68).",
    "summary": {
     "sunrise": "06:36",
     "sunset": "17:23",
@@ -493,6 +493,21 @@
    ],
    "species": [
     {
+     "id": "luderick",
+     "name": "Luderick (blackfish)",
+     "tag": "WEED & LEDGES",
+     "score": 68,
+     "session_mean": 67,
+     "best_session": "midday",
+     "calibrated": 63,
+     "label": "Excellent",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "11am\u20132pm",
+     "reason": "Rock, 11am\u20132pm. Peak season; onshore breeze stirring the wash.",
+     "rank_score": 69
+    },
+    {
      "id": "squid",
      "name": "Southern calamari",
      "tag": "HARBOUR WEED BEDS",
@@ -568,6 +583,21 @@
      "rank_score": 62
     },
     {
+     "id": "snapper",
+     "name": "Snapper",
+     "tag": "REEF STRUCTURE",
+     "score": 63,
+     "session_mean": 61,
+     "best_session": "dawn",
+     "calibrated": 52,
+     "label": "Good",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "5am\u20138am",
+     "reason": "Boat & offshore, 5am\u20138am. Low light; prime feeding window; water temp in the zone.",
+     "rank_score": 58
+    },
+    {
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
@@ -581,6 +611,51 @@
      "best_window": "5pm\u20138pm",
      "reason": "Estuary, 5pm\u20138pm. Water moving hard; low light; prime feeding window.",
      "rank_score": 56
+    },
+    {
+     "id": "flathead",
+     "name": "Dusky flathead",
+     "tag": "SAND AMBUSH",
+     "score": 64,
+     "session_mean": 60,
+     "best_session": "dusk",
+     "calibrated": 54,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "5pm\u20138pm",
+     "reason": "Estuary, 5pm\u20138pm. Water moving hard; low light; prime feeding window.",
+     "rank_score": 56
+    },
+    {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 64,
+     "session_mean": 61,
+     "best_session": "dusk",
+     "calibrated": 54,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Water moving hard; workable wash.",
+     "rank_score": 56
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 63,
+     "session_mean": 58,
+     "best_session": "dusk",
+     "calibrated": 52,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; onshore breeze stirring the wash.",
+     "rank_score": 55
     },
     {
      "id": "kingfish",
@@ -602,7 +677,7 @@
   {
    "date": "2026-08-14",
    "weekday": "Fri",
-   "headline": "The rock is firing today: workable wash. Offshore holds too. Top target: Southern calamari (70).",
+   "headline": "The rock is firing today: workable wash. Offshore holds too. Top target: Luderick (blackfish) (68).",
    "summary": {
     "sunrise": "06:35",
     "sunset": "17:24",
@@ -1058,6 +1133,21 @@
    ],
    "species": [
     {
+     "id": "luderick",
+     "name": "Luderick (blackfish)",
+     "tag": "WEED & LEDGES",
+     "score": 68,
+     "session_mean": 67,
+     "best_session": "midday",
+     "calibrated": 63,
+     "label": "Excellent",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "11am\u20132pm",
+     "reason": "Rock, 11am\u20132pm. Peak season; water moving hard.",
+     "rank_score": 68
+    },
+    {
      "id": "squid",
      "name": "Southern calamari",
      "tag": "HARBOUR WEED BEDS",
@@ -1133,6 +1223,36 @@
      "rank_score": 60
     },
     {
+     "id": "snapper",
+     "name": "Snapper",
+     "tag": "REEF STRUCTURE",
+     "score": 62,
+     "session_mean": 60,
+     "best_session": "dawn",
+     "calibrated": 49,
+     "label": "Good",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "5am\u20138am",
+     "reason": "Boat & offshore, 5am\u20138am. Low light; prime feeding window; water temp in the zone.",
+     "rank_score": 59
+    },
+    {
+     "id": "flathead",
+     "name": "Dusky flathead",
+     "tag": "SAND AMBUSH",
+     "score": 64,
+     "session_mean": 60,
+     "best_session": "dusk",
+     "calibrated": 54,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "5pm\u20138pm",
+     "reason": "Estuary, 5pm\u20138pm. Water moving hard; low light; prime feeding window.",
+     "rank_score": 55
+    },
+    {
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
@@ -1146,6 +1266,36 @@
      "best_window": "5pm\u20138pm",
      "reason": "Estuary, 5pm\u20138pm. Water moving hard; low light; prime feeding window.",
      "rank_score": 54
+    },
+    {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 64,
+     "session_mean": 62,
+     "best_session": "dusk",
+     "calibrated": 54,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Water moving hard; workable wash.",
+     "rank_score": 53
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 62,
+     "session_mean": 59,
+     "best_session": "dusk",
+     "calibrated": 49,
+     "label": "Good",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "5pm\u20138pm",
+     "reason": "Rock, 5pm\u20138pm. Low light; prime feeding window; water moving hard.",
+     "rank_score": 52
     },
     {
      "id": "kingfish",
@@ -1167,7 +1317,7 @@
   {
    "date": "2026-08-15",
    "weekday": "Sat",
-   "headline": "The offshore is firing today: light winds. Rock holds too. Top target: Southern calamari (70).",
+   "headline": "The offshore is firing today: light winds. Rock holds too. Top target: Luderick (blackfish) (68).",
    "summary": {
     "sunrise": "06:34",
     "sunset": "17:25",
@@ -1623,6 +1773,21 @@
    ],
    "species": [
     {
+     "id": "luderick",
+     "name": "Luderick (blackfish)",
+     "tag": "WEED & LEDGES",
+     "score": 68,
+     "session_mean": 67,
+     "best_session": "midday",
+     "calibrated": 63,
+     "label": "Excellent",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "11am\u20132pm",
+     "reason": "Rock, 11am\u20132pm. Peak season; water moving hard.",
+     "rank_score": 65
+    },
+    {
      "id": "squid",
      "name": "Southern calamari",
      "tag": "HARBOUR WEED BEDS",
@@ -1668,6 +1833,21 @@
      "rank_score": 61
     },
     {
+     "id": "snapper",
+     "name": "Snapper",
+     "tag": "REEF STRUCTURE",
+     "score": 63,
+     "session_mean": 61,
+     "best_session": "dawn",
+     "calibrated": 52,
+     "label": "Good",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "5am\u20138am",
+     "reason": "Boat & offshore, 5am\u20138am. Light winds; low light; prime feeding window.",
+     "rank_score": 61
+    },
+    {
      "id": "mulloway",
      "name": "Mulloway (jewfish)",
      "tag": "ESTUARY HOLES",
@@ -1698,6 +1878,21 @@
      "rank_score": 57
     },
     {
+     "id": "flathead",
+     "name": "Dusky flathead",
+     "tag": "SAND AMBUSH",
+     "score": 63,
+     "session_mean": 60,
+     "best_session": "dawn",
+     "calibrated": 52,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "5am\u20138am",
+     "reason": "Estuary, 5am\u20138am. Water moving hard; low light; prime feeding window.",
+     "rank_score": 53
+    },
+    {
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
@@ -1711,6 +1906,36 @@
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Water moving hard; low light; prime feeding window.",
      "rank_score": 52
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 61,
+     "session_mean": 59,
+     "best_session": "dusk",
+     "calibrated": 47,
+     "label": "Fair",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "5pm\u20138pm",
+     "reason": "Rock, 5pm\u20138pm. Low light; prime feeding window; water moving hard.",
+     "rank_score": 49
+    },
+    {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 63,
+     "session_mean": 61,
+     "best_session": "dusk",
+     "calibrated": 52,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Water moving hard; workable wash.",
+     "rank_score": 49
     },
     {
      "id": "kingfish",
@@ -1732,7 +1957,7 @@
   {
    "date": "2026-08-16",
    "weekday": "Sun",
-   "headline": "The offshore is firing today: light winds. Rock holds too. Top target: Southern calamari (69).",
+   "headline": "The offshore is firing today: light winds. Rock holds too. Top target: Luderick (blackfish) (67).",
    "summary": {
     "sunrise": "06:33",
     "sunset": "17:25",
@@ -2188,6 +2413,21 @@
    ],
    "species": [
     {
+     "id": "luderick",
+     "name": "Luderick (blackfish)",
+     "tag": "WEED & LEDGES",
+     "score": 67,
+     "session_mean": 67,
+     "best_session": "midday",
+     "calibrated": 61,
+     "label": "Good",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "11am\u20132pm",
+     "reason": "Rock, 11am\u20132pm. Peak season; water moving hard.",
+     "rank_score": 64
+    },
+    {
      "id": "squid",
      "name": "Southern calamari",
      "tag": "HARBOUR WEED BEDS",
@@ -2201,6 +2441,21 @@
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Runoff has coloured the water nicely; low light; prime feeding window.",
      "rank_score": 62
+    },
+    {
+     "id": "snapper",
+     "name": "Snapper",
+     "tag": "REEF STRUCTURE",
+     "score": 62,
+     "session_mean": 62,
+     "best_session": "dawn",
+     "calibrated": 49,
+     "label": "Good",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "5am\u20138am",
+     "reason": "Boat & offshore, 5am\u20138am. Low light; prime feeding window; water temp in the zone.",
+     "rank_score": 60
     },
     {
      "id": "mulloway",
@@ -2278,6 +2533,51 @@
      "rank_score": 53
     },
     {
+     "id": "flathead",
+     "name": "Dusky flathead",
+     "tag": "SAND AMBUSH",
+     "score": 62,
+     "session_mean": 60,
+     "best_session": "dawn",
+     "calibrated": 49,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "5am\u20138am",
+     "reason": "Estuary, 5am\u20138am. Water moving hard; low light; prime feeding window.",
+     "rank_score": 52
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 62,
+     "session_mean": 60,
+     "best_session": "dusk",
+     "calibrated": 49,
+     "label": "Good",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "5pm\u20138pm",
+     "reason": "Rock, 5pm\u20138pm. Low light; prime feeding window; onshore breeze stirring the wash.",
+     "rank_score": 50
+    },
+    {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 62,
+     "session_mean": 61,
+     "best_session": "dawn",
+     "calibrated": 49,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5am\u20138am",
+     "reason": "Beach, 5am\u20138am. Water moving hard; workable wash.",
+     "rank_score": 49
+    },
+    {
      "id": "kingfish",
      "name": "Yellowtail kingfish",
      "tag": "HARBOUR REEFS",
@@ -2297,7 +2597,7 @@
   {
    "date": "2026-08-17",
    "weekday": "Mon",
-   "headline": "The offshore is firing today: light winds. Rock holds too. Top target: Mulloway (jewfish) (69).",
+   "headline": "The offshore is firing today: light winds. Rock holds too. Top target: Luderick (blackfish) (67).",
    "summary": {
     "sunrise": "06:32",
     "sunset": "17:26",
@@ -2753,6 +3053,21 @@
    ],
    "species": [
     {
+     "id": "luderick",
+     "name": "Luderick (blackfish)",
+     "tag": "WEED & LEDGES",
+     "score": 67,
+     "session_mean": 66,
+     "best_session": "morning",
+     "calibrated": 61,
+     "label": "Good",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "8am\u201311am",
+     "reason": "Rock, 8am\u201311am. Peak season; water moving hard.",
+     "rank_score": 62
+    },
+    {
      "id": "mulloway",
      "name": "Mulloway (jewfish)",
      "tag": "ESTUARY HOLES",
@@ -2765,6 +3080,21 @@
      "environment_name": "Estuary",
      "best_window": "8pm\u201311pm",
      "reason": "Estuary, 8pm\u201311pm. Low light; prime feeding window; peak season.",
+     "rank_score": 59
+    },
+    {
+     "id": "snapper",
+     "name": "Snapper",
+     "tag": "REEF STRUCTURE",
+     "score": 62,
+     "session_mean": 61,
+     "best_session": "evening",
+     "calibrated": 49,
+     "label": "Good",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "8pm\u201311pm",
+     "reason": "Boat & offshore, 8pm\u201311pm. Light winds; water temp in the zone.",
      "rank_score": 59
     },
     {
@@ -2828,6 +3158,21 @@
      "rank_score": 54
     },
     {
+     "id": "flathead",
+     "name": "Dusky flathead",
+     "tag": "SAND AMBUSH",
+     "score": 62,
+     "session_mean": 60,
+     "best_session": "morning",
+     "calibrated": 49,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "8am\u201311am",
+     "reason": "Estuary, 8am\u201311am. Water moving hard; light winds.",
+     "rank_score": 51
+    },
+    {
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
@@ -2841,6 +3186,36 @@
      "best_window": "5am\u20138am",
      "reason": "Estuary, 5am\u20138am. Water moving hard; low light; prime feeding window.",
      "rank_score": 49
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 61,
+     "session_mean": 60,
+     "best_session": "dawn",
+     "calibrated": 47,
+     "label": "Fair",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "5am\u20138am",
+     "reason": "Rock, 5am\u20138am. Low light; prime feeding window; light winds.",
+     "rank_score": 47
+    },
+    {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 63,
+     "session_mean": 61,
+     "best_session": "morning",
+     "calibrated": 52,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "8am\u201311am",
+     "reason": "Beach, 8am\u201311am. Water moving hard; workable wash.",
+     "rank_score": 47
     },
     {
      "id": "kingfish",
@@ -3333,6 +3708,36 @@
      "rank_score": 62
     },
     {
+     "id": "luderick",
+     "name": "Luderick (blackfish)",
+     "tag": "WEED & LEDGES",
+     "score": 69,
+     "session_mean": 67,
+     "best_session": "morning",
+     "calibrated": 65,
+     "label": "Excellent",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "8am\u201311am",
+     "reason": "Rock, 8am\u201311am. Peak season; water moving hard.",
+     "rank_score": 62
+    },
+    {
+     "id": "snapper",
+     "name": "Snapper",
+     "tag": "REEF STRUCTURE",
+     "score": 63,
+     "session_mean": 63,
+     "best_session": "dawn",
+     "calibrated": 52,
+     "label": "Good",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "5am\u20138am",
+     "reason": "Boat & offshore, 5am\u20138am. Light winds; water temp in the zone.",
+     "rank_score": 61
+    },
+    {
      "id": "trevally",
      "name": "Silver trevally",
      "tag": "WHARF PYLONS",
@@ -3378,6 +3783,21 @@
      "rank_score": 56
     },
     {
+     "id": "flathead",
+     "name": "Dusky flathead",
+     "tag": "SAND AMBUSH",
+     "score": 65,
+     "session_mean": 61,
+     "best_session": "morning",
+     "calibrated": 56,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "8am\u201311am",
+     "reason": "Estuary, 8am\u201311am. Water moving hard; light winds.",
+     "rank_score": 55
+    },
+    {
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
@@ -3408,6 +3828,36 @@
      "rank_score": 50
     },
     {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 64,
+     "session_mean": 61,
+     "best_session": "afternoon",
+     "calibrated": 54,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "2pm\u20135pm",
+     "reason": "Estuary, 2pm\u20135pm. Water moving hard; workable wash.",
+     "rank_score": 49
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 61,
+     "session_mean": 60,
+     "best_session": "dusk",
+     "calibrated": 47,
+     "label": "Fair",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "5pm\u20138pm",
+     "reason": "Rock, 5pm\u20138pm. Low light; prime feeding window; onshore breeze stirring the wash.",
+     "rank_score": 45
+    },
+    {
      "id": "kingfish",
      "name": "Yellowtail kingfish",
      "tag": "HARBOUR REEFS",
@@ -3427,7 +3877,7 @@
   {
    "date": "2026-08-19",
    "weekday": "Wed",
-   "headline": "The offshore is firing today: light winds. Rock holds too. Top target: Mulloway (jewfish) (68).",
+   "headline": "The offshore is firing today: light winds. Rock holds too. Top target: Snapper (64).",
    "summary": {
     "sunrise": "06:29",
     "sunset": "17:27",
@@ -3878,6 +4328,36 @@
    ],
    "species": [
     {
+     "id": "snapper",
+     "name": "Snapper",
+     "tag": "REEF STRUCTURE",
+     "score": 64,
+     "session_mean": 62,
+     "best_session": "dusk",
+     "calibrated": 54,
+     "label": "Good",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "5pm\u20138pm",
+     "reason": "Boat & offshore, 5pm\u20138pm. Light winds; water temp in the zone.",
+     "rank_score": 62
+    },
+    {
+     "id": "luderick",
+     "name": "Luderick (blackfish)",
+     "tag": "WEED & LEDGES",
+     "score": 68,
+     "session_mean": 66,
+     "best_session": "morning",
+     "calibrated": 63,
+     "label": "Excellent",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "8am\u201311am",
+     "reason": "Rock, 8am\u201311am. Peak season; water moving hard.",
+     "rank_score": 60
+    },
+    {
      "id": "mulloway",
      "name": "Mulloway (jewfish)",
      "tag": "ESTUARY HOLES",
@@ -3938,6 +4418,21 @@
      "rank_score": 55
     },
     {
+     "id": "flathead",
+     "name": "Dusky flathead",
+     "tag": "SAND AMBUSH",
+     "score": 64,
+     "session_mean": 61,
+     "best_session": "morning",
+     "calibrated": 54,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "8am\u201311am",
+     "reason": "Estuary, 8am\u201311am. Water moving hard; light winds.",
+     "rank_score": 53
+    },
+    {
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
@@ -3966,6 +4461,36 @@
      "best_window": "5pm\u20138pm",
      "reason": "Rock, 5pm\u20138pm. Low light; prime feeding window; peak season.",
      "rank_score": 49
+    },
+    {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 64,
+     "session_mean": 61,
+     "best_session": "morning",
+     "calibrated": 54,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "8am\u201311am",
+     "reason": "Beach, 8am\u201311am. Water moving hard; workable wash.",
+     "rank_score": 48
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 61,
+     "session_mean": 61,
+     "best_session": "dusk",
+     "calibrated": 47,
+     "label": "Fair",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; onshore breeze stirring the wash.",
+     "rank_score": 44
     },
     {
      "id": "kingfish",

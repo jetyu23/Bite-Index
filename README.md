@@ -6,8 +6,8 @@ target today" list, species rigging guides, a knot guide, and a methodology page
 weight in the model with a written justification.
 
 **The portfolio piece is the scoring engine, not the UI**: a hand-set, fully explainable
-variable-weighting model. The same forecast inputs run through 12 different weighting profiles
-(5 environments + 7 species) and produce 12 different answers. No ML, nothing hidden — every score
+variable-weighting model. The same forecast inputs run through 17 different weighting profiles
+(5 environments + 12 species) and produce 17 different answers. No ML, nothing hidden — every score
 expands into the factors that drove it.
 
 ## Repo layout
