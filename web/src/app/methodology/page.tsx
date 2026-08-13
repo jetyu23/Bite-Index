@@ -122,7 +122,7 @@ export default function MethodologyPage() {
           <li>A small number of factors are <strong>gates, not weights</strong>: where the angling logic is genuinely a switch rather than a contribution (water below a species&apos; activity threshold, for example), that hour&apos;s blended score is multiplied down rather than averaged down, so it cannot be diluted by nine other factors that have nothing to do with whether the fish are there. Listed per profile below, alongside the rock safety override, which works the same way but is a hard cap, not a soft multiplier.</li>
           <li>This happens inside a small set of <strong>fixed named sessions</strong> per profile (dawn, dusk, and so on), hand-picked for the ones that make angling sense for that ground or species rather than one continuous window: tailor is dawn and dusk only, mulloway starts at dusk. The day&apos;s headline score is the <strong>best session&apos;s mean</strong>, also shown as the &ldquo;best window&rdquo; and named (&ldquo;dawn&rdquo;) alongside it. The <strong>mean across all of that profile&apos;s sessions</strong> is shown separately, underneath, as &ldquo;typical session&rdquo;. The best session answers &ldquo;when should I go&rdquo;; the mean answers &ldquo;is today worth going at all&rdquo;. They are genuinely different questions.</li>
           <li>Species scores blend the species&apos; own factor score with the score of its best environment, weighted by how strongly that species is tied to environment conditions.</li>
-          <li>The <strong>raw score is what&apos;s displayed</strong> as the headline number and the tier label (Poor/Fair/Good/Excellent) describes it. Separately, that raw score is also looked up in the profile&apos;s own historical distribution to get a <strong>percentile rank</strong> ("better than 73% of days on record"), shown as a secondary line so it can&apos;t be mistaken for a quality judgement on its own. Until enough live history exists, no percentile is shown at all, and the footer says so.</li>
+          <li>The <strong>raw score is what&apos;s displayed</strong> as the headline number and the tier label (Poor/Fair/Good/Excellent) describes it. Separately, that raw score is rescaled onto a <strong>calibrated</strong> number, shown as a secondary line so it can&apos;t be mistaken for a quality judgement on its own. This is deliberately not a straight percentile rank: straight percentile made two grounds with nearly identical raw quality display wildly differently, because each ground&apos;s history sits at a different raw level. The calibrated number instead uses one shared, hand-set curve for every profile, anchored on robust percentiles (p1, p10, p90, p99) pooled across all twelve, so equal raw quality reads the same regardless of which ground or species it&apos;s from. Until enough live history exists, no calibrated number is shown at all, and the footer says so.</li>
         </ol>
 
         <h2 style={{ margin: "30px 0 8px" }}>Calibration, in one paragraph</h2>
@@ -131,9 +131,16 @@ export default function MethodologyPage() {
           weighted factors does that by construction, not by mistake. So the raw number alone can&apos;t tell you
           whether a score of 66 is an unusually good day or an ordinary one. <code>engine/calibrate.py</code> scores
           a long window of historical Sydney days with this exact engine and stores each profile&apos;s raw-score
-          distribution; every live score is then also looked up in that distribution to get a percentile rank,
-          shown as a secondary line under the raw number. No fitting, no ML: an empirical CDF you can recompute
-          yourself. The calibration window is printed in the footer.
+          distribution. A first version reported straight percentile rank against that distribution, and it made
+          two grounds with nearly identical raw quality look wildly different, because each ground&apos;s own
+          history sits at a different raw level: on one real day, a 5-point raw gap between rock and boat produced
+          a 73-point rank gap. The calibrated number instead comes from one hand-set curve, shared by every profile,
+          anchored on robust percentiles (minimum, p1, p10, p90, p99, maximum) of the raw scores of all twelve
+          profiles pooled together, not each profile&apos;s own distribution. The middle of that pooled history maps
+          to a deliberately narrow band, roughly 40 to 70; genuinely rare days, high and low, reach further, and do
+          so rarely by construction. No fitting, no ML: every anchor point is a plain percentile you can recompute
+          yourself, and the mapping between anchors is a straight line. The calibration window is printed in the
+          footer.
         </p>
       </div>
 

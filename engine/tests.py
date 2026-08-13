@@ -98,6 +98,33 @@ def test_calibration() -> None:
     check("tiny distribution ignored", scoring.calibrate({"profiles": {"beach": [1, 2, 3]}}, "beach", 63.0) == 63.0)
 
 
+def test_rescale() -> None:
+    check("no calibration = raw passthrough", scoring.rescale(None, 63.0) == 63.0)
+    check("missing anchors = raw passthrough", scoring.rescale({"profiles": {}}, 63.0) == 63.0)
+
+    # A synthetic pooled distribution: uniform 0..100, so robust percentiles
+    # land close to their nominal values (p10~10, p90~90, etc).
+    pooled = [float(v) for v in range(0, 101)]
+    anchors = scoring.rescale_anchors(pooled)
+    calib = {"rescale_anchors": anchors}
+
+    check("min clamps to the low display target", scoring.rescale(calib, -50.0) == scoring.RESCALE_TARGETS[0])
+    check("max clamps to the high display target", scoring.rescale(calib, 500.0) == scoring.RESCALE_TARGETS[-1])
+    mid = scoring.rescale(calib, 50.0)
+    check("middle of the pooled range lands mid-band", 40 <= mid <= 70, f"{mid}")
+
+    # Cross-profile consistency: the whole point is that the SAME anchors
+    # apply regardless of which profile's raw score is passed in, so two
+    # raw scores 1 point apart always rescale a few points apart, not
+    # wildly apart the way a per-profile percentile lookup could.
+    d1, d2 = scoring.rescale(calib, 50.0), scoring.rescale(calib, 51.0)
+    check("a 1-point raw gap stays a few points apart", abs(d2 - d1) <= 5, f"{d1} vs {d2}")
+
+    # Monotonic: never reorders two profiles that were already ordered by raw.
+    vals = [scoring.rescale(calib, float(v)) for v in range(-10, 111, 5)]
+    check("monotonic non-decreasing", all(a <= b for a, b in zip(vals, vals[1:])))
+
+
 def test_no_em_dashes(out: dict) -> None:
     import json as _json
     check("no em dashes anywhere in site output", "\u2014" not in _json.dumps(out))
@@ -122,6 +149,7 @@ if __name__ == "__main__":
     test_factor_types()
     test_profiles_valid()
     test_calibration()
+    test_rescale()
     out = test_end_to_end()
     test_safety_flag(out)
     test_windows(out)

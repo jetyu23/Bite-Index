@@ -3,10 +3,11 @@
     python engine/calibrate.py --days 365
 
 Every historical day is scored with the exact same profiles and engine as the
-daily run. The sorted raw-score distribution per profile is stored; at runtime
-a raw score is converted to its percentile rank, so 50 literally means
-"a median day" and 90 means "better than ~90% of days". No ML, no fitting:
-just an empirical CDF, fully explainable.
+daily run. The sorted raw-score distribution per profile is stored (and
+pooled across all profiles into 'rescale_anchors', robust percentiles used to
+hand-anchor the display rescale -- see scoring.rescale()). No ML, no fitting:
+everything here is an empirical percentile computation, fully explainable and
+recomputable from the stored history.
 
 Notes:
 - Weather history comes from the ERA5 archive endpoint (years of coverage).
@@ -69,12 +70,21 @@ def main() -> None:
         med = raws[len(raws) // 2] if raws else None
         print(f"  {profile['id']:<10} n={len(raws):>3}  raw median={med}")
 
+    # Pooled across every profile, not per-profile: this is what the display
+    # rescale is anchored on, deliberately, so equal raw quality displays
+    # equally regardless of which ground or species it's from. See
+    # scoring.rescale()'s docstring for why per-profile anchors were rejected.
+    pooled = sorted(v for raws in dist.values() for v in raws)
+    anchors = scoring.rescale_anchors(pooled)
+    print(f"  rescale anchors (pooled, min/p1/p10/p90/p99/max): {[round(a, 1) for a in anchors]}")
+
     payload = {
         "generated": date.today().isoformat(),
         "window": [norm.days[0]["date"].isoformat(), norm.days[-1]["date"].isoformat()],
         "n_days": len(norm.days),
-        "note": "Empirical raw-score distributions per profile. Runtime scores are mapped to percentile rank in these lists; the median historical day therefore scores 50.",
+        "note": "Empirical raw-score distributions per profile (used to build 'rescale_anchors' below, pooled across all profiles). Both display and cross-profile ranking (which ground/species is relatively best today) use the non-linear rescale in 'rescale_anchors', not a per-profile percentile lookup -- equal raw quality then displays and ranks equally regardless of which ground or species it's from.",
         "profiles": dist,
+        "rescale_anchors": anchors,
     }
     OUT.write_text(json.dumps(payload, indent=1))
     print(f"\nwrote {OUT} ({len(dist)} profiles, {len(norm.days)} days)")

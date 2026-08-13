@@ -45,13 +45,13 @@ def run(live: bool) -> dict:
 
     # Calibration is an empirical distribution of real Sydney conditions; sample
     # data is a scripted synthetic demo, never part of that population, so it
-    # is never percentile-mapped against it (also keeps engine/tests.py, which
-    # runs on sample data, independent of whether calibration.json exists).
+    # is never rescaled against it (also keeps engine/tests.py, which runs on
+    # sample data, independent of whether calibration.json exists).
     calib = scoring.load_calibration(PROFILES / "calibration.json") if live else None
     if calib:
-        print(f"calibration: {calib['n_days']} days ({calib['window'][0]} to {calib['window'][1]}), median day = 50")
+        print(f"calibration: {calib['n_days']} days ({calib['window'][0]} to {calib['window'][1]})")
     else:
-        print("calibration: none yet; raw recentred scores in use (run engine/calibrate.py after your first live pull)")
+        print("calibration: none yet; raw scores only (run engine/calibrate.py after your first live pull)")
 
     days_out = []
     for day in norm.days:
@@ -63,23 +63,26 @@ def run(live: bool) -> dict:
                 continue
             raw = res["score"]
             session_mean_raw = res["session_mean"]
-            # percentile is derived from the uncapped raw score, before safety
+            # calibrated is derived from the uncapped raw score, before safety
             # mutates res["score"] below. res["score"] itself keeps its prior
-            # meaning (calibrated-or-raw) unchanged, because score_species_day
+            # meaning (rescaled-or-raw) unchanged, because score_species_day
             # still reads it via env_results_by_id to pick each species' best
-            # ground on a scale that's comparable across profiles.
-            percentile = round(scoring.calibrate(calib, env["id"], raw)) if calib else None
-            res["score"] = percentile if percentile is not None else raw
+            # ground on a scale that's comparable across profiles -- rescale()
+            # is global (pooled across all profiles), so it's valid for this
+            # cross-profile comparison the same way straight percentile was,
+            # without the noise-amplification straight percentile had.
+            calibrated = round(scoring.rescale(calib, raw)) if calib else None
+            res["score"] = calibrated if calibrated is not None else raw
             res = scoring.apply_safety(env, res, day, norm, sessions_def)
             if res["safety_flag"]:
                 # A capped, dangerous day isn't meaningfully "better or worse
-                # than X% of days" -- suppress the percentile rather than
-                # show a rank next to a score that's been overridden anyway.
+                # than most days" -- suppress the calibrated number rather
+                # than show one next to a score that's been overridden anyway.
                 # session_mean is capped too: a flagged day can't be "worth
                 # going overall" either.
                 raw_display = min(raw, env["safety"]["cap"])
                 session_mean_display = min(session_mean_raw, env["safety"]["cap"])
-                percentile = None
+                calibrated = None
             else:
                 raw_display = raw
                 session_mean_display = session_mean_raw
@@ -105,7 +108,7 @@ def run(live: bool) -> dict:
                 "score": raw_display,
                 "session_mean": session_mean_display,
                 "best_session": res["best_session"],
-                "percentile": percentile,
+                "calibrated": calibrated,
                 "raw_median": dist[len(dist) // 2] if dist else None,
                 "reason": scoring.env_summary(res["drivers"], metric_defs, res.get("gate_note")),
                 "label": scoring.score_label(raw_display, labels),
@@ -123,20 +126,20 @@ def run(live: bool) -> dict:
         for sp in species["species"]:
             res = scoring.score_species_day(
                 sp, env_results_by_id, day, norm, sessions_def,
-                cal=lambda raw_own: scoring.calibrate(calib, sp["id"], raw_own),
+                cal=lambda raw_own: scoring.rescale(calib, raw_own),
             )
             if res is None:
                 continue
             # Displayed score is the species' own raw profile score -- the one
             # thing calibration.json's per-species distribution was actually
             # built from (calibrate.py never blends in an environment score).
-            # Ranking "top targets" still uses the blended, calibrated value
+            # Ranking "top targets" still uses the blended, rescaled value
             # (res["score"]) as a private sort key: raw scores aren't on a
             # comparable scale across different species profiles, so ranking
             # by raw would just favour whichever species has the highest
             # natural raw baseline, not the best day.
             own_raw = res["raw_score"]
-            own_percentile = round(scoring.calibrate(calib, sp["id"], own_raw)) if calib else None
+            own_calibrated = round(scoring.rescale(calib, own_raw)) if calib else None
             window = scoring.humanize_window(res["best_window"])
             reason = scoring.build_reason(res["drivers"], env_names[res["environment"]], window, metric_defs, res.get("gate_note"))
             sp_results.append(
@@ -147,7 +150,7 @@ def run(live: bool) -> dict:
                     "score": own_raw,
                     "session_mean": res["session_mean"],
                     "best_session": res["best_session"],
-                    "percentile": own_percentile,
+                    "calibrated": own_calibrated,
                     "label": scoring.score_label(own_raw, labels),
                     "environment": res["environment"],
                     "environment_name": env_names[res["environment"]],

@@ -35,14 +35,14 @@ function Spark({ day }: { day: Day }) {
   );
 }
 
-/* "Best" is picked by percentile, not raw score: raw scores aren't on a
-   comparable scale across grounds with different curve-defined baselines
-   (e.g. boat's raw ceiling sits well above harbour's), so ranking by raw
-   would just favour whichever ground runs hottest by design, not whichever
-   is actually having a relatively good day. The displayed number is still
-   that ground's raw score. */
-function rank(e: { score: number; percentile: number | null }): number {
-  return e.percentile ?? e.score;
+/* "Best" is picked by the calibrated (rescaled, pooled-anchor) value, not
+   raw score: raw scores aren't on a comparable scale across grounds with
+   different curve-defined baselines (e.g. boat's raw ceiling sits well
+   above harbour's), so ranking by raw would just favour whichever ground
+   runs hottest by design, not whichever is actually having a relatively
+   good day. The displayed number is still that ground's raw score. */
+function rank(e: { score: number; calibrated: number | null }): number {
+  return e.calibrated ?? e.score;
 }
 
 /* Middle of the 5 grounds' raw scores -- "how's the whole day", as opposed to

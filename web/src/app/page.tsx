@@ -50,13 +50,13 @@ export default function Home() {
           <h2 className="sec" id="env-h"><span className="tick" style={{ background: "var(--olive)" }} />THE LEDGER: WHERE TO FISH</h2>
           <p className="sechint">
             all five grounds surveyed daily · same conditions, five answers (<Link href="/methodology">why</Link>) ·
-            each score is raw conditions, 0–100; the line under it is this ground's percentile rank vs. its own
-            history · tick on every meter marks this ground's own typical (median) day · open a row for the factor
-            breakdown
+            each score is raw conditions, 0–100; the line under it is a calibrated version rescaled so equal raw
+            quality reads the same on every card, ordinary is roughly 40 to 70 · tick on every meter marks this
+            ground's own typical (median) day · open a row for the factor breakdown
           </p>
           {(() => {
             const bestId = today.environments.reduce((a, b) =>
-              (b.percentile ?? b.score) > (a.percentile ?? a.score) ? b : a
+              (b.calibrated ?? b.score) > (a.calibrated ?? a.score) ? b : a
             ).id;
             const ordered = [...today.environments].sort((a, b) => {
               if (a.id === bestId) return -1;
@@ -79,7 +79,7 @@ export default function Home() {
 
         <section aria-labelledby="ol-h">
           <h2 className="sec" id="ol-h"><span className="tick" style={{ background: "var(--blue)" }} />THE WEEK AHEAD</h2>
-          <p className="sechint">each day shows all five grounds as raw-score bars (rock · beach · estuary · harbour · offshore) so you can read its shape at a glance; the big number is the best ground (picked by percentile, shown as its raw score) and answers &ldquo;where should I fish&rdquo;; &ldquo;overall day&rdquo; is the middle of all five and answers &ldquo;how good is today, generally&rdquo;. dashed line = 50, for scale.</p>
+          <p className="sechint">each day shows all five grounds as raw-score bars (rock · beach · estuary · harbour · offshore) so you can read its shape at a glance; the big number is the best ground (picked by the calibrated value, shown as its raw score) and answers &ldquo;where should I fish&rdquo;; &ldquo;overall day&rdquo; is the middle of all five and answers &ldquo;how good is today, generally&rdquo;. dashed line = 50, for scale.</p>
           <WeekAhead days={site.days} />
         </section>
 

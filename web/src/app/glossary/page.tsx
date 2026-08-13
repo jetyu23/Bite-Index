@@ -18,7 +18,7 @@ const FIELD_TERMS: { term: string; def: string }[] = [
   { term: "Braid vs mono", def: "Braid: thin, no stretch, feels everything. Mono: stretchy and forgiving. Beginners often start mono, graduate to braid plus leader." },
   { term: "Livie", def: "A live baitfish, usually a yakka, offered to something bigger. The most convincing argument in fishing." },
   { term: "Best window", def: "The best rolling 3-hour block of the day for that ground or species. We score the window, not the daily average, so the dawn bite is never buried by a dead lunchtime." },
-  { term: "Percentile line", def: "The small line under a score, e.g. \"better than 73% of days on record\". It ranks today's raw score against real history for that ground or species; it is not a second opinion on quality, just a scale for the number above it." },
+  { term: "Calibrated line", def: "The small number under a score, e.g. \"calibrated: 62\". It rescales today's raw score onto one shared scale used for every ground and species, so equal raw quality reads the same everywhere; ordinary sits roughly 40 to 70, rare good or bad days reach further. Not a second opinion on quality, just a scale for the number above it." },
 ];
 
 export default function GlossaryPage() {

@@ -65,8 +65,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p className="mono">
               WEATHER BY <a href="https://open-meteo.com/" rel="noopener">OPEN-METEO</a> · GENERATED {site.generated_at} · SOURCE: {site.source.toUpperCase()} ·{" "}
               {cal?.applied
-                ? `SCORES ARE RAW; PERCENTILE SHOWN IS RANKED AGAINST ${cal.n_days} DAYS ON RECORD`
-                : "CALIBRATION PENDING: NO PERCENTILE RANK YET, RAW SCORES ONLY"}{" "}
+                ? `SCORES ARE RAW; CALIBRATED NUMBER SHOWN IS RESCALED AGAINST ${cal.n_days} DAYS ON RECORD`
+                : "CALIBRATION PENDING: NO CALIBRATED NUMBER YET, RAW SCORES ONLY"}{" "}
               · SURVEY ENDS
             </p>
           </div>

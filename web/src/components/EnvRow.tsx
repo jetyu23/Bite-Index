@@ -19,8 +19,8 @@ export default function EnvRow({ env, best }: { env: EnvResult; best?: boolean }
       <div className={`sc ${t[0]}`}>
         <b>{env.score}</b>
         <i>{env.label.toUpperCase()}</i>
-        {env.percentile != null && (
-          <span className="pctl">better than {env.percentile}% of days on record</span>
+        {env.calibrated != null && (
+          <span className="pctl">calibrated: {env.calibrated}</span>
         )}
         <span className="pctl">typical session today: {env.session_mean}</span>
       </div>

@@ -302,3 +302,73 @@ after-dark-only case on the actual methodology page.
 **Not yet done: priority 6.** Thresholds are still blocked, now on a
 different problem than originally framed. Reporting back rather than
 proceeding blind.
+
+### 2026-08-13 — straight percentile replaced with a pooled, hand-set rescale
+Confirmed live, from real current data: rock raw 74 (percentile 98) vs boat
+raw 69 (percentile 25) -- a 5-point raw gap producing a 73-point percentile
+gap. Straight empirical percentile is uniform in RANK space by definition (1%
+of days = 1 percentile point everywhere), which means its slope against RAW
+score is steep exactly where the historical distribution is dense (the
+narrow middle every profile clusters in) -- amplifying small raw differences
+into large rank swings, worse for two DIFFERENT profiles being compared than
+within one.
+
+**Simulated per-profile vs global anchors, and a blend spectrum between
+them, before implementing.** They trade off, not reconcilable:
+- Per-profile anchors (each profile's own p10/p90 mapped to 40/70): nails
+  "ordinary lands at 40-70" for every profile by construction, but rock/boat
+  today showed a 30-point display gap for a 5-point raw gap -- reproduces
+  the bug, because boat's raw distribution sits ~5-6 points above rock's,
+  and per-profile anchoring absorbs that whole difference into where each
+  profile's own "ordinary" sits.
+- Global anchors (pooled across all 12 profiles): the general rule (1-2
+  point raw gap -> a few points display gap) passes cleanly, verified at
+  ~2.0-2.3 display points per raw point, consistent across rock, boat,
+  kingfish, tailor. Today's specific 5-point rock/boat gap shows 10.6-11
+  points -- proportionally consistent with that slope (a real 85% reduction
+  from straight percentile's 73 points), just not literally "a few" for a
+  gap that large. Costs real accuracy for 3 profiles whose raw distributions
+  sit off the pooled center: boat (58% of its own ordinary days read above
+  70), kingfish (both tails elevated, partly the new SST gate), tailor
+  (36% below 40, after the dawn/dusk-only session restriction).
+- Blend ratios in between move monotonically along this same trade-off --
+  no ratio satisfies both well. This is structural (different profiles have
+  different raw medians, by construction of their own curves/weights), not
+  a tuning problem.
+
+**Chose global anchors.** Best serves the actual complaint (cross-profile
+comparability was the whole point), one simple shared curve instead of
+twelve, and the 3 divergent profiles are individually explainable rather
+than a systemic failure. Implemented:
+- `scoring.rescale_anchors()` + `scoring.robust_percentile()`: compute
+  min/p1/p10/p90/p99/max of the POOLED raw scores across all 12 profiles.
+  `calibrate.py` writes these into `calibration.json` as `rescale_anchors`.
+- `scoring.rescale(calib, raw)`: piecewise-linear through 6 hand-set
+  anchor->target pairs (min->5, p1->20, p10->40, p90->70, p99->80, max->95).
+  Falls back to raw when no calibration exists, same pattern as the old
+  `calibrate()`. `calibrate()` itself is unchanged and kept as a primitive
+  (still a correct, useful percentile-rank function -- just not the right
+  one for a display two cards get compared on).
+- Replaced all three call sites (env display, species display, the internal
+  `cal` lambda that feeds species/environment blending) with `rescale()`.
+  This also fixes "best ground"/"top species" ranking, which had the exact
+  same amplification bug silently affecting which ground got the BEST TODAY
+  stamp -- `build_headline`'s ranking key, `WeekAhead.tsx`'s `rank()`, and
+  `page.tsx`'s `bestId` selection all switched from `percentile` to
+  `calibrated` together, for one consistent cross-profile metric everywhere.
+- Field renamed `percentile` -> `calibrated` throughout (JSON output, types,
+  components, copy) -- calling it "percentile" when it's a hand-set rescale,
+  not a literal percentage, would have been its own honesty problem.
+
+Verified: real live data now shows rock raw 74 -> calibrated 76, boat raw 69
+-> calibrated 65 (11-point gap, matching the simulation's predicted ~10.6).
+Face validity (boat, 4kn wind/1.0m swell/dusk/settled pressure): raw 70.4,
+tier label "Good" under the unchanged thresholds (never actually at risk of
+showing Poor), rescaled display 68.7 -- reads as solidly decent, not
+alarming. Spot-checked 10 more real boat days spread across the year, all
+"Good," nothing disputable. Monotonicity verified programmatically. New unit
+test (`test_rescale`) added alongside the existing `test_calibration`.
+`engine/tests.py` passes, `tsc --noEmit` and `next build` clean, rendered
+HTML confirms the calibrated numbers and updated methodology copy.
+
+**Continuing to the species work next**, per instruction.

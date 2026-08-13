@@ -20,9 +20,12 @@ export interface EnvResult {
   session_mean: number;
   /** Which named session produced the headline score, e.g. "dawn". */
   best_session: string;
-  /** This ground's percentile rank vs. its own historical distribution, 1-99. Null when
-   *  no calibration exists yet, or when a safety cap overrides normal scoring. */
-  percentile: number | null;
+  /** Raw score rescaled for display: a hand-set curve anchored on robust percentiles
+   *  (p1/p10/p90/p99) pooled across ALL profiles, not just this one, so equal raw
+   *  quality displays equally regardless of which ground or species it's from.
+   *  Ordinary days land around 40-70; exceptional days reach further and do so
+   *  rarely. Null when no calibration exists yet, or a safety cap overrides scoring. */
+  calibrated: number | null;
   /** This ground's raw-score median day, for positioning the meter's reference tick. */
   raw_median: number | null;
   reason: string;
@@ -43,8 +46,8 @@ export interface SpeciesResult {
   session_mean: number;
   /** Which named session produced the headline score, e.g. "dusk". */
   best_session: string;
-  /** Percentile rank of that raw score vs. this species' own historical distribution. */
-  percentile: number | null;
+  /** That raw score rescaled for display, same pooled-anchor curve as EnvResult.calibrated. */
+  calibrated: number | null;
   label: string;
   environment: string;
   environment_name: string;

@@ -289,7 +289,16 @@ def load_calibration(path) -> dict | None:
 def calibrate(calib: dict | None, profile_id: str, raw: float) -> float:
     """Map a raw score to its percentile rank in the profile's historical
     distribution. Median historical day -> 50 by construction. Falls back to
-    the raw score when no calibration exists for the profile."""
+    the raw score when no calibration exists for the profile.
+
+    Not used for display or ranking any more (see rescale() below) -- straight
+    percentile rank turned out to amplify noise: two profiles with nearly
+    identical raw scores can land at very different ranks purely because
+    their own historical distributions sit at different raw levels (rock
+    raw 74 and boat raw 69, a 5-point gap, ranked 98th and 25th percentile
+    respectively on 2026-08-13's real data). Kept as a primitive -- true
+    percentile rank is still a well-defined, useful number -- just not the
+    right one for a display a reader compares across cards."""
     if not calib:
         return raw
     dist = calib.get("profiles", {}).get(profile_id)
@@ -302,6 +311,65 @@ def calibrate(calib: dict | None, profile_id: str, raw: float) -> float:
     rank = (lo + hi) / 2  # ties get the middle rank
     pct = 100.0 * rank / len(dist)
     return max(1.0, min(99.0, pct))
+
+
+# Hand-set display targets at each pooled-history anchor. Anchored on robust
+# percentiles (min/p1/p10/p90/p99/max of ALL 12 profiles' raw scores pooled
+# together, not per profile) so equal raw quality displays equally regardless
+# of which ground or species it's from -- the specific bug this fixes. The
+# ordinary middle (p10-p90) gets a deliberately gentle, roughly-consistent
+# slope (~2 display points per raw point); the tails steepen, so genuinely
+# rare days reach further while staying rare, by construction (anchored at
+# p1/p99, not at the theoretical 0/100 ends).
+RESCALE_TARGETS = [5.0, 20.0, 40.0, 70.0, 80.0, 95.0]  # y-values for min,p1,p10,p90,p99,max
+
+
+def robust_percentile(sorted_vals: list[float], p: float) -> float:
+    """Linear-interpolation percentile (p in [0,100]) of an already-sorted list."""
+    n = len(sorted_vals)
+    if n == 1:
+        return sorted_vals[0]
+    k = (p / 100) * (n - 1)
+    lo, hi = int(k), min(int(k) + 1, n - 1)
+    frac = k - lo
+    return sorted_vals[lo] + (sorted_vals[hi] - sorted_vals[lo]) * frac
+
+
+def rescale_anchors(pooled_sorted: list[float]) -> list[float]:
+    """Raw-score x-values for the RESCALE_TARGETS anchors, from a pooled,
+    sorted list of raw scores across every profile."""
+    mn, mx = pooled_sorted[0], pooled_sorted[-1]
+    xs = [mn, robust_percentile(pooled_sorted, 1), robust_percentile(pooled_sorted, 10),
+          robust_percentile(pooled_sorted, 90), robust_percentile(pooled_sorted, 99), mx]
+    for i in range(1, len(xs)):
+        if xs[i] <= xs[i - 1]:
+            xs[i] = xs[i - 1] + 0.01
+    return xs
+
+
+def rescale(calib: dict | None, raw: float) -> float:
+    """Non-linear rescale of a raw score for display and cross-profile
+    ranking. Global (same anchors for every profile), not per-profile: a
+    per-profile version was simulated and rejected -- it makes each
+    profile's own "ordinary" band land exactly at 40-70, but two profiles
+    whose raw distributions sit at different levels (boat's runs ~5-6
+    points above rock's) then display similar raw scores very differently,
+    reproducing the exact bug this replaces. Falls back to the raw score
+    when no calibration exists yet, same as calibrate()."""
+    if not calib or "rescale_anchors" not in calib:
+        return raw
+    xs = calib["rescale_anchors"]
+    ys = RESCALE_TARGETS
+    if raw <= xs[0]:
+        return ys[0]
+    if raw >= xs[-1]:
+        return ys[-1]
+    for i in range(len(xs) - 1):
+        if xs[i] <= raw <= xs[i + 1]:
+            if xs[i + 1] <= xs[i]:
+                return ys[i + 1]
+            return ys[i] + (ys[i + 1] - ys[i]) * (raw - xs[i]) / (xs[i + 1] - xs[i])
+    return ys[-1]
 
 
 # --------------------------------------------------------------------------- #
@@ -377,13 +445,14 @@ def env_summary(drivers: list[dict], metric_defs: dict, gate_note: str | None = 
 def build_headline(env_results: list[dict], species_results: list[dict], metric_defs: dict) -> str:
     """Composed bulletin, not a template: lead with the best ground, mention
     the runner-up, warn on the worst. No em dashes anywhere in site copy."""
-    # "Best" is decided by percentile (comparable across profiles with
-    # different raw baselines), not raw score -- same reason the frontend's
-    # week-strip and ledger pick a winner by percentile too. The wording
-    # below still reads the winner's raw score, unchanged.
+    # "Best" is decided by the rescaled, cross-profile-comparable value
+    # (comparable across profiles with different raw baselines), not raw
+    # score -- same reason the frontend's week-strip and ledger pick a
+    # winner this way too. The wording below still reads the winner's raw
+    # score, unchanged.
     def _rank(e):
-        p = e.get("percentile")
-        return p if p is not None else e["score"]
+        c = e.get("calibrated")
+        return c if c is not None else e["score"]
 
     ranked = sorted(env_results, key=lambda e: -_rank(e))
     best, second, worst = ranked[0], ranked[1] if len(ranked) > 1 else None, ranked[-1]

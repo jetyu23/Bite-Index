@@ -30,7 +30,7 @@ export default function ContactList({ species }: { species: SpeciesResult[] }) {
               <div className={`pod-score ${t}`}>
                 {sp.score}
                 <span>{sp.label}</span>
-                {sp.percentile != null && <span className="pctl">top {100 - sp.percentile}% of days</span>}
+                {sp.calibrated != null && <span className="pctl">calibrated: {sp.calibrated}</span>}
                 <span className="pctl">typical session: {sp.session_mean}</span>
               </div>
               <div className="pod-why">{sp.reason}</div>
@@ -52,7 +52,7 @@ export default function ContactList({ species }: { species: SpeciesResult[] }) {
                 <td className="ct-bar"><span className={`minibar ${t}`}><i style={{ width: `${sp.score}%` }} /></span></td>
                 <td
                   className={`ct-sc ${t}`}
-                  title={`typical session: ${sp.session_mean}${sp.percentile != null ? ` · better than ${sp.percentile}% of days on record` : ""}`}
+                  title={`typical session: ${sp.session_mean}${sp.calibrated != null ? ` · calibrated: ${sp.calibrated}` : ""}`}
                 >
                   {sp.score}
                 </td>
