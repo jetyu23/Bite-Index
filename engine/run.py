@@ -99,7 +99,7 @@ def run(live: bool) -> dict:
                 "score": raw_display,
                 "percentile": percentile,
                 "raw_median": dist[len(dist) // 2] if dist else None,
-                "reason": scoring.env_summary(res["drivers"], metric_defs),
+                "reason": scoring.env_summary(res["drivers"], metric_defs, res.get("gate_note")),
                 "label": scoring.score_label(raw_display, labels),
                 "best_window": window,
                 "safety_flag": res["safety_flag"],
@@ -130,7 +130,7 @@ def run(live: bool) -> dict:
             own_raw = res["raw_score"]
             own_percentile = round(scoring.calibrate(calib, sp["id"], own_raw)) if calib else None
             window = scoring.humanize_window(res["best_window"])
-            reason = scoring.build_reason(res["drivers"], env_names[res["environment"]], window, metric_defs)
+            reason = scoring.build_reason(res["drivers"], env_names[res["environment"]], window, metric_defs, res.get("gate_note"))
             sp_results.append(
                 {
                     "id": sp["id"],

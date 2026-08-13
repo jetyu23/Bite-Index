@@ -111,6 +111,13 @@ export interface ProfileFactor {
   justification: string;
 }
 
+export interface ProfileGate {
+  metric: string;
+  points: number[][];
+  note: string;
+  justification: string;
+}
+
 export interface EnvProfile {
   id: string;
   name: string;
@@ -125,6 +132,7 @@ export interface EnvProfile {
     message: string;
   };
   factors: ProfileFactor[];
+  gates?: ProfileGate[];
 }
 
 export interface SpeciesGuide {
@@ -151,6 +159,7 @@ export interface SpeciesProfile {
   window: number[];
   environments: Record<string, number>;
   factors: ProfileFactor[];
+  gates?: ProfileGate[];
   guide: SpeciesGuide;
 }
 

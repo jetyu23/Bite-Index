@@ -80,6 +80,26 @@ def _window_datetimes(day, window: list[int]) -> list[datetime]:
     return out
 
 
+def _gate_multiplier(profile: dict, metrics: dict[str, Any]) -> tuple[float, dict | None]:
+    """Soft multiplicative gate for the small set of factors where the
+    angling logic is genuinely gating, not contributing: dead slack water,
+    a species' water-temperature switch-on point. Unlike a weighted factor,
+    a gate multiplies the whole hour's score rather than averaging into it,
+    so it cannot be diluted by the other 8-10 factors the way a normal
+    weight can. Returns (multiplier, worst active gate or None)."""
+    mult = 1.0
+    worst: tuple[dict, float] | None = None
+    for g in profile.get("gates", []):
+        v = metrics.get(g["metric"])
+        if v is None:
+            continue
+        m = interp_curve(g["points"], float(v))
+        mult *= m
+        if worst is None or m < worst[1]:
+            worst = (g, m)
+    return mult, (worst[0] if worst and worst[1] < 0.999 else None)
+
+
 def score_profile_day(profile: dict, day_metrics: dict, norm: Normalized) -> dict | None:
     """Score one profile for one day. Returns None if no hours had data."""
     wdts = [t for t in _window_datetimes(day_metrics["date"], profile["window"]) if t in norm.hours]
@@ -91,6 +111,7 @@ def score_profile_day(profile: dict, day_metrics: dict, norm: Normalized) -> dic
 
     hour_scores: list[float] = []
     hour_subs: list[dict[str, tuple[float, bool, Any]]] = []
+    hour_gates: list[dict | None] = []
     for t in wdts:
         merged = {**day_metrics, **norm.hours[t], "month": day_metrics["month"]}
         subs: dict[str, tuple[float, bool, Any]] = {}
@@ -99,8 +120,10 @@ def score_profile_day(profile: dict, day_metrics: dict, norm: Normalized) -> dic
             s, has = factor_subscore(f, merged)
             subs[f["metric"]] = (s, has, merged.get(f["metric"]))
             acc += f["weight"] * s
-        hour_scores.append(acc / total_w)
+        mult, active_gate = _gate_multiplier(profile, merged)
+        hour_scores.append((acc / total_w) * mult)
         hour_subs.append(subs)
+        hour_gates.append(active_gate)
 
     # Best rolling window.
     k = min(ROLL_HOURS, len(hour_scores))
@@ -111,6 +134,8 @@ def score_profile_day(profile: dict, day_metrics: dict, norm: Normalized) -> dic
             best_i, best_mean = i, m
 
     win_start, win_end = wdts[best_i], wdts[best_i + k - 1] + timedelta(hours=1)
+    gates_in_window = [g for g in hour_gates[best_i : best_i + k] if g is not None]
+    gate_note = gates_in_window[0]["note"] if gates_in_window else None
 
     # Drivers: averaged over the best window, ranked by |weighted deviation from neutral|.
     drivers = []
@@ -138,6 +163,7 @@ def score_profile_day(profile: dict, day_metrics: dict, norm: Normalized) -> dic
         "best_window": [win_start.isoformat(), win_end.isoformat()],
         "drivers": drivers,
         "hours_scored": len(wdts),
+        "gate_note": gate_note,
     }
 
 
@@ -195,6 +221,7 @@ def score_species_day(sp: dict, env_scores: dict[str, dict], day_metrics: dict, 
         "environment": best_env,
         "best_window": own["best_window"],
         "drivers": own["drivers"],
+        "gate_note": own["gate_note"],
     }
 
 
@@ -288,19 +315,23 @@ def top_notes(drivers: list[dict], metric_defs: dict, n: int = 2) -> list[str]:
     return notes
 
 
-def build_reason(drivers: list[dict], env_name: str, window: str, metric_defs: dict) -> str:
+def build_reason(drivers: list[dict], env_name: str, window: str, metric_defs: dict, gate_note: str | None = None) -> str:
     notes = top_notes(drivers, metric_defs, 2)
     body = "; ".join(notes) if notes else "steady conditions across the board"
-    return f"{env_name}, {window}. {body[0].upper()}{body[1:]}."
+    s = f"{env_name}, {window}. {body[0].upper()}{body[1:]}."
+    if gate_note:
+        s += f" {gate_note[0].upper()}{gate_note[1:]}."
+    return s
 
 
-def env_summary(drivers: list[dict], metric_defs: dict) -> str:
+def env_summary(drivers: list[dict], metric_defs: dict, gate_note: str | None = None) -> str:
     """One typed line per environment for the ledger."""
     notes = top_notes(drivers, metric_defs, 2)
-    if not notes:
-        return "Steady conditions, nothing driving the score hard either way."
-    body = "; ".join(notes)
-    return body[0].upper() + body[1:] + "."
+    body = "; ".join(notes) if notes else "steady conditions, nothing driving the score hard either way"
+    s = body[0].upper() + body[1:] + "."
+    if gate_note:
+        s += f" {gate_note[0].upper()}{gate_note[1:]}."
+    return s
 
 
 def build_headline(env_results: list[dict], species_results: list[dict], metric_defs: dict) -> str:

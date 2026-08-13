@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { profiles, site } from "@/lib/data";
-import type { ProfileFactor } from "@/lib/types";
+import type { ProfileFactor, ProfileGate } from "@/lib/types";
 
 export const metadata: Metadata = { title: "Methodology · Bite Index" };
 
@@ -64,6 +64,20 @@ function FactorRows({ factors }: { factors: ProfileFactor[] }) {
   );
 }
 
+function GateNotes({ gates }: { gates?: ProfileGate[] }) {
+  if (!gates || gates.length === 0) return null;
+  const defs = profiles.factors.metrics;
+  return (
+    <>
+      {gates.map((g) => (
+        <p key={g.metric} className="safety-msg" style={{ maxWidth: "80ch" }}>
+          Gate, not a weight ({defs[g.metric]?.label ?? g.metric}): {g.justification}
+        </p>
+      ))}
+    </>
+  );
+}
+
 export default function MethodologyPage() {
   const defs = profiles.factors.metrics;
 
@@ -94,6 +108,7 @@ export default function MethodologyPage() {
           <li>Forecast data is pulled once daily (Open-Meteo weather + marine models; sun and moon computed locally).</li>
           <li>Each factor is converted to a 0–100 <em>subscore</em> through a response curve: swell of 0.8 m scores high for rock fishing, 2.5 m scores near zero.</li>
           <li>Subscores are blended using the profile&apos;s weights (normalised to sum to 1). Missing data scores a neutral 50 and is flagged, never invented.</li>
+          <li>A small number of factors are <strong>gates, not weights</strong>: where the angling logic is genuinely a switch rather than a contribution (water below a species&apos; activity threshold, for example), that hour&apos;s blended score is multiplied down rather than averaged down, so it cannot be diluted by nine other factors that have nothing to do with whether the fish are there. Listed per profile below, alongside the rock safety override, which works the same way but is a hard cap, not a soft multiplier.</li>
           <li>This happens for every hour inside the profile&apos;s realistic fishing window; the day&apos;s score is the <strong>best rolling 3-hour block</strong>, which is also shown as the &ldquo;best window&rdquo;. A daily average would bury the dawn bite under the midday lull.</li>
           <li>Species scores blend the species&apos; own factor score with the score of its best environment, weighted by how strongly that species is tied to environment conditions.</li>
           <li>The <strong>raw score is what&apos;s displayed</strong> as the headline number and the tier label (Poor/Fair/Good/Excellent) describes it. Separately, that raw score is also looked up in the profile&apos;s own historical distribution to get a <strong>percentile rank</strong> ("better than 73% of days on record"), shown as a secondary line so it can&apos;t be mistaken for a quality judgement on its own. Until enough live history exists, no percentile is shown at all, and the footer says so.</li>
@@ -156,6 +171,7 @@ export default function MethodologyPage() {
                 against a good tide.
               </p>
             )}
+            <GateNotes gates={env.gates} />
           </div>
         ))}
       </section>
@@ -185,6 +201,7 @@ export default function MethodologyPage() {
                 </thead>
                 <FactorRows factors={sp.factors} />
               </table>
+              <GateNotes gates={sp.gates} />
             </div>
           );
         })}

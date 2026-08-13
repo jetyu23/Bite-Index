@@ -1955,6 +1955,27 @@
      "justification": "LOW EVIDENCE. Minimal weight, disclosed."
     }
    ],
+   "gates": [
+    {
+     "metric": "sst_c",
+     "points": [
+      [
+       16,
+       0.4
+      ],
+      [
+       18,
+       0.7
+      ],
+      [
+       19,
+       1.0
+      ]
+     ],
+     "note": "water below the kingfish activity threshold",
+     "justification": "Kingfish are temperature-gated, not merely temperature-preferring: the bite switches on near 19C rather than improving gradually as water warms. Below 16C this multiplies the hour's score to 40% of what the other factors alone would produce, ramping back to full strength by 19C, matching the sst_c curve's own inflection point. This is a soft version of the same principle behind the rock safety override: a genuinely gating condition should not be diluted into an average by nine other factors that have nothing to do with whether the fish are there at all."
+    }
+   ],
    "guide": {
     "difficulty": "Hard. Strong, rude, lives near sharp things",
     "baits": [
