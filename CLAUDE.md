@@ -372,3 +372,43 @@ test (`test_rescale`) added alongside the existing `test_calibration`.
 HTML confirms the calibrated numbers and updated methodology copy.
 
 **Continuing to the species work next**, per instruction.
+
+### 2026-08-13 — priority 6: thresholds set against the calibrated distribution
+Unblocked once the rescale existed: thresholds now judge `calibrated`, not
+raw. Simulated 7 candidate sets against the real 366-day calibrated
+distribution for all 12 profiles; picked Poor<32/Fair<48/Good<62/
+Excellent>=62 -- every profile reaches >=3 of 4 tiers, no profile exceeds 85%
+concentration (rounder candidates pushed some profile to 91-95%).
+`build_headline`'s separately-hardcoded phrasing thresholds (a third copy of
+roughly the same numbers, found while touching this) moved to the same
+value and the same 62/48/32 boundaries.
+
+Two residual findings, reported rather than smoothed over:
+- Harbour, bream, yakkas, mulloway never reach Poor -- their raw variance is
+  genuinely low (model-level, already logged above), not a threshold defect.
+- **Boat shows Excellent on 82% of real days** (8/8 in an 8-day spot check).
+  Its raw distribution runs structurally higher than the pooled average that
+  anchors the shared calibrated scale. Not fixed -- the only fix is
+  per-profile thresholds, which undoes the entire point of a shared scale
+  (see the rescale entry above for why per-profile was rejected there too).
+  This is the same underlying elevation already flagged when the rescale
+  anchors were chosen; priority-6 work just makes the consequence visible
+  in the tier label instead of only the calibrated number.
+
+Live-verified: today's ledger shows real label diversity across grounds for
+the first time (Rock Excellent, Beach Good, Estuary Good, Harbour Excellent,
+Boat Excellent) instead of five identical "Good" labels. Committed as
+`451d886`.
+
+### 2026-08-13 — species backlog clarified (priorities 11-13)
+User confirmed "the species work" meant a backlog never formally logged in
+this file: (11) research and add 4+ new species profiles (Australian salmon,
+dusky flathead, luderick, sand whiting, plus any other justified additions)
+with sourced citations distinguished from general knowledge; (12) fixed,
+non-scoring card metadata (eating quality, difficulty) -- explicitly not
+engine inputs; (13) search/sort/filter on the species page, static build, no
+new dependencies. Also asked whether new species widen the existing
+clustering (6 of 7 current species sit raw 64-69, displaying calibrated
+54-65; kingfish separates only via its SST gate) or land in the same band --
+to be checked and reported once the new profiles are scored, not assumed.
+Starting on 11 now.
