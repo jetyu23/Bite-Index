@@ -1,13 +1,16 @@
 {
- "_comment": "Environment profiles. Each factor: metric id, weight (relative; the engine normalises), response ('curve' = piecewise-linear points [[x, score 0-100], ...] interpolated and clamped at the ends; 'table' = category -> score), and a written justification. 'window' = local hours [start, end) the environment is realistically fished and scored over; the day's score is the best rolling 3-hour average inside it. 'safety' (rock only) is a hard override, applied after scoring, that caps the score and raises a flag regardless of every other factor.",
+ "_comment": "Environment profiles. Each factor: metric id, weight (relative; the engine normalises), response ('curve' = piecewise-linear points [[x, score 0-100], ...] interpolated and clamped at the ends; 'table' = category -> score), and a written justification. 'sessions' = the named 3-hour blocks (defined once in factors.json's 'sessions' dict) this environment is realistically fished over, hand-picked per profile rather than a single continuous window; the day's score is the best (or mean) of just those sessions. 'safety' (rock only) is a hard override, applied after scoring, that caps the score and raises a flag regardless of every other factor. 'gates' (optional) softly multiply a session's score for factors that genuinely switch conditions on/off rather than merely contributing to them.",
  "environments": [
   {
    "id": "rock",
    "name": "Rock",
    "tagline": "Ledges and headland washes",
-   "window": [
-    4,
-    22
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk"
    ],
    "safety": {
     "metric_max_swell_m": 2.0,
@@ -280,9 +283,13 @@
    "id": "beach",
    "name": "Beach",
    "tagline": "Gutters, banks and the surf zone",
-   "window": [
-    4,
-    23
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "factors": [
     {
@@ -540,9 +547,13 @@
    "id": "estuary",
    "name": "Estuary",
    "tagline": "Rivers, bays and the brackish reaches",
-   "window": [
-    4,
-    24
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "factors": [
     {
@@ -792,9 +803,13 @@
    "id": "harbour",
    "name": "Harbour & wharf",
    "tagline": "Structure, pylons and deep protected water",
-   "window": [
-    4,
-    24
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "factors": [
     {
@@ -1064,9 +1079,11 @@
    "id": "boat",
    "name": "Boat & offshore",
    "tagline": "Outside the Heads; reefs, FADs and open water",
-   "window": [
-    4,
-    19
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon"
    ],
    "factors": [
     {

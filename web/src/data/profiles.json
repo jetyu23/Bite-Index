@@ -196,16 +196,54 @@
     "min": 0,
     "label": "Poor"
    }
-  ]
+  ],
+  "_sessions_comment": "Canonical named sessions, each a fixed 3-hour local-time block. Replaces the old rolling-3-hour-window search: instead of scoring every possible starting hour in a wide range and picking the best, each profile lists the specific sessions that make angling sense for it (see each profile's 'sessions' field), and the day's score is the best (or mean) of just those fixed, inspectable blocks. late_night and pre_dawn wrap past midnight for late/after-dark profiles.",
+  "sessions": {
+   "dawn": [
+    5,
+    8
+   ],
+   "morning": [
+    8,
+    11
+   ],
+   "midday": [
+    11,
+    14
+   ],
+   "afternoon": [
+    14,
+    17
+   ],
+   "dusk": [
+    17,
+    20
+   ],
+   "evening": [
+    20,
+    23
+   ],
+   "late_night": [
+    23,
+    26
+   ],
+   "pre_dawn": [
+    26,
+    29
+   ]
+  }
  },
  "environments": [
   {
    "id": "rock",
    "name": "Rock",
    "tagline": "Ledges and headland washes",
-   "window": [
-    4,
-    22
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk"
    ],
    "safety": {
     "metric_max_swell_m": 2.0,
@@ -478,9 +516,13 @@
    "id": "beach",
    "name": "Beach",
    "tagline": "Gutters, banks and the surf zone",
-   "window": [
-    4,
-    23
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "factors": [
     {
@@ -738,9 +780,13 @@
    "id": "estuary",
    "name": "Estuary",
    "tagline": "Rivers, bays and the brackish reaches",
-   "window": [
-    4,
-    24
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "factors": [
     {
@@ -990,9 +1036,13 @@
    "id": "harbour",
    "name": "Harbour & wharf",
    "tagline": "Structure, pylons and deep protected water",
-   "window": [
-    4,
-    24
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "factors": [
     {
@@ -1262,9 +1312,11 @@
    "id": "boat",
    "name": "Boat & offshore",
    "tagline": "Outside the Heads; reefs, FADs and open water",
-   "window": [
-    4,
-    19
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon"
    ],
    "factors": [
     {
@@ -1500,9 +1552,10 @@
    "id": "mulloway",
    "name": "Mulloway (jewfish)",
    "env_blend": 0.45,
-   "window": [
-    15,
-    27
+   "sessions": [
+    "dusk",
+    "evening",
+    "late_night"
    ],
    "environments": {
     "estuary": 1.0,
@@ -1744,9 +1797,11 @@
    "id": "kingfish",
    "name": "Yellowtail kingfish",
    "env_blend": 0.5,
-   "window": [
-    4,
-    19
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon"
    ],
    "environments": {
     "harbour": 1.0,
@@ -2009,9 +2064,13 @@
    "id": "bream",
    "name": "Bream",
    "env_blend": 0.5,
-   "window": [
-    4,
-    23
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "environments": {
     "estuary": 1.0,
@@ -2299,9 +2358,9 @@
    "id": "tailor",
    "name": "Tailor",
    "env_blend": 0.5,
-   "window": [
-    4,
-    21
+   "sessions": [
+    "dawn",
+    "dusk"
    ],
    "environments": {
     "beach": 1.0,
@@ -2569,9 +2628,12 @@
    "id": "trevally",
    "name": "Silver trevally",
    "env_blend": 0.5,
-   "window": [
-    4,
-    21
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk"
    ],
    "environments": {
     "harbour": 1.0,
@@ -2857,9 +2919,13 @@
    "id": "squid",
    "name": "Southern calamari",
    "env_blend": 0.5,
-   "window": [
-    4,
-    23
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "environments": {
     "harbour": 1.0,
@@ -3146,9 +3212,13 @@
    "id": "yakkas",
    "name": "Yellowtail (yakkas)",
    "env_blend": 0.55,
-   "window": [
-    4,
-    23
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "environments": {
     "harbour": 1.0,

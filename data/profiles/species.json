@@ -1,13 +1,14 @@
 {
- "_comment": "Species profiles. Scoring: same engine as environments; factors with curves/tables and weights. 'season' is a Jan..Dec presence multiplier (0-1) for Sydney, scored as its own factor. 'environments' are affinity multipliers; the species' final score in an environment = affinity x (env_blend x environment_score + (1 - env_blend) x species_score), and the best environment is surfaced. 'window' = local hours the species is realistically targeted (mulloway runs past midnight). CONTENT NOTE: baits/rigs/seasonality drafted from published Australian angling knowledge + owner experience; owner verifies against NSW DPI before publishing; size/bag limits are deliberately linked out, never republished.",
+ "_comment": "Species profiles. Scoring: same engine as environments; factors with curves/tables and weights. 'season' is a Jan..Dec presence multiplier (0-1) for Sydney, scored as its own factor. 'environments' are affinity multipliers; the species' final score in an environment = affinity x (env_blend x environment_score + (1 - env_blend) x species_score), and the best environment is surfaced. 'sessions' = the named 3-hour blocks (defined once in factors.json's 'sessions' dict) this species is realistically targeted in, hand-picked per profile -- not necessarily contiguous (tailor is dawn and dusk only, nothing between; mulloway starts at dusk and wraps past midnight). 'gates' (optional, kingfish only so far) softly multiply a session's score for factors that genuinely switch conditions on/off. CONTENT NOTE: baits/rigs/seasonality drafted from published Australian angling knowledge + owner experience; owner verifies against NSW DPI before publishing; size/bag limits are deliberately linked out, never republished.",
  "species": [
   {
    "id": "mulloway",
    "name": "Mulloway (jewfish)",
    "env_blend": 0.45,
-   "window": [
-    15,
-    27
+   "sessions": [
+    "dusk",
+    "evening",
+    "late_night"
    ],
    "environments": {
     "estuary": 1.0,
@@ -249,9 +250,11 @@
    "id": "kingfish",
    "name": "Yellowtail kingfish",
    "env_blend": 0.5,
-   "window": [
-    4,
-    19
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon"
    ],
    "environments": {
     "harbour": 1.0,
@@ -514,9 +517,13 @@
    "id": "bream",
    "name": "Bream",
    "env_blend": 0.5,
-   "window": [
-    4,
-    23
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "environments": {
     "estuary": 1.0,
@@ -804,9 +811,9 @@
    "id": "tailor",
    "name": "Tailor",
    "env_blend": 0.5,
-   "window": [
-    4,
-    21
+   "sessions": [
+    "dawn",
+    "dusk"
    ],
    "environments": {
     "beach": 1.0,
@@ -1074,9 +1081,12 @@
    "id": "trevally",
    "name": "Silver trevally",
    "env_blend": 0.5,
-   "window": [
-    4,
-    21
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk"
    ],
    "environments": {
     "harbour": 1.0,
@@ -1362,9 +1372,13 @@
    "id": "squid",
    "name": "Southern calamari",
    "env_blend": 0.5,
-   "window": [
-    4,
-    23
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "environments": {
     "harbour": 1.0,
@@ -1651,9 +1665,13 @@
    "id": "yakkas",
    "name": "Yellowtail (yakkas)",
    "env_blend": 0.55,
-   "window": [
-    4,
-    23
+   "sessions": [
+    "dawn",
+    "morning",
+    "midday",
+    "afternoon",
+    "dusk",
+    "evening"
    ],
    "environments": {
     "harbour": 1.0,

@@ -13,7 +13,7 @@ export default function EnvRow({ env, best }: { env: EnvResult; best?: boolean }
       <div>
         <span className="nm">{env.name}</span>
         <span className={`tag c-${env.id}`}>{env.tag || env.tagline.toUpperCase()}</span>
-        {!env.safety_flag && <span className="win">best {env.best_window}</span>}
+        {!env.safety_flag && <span className="win">best: {env.best_session}, {env.best_window}</span>}
         <span className="why">{env.reason}</span>
       </div>
       <div className={`sc ${t[0]}`}>
@@ -22,6 +22,7 @@ export default function EnvRow({ env, best }: { env: EnvResult; best?: boolean }
         {env.percentile != null && (
           <span className="pctl">better than {env.percentile}% of days on record</span>
         )}
+        <span className="pctl">typical session today: {env.session_mean}</span>
       </div>
       {env.safety_flag && env.safety_message && <div className="safety-inline">⚠ {env.safety_message}</div>}
       <div className={`meter ${t[0]}`}>

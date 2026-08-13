@@ -37,6 +37,7 @@ def run(live: bool) -> dict:
     factors, envs, species = load_profiles()
     metric_defs = factors["metrics"]
     labels = factors["score_labels"]
+    sessions_def = factors["sessions"]
 
     bundle = ingest.fetch_live() if live else ingest.build_sample()
     norm = ingest.normalize(bundle)
@@ -57,10 +58,11 @@ def run(live: bool) -> dict:
         env_results_by_id: dict[str, dict] = {}
         env_results: list[dict] = []
         for env in envs["environments"]:
-            res = scoring.score_profile_day(env, day, norm)
+            res = scoring.score_profile_day(env, day, norm, sessions_def)
             if res is None:
                 continue
             raw = res["score"]
+            session_mean_raw = res["session_mean"]
             # percentile is derived from the uncapped raw score, before safety
             # mutates res["score"] below. res["score"] itself keeps its prior
             # meaning (calibrated-or-raw) unchanged, because score_species_day
@@ -68,15 +70,19 @@ def run(live: bool) -> dict:
             # ground on a scale that's comparable across profiles.
             percentile = round(scoring.calibrate(calib, env["id"], raw)) if calib else None
             res["score"] = percentile if percentile is not None else raw
-            res = scoring.apply_safety(env, res, day, norm)
+            res = scoring.apply_safety(env, res, day, norm, sessions_def)
             if res["safety_flag"]:
                 # A capped, dangerous day isn't meaningfully "better or worse
                 # than X% of days" -- suppress the percentile rather than
                 # show a rank next to a score that's been overridden anyway.
+                # session_mean is capped too: a flagged day can't be "worth
+                # going overall" either.
                 raw_display = min(raw, env["safety"]["cap"])
+                session_mean_display = min(session_mean_raw, env["safety"]["cap"])
                 percentile = None
             else:
                 raw_display = raw
+                session_mean_display = session_mean_raw
             window = scoring.humanize_window(res["best_window"])
             drivers_out = [
                 {
@@ -97,6 +103,8 @@ def run(live: bool) -> dict:
                 "tagline": env["tagline"],
                 "tag": env.get("tag", ""),
                 "score": raw_display,
+                "session_mean": session_mean_display,
+                "best_session": res["best_session"],
                 "percentile": percentile,
                 "raw_median": dist[len(dist) // 2] if dist else None,
                 "reason": scoring.env_summary(res["drivers"], metric_defs, res.get("gate_note")),
@@ -114,7 +122,7 @@ def run(live: bool) -> dict:
         env_names = {e["id"]: e["name"] for e in envs["environments"]}
         for sp in species["species"]:
             res = scoring.score_species_day(
-                sp, env_results_by_id, day, norm,
+                sp, env_results_by_id, day, norm, sessions_def,
                 cal=lambda raw_own: scoring.calibrate(calib, sp["id"], raw_own),
             )
             if res is None:
@@ -137,6 +145,8 @@ def run(live: bool) -> dict:
                     "name": sp["name"],
                     "tag": sp.get("tag", ""),
                     "score": own_raw,
+                    "session_mean": res["session_mean"],
+                    "best_session": res["best_session"],
                     "percentile": own_percentile,
                     "label": scoring.score_label(own_raw, labels),
                     "environment": res["environment"],

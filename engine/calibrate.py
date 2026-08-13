@@ -56,11 +56,12 @@ def main() -> None:
         print(f"REFUSING: only {len(norm.days)} usable days; calibration on <45 days is noise.")
         sys.exit(1)
 
+    sessions_def = factors["sessions"]
     dist: dict[str, list[float]] = {}
     for profile in envs["environments"] + species["species"]:
         raws = []
         for day in norm.days:
-            r = scoring.score_profile_day(profile, day, norm)
+            r = scoring.score_profile_day(profile, day, norm, sessions_def)
             if r is not None:
                 raws.append(round(float(r["score"]), 1))
         raws.sort()

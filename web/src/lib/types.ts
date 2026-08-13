@@ -13,8 +13,13 @@ export interface EnvResult {
   name: string;
   tagline: string;
   tag?: string;
-  /** Raw, uncalibrated 0-100 score -- what the headline number and tier label describe. */
+  /** Raw, uncalibrated 0-100 score of the best session -- the headline number and tier label. */
   score: number;
+  /** Mean raw score across all of this ground's sessions, not just the best one --
+   *  "is today worth going at all", as distinct from "when's the best moment". */
+  session_mean: number;
+  /** Which named session produced the headline score, e.g. "dawn". */
+  best_session: string;
   /** This ground's percentile rank vs. its own historical distribution, 1-99. Null when
    *  no calibration exists yet, or when a safety cap overrides normal scoring. */
   percentile: number | null;
@@ -34,6 +39,10 @@ export interface SpeciesResult {
   tag?: string;
   /** Species' own raw, uncalibrated score -- not blended with its routed environment. */
   score: number;
+  /** Mean raw score across all of this species' sessions, not just the best one. */
+  session_mean: number;
+  /** Which named session produced the headline score, e.g. "dusk". */
+  best_session: string;
   /** Percentile rank of that raw score vs. this species' own historical distribution. */
   percentile: number | null;
   label: string;
@@ -123,7 +132,7 @@ export interface EnvProfile {
   name: string;
   tagline: string;
   tag?: string;
-  window: number[];
+  sessions: string[];
   safety?: {
     metric_max_swell_m: number;
     long_period_swell_m: number;
@@ -156,7 +165,7 @@ export interface SpeciesProfile {
   name: string;
   tag?: string;
   env_blend: number;
-  window: number[];
+  sessions: string[];
   environments: Record<string, number>;
   factors: ProfileFactor[];
   gates?: ProfileGate[];
@@ -164,7 +173,11 @@ export interface SpeciesProfile {
 }
 
 export interface Profiles {
-  factors: { metrics: Record<string, FactorDef>; score_labels: { min: number; label: string }[] };
+  factors: {
+    metrics: Record<string, FactorDef>;
+    score_labels: { min: number; label: string }[];
+    sessions: Record<string, number[]>;
+  };
   environments: EnvProfile[];
   species: SpeciesProfile[];
 }

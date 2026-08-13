@@ -30,14 +30,25 @@ function pct(f: ProfileFactor, all: ProfileFactor[]): string {
   return `${Math.round((100 * f.weight) / total)}%`;
 }
 
-function windowLabel(w: number[]): string {
-  const f = (h: number) => {
-    const hh = h % 24;
-    const ap = hh < 12 ? "am" : "pm";
-    const d = hh % 12 === 0 ? 12 : hh % 12;
-    return `${d}${ap}`;
-  };
-  return `${f(w[0])}–${f(w[1])}${w[1] > 24 ? " (next day)" : ""}`;
+function hourLabel(h: number): string {
+  const hh = h % 24;
+  const ap = hh < 12 ? "am" : "pm";
+  const d = hh % 12 === 0 ? 12 : hh % 12;
+  return `${d}${ap}`;
+}
+
+/* Sessions replaced a single continuous scoring window: each profile lists
+   the fixed 3-hour named sessions (defined once in factors.json) that make
+   angling sense for it, not necessarily contiguous -- tailor is dawn and
+   dusk only, nothing between. */
+function sessionsLabel(sessionNames: string[]): string {
+  const defs = profiles.factors.sessions;
+  return sessionNames
+    .map((name) => {
+      const [s, e] = defs[name];
+      return `${name} (${hourLabel(s)}–${hourLabel(e)}${e > 24 ? " next day" : ""})`;
+    })
+    .join(", ");
 }
 
 function FactorRows({ factors }: { factors: ProfileFactor[] }) {
@@ -109,7 +120,7 @@ export default function MethodologyPage() {
           <li>Each factor is converted to a 0–100 <em>subscore</em> through a response curve: swell of 0.8 m scores high for rock fishing, 2.5 m scores near zero.</li>
           <li>Subscores are blended using the profile&apos;s weights (normalised to sum to 1). Missing data scores a neutral 50 and is flagged, never invented.</li>
           <li>A small number of factors are <strong>gates, not weights</strong>: where the angling logic is genuinely a switch rather than a contribution (water below a species&apos; activity threshold, for example), that hour&apos;s blended score is multiplied down rather than averaged down, so it cannot be diluted by nine other factors that have nothing to do with whether the fish are there. Listed per profile below, alongside the rock safety override, which works the same way but is a hard cap, not a soft multiplier.</li>
-          <li>This happens for every hour inside the profile&apos;s realistic fishing window; the day&apos;s score is the <strong>best rolling 3-hour block</strong>, which is also shown as the &ldquo;best window&rdquo;. A daily average would bury the dawn bite under the midday lull.</li>
+          <li>This happens inside a small set of <strong>fixed named sessions</strong> per profile (dawn, dusk, and so on), hand-picked for the ones that make angling sense for that ground or species rather than one continuous window: tailor is dawn and dusk only, mulloway starts at dusk. The day&apos;s headline score is the <strong>best session&apos;s mean</strong>, also shown as the &ldquo;best window&rdquo; and named (&ldquo;dawn&rdquo;) alongside it. The <strong>mean across all of that profile&apos;s sessions</strong> is shown separately, underneath, as &ldquo;typical session&rdquo;. The best session answers &ldquo;when should I go&rdquo;; the mean answers &ldquo;is today worth going at all&rdquo;. They are genuinely different questions.</li>
           <li>Species scores blend the species&apos; own factor score with the score of its best environment, weighted by how strongly that species is tied to environment conditions.</li>
           <li>The <strong>raw score is what&apos;s displayed</strong> as the headline number and the tier label (Poor/Fair/Good/Excellent) describes it. Separately, that raw score is also looked up in the profile&apos;s own historical distribution to get a <strong>percentile rank</strong> ("better than 73% of days on record"), shown as a secondary line so it can&apos;t be mistaken for a quality judgement on its own. Until enough live history exists, no percentile is shown at all, and the footer says so.</li>
         </ol>
@@ -155,7 +166,7 @@ export default function MethodologyPage() {
           <div key={env.id} id={`m-${env.id}`}>
             <h3 style={{ margin: "26px 0 2px" }}>{env.name}</h3>
             <p className="card-meta">
-              scoring window {windowLabel(env.window)} · {env.tagline}
+              sessions: {sessionsLabel(env.sessions)} · {env.tagline}
             </p>
             <table className="mtable">
               <thead>
@@ -184,7 +195,7 @@ export default function MethodologyPage() {
             <div key={sp.id} id={`m-${sp.id}`}>
               <h3 style={{ margin: "26px 0 2px" }}>{sp.name}</h3>
               <p className="card-meta">
-                window {windowLabel(sp.window)} · environment blend {Math.round(sp.env_blend * 100)}% · fishes best in{" "}
+                sessions: {sessionsLabel(sp.sessions)} · environment blend {Math.round(sp.env_blend * 100)}% · fishes best in{" "}
                 {Object.entries(sp.environments)
                   .sort((a, b) => b[1] - a[1])
                   .map(([e, a]) => `${e} (${Math.round(a * 100)}%)`)

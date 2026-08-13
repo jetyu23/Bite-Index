@@ -195,5 +195,16 @@
    "min": 0,
    "label": "Poor"
   }
- ]
+ ],
+ "_sessions_comment": "Canonical named sessions, each a fixed 3-hour local-time block. Replaces the old rolling-3-hour-window search: instead of scoring every possible starting hour in a wide range and picking the best, each profile lists the specific sessions that make angling sense for it (see each profile's 'sessions' field), and the day's score is the best (or mean) of just those fixed, inspectable blocks. late_night and pre_dawn wrap past midnight for late/after-dark profiles.",
+ "sessions": {
+  "dawn": [5, 8],
+  "morning": [8, 11],
+  "midday": [11, 14],
+  "afternoon": [14, 17],
+  "dusk": [17, 20],
+  "evening": [20, 23],
+  "late_night": [23, 26],
+  "pre_dawn": [26, 29]
+ }
 }

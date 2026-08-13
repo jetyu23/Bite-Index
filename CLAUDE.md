@@ -197,3 +197,108 @@ User granted standing authority to investigate/implement/test/commit within
 defined boundaries (see this file's header for the stop conditions) and asked
 for this file to persist context between sessions. Working through the
 priority list below; entries continue as work lands.
+
+### 2026-08-13 — priority 1: kingfish SST gate implemented
+Added a generic `gates` mechanism to `score_profile_day` (soft multiplicative,
+applied per hour before the best-window search, so it isn't diluted the way a
+weighted factor can be) and configured it for kingfish only: floor 0.4 below
+16C, full strength by 19C. Verified against the real 366-day history via the
+actual engine, not the standalone simulation: raw min 49->38, stdev 7.4->8.5,
+hand-set Poor threshold (39) reachable on 1/366 days, no overcorrection.
+`calibration.json` regenerated (kingfish's distribution changed; the other 11
+profiles' medians are unchanged, confirming no cross-profile leakage).
+Live-verified: today (winter, cold water) shows the gate active on all 7
+forecast days with the expected disclosure text appended to the reason
+string, and the methodology page renders the gate's justification the same
+way it renders every weight. Committed as `27340f8`.
+
+### 2026-08-13 — priority 2: wind data-source limitation disclosed
+Added to the methodology page's "Honest limitations" section: wind for every
+wind-scoring profile (rock, beach, estuary, harbour, boat) comes from
+Open-Meteo's forecast-endpoint `wind_speed_10m` at the Sydney CBD land point;
+the marine API has no wind field at all, so there's no offshore alternative
+to switch to. A land point systematically understates offshore wind, which
+matters most for boat/offshore (wind is its heaviest-weighted factor at 30%).
+Disclosure, not a fix — no $0 offshore wind source exists to switch to.
+Committed as `1df402b`.
+
+### 2026-08-13 — priorities 3+4+5: fixed named sessions replace the rolling window
+**The premise needs correcting first.** Priority 3 was framed as "the best-3-
+hour-window search selects the least-bad block of each day, which is why
+range is compressed." Simulated fixed sessions against the real 366-day
+history before touching any code: best-of-named-sessions produces almost
+identical stdev to the rolling window for every profile (e.g. rock 4.93 vs
+4.92, boat 4.08 vs 4.42) — the rolling search rarely lands anywhere but a
+named session's neighbourhood anyway. More importantly: **switching the
+mechanism does not make Poor reachable.** Beach, estuary, harbour, bream and
+mulloway still show 0% Poor under best-session AND under session-mean, using
+the same thresholds drafted earlier. The search mechanism was never the
+cause of range compression — that's still the averaging-8-11-factors effect
+identified at the start of this work. This doesn't invalidate implementing
+sessions (see below), but it means priority 6 (thresholds) is blocked on
+something the window work doesn't fix, and that needs its own decision
+before touching thresholds again.
+
+**Implemented anyway, on independent merits.** A fixed named session ("dawn",
+"dusk") is inspectable and disputable by a real angler in a way an
+algorithmically-found "5:14am-8:14am" window isn't, and it's a precondition
+for priority 5's mean-vs-best question to even be askable. Replaced
+`window: [start, end]` with `sessions: [names]` per profile (defined once in
+factors.json's `sessions` dict, 8 canonical 3-hour blocks) — chosen by
+angling judgment against each profile's own existing justification text, not
+mechanically:
+- Most profiles kept a near-full dawn-through-evening set (their own text
+  doesn't claim day-part exclusivity).
+- **Tailor: dawn and dusk only**, nothing between -- its own text says
+  "dawn and dusk appointments, almost to the minute," which a single
+  contiguous window literally cannot represent. This is the clearest
+  argument for sessions over window-narrowing alone.
+- **Mulloway: dusk/evening/late_night only** -- "daytime mulloway are the
+  exception, not the plan," per its own text. No dawn session.
+- **Boat: dawn/morning/midday/afternoon only** -- its own text says the
+  "afternoon sea breeze typically ends the day."
+- **Kingfish: dawn/morning/midday/afternoon** -- its own text says kingfish
+  "keep feeding through the day more than most inshore species," so unlike
+  boat this keeps midday/afternoon on strong textual grounds, not just
+  copied from boat's window.
+This also completes priority 4 (window audit) -- narrowing wasn't a separate
+step from choosing sessions; a profile's window is now just the union of its
+chosen sessions, so justifying the sessions justified the boundaries in the
+same motion. Beach's old `[4,23]` (4am-11pm, the complaint that started this)
+is now `dawn, morning, midday, afternoon, dusk, evening` -- 5am-11pm,
+narrower and named.
+
+**Priority 5: both numbers shown, not a single decision between them.**
+`score_profile_day` now returns both `score` (best session's mean, the
+existing headline meaning: "when should I go") and `session_mean` (mean
+across all the profile's sessions: "is today worth going at all"). Both are
+raw-scale, both safety-capped when flagged. Displayed as "typical session
+today: N" under the existing headline, same secondary-line treatment as
+percentile. Chose to show both rather than pick one, same pattern as
+raw+percentile and best-ground+overall-day earlier in this project: never
+remove information, add clearly-labelled context instead.
+
+**Safety override**: unchanged in behaviour, per instruction. Only the source
+of "every hour the profile is scored over" changed (union of sessions
+instead of a continuous window) -- same thresholds, same cap, same flag
+condition, verified via the existing sample-data safety tests, which still
+pass unmodified.
+
+Verified: `engine/tests.py` passes with zero test changes needed (including
+the safety-flag and mulloway-is-late tests), `tsc --noEmit` and `next build`
+clean, real 366-day history re-verified against the actual implemented code
+(not just the simulation) -- session usage per profile looks angling-sane
+(mulloway: late_night 169 days, evening 183, dusk only 14; kingfish: dawn
+173 but morning+midday+afternoon combined 193, confirming the "feeds all
+day" text was right to keep those sessions). calibration.json regenerated
+for all 12 profiles (one fetch attempt hit a transient Open-Meteo marine
+timeout and silently fell back to a 92-day window with several fields
+missing -- caught by checking the printed warnings before using it, retried,
+second attempt was clean with no warnings and full-year marine coverage).
+Live run and rendered HTML both confirm sessions and typical-session numbers
+display correctly, including tailor's dawn/dusk-only case and mulloway's
+after-dark-only case on the actual methodology page.
+
+**Not yet done: priority 6.** Thresholds are still blocked, now on a
+different problem than originally framed. Reporting back rather than
+proceeding blind.

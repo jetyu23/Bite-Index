@@ -8,9 +8,21 @@ both 'just profiles' — the entire product thesis ("same inputs, different
 weightings, different answers") lives in the config, not the code.
 
 Aggregation: conditions change through a day, and a daily average would bury
-the dawn bite under the midday lull. So each profile is scored per hour inside
-its realistic fishing window, and the day's score is the best rolling 3-hour
-mean — which also gives the user a concrete 'best window' to plan around.
+the dawn bite under the midday lull. So each profile is scored per hour
+inside a small set of fixed named sessions (dawn, dusk, and so on -- see
+factors.json's 'sessions' dict), hand-picked per profile for the ones that
+make angling sense (tailor is dawn and dusk only; mulloway starts at dusk).
+The day's score is the best session's mean, which also gives the user a
+concrete 'best window' to plan around; the mean across all the profile's
+sessions is reported too, as 'session_mean', for "is today worth going" as
+distinct from "when's the best moment if I go". This replaced a rolling
+3-hour-window search that could start at any hour in a wide range: real-world
+comparison across the 366-day history showed the two produce almost
+identical scores (the rolling search rarely lands anywhere but a named
+session's neighbourhood anyway), so the switch is for explainability -- a
+named session is inspectable and disputable by a real angler in a way an
+algorithmically-found window isn't -- not because it changes day-to-day
+range on its own.
 
 Safety: the rock profile carries a hard override. If swell exceeds the
 threshold (or is long-period and moderate), the score is capped and a flag is
@@ -28,7 +40,6 @@ from typing import Any
 from ingest import TZ, Normalized
 
 NEUTRAL = 50.0
-ROLL_HOURS = 3
 
 
 # --------------------------------------------------------------------------- #
@@ -70,13 +81,25 @@ def factor_subscore(factor: dict, metrics: dict[str, Any]) -> tuple[float, bool]
 # Profile scoring over a day
 # --------------------------------------------------------------------------- #
 
-def _window_datetimes(day, window: list[int]) -> list[datetime]:
-    """Window hours as aware datetimes; end past 24 spills into the next day
-    (mulloway's window runs to 3 am)."""
-    start, end = window
+def _session_hours(day: object, profile: dict, sessions_def: dict[str, list[int]]) -> list[tuple[str, list[datetime]]]:
+    """Each of the profile's named sessions as (name, hour-list) -- hours as
+    aware datetimes; a session end past 24 spills into the next day
+    (mulloway's late_night session runs to 2 am). A profile's sessions are
+    hand-picked, not necessarily contiguous or covering every hour of the
+    day (tailor is dawn and dusk only, nothing between)."""
     out = []
-    for h in range(start, end):
-        out.append(datetime.combine(day, time(0), tzinfo=TZ) + timedelta(hours=h))
+    for name in profile["sessions"]:
+        start, end = sessions_def[name]
+        hrs = [datetime.combine(day, time(0), tzinfo=TZ) + timedelta(hours=h) for h in range(start, end)]
+        out.append((name, hrs))
+    return out
+
+
+def _all_hours(day: object, profile: dict, sessions_def: dict[str, list[int]]) -> list[datetime]:
+    """Every hour covered by any of the profile's sessions, flattened."""
+    out = []
+    for _, hrs in _session_hours(day, profile, sessions_def):
+        out.extend(hrs)
     return out
 
 
@@ -100,47 +123,55 @@ def _gate_multiplier(profile: dict, metrics: dict[str, Any]) -> tuple[float, dic
     return mult, (worst[0] if worst and worst[1] < 0.999 else None)
 
 
-def score_profile_day(profile: dict, day_metrics: dict, norm: Normalized) -> dict | None:
-    """Score one profile for one day. Returns None if no hours had data."""
-    wdts = [t for t in _window_datetimes(day_metrics["date"], profile["window"]) if t in norm.hours]
-    if not wdts:
-        return None
-
+def score_profile_day(profile: dict, day_metrics: dict, norm: Normalized, sessions_def: dict[str, list[int]]) -> dict | None:
+    """Score one profile for one day across its fixed named sessions (not a
+    rolling search): each session is scored as the mean of its own hours, and
+    the day's score is the best session, with the mean across all the
+    profile's sessions also returned (see 'session_mean') for anyone asking
+    "is today worth going at all", as opposed to "when's the best moment".
+    Returns None if no session had data."""
     factors = profile["factors"]
     total_w = sum(f["weight"] for f in factors)
 
-    hour_scores: list[float] = []
-    hour_subs: list[dict[str, tuple[float, bool, Any]]] = []
-    hour_gates: list[dict | None] = []
-    for t in wdts:
-        merged = {**day_metrics, **norm.hours[t], "month": day_metrics["month"]}
-        subs: dict[str, tuple[float, bool, Any]] = {}
-        acc = 0.0
-        for f in factors:
-            s, has = factor_subscore(f, merged)
-            subs[f["metric"]] = (s, has, merged.get(f["metric"]))
-            acc += f["weight"] * s
-        mult, active_gate = _gate_multiplier(profile, merged)
-        hour_scores.append((acc / total_w) * mult)
-        hour_subs.append(subs)
-        hour_gates.append(active_gate)
+    sessions = []
+    for name, hrs in _session_hours(day_metrics["date"], profile, sessions_def):
+        hrs = [t for t in hrs if t in norm.hours]
+        if not hrs:
+            continue
+        hour_scores: list[float] = []
+        hour_subs: list[dict[str, tuple[float, bool, Any]]] = []
+        hour_gates: list[dict | None] = []
+        for t in hrs:
+            merged = {**day_metrics, **norm.hours[t], "month": day_metrics["month"]}
+            subs: dict[str, tuple[float, bool, Any]] = {}
+            acc = 0.0
+            for f in factors:
+                s, has = factor_subscore(f, merged)
+                subs[f["metric"]] = (s, has, merged.get(f["metric"]))
+                acc += f["weight"] * s
+            mult, active_gate = _gate_multiplier(profile, merged)
+            hour_scores.append((acc / total_w) * mult)
+            hour_subs.append(subs)
+            hour_gates.append(active_gate)
+        sessions.append({
+            "name": name, "hrs": hrs, "subs": hour_subs, "gates": hour_gates,
+            "mean": sum(hour_scores) / len(hour_scores),
+        })
 
-    # Best rolling window.
-    k = min(ROLL_HOURS, len(hour_scores))
-    best_i, best_mean = 0, -1.0
-    for i in range(len(hour_scores) - k + 1):
-        m = sum(hour_scores[i : i + k]) / k
-        if m > best_mean:
-            best_i, best_mean = i, m
+    if not sessions:
+        return None
 
-    win_start, win_end = wdts[best_i], wdts[best_i + k - 1] + timedelta(hours=1)
-    gates_in_window = [g for g in hour_gates[best_i : best_i + k] if g is not None]
-    gate_note = gates_in_window[0]["note"] if gates_in_window else None
+    best = max(sessions, key=lambda s: s["mean"])
+    session_mean = sum(s["mean"] for s in sessions) / len(sessions)
 
-    # Drivers: averaged over the best window, ranked by |weighted deviation from neutral|.
+    win_start, win_end = best["hrs"][0], best["hrs"][-1] + timedelta(hours=1)
+    gates_in_best = [g for g in best["gates"] if g is not None]
+    gate_note = gates_in_best[0]["note"] if gates_in_best else None
+
+    # Drivers: averaged over the best session's hours, ranked by |weighted deviation from neutral|.
     drivers = []
     for f in factors:
-        rows = [hour_subs[i][f["metric"]] for i in range(best_i, best_i + k)]
+        rows = [subs[f["metric"]] for subs in best["subs"]]
         sub = sum(r[0] for r in rows) / len(rows)
         has = any(r[1] for r in rows)
         vals = [r[2] for r in rows if r[2] is not None]
@@ -159,23 +190,30 @@ def score_profile_day(profile: dict, day_metrics: dict, norm: Normalized) -> dic
     drivers.sort(key=lambda d: abs(d["contribution"]), reverse=True)
 
     return {
-        "score": round(best_mean),
+        "score": round(best["mean"]),
+        "session_mean": round(session_mean),
+        "best_session": best["name"],
         "best_window": [win_start.isoformat(), win_end.isoformat()],
         "drivers": drivers,
-        "hours_scored": len(wdts),
+        "hours_scored": sum(len(s["hrs"]) for s in sessions),
         "gate_note": gate_note,
     }
 
 
-def apply_safety(profile: dict, result: dict, day_metrics: dict, norm: Normalized) -> dict:
-    """Rock hard-override: cap the score on dangerous swell regardless of everything else."""
+def apply_safety(profile: dict, result: dict, day_metrics: dict, norm: Normalized, sessions_def: dict[str, list[int]]) -> dict:
+    """Rock hard-override: cap the score on dangerous swell regardless of
+    everything else. Unchanged behaviour from before sessions replaced the
+    rolling window -- still scans every hour the profile is scored over for
+    the day's worst swell, same thresholds, same cap, same flag condition.
+    Only the source of "every hour the profile is scored over" changed, from
+    a single continuous window to the union of its named sessions."""
     safety = profile.get("safety")
     result["safety_flag"] = False
     result["safety_message"] = None
     if not safety or not result:
         return result
-    wdts = [t for t in _window_datetimes(day_metrics["date"], profile["window"]) if t in norm.hours]
-    swells = [(norm.hours[t].get("swell_m"), norm.hours[t].get("swell_period_s")) for t in wdts]
+    hrs = [t for t in _all_hours(day_metrics["date"], profile, sessions_def) if t in norm.hours]
+    swells = [(norm.hours[t].get("swell_m"), norm.hours[t].get("swell_period_s")) for t in hrs]
     swells = [(s, p) for s, p in swells if s is not None]
     if not swells:
         return result
@@ -194,8 +232,8 @@ def apply_safety(profile: dict, result: dict, day_metrics: dict, norm: Normalize
 # Species blending
 # --------------------------------------------------------------------------- #
 
-def score_species_day(sp: dict, env_scores: dict[str, dict], day_metrics: dict, norm: Normalized, cal=None) -> dict | None:
-    own = score_profile_day(sp, day_metrics, norm)
+def score_species_day(sp: dict, env_scores: dict[str, dict], day_metrics: dict, norm: Normalized, sessions_def: dict[str, list[int]], cal=None) -> dict | None:
+    own = score_profile_day(sp, day_metrics, norm, sessions_def)
     if own is None:
         return None
     own_raw = own["score"]
@@ -218,6 +256,8 @@ def score_species_day(sp: dict, env_scores: dict[str, dict], day_metrics: dict, 
     return {
         "score": round(best_score),
         "raw_score": own_raw,
+        "session_mean": own["session_mean"],
+        "best_session": own["best_session"],
         "environment": best_env,
         "best_window": own["best_window"],
         "drivers": own["drivers"],
