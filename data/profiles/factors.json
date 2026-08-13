@@ -178,17 +178,18 @@
    "plain": "The calendar. Fish keep to seasons more reliably than trains keep to timetables."
   }
  },
+ "_score_labels_comment": "Judged on the calibrated (rescaled) number, not raw: raw is compressed by averaging 8-11 factors per profile, and thresholds set on it were unreachable at the bottom for most profiles (verified against a real 366-day history: 8 of 12 profiles showed 0% Poor all year). Simulated against the real calibrated distribution for all 12 profiles before picking these: every profile reaches at least 3 of the 4 tiers, and no profile concentrates more than 85% of its days in a single tier. A few low-intrinsic-variance profiles (harbour, bream, yakkas, mulloway) never reach Poor -- a real, model-level finding (see CLAUDE.md), not a threshold defect; forcing it would mean per-profile thresholds, which would undo the whole point of a shared calibrated scale.",
  "score_labels": [
   {
-   "min": 80,
+   "min": 62,
    "label": "Excellent"
   },
   {
-   "min": 60,
+   "min": 48,
    "label": "Good"
   },
   {
-   "min": 40,
+   "min": 32,
    "label": "Fair"
   },
   {

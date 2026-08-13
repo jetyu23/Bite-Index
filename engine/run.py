@@ -111,7 +111,14 @@ def run(live: bool) -> dict:
                 "calibrated": calibrated,
                 "raw_median": dist[len(dist) // 2] if dist else None,
                 "reason": scoring.env_summary(res["drivers"], metric_defs, res.get("gate_note")),
-                "label": scoring.score_label(raw_display, labels),
+                # Tier label is judged on the calibrated scale, not raw: raw
+                # is compressed by averaging 8-11 factors (rock's raw scores
+                # spent a whole year never once reaching "Excellent" under
+                # thresholds set on raw). Falls back to raw with no
+                # calibration (sample data, or a fresh clone before the
+                # first calibrate.py run) -- a capped/flagged score is
+                # always low enough to read "Poor" on either scale.
+                "label": scoring.score_label(calibrated if calibrated is not None else raw_display, labels),
                 "best_window": window,
                 "safety_flag": res["safety_flag"],
                 "safety_message": res["safety_message"],
@@ -151,7 +158,7 @@ def run(live: bool) -> dict:
                     "session_mean": res["session_mean"],
                     "best_session": res["best_session"],
                     "calibrated": own_calibrated,
-                    "label": scoring.score_label(own_raw, labels),
+                    "label": scoring.score_label(own_calibrated if own_calibrated is not None else own_raw, labels),
                     "environment": res["environment"],
                     "environment_name": env_names[res["environment"]],
                     "best_window": window,

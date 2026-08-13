@@ -463,27 +463,31 @@ def build_headline(env_results: list[dict], species_results: list[dict], metric_
     notes = top_notes(best.get("raw_drivers", []), metric_defs, 1)
     note = (notes[0] if notes else "").rstrip(".")
 
-    s = best["score"]
-    if s >= 75:
+    # Phrasing thresholds mirror score_labels (Excellent/Good/Fair/Poor at
+    # 62/48/32), judged on the same calibrated value as the tier label --
+    # raw stays compressed (most profiles never reach the high-70s), so a
+    # threshold set on raw would make "firing today" nearly unreachable.
+    s = _rank(best)
+    if s >= 62:
         lead = f"The {name(best)} is firing today" + (f": {note}." if note else ".")
-    elif s >= 58:
+    elif s >= 48:
         lead = f"{name(best).capitalize()} first today" + (f": {note}." if note else ".")
-    elif s >= 42:
+    elif s >= 32:
         lead = f"A middling day. {name(best).capitalize()} is the pick" + (f": {note}." if note else ".")
     else:
         lead = f"A tough survey today; {name(best)} edges it at {best['score']}."
     parts = [lead]
 
     if second and second["id"] != best["id"]:
-        if second["score"] >= 58:
+        if _rank(second) >= 48:
             parts.append(f"{name(second).capitalize()} holds too.")
-        elif second["score"] >= 42:
+        elif _rank(second) >= 32:
             parts.append(f"{name(second).capitalize()} is workable.")
 
     flagged = [e for e in env_results if e.get("safety_flag")]
     if flagged:
         parts.append("Stay off the rocks: swell is over the safety line.")
-    elif worst["score"] < 40 and worst["id"] != best["id"]:
+    elif _rank(worst) < 32 and worst["id"] != best["id"]:
         parts.append(f"Give the {name(worst)} a miss.")
 
     if species_results:
