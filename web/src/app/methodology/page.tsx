@@ -213,8 +213,15 @@ export default function MethodologyPage() {
           Tides come from a global ocean model sampled near Sydney Harbour, refined to event times by fitting a
           parabola around each extreme: good enough to plan a session, <strong>not official tide predictions and
           not for navigation</strong>. Swell is a model grid point off the coast, so your specific ledge or gutter
-          will differ. Rain is used as a turbidity proxy without measuring turbidity. Season curves and every
-          weight are one angler&apos;s codified judgment: v1 of a model, not truth.
+          will differ. Rain is used as a turbidity proxy without measuring turbidity. Wind, for every profile that
+          scores it (rock, beach, estuary, harbour and boat/offshore alike), is read from Open-Meteo&apos;s forecast
+          model at a Sydney CBD land point, not a marine buoy or an offshore model grid cell; Open-Meteo&apos;s
+          marine API has no wind field at all. A land point <strong>systematically understates true offshore wind
+          speed</strong>, most on a sea-breeze afternoon or ahead of a front, which matters most for boat/offshore,
+          where wind carries the heaviest weight in the model (30%) and the profile&apos;s own justification calls
+          it &ldquo;the gatekeeper&rdquo;. Treat the wind number here as a floor, not a forecast, especially before
+          a bar crossing. Season curves and every weight are one angler&apos;s codified judgment: v1 of a model, not
+          truth.
         </p>
         <h2 style={{ marginTop: 26 }}>What would make this better (v3)</h2>
         <p>
