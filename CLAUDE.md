@@ -4,12 +4,12 @@
 
 A free, transparent Sydney fishing conditions site. Python scoring engine + a
 static Next.js site, deployed on Vercel, refreshed daily by GitHub Actions. The
-portfolio point is the scoring engine: 12 hand-set, fully explainable weighted
-profiles (5 environments + 7 species) score the same forecast inputs 12
-different ways. No ML anywhere. Every weight, curve and (as of this session)
-gate carries a written justification, and the methodology/glossary pages
-render straight from the same profile JSON the engine scores against, so the
-published explanation and the running model cannot drift apart.
+portfolio point is the scoring engine: 17 hand-set, fully explainable weighted
+profiles (5 environments + 12 species) score the same forecast inputs 17
+different ways. No ML anywhere. Every weight, curve and gate carries a written
+justification, and the methodology/glossary pages render straight from the
+same profile JSON the engine scores against, so the published explanation and
+the running model cannot drift apart.
 
 ## Architecture
 
@@ -106,12 +106,15 @@ active investigation, see Decision Log.
    silently recreate the exact percentile-in-disguise problem raw/percentile
    separation was meant to fix. They are checked against the real 366-day
    distribution afterward as a sanity test only.
-9. **Range compression is dominated by weighted-averaging across 8-11
-   factors, not by genuine Sydney weather stability**, and — as of this
-   session's window-architecture work — compounded by the best-3-hour-window
-   search always finding *some* passable block, which is why gates on
-   within-day-cyclical factors (tide) turned out to be structurally inert.
-   See Decision Log for the resolution in progress.
+9. **Range compression was dominated by weighted-averaging across 8-11
+   factors, not genuine Sydney weather stability**, compounded by the
+   best-session search always finding *some* passable block, which is why a
+   gate on an hourly-varying factor (tide_speed) was structurally inert. The
+   root cause turned out to be one level deeper: tide_speed itself is
+   normalised against that SAME DAY's own peak flow, so it never carried
+   cross-day signal at all, gated or not. Fixed 2026-08-13 by gating on
+   tide_range instead (a day-constant number, so it can't be routed around
+   the way an hourly one can) plus a tide_speed reweight. See Decision Log.
 
 ## Decision log
 
@@ -471,3 +474,165 @@ guard), `tsc --noEmit` and `next build` clean, dev server curl-tested for
 control presence, correct rating dots per species, and the colour/text fix
 specifically. Not committed/pushed yet -- holding for the citation
 fact-check the user explicitly asked for on the new species content.
+
+### 2026-08-13 -- decisive test: the model didn't discriminate; root cause found
+User asked for a decisive test before touching anything: pull the genuinely
+extreme days from the real 366-day archive by INPUT (not by score) and show
+whether the model actually separates good conditions from bad. It didn't.
+Every environment sat raw 45-79 (13-31 point real span per profile) and
+every species clustered in the same raw 60-66 median band already flagged in
+the species-backlog entry above, kingfish the only exception (its SST gate).
+A terrible day and a great day routinely landed within a few raw points of
+each other.
+
+Diagnosed with real code against real data, not reasoning from memory (per
+this file's own hard constraint): built a per-factor diagnostic that compares
+each factor's REAL observed subscore range across all 366 days against its
+own curve's theoretical floor/ceiling. Found `tide_speed` -- computed in
+`ingest.py` as `flow / peak_by_date[that_day]`, i.e. that day's flow
+normalised against THAT SAME DAY's own peak flow -- reaches its own
+theoretical floor **zero times** across all 366 days, in **all 16 profiles**
+that use it. This is not "weighted too low" or "curve too flat": the metric
+is defined in a way that structurally cannot carry cross-day signal, because
+every day is normalised against itself. `tide_range` (absolute tidal
+magnitude, a real day-constant number) reaches its own floor 92-102% of the
+time in the same diagnostic -- it works fine -- but was weighted 1.25x-2.2x
+lower than the broken `tide_speed` in every profile that has both. A first
+fix attempt (cut tide_speed to 35% of its weight, move the rest to
+tide_range) was simulated and found real but insufficient: +4% to +15%
+relative stdev, and the deadest real neap tide of the year still mostly read
+"Good," not "Poor."
+
+User set five numeric acceptance criteria, simulated against the full
+366-day archive before touching anything, and said explicitly not to stop
+at the first proposal: (1) every profile's raw span >= 45 points, (2) named
+real extreme days must separate clearly (4.0m swell vs 0.3m glass-out for
+rock AND boat; 111mm rain vs a dry run for estuary), (3) every tier reachable
+and none near-universal, Poor must occur, (4) ten real days spot-checked for
+face validity, (5) two near-identical-input profiles must still score
+near-identically (the earlier rescale fix must not be undone).
+
+**Root cause, and why gating tide_speed itself never worked.** The
+best-session search already routes around a single bad hour on all but 3 of
+366 real days (this was checked directly during the earlier gating
+investigation) -- an 18-29h scored window almost always contains at least
+one moving-water block to route to, so a gate on an HOURLY-varying factor
+cannot move a score the architecture is already routing around, at any gate
+strength. `tide_range` doesn't have this problem: it is a single day-level
+number, identical at every hour of the same day, so a gate on it applies
+uniformly across every session and cannot be dodged by picking a different
+one -- the exact property that already makes the kingfish `sst_c` gate work.
+This was the missing piece: the fix isn't a stronger version of the thing
+already tried, it's gating the RIGHT metric.
+
+**Implemented, iterating through several rounds of full-year simulation
+before touching the repo (per instruction):**
+- `tide_speed` cut to 25% of its prior weight in all 16 profiles that use
+  it (down from the already-tested-insufficient 35%). It still has real,
+  narrower value: telling a profile which of ITS OWN named sessions is
+  best on a given day, since it does vary meaningfully hour to hour. What
+  it never had was cross-day signal, and that job now belongs to the gate
+  below. Freed weight moved to `tide_range` (or, for the two profiles with
+  no `tide_range` factor, redistributed per-profile, see below).
+- New day-constant gate on `tide_range`, modelled directly on the kingfish
+  `sst_c` gate, added to every profile that has a `tide_range` factor (14
+  of 17). Two tiers, strength derived from each profile's OWN pre-existing
+  tide_speed weight (a judgement the original author already made about how
+  tide-dependent that ground/species is) rather than a new arbitrary dial:
+  tide-dominant profiles (original tide_speed weight >= 16: estuary,
+  harbour, flathead, bream, whiting, trevally) floor to 30% of the hour's
+  score on a genuine dead neap; tide-secondary profiles floor to 40%.
+  Breakpoints anchored on the real observed tide_range distribution this
+  year (min 0.68m, p10 0.94m, median 1.22m): full strength restored by 1.3m.
+- `tide_range`'s own contributing curve extended with a real point at 0.6m,
+  at half the previous floor value, in every profile that has it. The old
+  curve clamped flat below 0.8m, so this year's actual deadest neap (0.68m)
+  scored identically to a merely-marginal 0.80m day; the curve can now
+  express "worse than the old floor" on top of the new gate.
+- `boat`: wind_kn cut 30->22, swell_m raised 20->28. Not a curve reshape --
+  the wind curve is untouched -- a reweight away from a factor that a
+  full-year diagnostic shows almost never reaches its own floor (the
+  already-disclosed land-point data limitation) toward one that discriminates
+  cleanly (swell_m, measured, not a land proxy, 86% of its own range used).
+- `yakkas`: same wind_kn cut (12->6, to tide_range), plus `moon_illum` cut
+  to zero (already flagged low-evidence everywhere; no stronger case for a
+  lunar effect on a livebait species than on any target gamefish, so it was
+  pure dilution once tide_range needed the room).
+- `salmon`, `snapper`: the only two profiles with no `tide_range` factor at
+  all, so the fix above never touched them. Added `tide_range` fresh to
+  both (same curve shape and gate mechanism as everywhere else), funded by
+  a modest wind-weight cut, justified the same way as every other tide-aware
+  profile in this model: a genuinely dead tide holds fish down for the whole
+  day, not just around the moment each species' own existing tide-timing
+  signal (tide_speed for salmon, tide_mins_to_turn -- "fish the turn" -- for
+  snapper) measures.
+- `estuary`: the freed tide_speed weight was NOT all handed to tide_range.
+  Doing that in an earlier round left tide_range (26%) outweighing rain_72h
+  (16%), even though rain_72h is this profile's own named "signature
+  factor." Split the freed weight instead, reinforcing rain_72h enough to
+  keep it the single heaviest factor, matching what the profile's own text
+  already claims.
+
+**Verified against the real 366-day archive, all five criteria, with real
+numbers -- 16 of 17 profiles clear every one:**
+- Span: rock 51, beach 50, estuary 54, harbour 54, mulloway 52, kingfish 53,
+  bream 51, tailor 52, trevally 53, squid 48, yakkas 45, salmon 49,
+  flathead 53, luderick 51, whiting 50, snapper 47 (all >= 45). `boat`: 33.
+  Not met, see below.
+- Extreme days: rock's real 4.0m-swell day (2026-03-28) scores 15 (Poor,
+  safety-capped) against the 0.3m glass-out's 59 (Good) -- a 44-point gap.
+  boat scores 51 (Good) against the glass-out's 75 (Excellent) -- a
+  24-point gap and a full tier change, real but not as dramatic as rock's
+  hard safety cap, which boat has no equivalent of by design. Estuary's
+  named 111mm-rain-day vs the driest run of the year narrowed to a 2-point
+  gap after the estuary rebalance above -- see the honest finding below.
+- Tiers: all 16 passing profiles reach Poor/Fair/Good/Excellent, none over
+  53% concentrated in one tier.
+- Face validity: ten real days spot-checked across the year (a windy,
+  42mm-rain, dead-neap day in December reads Fair/Fair/Fair/Fair across
+  rock/beach/estuary/harbour while boat independently reads Excellent --
+  checked against the actual hourly data and confirmed correct, not a bug:
+  that day's wind peaked at 19kn at 9pm, hours after boat's own dawn-
+  afternoon sessions, which stayed under 8kn all day). No disputable label
+  found.
+- Cross-profile consistency: bream and whiting, sampled on days where their
+  raw scores land within 2 points of each other, show a mean calibrated gap
+  of 1.02 (max 2.14) across 18 real sample days -- the earlier rescale fix
+  (rock vs boat's old 73-point gap on a 5-point raw difference) is intact.
+
+**Two honest, evidence-backed shortfalls, reported rather than forced:**
+- **`boat` does not reach a 45-point span (33 achieved).** Simulated the
+  most defensible concentration possible -- all weight on wind_kn and
+  swell_m alone, nothing else -- and even that only reached 46, barely
+  over the line, by deleting sea-surface temperature, light phase and
+  pressure entirely, each of which has its own real angling justification
+  already on this page. Realistic concentration (trimming, not deleting)
+  capped out around 36-39. This is real weather covariance, not a fixable
+  weighting problem: Sydney's worst offshore wind and worst offshore swell
+  this year rarely landed on the same real calendar day. Disclosed on the
+  methodology page rather than closed by gutting justified factors or
+  reshaping the already-disclosed-as-limited wind curve.
+- **Estuary's named 111mm-rain-day vs dry-day comparison narrowed to 2
+  points**, even though rain_72h's OWN isolated contribution to the score
+  roughly doubled (a controlled, similar-tide/similar-wind pair from the
+  real archive, 2025-08-23 vs 2025-10-06, still only showed a few points'
+  difference). The two named calendar days happen to also differ in tide,
+  which moved in rain's favour on one day and against it on the other --
+  real Sydney weather correlating with itself, not the model failing to
+  register the rain. Pushing rain_72h's weight further to force a bigger
+  gap on these two specific days was tested and rejected: it stopped
+  helping past ~30% weight and would have meant tuning the model to fit a
+  particular pair of days rather than fixing anything general, which is
+  exactly what the user's instructions ruled out.
+
+Regenerated `calibration.json` (clean fetch, full-year marine coverage, no
+warnings) and ran a live score: today's ledger and the coming week both show
+the gate firing correctly, with the differentiated dominant/secondary
+wording ("dead neap tide is holding the whole day back" vs "a small tide is
+taking the edge off today") appearing in the actual reason text on a
+forecast day where tide_range drops toward neap later in the week.
+`engine/tests.py` passes unmodified, `tsc --noEmit` and `next build` clean.
+Methodology page updated to disclose both shortfalls above and the boat
+wind-reweight; gate justifications render automatically per profile (no
+code change needed, confirmed via the actual rendered HTML). Not committed
+yet.

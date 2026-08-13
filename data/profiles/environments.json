@@ -122,7 +122,7 @@
     },
     {
      "metric": "tide_speed",
-     "weight": 12,
+     "weight": 3,
      "type": "curve",
      "points": [
       [
@@ -142,7 +142,7 @@
        86.4
       ]
      ],
-     "justification": "Moving water concentrates the washes and gets pelagics and drummer feeding along the edges."
+     "justification": "Moving water concentrates the washes and gets pelagics and drummer feeding along the edges. REVISED 2026-08-13: full-year diagnostic showed tide_speed, computed as flow normalised against that SAME DAY's own peak flow, never once reached its own theoretical floor across 366 real days in any of the 16 profiles using it -- it carries no cross-day signal by construction, only within-day shape. Cut to a quarter of its former weight: still useful for picking which of a profile's named sessions is best on a given day, but no longer trusted to say whether today's tide is good or bad overall. That job now belongs to the tide_range gate below, which reads an absolute, day-constant number instead."
     },
     {
      "metric": "light_phase",
@@ -158,9 +158,13 @@
     },
     {
      "metric": "tide_range",
-     "weight": 8,
+     "weight": 17,
      "type": "curve",
      "points": [
+      [
+       0.6,
+       19.0
+      ],
       [
        0.8,
        38.0
@@ -174,7 +178,7 @@
        76.0
       ]
      ],
-     "justification": "Bigger tides push more water through the washes. Springs generally beat neaps off the stones."
+     "justification": "Bigger tides push more water through the washes. Springs generally beat neaps off the stones. REVISED 2026-08-13: extended the floor to 0.6m at half the previous floor value. The old curve clamped flat below 0.8m, so this year's actual deadest neap (0.68m) scored identically to a merely-marginal 0.80m day; the extension lets the curve itself express \"worse than the old floor\" for genuinely dead water, on top of the new gate below."
     },
     {
      "metric": "pressure",
@@ -277,7 +281,32 @@
      "justification": "Heavy rain during the session makes platforms slippery and visibility poor; a comfort and safety discount, not a bite factor."
     }
    ],
-   "tag": "LEDGES & WASHES"
+   "tag": "LEDGES & WASHES",
+   "gates": [
+    {
+     "metric": "tide_range",
+     "points": [
+      [
+       0.68,
+       0.4
+      ],
+      [
+       0.9,
+       0.64
+      ],
+      [
+       1.1,
+       0.85
+      ],
+      [
+       1.3,
+       1.0
+      ]
+     ],
+     "note": "a small tide is taking the edge off today",
+     "justification": "tide_range is a single day-level number, not an hourly one -- unlike tide_speed, it can't be dodged by picking a different session, which is exactly the property that makes the kingfish sst_c gate work and makes a gate on tide_speed pointless (full-year check: the best-session search already routes around a bad hour on all but 3 of 366 real days). Tide is secondary here (tide_speed carried only 12% of this profile's original weight), so the gate is gentler than the tide-dominant grounds/species: a genuine dead neap (this year's minimum was 0.68m) floors the hour-score to 40% rather than 30%, ramping back to full strength by 1.3m, above the year's own median (1.22m)."
+    }
+   ]
   },
   {
    "id": "beach",
@@ -378,7 +407,7 @@
     },
     {
      "metric": "tide_speed",
-     "weight": 10,
+     "weight": 2,
      "type": "curve",
      "points": [
       [
@@ -398,13 +427,17 @@
        84.0
       ]
      ],
-     "justification": "A making or running tide moves food through the gutters; the top of the tide also lets you fish gutters that are too shallow at low."
+     "justification": "A making or running tide moves food through the gutters; the top of the tide also lets you fish gutters that are too shallow at low. REVISED 2026-08-13: full-year diagnostic showed tide_speed, computed as flow normalised against that SAME DAY's own peak flow, never once reached its own theoretical floor across 366 real days in any of the 16 profiles using it -- it carries no cross-day signal by construction, only within-day shape. Cut to a quarter of its former weight: still useful for picking which of a profile's named sessions is best on a given day, but no longer trusted to say whether today's tide is good or bad overall. That job now belongs to the tide_range gate below, which reads an absolute, day-constant number instead."
     },
     {
      "metric": "tide_range",
-     "weight": 8,
+     "weight": 16,
      "type": "curve",
      "points": [
+      [
+       0.6,
+       19.0
+      ],
       [
        0.8,
        38.0
@@ -418,7 +451,7 @@
        76.0
       ]
      ],
-     "justification": "Bigger tides flush the gutters harder and give a stronger run-in session in the evening."
+     "justification": "Bigger tides flush the gutters harder and give a stronger run-in session in the evening. REVISED 2026-08-13: extended the floor to 0.6m at half the previous floor value. The old curve clamped flat below 0.8m, so this year's actual deadest neap (0.68m) scored identically to a merely-marginal 0.80m day; the extension lets the curve itself express \"worse than the old floor\" for genuinely dead water, on top of the new gate below."
     },
     {
      "metric": "swell_period_s",
@@ -541,7 +574,32 @@
      "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
     }
    ],
-   "tag": "GUTTERS & BANKS"
+   "tag": "GUTTERS & BANKS",
+   "gates": [
+    {
+     "metric": "tide_range",
+     "points": [
+      [
+       0.68,
+       0.4
+      ],
+      [
+       0.9,
+       0.64
+      ],
+      [
+       1.1,
+       0.85
+      ],
+      [
+       1.3,
+       1.0
+      ]
+     ],
+     "note": "a small tide is taking the edge off today",
+     "justification": "tide_range is a single day-level number, not an hourly one -- unlike tide_speed, it can't be dodged by picking a different session, which is exactly the property that makes the kingfish sst_c gate work and makes a gate on tide_speed pointless (full-year check: the best-session search already routes around a bad hour on all but 3 of 366 real days). Tide is secondary here (tide_speed carried only 10% of this profile's original weight), so the gate is gentler than the tide-dominant grounds/species: a genuine dead neap (this year's minimum was 0.68m) floors the hour-score to 40% rather than 30%, ramping back to full strength by 1.3m, above the year's own median (1.22m)."
+    }
+   ]
   },
   {
    "id": "estuary",
@@ -558,7 +616,7 @@
    "factors": [
     {
      "metric": "tide_speed",
-     "weight": 22,
+     "weight": 6,
      "type": "curve",
      "points": [
       [
@@ -578,11 +636,11 @@
        86.4
       ]
      ],
-     "justification": "In sheltered water the tide IS the weather. Run-out especially drains bait off the flats and out of the mangroves past waiting predators. Slack water is the classic dead hour."
+     "justification": "In sheltered water the tide IS the weather. Run-out especially drains bait off the flats and out of the mangroves past waiting predators. Slack water is the classic dead hour. REVISED 2026-08-13: full-year diagnostic showed tide_speed, computed as flow normalised against that SAME DAY's own peak flow, never once reached its own theoretical floor across 366 real days in any of the 16 profiles using it -- it carries no cross-day signal by construction, only within-day shape. Cut to a quarter of its former weight: still useful for picking which of a profile's named sessions is best on a given day, but no longer trusted to say whether today's tide is good or bad overall. That job now belongs to the tide_range gate below, which reads an absolute, day-constant number instead."
     },
     {
      "metric": "rain_72h",
-     "weight": 16,
+     "weight": 24,
      "type": "curve",
      "points": [
       [
@@ -610,7 +668,7 @@
        9.5
       ]
      ],
-     "justification": "The estuary's signature factor. 10\u201340 mm over a few days colours the water, flushes prawns and baitfish down and switches on mulloway and bream. Flood-level rain (>80 mm) blows the system out with fresh, dirty water and shuts it down."
+     "justification": "The estuary's signature factor. 10\u201340 mm over a few days colours the water, flushes prawns and baitfish down and switches on mulloway and bream. Flood-level rain (>80 mm) blows the system out with fresh, dirty water and shuts it down. REVISED 2026-08-13: of the weight freed from tide_speed's cut, only half went to tide_range -- the rest reinforced rain_72h instead, so rain stays the single heaviest-weighted factor in this profile, matching what this factor's own justification already claims (\"the estuary's signature factor\")."
     },
     {
      "metric": "light_phase",
@@ -654,9 +712,13 @@
     },
     {
      "metric": "tide_range",
-     "weight": 10,
+     "weight": 18,
      "type": "curve",
      "points": [
+      [
+       0.6,
+       20.4
+      ],
       [
        0.8,
        40.8
@@ -670,7 +732,7 @@
        80.8
       ]
      ],
-     "justification": "Spring tides move more water through the system and make the run-out window stronger."
+     "justification": "Spring tides move more water through the system and make the run-out window stronger. REVISED 2026-08-13: extended the floor to 0.6m at half the previous floor value. The old curve clamped flat below 0.8m, so this year's actual deadest neap (0.68m) scored identically to a merely-marginal 0.80m day; the extension lets the curve itself express \"worse than the old floor\" for genuinely dead water, on top of the new gate below."
     },
     {
      "metric": "pressure",
@@ -797,7 +859,32 @@
      "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
     }
    ],
-   "tag": "RIVERS & REACHES"
+   "tag": "RIVERS & REACHES",
+   "gates": [
+    {
+     "metric": "tide_range",
+     "points": [
+      [
+       0.68,
+       0.3
+      ],
+      [
+       0.9,
+       0.58
+      ],
+      [
+       1.1,
+       0.825
+      ],
+      [
+       1.3,
+       1.0
+      ]
+     ],
+     "note": "dead neap tide is holding the whole day back",
+     "justification": "tide_range is a single day-level number, not an hourly one -- unlike tide_speed, it can't be dodged by picking a different session, which is exactly the property that makes the kingfish sst_c gate work and makes a gate on tide_speed pointless (full-year check: the best-session search already routes around a bad hour on all but 3 of 366 real days). On this profile's original weighting, tide was already judged the dominant driver (tide_speed carried 22% of the weight, more than any factor here). A genuine dead neap (this year's minimum was 0.68m) holds the whole day back regardless of session choice, so the gate floors this profile's hour-scores to 30% of what the other factors alone would produce on the deadest tides, ramping back to full strength by 1.3m, above the year's own median (1.22m)."
+    }
+   ]
   },
   {
    "id": "harbour",
@@ -814,7 +901,7 @@
    "factors": [
     {
      "metric": "tide_speed",
-     "weight": 20,
+     "weight": 5,
      "type": "curve",
      "points": [
       [
@@ -834,7 +921,7 @@
        86.4
       ]
      ],
-     "justification": "Harbour fishing is structure fishing, and structure only works when current pushes bait past it. Markers, moorings and pylons all fire on the run."
+     "justification": "Harbour fishing is structure fishing, and structure only works when current pushes bait past it. Markers, moorings and pylons all fire on the run. REVISED 2026-08-13: full-year diagnostic showed tide_speed, computed as flow normalised against that SAME DAY's own peak flow, never once reached its own theoretical floor across 366 real days in any of the 16 profiles using it -- it carries no cross-day signal by construction, only within-day shape. Cut to a quarter of its former weight: still useful for picking which of a profile's named sessions is best on a given day, but no longer trusted to say whether today's tide is good or bad overall. That job now belongs to the tide_range gate below, which reads an absolute, day-constant number instead."
     },
     {
      "metric": "light_phase",
@@ -958,9 +1045,13 @@
     },
     {
      "metric": "tide_range",
-     "weight": 8,
+     "weight": 23,
      "type": "curve",
      "points": [
+      [
+       0.6,
+       20.4
+      ],
       [
        0.8,
        40.8
@@ -974,7 +1065,7 @@
        77.6
       ]
      ],
-     "justification": "More range, more current past the structure."
+     "justification": "More range, more current past the structure. REVISED 2026-08-13: extended the floor to 0.6m at half the previous floor value. The old curve clamped flat below 0.8m, so this year's actual deadest neap (0.68m) scored identically to a merely-marginal 0.80m day; the extension lets the curve itself express \"worse than the old floor\" for genuinely dead water, on top of the new gate below."
     },
     {
      "metric": "pressure",
@@ -1073,7 +1164,32 @@
      "justification": "LOW EVIDENCE. Solunar folklore, small weight, disclosed."
     }
    ],
-   "tag": "PYLONS & EDGES"
+   "tag": "PYLONS & EDGES",
+   "gates": [
+    {
+     "metric": "tide_range",
+     "points": [
+      [
+       0.68,
+       0.3
+      ],
+      [
+       0.9,
+       0.58
+      ],
+      [
+       1.1,
+       0.825
+      ],
+      [
+       1.3,
+       1.0
+      ]
+     ],
+     "note": "dead neap tide is holding the whole day back",
+     "justification": "tide_range is a single day-level number, not an hourly one -- unlike tide_speed, it can't be dodged by picking a different session, which is exactly the property that makes the kingfish sst_c gate work and makes a gate on tide_speed pointless (full-year check: the best-session search already routes around a bad hour on all but 3 of 366 real days). On this profile's original weighting, tide was already judged the dominant driver (tide_speed carried 20% of the weight, more than any factor here). A genuine dead neap (this year's minimum was 0.68m) holds the whole day back regardless of session choice, so the gate floors this profile's hour-scores to 30% of what the other factors alone would produce on the deadest tides, ramping back to full strength by 1.3m, above the year's own median (1.22m)."
+    }
+   ]
   },
   {
    "id": "boat",
@@ -1088,7 +1204,7 @@
    "factors": [
     {
      "metric": "wind_kn",
-     "weight": 30,
+     "weight": 22,
      "type": "curve",
      "points": [
       [
@@ -1120,11 +1236,11 @@
        2
       ]
      ],
-     "justification": "The gatekeeper offshore. Under 10 kn is pleasant, 10\u201315 workable, over 18\u201320 is a safety and seasickness problem regardless of how good everything else looks. Weighted heaviest for that reason."
+     "justification": "The gatekeeper offshore. Under 10 kn is pleasant, 10\u201315 workable, over 18\u201320 is a safety and seasickness problem regardless of how good everything else looks. Weighted heaviest for that reason. REVISED 2026-08-13: wind_kn/wind_onshore_kn read Open-Meteo's forecast-endpoint land-point wind (Sydney CBD), not an offshore reading -- a known, disclosed limitation (see the methodology page), not something this weight change tries to fix. What changed: full-year diagnostic showed this factor almost never reaches its own curve's floor despite real bad-wind days existing, while swell_m (measured, not a land proxy) discriminates cleanly across 86% of its own range. Moved weight away from the weaker-known signal toward the stronger one already in this profile -- the wind curve itself is untouched, so this doesn't manufacture precision the land-point reading doesn't have."
     },
     {
      "metric": "swell_m",
-     "weight": 20,
+     "weight": 28,
      "type": "curve",
      "points": [
       [
@@ -1220,7 +1336,7 @@
     },
     {
      "metric": "tide_speed",
-     "weight": 6,
+     "weight": 2,
      "type": "curve",
      "points": [
       [
@@ -1236,7 +1352,7 @@
        76.0
       ]
      ],
-     "justification": "Current matters on the reefs and around the change, though less dominant than inshore."
+     "justification": "Current matters on the reefs and around the change, though less dominant than inshore. REVISED 2026-08-13: full-year diagnostic showed tide_speed, computed as flow normalised against that SAME DAY's own peak flow, never once reached its own theoretical floor across 366 real days in any of the 16 profiles using it -- it carries no cross-day signal by construction, only within-day shape. Cut to a quarter of its former weight: still useful for picking which of a profile's named sessions is best on a given day, but no longer trusted to say whether today's tide is good or bad overall. That job now belongs to the tide_range gate below, which reads an absolute, day-constant number instead."
     },
     {
      "metric": "pressure",

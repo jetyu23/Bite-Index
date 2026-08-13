@@ -236,10 +236,31 @@ export default function MethodologyPage() {
           model at a Sydney CBD land point, not a marine buoy or an offshore model grid cell; Open-Meteo&apos;s
           marine API has no wind field at all. A land point <strong>systematically understates true offshore wind
           speed</strong>, most on a sea-breeze afternoon or ahead of a front, which matters most for boat/offshore,
-          where wind carries the heaviest weight in the model (30%) and the profile&apos;s own justification calls
-          it &ldquo;the gatekeeper&rdquo;. Treat the wind number here as a floor, not a forecast, especially before
-          a bar crossing. Season curves and every weight are one angler&apos;s codified judgment: v1 of a model, not
-          truth.
+          where wind still carries the single heaviest weight in the model (22%, cut from 30% on 2026-08-13, see
+          below) and the profile&apos;s own justification calls it &ldquo;the gatekeeper&rdquo;. Treat the wind
+          number here as a floor, not a forecast, especially before a bar crossing. Season curves and every weight
+          are one angler&apos;s codified judgment: v1 of a model, not truth.
+        </p>
+        <p>
+          <strong>Boat/offshore&apos;s day-to-day range is narrower than every other profile&apos;s, and stays that
+          way on purpose.</strong> A 2026-08-13 pass moved real weight off the land-point wind reading toward
+          swell_m (measured, not a land proxy) specifically because it does not discriminate real days from each
+          other. That helped, but simulating the most aggressive concentration defensible on angling grounds (all
+          the weight on wind and swell alone, nothing else) still only reached about two thirds of the range every
+          other profile now reaches, because Sydney&apos;s real offshore weather this year rarely put a genuine
+          wind extreme and a genuine swell extreme on the same calendar day. Reaching further would mean either
+          fabricating precision the land-point wind reading doesn&apos;t have, or stripping out factors
+          (sea-surface temperature, dawn-start light phase, settled-high pressure) that have their own honest
+          angling justification just to make the histogram wider. Both were rejected. The gap is disclosed here
+          rather than closed by either.
+        </p>
+        <p>
+          Estuary&apos;s rain_72h weight was reinforced in the same 2026-08-13 pass so it stays the single heaviest
+          factor in that profile, matching its own justification (&ldquo;the estuary&apos;s signature factor&rdquo;).
+          Its isolated effect on the score roughly doubled. On any two specific real calendar days, though, tide and
+          rain don&apos;t move independently of each other by coincidence, so a heavy-rain day and a dry day can
+          still land close together if the dry day happened to also draw a smaller tide. That is real Sydney weather
+          correlating with itself, not the model failing to notice the rain.
         </p>
         <h2 style={{ marginTop: 26 }}>What would make this better (v3)</h2>
         <p>
