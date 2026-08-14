@@ -70,21 +70,28 @@ def main() -> None:
         med = raws[len(raws) // 2] if raws else None
         print(f"  {profile['id']:<10} n={len(raws):>3}  raw median={med}")
 
-    # Pooled across every profile, not per-profile: this is what the display
-    # rescale is anchored on, deliberately, so equal raw quality displays
-    # equally regardless of which ground or species it's from. See
-    # scoring.rescale()'s docstring for why per-profile anchors were rejected.
+    # Pooled across every profile: used ONLY for cross-profile RANKING
+    # (build_headline's "best ground", species "top targets" ordering) via
+    # scoring.rescale(). See scoring.rescale()'s docstring for why a
+    # per-profile version was rejected for this specific purpose.
     pooled = sorted(v for raws in dist.values() for v in raws)
     anchors = scoring.rescale_anchors(pooled)
-    print(f"  rescale anchors (pooled, min/p1/p10/p90/p99/max): {[round(a, 1) for a in anchors]}")
+    print(f"  rescale anchors (pooled, ranking-only, min/p1/p10/p90/p99/max): {[round(a, 1) for a in anchors]}")
+
+    # Per-profile: used for DISPLAY (the "calibrated" number and tier label
+    # a reader actually sees) via scoring.rescale_display(). See that
+    # function's docstring for why display and ranking deliberately use
+    # different anchor sets now.
+    anchors_by_profile = {pid: scoring.rescale_anchors(raws) for pid, raws in dist.items() if raws}
 
     payload = {
         "generated": date.today().isoformat(),
         "window": [norm.days[0]["date"].isoformat(), norm.days[-1]["date"].isoformat()],
         "n_days": len(norm.days),
-        "note": "Empirical raw-score distributions per profile (used to build 'rescale_anchors' below, pooled across all profiles). Both display and cross-profile ranking (which ground/species is relatively best today) use the non-linear rescale in 'rescale_anchors', not a per-profile percentile lookup -- equal raw quality then displays and ranks equally regardless of which ground or species it's from.",
+        "note": "Empirical raw-score distributions per profile. 'rescale_anchors' (pooled across all profiles) feeds scoring.rescale(), used only for cross-profile ranking. 'rescale_anchors_by_profile' (each profile's own distribution) feeds scoring.rescale_display(), used for the displayed 'calibrated' number and tier label -- so what's shown communicates how rare a score is FOR THAT PROFILE, not a cross-profile comparison (see the methodology page).",
         "profiles": dist,
         "rescale_anchors": anchors,
+        "rescale_anchors_by_profile": anchors_by_profile,
     }
     OUT.write_text(json.dumps(payload, indent=1))
     print(f"\nwrote {OUT} ({len(dist)} profiles, {len(norm.days)} days)")

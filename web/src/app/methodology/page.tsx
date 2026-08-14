@@ -134,13 +134,28 @@ export default function MethodologyPage() {
           distribution. A first version reported straight percentile rank against that distribution, and it made
           two grounds with nearly identical raw quality look wildly different, because each ground&apos;s own
           history sits at a different raw level: on one real day, a 5-point raw gap between rock and boat produced
-          a 73-point rank gap. The calibrated number instead comes from one hand-set curve, shared by every profile,
-          anchored on robust percentiles (minimum, p1, p10, p90, p99, maximum) of the raw scores of all twelve
-          profiles pooled together, not each profile&apos;s own distribution. The middle of that pooled history maps
-          to a deliberately narrow band, roughly 40 to 70; genuinely rare days, high and low, reach further, and do
-          so rarely by construction. No fitting, no ML: every anchor point is a plain percentile you can recompute
-          yourself, and the mapping between anchors is a straight line. The calibration window is printed in the
-          footer.
+          a 73-point rank gap. That was replaced with one hand-set curve, shared by every profile, anchored on
+          robust percentiles pooled across all of them. This pooled curve still exists today, as{" "}
+          <code>rank_score</code>, but it is no longer what&apos;s displayed; it now runs quietly in the background,
+          used only to pick a &ldquo;best ground&rdquo; or order &ldquo;top targets&rdquo; on a scale genuinely
+          comparable across different profiles.
+        </p>
+        <p>
+          The number actually shown next to each score, &ldquo;calibrated&rdquo;, changed again on 2026-08-14 to
+          anchor on each profile&apos;s <strong>own</strong> raw-score history instead of the pooled one, with a
+          wider output range (a hand-set curve through that profile&apos;s own minimum, p1, p10, p90, p99 and
+          maximum, verified against the real 366-day archive before shipping: a 90+ lands roughly once a month for
+          a given ground or species, an 80+ a few times a month, and the ordinary middle still sits roughly 40 to
+          70). This is a deliberate trade: <strong>an 85 on two different grounds now means equally rare for each
+          of them, not equally good in absolute terms</strong>, since boat&apos;s raw ceiling sits well above
+          harbour&apos;s, so an absolute 85 would never have been equally likely for both anyway. Every
+          curve, weight and session in this model is already hand-set per profile; anchoring the number a reader
+          actually sees to a shared pooled scale, while every other part of the same card was profile-specific, was
+          becoming an implementation accident rather than a considered choice. Absolute cross-profile comparison
+          didn&apos;t disappear: it&apos;s what picks the &ldquo;best ground&rdquo; call-out and orders the
+          &ldquo;top targets&rdquo; list, it just isn&apos;t the number printed under each score any more. No
+          fitting, no ML either way: every anchor point is a plain percentile you can recompute yourself, and the
+          mapping between anchors is a straight line. The calibration window is printed in the footer.
         </p>
       </div>
 

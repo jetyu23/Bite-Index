@@ -314,14 +314,31 @@ def calibrate(calib: dict | None, profile_id: str, raw: float) -> float:
 
 
 # Hand-set display targets at each pooled-history anchor. Anchored on robust
-# percentiles (min/p1/p10/p90/p99/max of ALL 12 profiles' raw scores pooled
-# together, not per profile) so equal raw quality displays equally regardless
-# of which ground or species it's from -- the specific bug this fixes. The
-# ordinary middle (p10-p90) gets a deliberately gentle, roughly-consistent
-# slope (~2 display points per raw point); the tails steepen, so genuinely
-# rare days reach further while staying rare, by construction (anchored at
-# p1/p99, not at the theoretical 0/100 ends).
+# percentiles (min/p1/p10/p90/p99/max of ALL 17 profiles' raw scores pooled
+# together, not per profile) so equal raw quality RANKS equally regardless of
+# which ground or species it's from. This is now used ONLY internally, for
+# cross-profile ranking (build_headline's "best ground", species' "top
+# targets" ordering) -- see RESCALE_DISPLAY_TARGETS below for what's actually
+# shown to a reader. Kept separate on purpose: collapsing them back into one
+# number is exactly the mistake that made the original noise-amplification
+# bug possible (rock 74 vs boat 69 read 73 rank-points apart under straight
+# percentile) -- see rescale_display()'s docstring for the fuller story.
 RESCALE_TARGETS = [5.0, 20.0, 40.0, 70.0, 80.0, 95.0]  # y-values for min,p1,p10,p90,p99,max
+
+# Hand-set display targets for the PER-PROFILE display rescale (2026-08-14).
+# Wider than RESCALE_TARGETS on purpose: the pooled version above stays
+# deliberately conservative because it's a ranking key, not something read as
+# a number on its own. This one IS read on its own, and the pooled version's
+# narrow ceiling (a "95" needed a genuinely exceptional profile AND a
+# genuinely exceptional day at once, compounding two rarities into one) meant
+# 90+ was reached only ~1-3 times a year per profile even after the
+# 2026-08-13 tide_speed fix widened every profile's raw distribution.
+# Verified against the real 366-day archive before picking these: 90+ lands
+# 4-16 times a year per profile (close to "about once a month"), 80+ lands
+# 9-36 times a year ("a few times a month"), and the 40-70 "ordinary" band
+# still covers 78-85% of real days -- unchanged from the pooled version,
+# since p10/p90 targets didn't move.
+RESCALE_DISPLAY_TARGETS = [1.0, 12.0, 40.0, 70.0, 93.0, 100.0]
 
 
 def robust_percentile(sorted_vals: list[float], p: float) -> float:
@@ -347,19 +364,7 @@ def rescale_anchors(pooled_sorted: list[float]) -> list[float]:
     return xs
 
 
-def rescale(calib: dict | None, raw: float) -> float:
-    """Non-linear rescale of a raw score for display and cross-profile
-    ranking. Global (same anchors for every profile), not per-profile: a
-    per-profile version was simulated and rejected -- it makes each
-    profile's own "ordinary" band land exactly at 40-70, but two profiles
-    whose raw distributions sit at different levels (boat's runs ~5-6
-    points above rock's) then display similar raw scores very differently,
-    reproducing the exact bug this replaces. Falls back to the raw score
-    when no calibration exists yet, same as calibrate()."""
-    if not calib or "rescale_anchors" not in calib:
-        return raw
-    xs = calib["rescale_anchors"]
-    ys = RESCALE_TARGETS
+def _interp_anchors(xs: list[float], ys: list[float], raw: float) -> float:
     if raw <= xs[0]:
         return ys[0]
     if raw >= xs[-1]:
@@ -370,6 +375,50 @@ def rescale(calib: dict | None, raw: float) -> float:
                 return ys[i + 1]
             return ys[i] + (ys[i + 1] - ys[i]) * (raw - xs[i]) / (xs[i + 1] - xs[i])
     return ys[-1]
+
+
+def rescale(calib: dict | None, raw: float) -> float:
+    """Non-linear rescale of a raw score for CROSS-PROFILE RANKING only
+    (build_headline's "best ground", species "top targets" ordering) -- not
+    for display, see rescale_display() below. Global (same pooled anchors
+    for every profile), not per-profile, specifically because ranking needs
+    two profiles' raw scores to compare on one consistent scale: a
+    per-profile version was simulated for this purpose and rejected -- it
+    makes each profile's own "ordinary" band land exactly at 40-70, but two
+    profiles whose raw distributions sit at different levels (boat's runs
+    ~5-6 points above rock's) then rank similar raw scores very differently,
+    reproducing the exact bug this replaces (rock 74 vs boat 69, a 5-point
+    raw gap, ranked 73 points apart under straight percentile). Falls back
+    to the raw score when no calibration exists yet."""
+    if not calib or "rescale_anchors" not in calib:
+        return raw
+    return _interp_anchors(calib["rescale_anchors"], RESCALE_TARGETS, raw)
+
+
+def rescale_display(calib: dict | None, profile_id: str, raw: float) -> float:
+    """Non-linear rescale of a raw score for DISPLAY -- the "calibrated"
+    number and tier label shown to a reader. Per-profile (2026-08-14),
+    unlike rescale() above: every other part of this engine (curves,
+    weights, sessions, gates) is already hand-set per profile, and pooled
+    anchors here meant a reader effectively saw "how good is this raw score
+    across ALL 17 profiles pooled" rather than "how rare is this for the
+    ground/species in front of me" -- the latter is what a 90+ or an
+    Excellent tag is actually trying to communicate. The tradeoff, stated
+    plainly (also on the methodology page): an 85 on two different profiles
+    now means "equally rare for that profile," not "equally good in
+    absolute terms" -- absolute cross-profile comparison is what rescale()
+    and rank_score exist for, and nothing that picks a "best ground" or
+    orders "top targets" reads this function's output. Falls back to
+    rescale()'s pooled anchors if this profile has no per-profile anchors
+    yet (a fresh calibration.json before its next regeneration), then to
+    raw with no calibration at all."""
+    if not calib:
+        return raw
+    by_profile = calib.get("rescale_anchors_by_profile", {})
+    xs = by_profile.get(profile_id)
+    if not xs:
+        return rescale(calib, raw)
+    return _interp_anchors(xs, RESCALE_DISPLAY_TARGETS, raw)
 
 
 # --------------------------------------------------------------------------- #
@@ -451,7 +500,12 @@ def build_headline(env_results: list[dict], species_results: list[dict], metric_
     # winner this way too. The wording below still reads the winner's raw
     # score, unchanged.
     def _rank(e):
-        c = e.get("calibrated")
+        # rank_score (pooled anchors), not calibrated (per-profile anchors,
+        # 2026-08-14): calibrated now means "how rare for this ground", not
+        # "how good compared to other grounds" -- see rescale_display()'s
+        # docstring. Picking "best ground" needs the cross-profile-comparable
+        # number.
+        c = e.get("rank_score")
         return c if c is not None else e["score"]
 
     ranked = sorted(env_results, key=lambda e: -_rank(e))
@@ -464,15 +518,19 @@ def build_headline(env_results: list[dict], species_results: list[dict], metric_
     note = (notes[0] if notes else "").rstrip(".")
 
     # Phrasing thresholds read the live score_labels rather than a copied
-    # literal, so a threshold re-derivation (like 2026-08-14's, after the
-    # tide_speed fix widened every raw distribution) can't leave this
-    # phrasing quietly out of sync with the tier label a reader sees right
-    # next to it. Judged on the same calibrated value as the tier label --
-    # raw stays compressed, so a threshold set on raw would make "firing
-    # today" nearly unreachable.
+    # literal, so a threshold re-derivation can't leave this phrasing
+    # quietly out of sync with the tier label a reader sees right next to
+    # it. Judged on `calibrated` (the per-profile DISPLAY value, same as the
+    # tier label), not `_rank`/rank_score (the pooled value used only to
+    # pick which ground is best) -- since 2026-08-14 these are genuinely
+    # different numbers, see rescale_display()'s docstring.
+    def _display(e):
+        c = e.get("calibrated")
+        return c if c is not None else e["score"]
+
     by_label = {row["label"]: row["min"] for row in labels}
     excellent_min, good_min, fair_min = by_label["Excellent"], by_label["Good"], by_label["Fair"]
-    s = _rank(best)
+    s = _display(best)
     if s >= excellent_min:
         lead = f"The {name(best)} is firing today" + (f": {note}." if note else ".")
     elif s >= good_min:
@@ -484,15 +542,15 @@ def build_headline(env_results: list[dict], species_results: list[dict], metric_
     parts = [lead]
 
     if second and second["id"] != best["id"]:
-        if _rank(second) >= good_min:
+        if _display(second) >= good_min:
             parts.append(f"{name(second).capitalize()} holds too.")
-        elif _rank(second) >= fair_min:
+        elif _display(second) >= fair_min:
             parts.append(f"{name(second).capitalize()} is workable.")
 
     flagged = [e for e in env_results if e.get("safety_flag")]
     if flagged:
         parts.append("Stay off the rocks: swell is over the safety line.")
-    elif _rank(worst) < fair_min and worst["id"] != best["id"]:
+    elif _display(worst) < fair_min and worst["id"] != best["id"]:
         parts.append(f"Give the {name(worst)} a miss.")
 
     if species_results:

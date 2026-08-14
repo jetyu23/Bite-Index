@@ -634,5 +634,120 @@ forecast day where tide_range drops toward neap later in the week.
 `engine/tests.py` passes unmodified, `tsc --noEmit` and `next build` clean.
 Methodology page updated to disclose both shortfalls above and the boat
 wind-reweight; gate justifications render automatically per profile (no
-code change needed, confirmed via the actual rendered HTML). Not committed
-yet.
+code change needed, confirmed via the actual rendered HTML). Committed as
+`cef4beb`, pushed.
+
+### 2026-08-14 -- bug 7 (tier thresholds stale) and bug 6 (card overflow)
+User reported every environment card rendering identical blue with an
+identical EXCELLENT label right after the tide_speed fix landed. Root cause
+verified, not assumed: the fix widened every profile's raw and calibrated
+distribution, so the old 62/48/32 cuts (set against the pre-fix
+distribution) became trivially easy to clear -- a genuinely good week
+really could read Excellent across all 5 environments at once, which is
+what happened. Re-simulated thresholds against the regenerated
+`calibration.json` and picked 67/53/36/0 (all 16 non-boat profiles reach
+every tier, worst concentration 65%). Also found and fixed a real third
+hardcoded copy of the threshold values while checking for one as
+instructed: `build_headline()`'s phrasing logic claimed to "mirror
+score_labels" but was a literal copy; it now reads `score_labels` directly
+via a `labels` parameter threaded through from `run.py`, so a future
+re-derivation can't leave it silently out of sync again.
+
+Bug 6 (the reported `.pctl` text overflow) turned out to be three stacked
+issues, each found by actually rendering the page with Playwright at
+1280/760/375px rather than reasoning about the CSS: (1) `.pctl` had
+`white-space: nowrap`, the literal reported bug; (2) fixing that exposed
+the row itself overflowing its own card at 375px, from CSS Grid's default
+`min-width: auto` refusing to shrink the `1fr` track below its content's
+min-content size (added `.row > * { min-width: 0 }`); (3) fixing that
+exposed `.win` ("best: dawn, 5am-8am") still forcing width via its own
+nowrap. Verified overflow-free on both the homepage and species page at all
+three widths with a real headless-browser check. Committed as `d6427e9`,
+regenerated data committed as `1ee7acc`, both pushed.
+
+### 2026-08-14 -- display rescale widened, made per-profile
+User: widen the rescale's output range so 90+ lands roughly once a month
+and 80+ a few times a month per profile, keep the compress-middle/expand-
+tails shape, keep Poor in the 5-12% band, verify two similar profiles
+still display near-identically, then decide per-profile vs global anchors
+and justify it, then reset tier cuts, then check whether boat still shows
+a broken distribution against the new scale.
+
+Simulated several output-target candidates against the real 366-day
+`calibration.json` distributions before implementing. The literal
+frequency asks (roughly-once-a-month 90+, roughly-a-few-times-a-month 80+)
+turned out to need the p90-p99 anchor segment's target pushed most of the
+way to 100 (p99->~93, max->100), not just a uniform stretch of the old
+[5,20,40,70,80,95] targets -- because p99 and max sit only 1-2 raw points
+apart for most profiles (the same compressed-top-end finding from the
+2026-08-13 diagnostic), so any target split between them only ever covers
+about 1% of days no matter where it's set; the frequency has to come from
+the wider p90-p99 segment instead. Landed on
+`RESCALE_DISPLAY_TARGETS = [1, 12, 40, 70, 93, 100]`: verified 90+ lands
+4-16 times/year per profile, 80+ lands 9-36 times/year, and the 40-70
+"ordinary" band is unchanged at 78-85% of days (p10/p90 targets didn't
+move).
+
+**Per-profile, not pooled -- made the call, with a real tradeoff, not a
+free upgrade.** The literal frequency asks are inherently per-profile
+statements ("once a month FOR THIS GROUND"), which pooled anchors can't
+satisfy consistently: a profile whose raw distribution sits persistently
+above or below the pooled center (boat, chronically) would still show a
+skewed tier distribution no matter how the pooled targets were set, which
+is exactly the "all Excellent" bug from earlier that day. Every curve,
+weight, session and gate in this engine is already hand-set per profile;
+the display rescale being the one pooled exception was flagged by the user
+as an implementation accident, not a considered design choice, and
+re-examining it agreed. The cost: the original reason pooled anchors were
+chosen (rock vs boat, a 5-point raw gap reading 73 rank-points apart under
+straight percentile) is a cross-profile comparison problem, and per-profile
+anchors reopen it for the DISPLAYED number specifically -- an 85 on rock
+and an 85 on boat are no longer claiming the same absolute quality.
+Resolved by not collapsing display and ranking into one number any more:
+`rescale()` (pooled anchors, unchanged targets) is now used ONLY internally
+for cross-profile ranking (`build_headline`'s "best ground", species
+environment-blend selection, "top targets" ordering) via a new `rank_score`
+field on both environments and species output; `rescale_display()`
+(per-profile anchors, new wider targets) produces the `calibrated` field
+actually shown to a reader. Frontend (`WeekAhead.tsx`'s `rank()`,
+`page.tsx`'s `bestId` selection) and `build_headline`'s sort key switched
+to `rank_score`; tier-label phrasing and colour (`tier()` everywhere, plus
+`build_headline`'s "firing today" wording) stayed on `calibrated`, since
+that's the number printed next to them. Verified live: today's rock
+(raw 73) showed calibrated 91 / rank_score 77 -- rare for rock specifically
+versus solid-but-not-exceptional pooled against everyone -- and boat
+(raw 69, boat's own median is 72) showed calibrated 55 ("Fair", genuinely
+below par for boat) / rank_score 71 (still comparably decent), which is
+exactly the intended split working as designed, not a bug.
+
+Disclosed the tradeoff plainly, as instructed: methodology page states
+that an 85 on two different profiles now means equally rare for each, not
+equally good in absolute terms, and that absolute cross-profile comparison
+still exists (`rank_score`) but isn't what's displayed. Glossary's
+"Calibrated line" entry updated to match.
+
+**Tier cuts re-derived against the new per-profile distribution**: 0/40/58/80
+(Poor/Fair/Good/Excellent), chosen so Excellent lands exactly at the
+requested 80+, Poor sits 8-10% (inside the 5-12% band), worst single-tier
+concentration 59% (kingfish, Fair).
+
+**Checked whether boat still needs its own tier cuts, as instructed: no.**
+Every one of the 17 profiles, including boat, now reaches all 4 tiers under
+ONE shared cut set -- boat's chronic "never reaches Poor, always
+Excellent" problem was a direct consequence of pooled anchors comparing
+its persistently-high raw distribution against everyone else's; per-profile
+anchors normalise that at the source, so the boat-specific-thresholds
+contingency the user asked me to fall back to turned out not to be needed.
+
+Verified: bream/whiting (similar underlying distributions) sampled where
+their raw scores land within 2 points show a mean calibrated gap of 1.41
+(max 7.67, one outlier near a tier-adjacent anchor point) across 29 real
+sample days -- tighter than the original 73-point bug by two orders of
+magnitude, though the max is a bit looser than the pooled version's 2.14,
+an honest cost of the per-profile switch worth naming rather than
+smoothing over. `engine/tests.py` passes, `tsc --noEmit` and `next build`
+clean, live run and rendered HTML confirm calibrated/rank_score/label are
+all internally consistent (caught and fixed one build-ordering mistake
+during verification: had built the static site before regenerating live
+data, so the first rendered check was against stale JSON baked in at build
+time, not a scoring bug).

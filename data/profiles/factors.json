@@ -178,18 +178,18 @@
    "plain": "The calendar. Fish keep to seasons more reliably than trains keep to timetables."
   }
  },
- "_score_labels_comment": "Judged on the calibrated (rescaled) number, not raw. REVISED 2026-08-14: the 2026-08-13 tide_speed fix widened every profile's raw distribution (11-31 point spans became 45-55), which shifted the pooled rescale anchors and made the old 62/48/32 cuts too easy to clear -- a genuinely good week could read Excellent across all 5 environments simultaneously, which is exactly what happened and is what prompted this re-derivation. Re-simulated against the NEW real 366-day calibrated distribution (calibration.json regenerated post-fix): every one of the 16 non-boat profiles reaches all 4 tiers, worst single-tier concentration 65% (bream/whiting, Good). `boat` is the sole exception -- it never reaches Poor or Fair under any threshold set tried, a direct, already-disclosed consequence of its raw span (33) falling short of the ~45-55 every other profile now reaches (see the methodology page and CLAUDE.md's 2026-08-13 entry); forcing it to reach Poor would mean distorting every other profile's thresholds around one exception, which was rejected for the same reason per-profile thresholds were rejected when the calibrated scale was first built.",
+ "_score_labels_comment": "Judged on the calibrated (rescaled) number, not raw. REVISED 2026-08-14, second time this week: the display rescale itself moved from pooled anchors to PER-PROFILE anchors with a wider output range (RESCALE_DISPLAY_TARGETS in scoring.py) so a 90+ means roughly a once-a-month day and an 80+ a few times a month, FOR THAT SPECIFIC GROUND OR SPECIES -- see scoring.rescale_display()'s docstring and the methodology page for the full reasoning and the 'equally rare, not equally good' tradeoff this makes. Thresholds re-derived against the new per-profile calibrated distribution (calibration.json regenerated post-change): EVERY one of the 17 profiles reaches all 4 tiers now, including boat, which never reached Poor under the old pooled-anchor scale no matter how the cuts were set (see the 2026-08-13 entry in CLAUDE.md) -- the per-profile switch fixed that at the root, so boat does not need its own thresholds after all. Poor sits 8-10% of days, worst single-tier concentration 59% (kingfish, Fair).",
  "score_labels": [
   {
-   "min": 67,
+   "min": 80,
    "label": "Excellent"
   },
   {
-   "min": 53,
+   "min": 58,
    "label": "Good"
   },
   {
-   "min": 36,
+   "min": 40,
    "label": "Fair"
   },
   {

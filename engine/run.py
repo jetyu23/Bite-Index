@@ -63,16 +63,19 @@ def run(live: bool) -> dict:
                 continue
             raw = res["score"]
             session_mean_raw = res["session_mean"]
-            # calibrated is derived from the uncapped raw score, before safety
-            # mutates res["score"] below. res["score"] itself keeps its prior
-            # meaning (rescaled-or-raw) unchanged, because score_species_day
-            # still reads it via env_results_by_id to pick each species' best
-            # ground on a scale that's comparable across profiles -- rescale()
-            # is global (pooled across all profiles), so it's valid for this
-            # cross-profile comparison the same way straight percentile was,
-            # without the noise-amplification straight percentile had.
-            calibrated = round(scoring.rescale(calib, raw)) if calib else None
-            res["score"] = calibrated if calibrated is not None else raw
+            # Two derived numbers, deliberately kept separate (2026-08-14):
+            # rank_score (pooled anchors, scoring.rescale) is for CROSS-
+            # PROFILE RANKING only -- build_headline's "best ground" and
+            # species_day's environment-blend selection below both need two
+            # profiles' scores compared on one consistent scale. calibrated
+            # (per-profile anchors, scoring.rescale_display) is for DISPLAY
+            # -- how rare is this raw score for THIS ground specifically.
+            # res["score"] is set to rank_score, not calibrated, because
+            # score_species_day still reads it via env_results_by_id to pick
+            # each species' best ground on the cross-profile-comparable scale.
+            rank_score = round(scoring.rescale(calib, raw)) if calib else None
+            calibrated = round(scoring.rescale_display(calib, env["id"], raw)) if calib else None
+            res["score"] = rank_score if rank_score is not None else raw
             res = scoring.apply_safety(env, res, day, norm, sessions_def)
             if res["safety_flag"]:
                 # A capped, dangerous day isn't meaningfully "better or worse
@@ -83,6 +86,7 @@ def run(live: bool) -> dict:
                 raw_display = min(raw, env["safety"]["cap"])
                 session_mean_display = min(session_mean_raw, env["safety"]["cap"])
                 calibrated = None
+                rank_score = None
             else:
                 raw_display = raw
                 session_mean_display = session_mean_raw
@@ -109,6 +113,11 @@ def run(live: bool) -> dict:
                 "session_mean": session_mean_display,
                 "best_session": res["best_session"],
                 "calibrated": calibrated,
+                # Cross-profile ranking key (pooled anchors), NOT for display
+                # -- see scoring.rescale_display()'s docstring. Kept in the
+                # output rather than discarded, same "nothing hidden"
+                # reasoning as species' own rank_score.
+                "rank_score": rank_score,
                 "raw_median": dist[len(dist) // 2] if dist else None,
                 "reason": scoring.env_summary(res["drivers"], metric_defs, res.get("gate_note")),
                 # Tier label is judged on the calibrated scale, not raw: raw
@@ -146,7 +155,7 @@ def run(live: bool) -> dict:
             # by raw would just favour whichever species has the highest
             # natural raw baseline, not the best day.
             own_raw = res["raw_score"]
-            own_calibrated = round(scoring.rescale(calib, own_raw)) if calib else None
+            own_calibrated = round(scoring.rescale_display(calib, sp["id"], own_raw)) if calib else None
             window = scoring.humanize_window(res["best_window"])
             reason = scoring.build_reason(res["drivers"], env_names[res["environment"]], window, metric_defs, res.get("gate_note"))
             sp_results.append(

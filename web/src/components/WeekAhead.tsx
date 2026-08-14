@@ -40,14 +40,17 @@ function Spark({ day }: { day: Day }) {
   );
 }
 
-/* "Best" is picked by the calibrated (rescaled, pooled-anchor) value, not
-   raw score: raw scores aren't on a comparable scale across grounds with
-   different curve-defined baselines (e.g. boat's raw ceiling sits well
-   above harbour's), so ranking by raw would just favour whichever ground
-   runs hottest by design, not whichever is actually having a relatively
-   good day. The displayed number is still that ground's raw score. */
-function rank(e: { score: number; calibrated: number | null }): number {
-  return e.calibrated ?? e.score;
+/* "Best" is picked by rank_score (rescaled, pooled-anchor value), not raw
+   score and not calibrated: raw scores aren't on a comparable scale across
+   grounds with different curve-defined baselines (e.g. boat's raw ceiling
+   sits well above harbour's), so ranking by raw would just favour whichever
+   ground runs hottest by design, not whichever is actually having a
+   relatively good day. calibrated (2026-08-14) is per-profile now -- how
+   rare a score is FOR THAT GROUND -- so it's no longer comparable across
+   different grounds either; only rank_score still is. The displayed number
+   is still that ground's raw score. */
+function rank(e: { score: number; rank_score: number | null }): number {
+  return e.rank_score ?? e.score;
 }
 
 /* Middle of the 5 grounds' raw scores -- "how's the whole day", as opposed to
@@ -66,7 +69,10 @@ export default function WeekAhead({ days }: { days: Day[] }) {
         const best = d.environments.reduce((a, b) => (rank(b) > rank(a) ? b : a));
         const overall = overallDay(d);
         const rockFlag = d.environments.some((e) => e.safety_flag);
-        const t = tier(rank(best))[0];
+        // Colour of the "best" badge reads DISPLAY (calibrated, per-ground),
+        // not the ranking key used to pick which ground is best -- same
+        // "one source for colour and label" rule as everywhere else.
+        const t = tier(best.calibrated ?? best.score)[0];
         const tideH = d.summary.tide_events.find((e) => e.type === "high");
         return (
           <div key={d.date} className={`wk ${i === 0 ? "today" : ""}`}>

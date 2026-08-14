@@ -20,12 +20,18 @@ export interface EnvResult {
   session_mean: number;
   /** Which named session produced the headline score, e.g. "dawn". */
   best_session: string;
-  /** Raw score rescaled for display: a hand-set curve anchored on robust percentiles
-   *  (p1/p10/p90/p99) pooled across ALL profiles, not just this one, so equal raw
-   *  quality displays equally regardless of which ground or species it's from.
-   *  Ordinary days land around 40-70; exceptional days reach further and do so
-   *  rarely. Null when no calibration exists yet, or a safety cap overrides scoring. */
+  /** Raw score rescaled for display: a hand-set curve anchored on THIS PROFILE'S OWN
+   *  robust percentiles (p1/p10/p90/p99), so the number communicates how rare a score
+   *  is for this specific ground -- not a cross-profile comparison (rank_score is for
+   *  that). Ordinary days land around 40-70; a 90+ is roughly a once-a-month day for
+   *  this ground, an 80+ a few times a month. Null when no calibration exists yet, or
+   *  a safety cap overrides scoring. */
   calibrated: number | null;
+  /** Cross-profile ranking key (pooled anchors across all profiles) -- picks "best
+   *  ground" and orders comparisons between different grounds. NOT for display: two
+   *  grounds' calibrated numbers aren't comparable to each other, but their rank_score
+   *  is. Null when no calibration exists yet, or a safety cap overrides scoring. */
+  rank_score: number | null;
   /** This ground's raw-score median day, for positioning the meter's reference tick. */
   raw_median: number | null;
   reason: string;
@@ -46,14 +52,16 @@ export interface SpeciesResult {
   session_mean: number;
   /** Which named session produced the headline score, e.g. "dusk". */
   best_session: string;
-  /** That raw score rescaled for display, same pooled-anchor curve as EnvResult.calibrated. */
+  /** That raw score rescaled for display, per-profile anchors -- same meaning as
+   *  EnvResult.calibrated: how rare this score is for this species specifically. */
   calibrated: number | null;
   label: string;
   environment: string;
   environment_name: string;
   best_window: string;
   reason: string;
-  /** Calibrated, environment-blended value this list is sorted by. Not a headline number. */
+  /** Pooled-anchor, environment-blended value this list is sorted by. Not a headline
+   *  number, and not the same scale as `calibrated` -- see EnvResult.rank_score. */
   rank_score?: number;
 }
 
