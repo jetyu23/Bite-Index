@@ -751,3 +751,51 @@ all internally consistent (caught and fixed one build-ordering mistake
 during verification: had built the static site before regenerating live
 data, so the first rendered check was against stale JSON baked in at build
 time, not a scoring bug).
+
+### 2026-08-14 -- boat wind data researched (not implemented), bug 8 (species cards)
+User asked whether Open-Meteo exposes a better free wind source for boat,
+given wind carries 22% of that profile's weight and reads from a Sydney CBD
+land point. Researched and verified directly, not from memory: the marine
+API has no wind field at all (already known); the existing "marine" lat/lon
+(2km off the Heads) turned out to resolve to the exact same coarse grid
+cell as the CBD point (~20-25km model resolution near Sydney), so it
+returns identical wind, a dead end. A point ~10nm (18km) further offshore,
+matching where the profile's own text says boat fishing happens ("reefs,
+FADs and open water"), resolves to a genuinely different grid cell:
+verified across the real 366-day archive, CBD mean 6.1kn/max 19.9kn vs
+offshore mean 12.5kn/max 36.2kn, roughly double. Re-scored boat's actual
+profile substituting this offshore wind for the land-point reading: span
+goes from 33 to 40-41, a real improvement from better data, still short of
+45. Cost: $0, same free endpoint, one more coordinate. Not implemented,
+per instruction -- reported with numbers for a future session to act on.
+Also noted: altitude wind (80m/120m/180m) is available and reads much
+higher (not land/water-resolution-limited) but would need a boundary-layer
+correction to estimate an actual 10m-over-water value, which starts
+crossing into the "don't fabricate precision from a data limitation" line
+already drawn for this profile -- flagged, not pursued.
+
+Bug 8: species cards collapsed to name, one-line descriptor (reused
+`attributes.difficulty_note` -- already existed, already had the right
+voice, no new field needed), today's score, ground, eating/difficulty
+dots, with bait/rig/season/habitat/lures/line/knots/rig-diagram moved
+behind the existing `why-details` expander pattern. Page changed from a
+2-up card grid to a single-column row list (`.species-grid` now flex-
+column, `.sp-row` styled like the environment ledger's `.row` for visual
+consistency) per instruction that it didn't need to stay 2-across.
+
+Added 12 original hand-drawn fish silhouettes (`FishSilhouette.tsx`), same
+INK/TEAL/SOFT line-art palette and viewBox convention as `RigDiagram.tsx`.
+First pass used subtle proportion differences between species and, once
+actually rendered, looked like near-identical grey blobs at the ~90px card
+size -- caught by looking at the real screenshot, not by trusting the code.
+Redrawn with one or two exaggerated, real identifying features per species
+instead of subtle ones: flathead's flat head silhouette, bream's spiked
+dorsal, snapper's forehead hump, trevally's blunt vertical face, luderick's
+smooth round profile with no spikes, yakkas' dark shoulder spot (a real
+field mark), squid's tapered mantle and spread tentacles instead of a fish
+tail. Verified by rendering the actual page (not just reading the SVG
+source) at 1280/760/375px: no overflow, and the second pass is genuinely
+distinguishable card-to-card where the first wasn't. `engine/tests.py`
+passes, `tsc --noEmit` and `next build` clean, search/sort/ground-filter
+functionally re-tested together (ground filter + text search both narrow
+the same list correctly) after the markup rewrite.

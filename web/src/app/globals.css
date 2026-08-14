@@ -190,6 +190,13 @@ h2.sec::after { content: ""; display: block; border-bottom: 2px solid var(--ink)
 .rstamp.olive, .cstamp.olive { color: var(--olive); border-color: var(--olive); }
 .rstamp.ochre, .cstamp.ochre { color: var(--ochre); border-color: var(--ochre); }
 .rstamp.red, .cstamp.red { color: var(--red); border-color: var(--red); }
+.diff-chip {
+  font-family: var(--mono); font-size: 0.54rem; font-weight: 600; letter-spacing: 0.12em;
+  border: 1.5px solid; padding: 1.5px 6px; margin-left: auto;
+}
+.diff-chip.olive { color: var(--olive); border-color: var(--olive); }
+.diff-chip.ochre { color: var(--ochre); border-color: var(--ochre); }
+.diff-chip.red { color: var(--red); border-color: var(--red); }
 .rstamp.blue, .cstamp.blue { color: var(--blue); border-color: var(--blue); }
 .hot-tip {
   margin: 10px 0 0; padding: 8px 11px; font-size: 0.86rem;
@@ -258,7 +265,20 @@ details.why-details[open] summary::after { content: " \2212"; }
 .sp-checkbox { display: flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 0.72rem; color: var(--soft); cursor: pointer; }
 .sp-ratings { display: flex; gap: 18px; margin: 2px 0 10px; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.02em; }
 .sp-rating-label { font-size: 0.56rem; letter-spacing: 0.12em; color: var(--soft); margin-right: 3px; }
-.species-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 16px; }
+.species-grid { display: flex; flex-direction: column; gap: 10px; }
+.sp-row {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--paper-hi); border: 1.5px solid var(--rule);
+  padding: 13px 16px 12px; transition: transform 0.14s, border-color 0.14s;
+}
+.sp-row:hover { transform: translateX(4px); border-color: var(--ink); }
+.sp-row > * { min-width: 0; }
+.fish-silhouette { flex: 0 0 96px; padding-top: 3px; }
+.fish-silhouette svg { width: 100%; height: auto; display: block; }
+.sp-row-body { flex: 1; min-width: 0; }
+.sp-row-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.sp-row-top h3 { font-family: var(--disp); font-size: 1.1rem; font-weight: 700; }
+.sp-descriptor { font-size: 0.86rem; color: #4a463a; margin-top: 2px; max-width: 52ch; }
 .card { background: var(--paper-hi); border: 1.5px solid var(--rule); padding: 16px 16px 12px; }
 .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
 .card h3 { font-family: var(--disp); font-size: 1.1rem; font-weight: 700; }

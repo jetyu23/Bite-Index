@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import RigDiagram from "@/components/RigDiagram";
+import FishSilhouette from "@/components/FishSilhouette";
 import { tier } from "@/lib/data";
 import type { SpeciesProfile, SpeciesResult } from "@/lib/types";
 
@@ -151,66 +152,68 @@ export default function SpeciesExplorer({
           const g = sp.guide;
           const a = sp.attributes;
           const ds = diffStamp(g.difficulty);
+          const tierClass = t ? tier(t.calibrated ?? t.score)[0] : "";
           return (
-            <article className="card sp-card" id={sp.id} key={sp.id} style={{ position: "relative" }}>
-              <div className={`cstamp ${ds.cls}`}>{ds.label}</div>
-              <div className="card-top">
-                <div>
-                  <h3>{sp.name}</h3>
-                  <div className="sp-diff">{g.difficulty}</div>
-                </div>
-                {t && (
-                  <div className="score-block">
-                    <div className={`score-num ${tier(t.calibrated ?? t.score)[0]}`}>{t.score}</div>
-                    <div className={`score-word ${tier(t.calibrated ?? t.score)[0]}`}>today &middot; {t.environment_name}</div>
+            <article className="sp-row" id={sp.id} key={sp.id}>
+              <FishSilhouette id={sp.id} />
+              <div className="sp-row-body">
+                <div className="sp-row-top">
+                  <div>
+                    <h3>{sp.name}</h3>
+                    <p className="sp-descriptor">{a.difficulty_note}</p>
                   </div>
-                )}
-              </div>
-
-              <div className="sp-ratings">
-                <span title={a.eating_note}>
-                  <span className="sp-rating-label">EATING</span> {dots(a.eating_quality)}
-                </span>
-                <span title={a.difficulty_note}>
-                  <span className="sp-rating-label">DIFFICULTY</span> {dots(a.difficulty)}
-                </span>
-              </div>
-
-              <div className="sp-flex">
-                <div>
-                  <dl className="kv">
-                    <dt>Bait</dt>
-                    <dd>{g.baits.join(" · ")}</dd>
-                    <dt>Rig</dt>
-                    <dd>{g.rigs.join(" / ")}</dd>
-                    <dt>When</dt>
-                    <dd>{g.season_notes}</dd>
-                    <dt>Where (general)</dt>
-                    <dd>{g.habitat}</dd>
-                  </dl>
-                  {g.hot_tip && <p className="hot-tip">&#9756; {g.hot_tip}</p>}
-                  {g.safety_note && <p className="sp-safety">&#9888; {g.safety_note}</p>}
-                  <details className="why-details">
-                    <summary>FULL SPEC</summary>
-                    <dl className="kv" style={{ marginTop: 4 }}>
-                      <dt>Lures</dt>
-                      <dd>{g.lures.length ? g.lures.join(" · ") : "None; bait or weed only"}</dd>
-                      <dt>Line / leader / rod</dt>
-                      <dd className="mono">
-                        {g.line} &middot; {g.leader} &middot; {g.rod}
-                      </dd>
-                      <dt>Knots</dt>
-                      <dd>
-                        {g.knots.map((k) => (
-                          <Link className="knot-chip" href={`/knots#${k}`} key={k}>
-                            {KNOT_NAMES[k] ?? k}
-                          </Link>
-                        ))}
-                      </dd>
-                    </dl>
-                  </details>
+                  {t && (
+                    <div className="score-block">
+                      <div className={`score-num ${tierClass}`}>{t.score}</div>
+                      <div className={`score-word ${tierClass}`}>today &middot; {t.environment_name}</div>
+                    </div>
+                  )}
                 </div>
-                <RigDiagram id={g.rig_diagram} />
+
+                <div className="sp-ratings">
+                  <span title={a.eating_note}>
+                    <span className="sp-rating-label">EATING</span> {dots(a.eating_quality)}
+                  </span>
+                  <span title={a.difficulty_note}>
+                    <span className="sp-rating-label">DIFFICULTY</span> {dots(a.difficulty)}
+                  </span>
+                  <span className={`diff-chip ${ds.cls}`}>{ds.label}</span>
+                </div>
+
+                <details className="why-details">
+                  <summary>FULL SPEC</summary>
+                  <div className="sp-flex">
+                    <div>
+                      <dl className="kv">
+                        <dt>Bait</dt>
+                        <dd>{g.baits.join(" · ")}</dd>
+                        <dt>Rig</dt>
+                        <dd>{g.rigs.join(" / ")}</dd>
+                        <dt>When</dt>
+                        <dd>{g.season_notes}</dd>
+                        <dt>Where (general)</dt>
+                        <dd>{g.habitat}</dd>
+                        <dt>Lures</dt>
+                        <dd>{g.lures.length ? g.lures.join(" · ") : "None; bait or weed only"}</dd>
+                        <dt>Line / leader / rod</dt>
+                        <dd className="mono">
+                          {g.line} &middot; {g.leader} &middot; {g.rod}
+                        </dd>
+                        <dt>Knots</dt>
+                        <dd>
+                          {g.knots.map((k) => (
+                            <Link className="knot-chip" href={`/knots#${k}`} key={k}>
+                              {KNOT_NAMES[k] ?? k}
+                            </Link>
+                          ))}
+                        </dd>
+                      </dl>
+                      {g.hot_tip && <p className="hot-tip">&#9756; {g.hot_tip}</p>}
+                      {g.safety_note && <p className="sp-safety">&#9888; {g.safety_note}</p>}
+                    </div>
+                    <RigDiagram id={g.rig_diagram} />
+                  </div>
+                </details>
               </div>
             </article>
           );
