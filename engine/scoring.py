@@ -442,7 +442,7 @@ def env_summary(drivers: list[dict], metric_defs: dict, gate_note: str | None = 
     return s
 
 
-def build_headline(env_results: list[dict], species_results: list[dict], metric_defs: dict) -> str:
+def build_headline(env_results: list[dict], species_results: list[dict], metric_defs: dict, labels: list[dict]) -> str:
     """Composed bulletin, not a template: lead with the best ground, mention
     the runner-up, warn on the worst. No em dashes anywhere in site copy."""
     # "Best" is decided by the rescaled, cross-profile-comparable value
@@ -463,31 +463,36 @@ def build_headline(env_results: list[dict], species_results: list[dict], metric_
     notes = top_notes(best.get("raw_drivers", []), metric_defs, 1)
     note = (notes[0] if notes else "").rstrip(".")
 
-    # Phrasing thresholds mirror score_labels (Excellent/Good/Fair/Poor at
-    # 62/48/32), judged on the same calibrated value as the tier label --
-    # raw stays compressed (most profiles never reach the high-70s), so a
-    # threshold set on raw would make "firing today" nearly unreachable.
+    # Phrasing thresholds read the live score_labels rather than a copied
+    # literal, so a threshold re-derivation (like 2026-08-14's, after the
+    # tide_speed fix widened every raw distribution) can't leave this
+    # phrasing quietly out of sync with the tier label a reader sees right
+    # next to it. Judged on the same calibrated value as the tier label --
+    # raw stays compressed, so a threshold set on raw would make "firing
+    # today" nearly unreachable.
+    by_label = {row["label"]: row["min"] for row in labels}
+    excellent_min, good_min, fair_min = by_label["Excellent"], by_label["Good"], by_label["Fair"]
     s = _rank(best)
-    if s >= 62:
+    if s >= excellent_min:
         lead = f"The {name(best)} is firing today" + (f": {note}." if note else ".")
-    elif s >= 48:
+    elif s >= good_min:
         lead = f"{name(best).capitalize()} first today" + (f": {note}." if note else ".")
-    elif s >= 32:
+    elif s >= fair_min:
         lead = f"A middling day. {name(best).capitalize()} is the pick" + (f": {note}." if note else ".")
     else:
         lead = f"A tough survey today; {name(best)} edges it at {best['score']}."
     parts = [lead]
 
     if second and second["id"] != best["id"]:
-        if _rank(second) >= 48:
+        if _rank(second) >= good_min:
             parts.append(f"{name(second).capitalize()} holds too.")
-        elif _rank(second) >= 32:
+        elif _rank(second) >= fair_min:
             parts.append(f"{name(second).capitalize()} is workable.")
 
     flagged = [e for e in env_results if e.get("safety_flag")]
     if flagged:
         parts.append("Stay off the rocks: swell is over the safety line.")
-    elif _rank(worst) < 32 and worst["id"] != best["id"]:
+    elif _rank(worst) < fair_min and worst["id"] != best["id"]:
         parts.append(f"Give the {name(worst)} a miss.")
 
     if species_results:

@@ -25,7 +25,7 @@ export default function EnvRow({ env, best }: { env: EnvResult; best?: boolean }
         {env.calibrated != null && (
           <span className="pctl">calibrated: {env.calibrated}</span>
         )}
-        <span className="pctl">typical session today: {env.session_mean}</span>
+        <span className="pctl">typical session: {env.session_mean}</span>
       </div>
       {env.safety_flag && env.safety_message && <div className="safety-inline">⚠ {env.safety_message}</div>}
       <div className={`meter ${t[0]}`}>

@@ -178,18 +178,18 @@
    "plain": "The calendar. Fish keep to seasons more reliably than trains keep to timetables."
   }
  },
- "_score_labels_comment": "Judged on the calibrated (rescaled) number, not raw: raw is compressed by averaging 8-11 factors per profile, and thresholds set on it were unreachable at the bottom for most profiles (verified against a real 366-day history: 8 of 12 profiles showed 0% Poor all year). Simulated against the real calibrated distribution for all 12 profiles before picking these: every profile reaches at least 3 of the 4 tiers, and no profile concentrates more than 85% of its days in a single tier. A few low-intrinsic-variance profiles (harbour, bream, yakkas, mulloway) never reach Poor -- a real, model-level finding (see CLAUDE.md), not a threshold defect; forcing it would mean per-profile thresholds, which would undo the whole point of a shared calibrated scale.",
+ "_score_labels_comment": "Judged on the calibrated (rescaled) number, not raw. REVISED 2026-08-14: the 2026-08-13 tide_speed fix widened every profile's raw distribution (11-31 point spans became 45-55), which shifted the pooled rescale anchors and made the old 62/48/32 cuts too easy to clear -- a genuinely good week could read Excellent across all 5 environments simultaneously, which is exactly what happened and is what prompted this re-derivation. Re-simulated against the NEW real 366-day calibrated distribution (calibration.json regenerated post-fix): every one of the 16 non-boat profiles reaches all 4 tiers, worst single-tier concentration 65% (bream/whiting, Good). `boat` is the sole exception -- it never reaches Poor or Fair under any threshold set tried, a direct, already-disclosed consequence of its raw span (33) falling short of the ~45-55 every other profile now reaches (see the methodology page and CLAUDE.md's 2026-08-13 entry); forcing it to reach Poor would mean distorting every other profile's thresholds around one exception, which was rejected for the same reason per-profile thresholds were rejected when the calibrated scale was first built.",
  "score_labels": [
   {
-   "min": 62,
+   "min": 67,
    "label": "Excellent"
   },
   {
-   "min": 48,
+   "min": 53,
    "label": "Good"
   },
   {
-   "min": 32,
+   "min": 36,
    "label": "Fair"
   },
   {

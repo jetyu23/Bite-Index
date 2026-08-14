@@ -134,10 +134,14 @@ h2.sec::after { content: ""; display: block; border-bottom: 2px solid var(--ink)
 
 /* ------------------------------------------------------------ ledger rows */
 .row {
-  display: grid; grid-template-columns: 1fr 112px; gap: 14px; align-items: baseline;
+  display: grid; grid-template-columns: 1fr 126px; gap: 14px; align-items: baseline;
   background: var(--paper-hi); border: 1.5px solid var(--rule);
   padding: 13px 16px 11px; margin-bottom: 10px; transition: transform 0.14s, border-color 0.14s; position: relative;
 }
+/* Grid items default to min-width: auto, so a 1fr track refuses to shrink
+   below its content's min-content width and the row silently overflows its
+   own card at narrow widths -- this override is what actually lets it. */
+.row > * { min-width: 0; }
 .row:hover { transform: translateX(4px); border-color: var(--ink); }
 .row.tb-g { border-left: 4px solid var(--olive); }
 .row.tb-f { border-left: 4px solid var(--ochre); }
@@ -158,12 +162,16 @@ h2.sec::after { content: ""; display: block; border-bottom: 2px solid var(--ink)
 .tag.c-harbour { color: var(--blue); border-color: var(--blue); }
 .tag.c-boat { color: #0f6e73; border-color: #0f6e73; }
 .tag.c-rock { color: var(--ink); border-color: var(--soft); }
-.win { font-family: var(--mono); font-size: 0.66rem; color: var(--soft); margin-left: 9px; white-space: nowrap; }
+.win { font-family: var(--mono); font-size: 0.66rem; color: var(--soft); margin-left: 9px; white-space: normal; overflow-wrap: break-word; }
 .why { display: block; font-size: 0.9rem; color: #4a463a; margin-top: 4px; max-width: 64ch; }
-.sc { text-align: right; font-family: var(--mono); }
+.sc { text-align: right; font-family: var(--mono); max-width: 100%; }
 .sc b { display: block; font-size: 1.9rem; font-weight: 600; line-height: 1; }
 .sc i { font-style: normal; font-size: 0.54rem; letter-spacing: 0.24em; font-weight: 600; }
-.pctl { display: block; font-family: var(--mono); font-size: 0.58rem; color: var(--soft); font-weight: 400; letter-spacing: 0; margin-top: 3px; white-space: nowrap; }
+.pctl {
+  display: block; font-family: var(--mono); font-size: 0.58rem; color: var(--soft);
+  font-weight: 400; letter-spacing: 0; margin-top: 3px;
+  white-space: normal; overflow-wrap: break-word; word-break: break-word; max-width: 100%;
+}
 .g { color: var(--olive); } .f { color: var(--ochre); } .p { color: var(--red); } .e { color: var(--blue); }
 .meter { grid-column: 1 / -1; height: 4px; background: var(--rule-soft); position: relative; margin-top: 6px; }
 .meter i { position: absolute; left: 0; top: 0; bottom: 0; background: currentColor; }
@@ -304,7 +312,7 @@ footer p { margin: 0 0 8px; max-width: 90ch; }
   .sp-flex { flex-direction: column; }
   .sp-controls { flex-direction: column; align-items: stretch; }
   .sp-search { min-width: 0; }
-  .row { grid-template-columns: 1fr 84px; }
+  .row { grid-template-columns: 1fr 100px; }
   .stamp.blue { display: none; }
 }
 
@@ -344,7 +352,9 @@ footer p { margin: 0 0 8px; max-width: 90ch; }
   gap: 2px 10px; text-decoration: none; color: inherit;
   background: var(--paper-hi); border: 1.5px solid var(--rule); padding: 13px 15px 14px;
   transition: transform 0.14s, border-color 0.14s, box-shadow 0.14s; position: relative;
+  min-width: 0;
 }
+.pod > * { min-width: 0; }
 .pod:hover { transform: translateY(-3px); border-color: var(--ink); box-shadow: 0 10px 22px rgba(38, 37, 28, 0.13); }
 .pod-1 { border-color: var(--ochre); border-width: 2px; background: linear-gradient(rgba(161,122,40,0.06), transparent), var(--paper-hi); }
 .pod-rank { grid-area: rank; font-family: var(--mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; color: var(--soft); }

@@ -175,7 +175,7 @@ def run(live: bool) -> dict:
             )
         sp_results.sort(key=lambda s: -s["rank_score"])
 
-        headline = scoring.build_headline(env_results, sp_results, metric_defs) if env_results else "No data for today."
+        headline = scoring.build_headline(env_results, sp_results, metric_defs, labels) if env_results else "No data for today."
         for e in env_results:
             e.pop("raw_drivers", None)
 
