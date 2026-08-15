@@ -831,3 +831,31 @@ again reverses to Mulloway first, matching the hand-set values.
 
 `engine/tests.py` passes, `tsc --noEmit` and `next build` clean, live run
 regenerated (attributes are non-scoring, so no score changed).
+
+### 2026-08-15 -- "overall day" promoted above the ledger
+User's framing: "overall day" (median raw score across the 5 environments)
+answers "is today worth going at all," which is the first question, before
+"where should I fish" (which the ledger answers). It previously only
+existed as a small secondary line inside each day of the week strip, never
+surfaced for TODAY specifically anywhere near the top of the page.
+
+Extracted the existing median calculation (previously duplicated logic
+living only in `WeekAhead.tsx`) into a shared `overallDay()` in
+`lib/data.ts`, and added a new bordered stat block on the homepage,
+between the headline and the tide instrument, well above the ledger:
+today's overall-day number at `clamp(2.6rem, 7vw, 3.6rem)`, deliberately
+larger than any individual ground's score in the ledger below it (their
+`.sc b` renders at 1.9rem), so it reads as more prominent by construction,
+not just by position. Deliberately NOT tier-coloured: it's a raw median
+across 5 profiles with different curve-defined ceilings, never rescaled
+against any one profile's own history, so it has no defined position on
+the calibrated scale, and colouring it would repeat the exact category
+error (raw vs. percentile, calibrated vs. rank_score) that got fixed
+earlier in this project. Text under the number states the range of the
+five so "65 overall" is legible in context ("today's five range from 61
+to 72"), not a bare number.
+
+Verified visually at 1280px and 375px with a real render, not just the
+CSS: correctly the single largest number on the page at both widths, and
+stacks cleanly to a single column under 520px. `engine/tests.py` passes,
+`tsc --noEmit` and `next build` clean.

@@ -4,7 +4,7 @@ import ContactList from "@/components/ContactList";
 import EnvRow from "@/components/EnvRow";
 import TideInstrument from "@/components/TideInstrument";
 import WeekAhead from "@/components/WeekAhead";
-import { fmtDate, site, tier } from "@/lib/data";
+import { fmtDate, overallDay, site, tier } from "@/lib/data";
 
 export default function Home() {
   const today = site.days[0];
@@ -41,6 +41,26 @@ export default function Home() {
         <section className="hero" style={{ margin: "0 0 10px" }}>
           <p className="lede">{today.headline}</p>
         </section>
+
+        {(() => {
+          const overall = overallDay(today);
+          if (overall == null) return null;
+          const scores = today.environments.map((e) => e.score);
+          const lo = Math.min(...scores);
+          const hi = Math.max(...scores);
+          return (
+            <section className="overall-day" aria-labelledby="od-h">
+              <div className="od-num">{overall}</div>
+              <div className="od-text">
+                <h2 id="od-h">OVERALL DAY</h2>
+                <p>
+                  Median raw score across all five grounds today, answering is today worth going at all, before
+                  where. Today&apos;s five range from {lo} to {hi}; the ledger below picks the best of them.
+                </p>
+              </div>
+            </section>
+          );
+        })()}
 
         <CondLog s={s} />
 

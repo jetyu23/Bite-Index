@@ -1,6 +1,6 @@
 import latestJson from "@/data/latest.json";
 import profilesJson from "@/data/profiles.json";
-import type { Profiles, SiteData } from "./types";
+import type { Day, Profiles, SiteData } from "./types";
 
 export const site = latestJson as unknown as SiteData;
 export const profiles = profilesJson as unknown as Profiles;
@@ -38,4 +38,16 @@ export function shortEnv(name: string): string {
 
 export function dayNum(iso: string): string {
   return String(new Date(iso + "T00:00:00").getDate());
+}
+
+/* Middle of the 5 grounds' raw scores for one day -- "is today worth going
+   at all", as opposed to "where should I fish" (which the ledger/best-ground
+   pick answers). Deliberately the median, not the mean: a real ground's
+   actual score, not an average nobody's ground produced. Not tier-coloured
+   anywhere it's shown -- it's a raw composite across profiles with different
+   curve-defined ceilings, never rescaled against any one profile's own
+   history, so it has no defined position on the calibrated scale. */
+export function overallDay(day: Day): number | null {
+  const scores = [...day.environments].map((e) => e.score).sort((a, b) => a - b);
+  return scores.length ? scores[Math.floor((scores.length - 1) / 2)] : null;
 }

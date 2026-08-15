@@ -96,6 +96,19 @@ h1, h2, h3 { line-height: 1.15; margin: 0; }
 .lede .hi { background: rgba(76, 122, 69, 0.16); }
 .lede .warn { background: var(--red-wash); color: var(--red); }
 
+/* ------------------------------------------------------------ overall day */
+.overall-day {
+  display: flex; align-items: center; gap: 20px;
+  border: 2px solid var(--ink); border-left: 6px solid var(--ink);
+  background: var(--paper-hi); padding: 16px 22px; margin: 14px 0 22px;
+}
+.od-num { font-family: var(--disp); font-weight: 800; font-size: clamp(2.6rem, 7vw, 3.6rem); line-height: 1; color: var(--ink); }
+.od-text h2 { font-family: var(--disp); font-weight: 800; font-size: 0.9rem; letter-spacing: 0.22em; color: var(--ink); }
+.od-text p { font-size: 0.86rem; color: #4a463a; margin-top: 4px; max-width: 62ch; }
+@media (max-width: 520px) {
+  .overall-day { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
 /* ------------------------------------------------------------ conditions log */
 .log {
   display: grid; grid-template-columns: repeat(4, 1fr);

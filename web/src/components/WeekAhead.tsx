@@ -1,4 +1,4 @@
-import { dayNum, shortEnv, tier } from "@/lib/data";
+import { dayNum, overallDay, shortEnv, tier } from "@/lib/data";
 import type { Day } from "@/lib/types";
 
 /* The week strip earns its space by showing the SHAPE of each day, not one
@@ -51,15 +51,6 @@ function Spark({ day }: { day: Day }) {
    is still that ground's raw score. */
 function rank(e: { score: number; rank_score: number | null }): number {
   return e.rank_score ?? e.score;
-}
-
-/* Middle of the 5 grounds' raw scores -- "how's the whole day", as opposed to
-   "best" which answers "where should I fish". Deliberately not an average:
-   the median is a real ground's actual score, not a number nobody's ground
-   produced. */
-function overallDay(day: Day): number | null {
-  const scores = [...day.environments].map((e) => e.score).sort((a, b) => a - b);
-  return scores.length ? scores[Math.floor((scores.length - 1) / 2)] : null;
 }
 
 export default function WeekAhead({ days }: { days: Day[] }) {
