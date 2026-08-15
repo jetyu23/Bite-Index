@@ -1,5 +1,5 @@
 {
- "_comment": "Species profiles. Scoring: same engine as environments; factors with curves/tables and weights. 'season' is a Jan..Dec presence multiplier (0-1) for Sydney, scored as its own factor. 'environments' are affinity multipliers; the species' final score in an environment = affinity x (env_blend x environment_score + (1 - env_blend) x species_score), and the best environment is surfaced. 'sessions' = the named 3-hour blocks (defined once in factors.json's 'sessions' dict) this species is realistically targeted in, hand-picked per profile -- not necessarily contiguous (tailor is dawn and dusk only, nothing between; mulloway starts at dusk and wraps past midnight). 'gates' (optional, kingfish only so far) softly multiply a session's score for factors that genuinely switch conditions on/off. 'attributes' (difficulty, eating_quality, 1-5) is fixed card metadata ONLY -- explicitly never read by the scoring engine, guarded by engine/tests.py's test_attributes_dont_score, since a fish isn't tastier on a Tuesday. CONTENT NOTE: baits/rigs/seasonality drafted from published Australian angling knowledge + owner experience, or sourced from NSW DPI and other cited material for species added 2026-08-13 (see each factor's justification for SOURCED vs GENERAL KNOWLEDGE); owner verifies against NSW DPI before publishing; size/bag limits are deliberately linked out, never republished.",
+ "_comment": "Species profiles. Scoring: same engine as environments; factors with curves/tables and weights. 'season' is a Jan..Dec presence multiplier (0-1) for Sydney, scored as its own factor. 'environments' are affinity multipliers; the species' final score in an environment = affinity x (env_blend x environment_score + (1 - env_blend) x species_score), and the best environment is surfaced. 'sessions' = the named 3-hour blocks (defined once in factors.json's 'sessions' dict) this species is realistically targeted in, hand-picked per profile -- not necessarily contiguous (tailor is dawn and dusk only, nothing between; mulloway starts at dusk and wraps past midnight). 'gates' (optional, kingfish only so far) softly multiply a session's score for factors that genuinely switch conditions on/off. 'attributes' (difficulty, eating_quality, rarity, all 1-5) is fixed card metadata ONLY -- explicitly never read by the scoring engine, guarded by engine/tests.py's test_attributes_dont_score, since a fish isn't tastier on a Tuesday. rarity (added 2026-08-15) is distinct from difficulty: difficulty is how hard the fish is to land once you have found one, rarity is how often you encounter one at all -- a yakka is easy and common, a mulloway is hard and uncommon, an Australian salmon is easy but seasonal. CONTENT NOTE: baits/rigs/seasonality drafted from published Australian angling knowledge + owner experience, or sourced from NSW DPI and other cited material for species added 2026-08-13 (see each factor's justification for SOURCED vs GENERAL KNOWLEDGE); owner verifies against NSW DPI before publishing; size/bag limits are deliberately linked out, never republished.",
  "species": [
   {
    "id": "mulloway",
@@ -9,7 +9,9 @@
     "difficulty": 5,
     "difficulty_note": "The thousand-cast fish. Earn it.",
     "eating_quality": 4,
-    "eating_note": "Firm, clean white flesh, especially the smaller 'soapy' school fish. A genuine reward for the wait."
+    "eating_note": "Firm, clean white flesh, especially the smaller 'soapy' school fish. A genuine reward for the wait.",
+    "rarity": 5,
+    "rarity_note": "Genuinely uncommon. Most sessions aimed at mulloway end in nothing; that is the deal, not a fluke."
    },
    "sessions": [
     "dusk",
@@ -289,7 +291,9 @@
     "difficulty": 4,
     "difficulty_note": "Finds sharp things to swim you into. Heavy tackle, no negotiating.",
     "eating_quality": 3,
-    "eating_note": "Good raw as sashimi from a fresh, well-bled fish; cooked, opinions split. Bring a knife, not just a rod."
+    "eating_note": "Good raw as sashimi from a fresh, well-bled fish; cooked, opinions split. Bring a knife, not just a rod.",
+    "rarity": 3,
+    "rarity_note": "Reliable once the water warms and you are on the right structure, close to absent outside that window."
    },
    "sessions": [
     "dawn",
@@ -589,7 +593,9 @@
     "difficulty": 3,
     "difficulty_note": "Easy to meet, genuinely hard to master. The bites get subtler as you improve.",
     "eating_quality": 4,
-    "eating_note": "Firm, sweet, and forgiving to cook. A reliable plate fish."
+    "eating_note": "Firm, sweet, and forgiving to cook. A reliable plate fish.",
+    "rarity": 1,
+    "rarity_note": "Wherever there is structure in an estuary, there is probably a bream nearby."
    },
    "sessions": [
     "dawn",
@@ -918,7 +924,9 @@
     "difficulty": 2,
     "difficulty_note": "Aggressive and not shy. The teeth do the hard work for you.",
     "eating_quality": 3,
-    "eating_note": "Bleed it on the sand immediately or it turns strong and oily fast. Handling matters more than the fish."
+    "eating_note": "Bleed it on the sand immediately or it turns strong and oily fast. Handling matters more than the fish.",
+    "rarity": 2,
+    "rarity_note": "Runs through in real numbers on its season; quiet the rest of the year."
    },
    "sessions": [
     "dawn",
@@ -1223,7 +1231,9 @@
     "difficulty": 2,
     "difficulty_note": "An honest fighter. No trickery required, just find the school.",
     "eating_quality": 3,
-    "eating_note": "Solid, workmanlike eating. Not fancy, never lets you down."
+    "eating_note": "Solid, workmanlike eating. Not fancy, never lets you down.",
+    "rarity": 2,
+    "rarity_note": "A common incidental catch around markers, moorings and bait schools."
    },
    "sessions": [
     "dawn",
@@ -1549,7 +1559,9 @@
     "difficulty": 1,
     "difficulty_note": "Ten arms, zero table manners, very forgiving of a clumsy jig technique.",
     "eating_quality": 5,
-    "eating_note": "Calamari doesn't get fresher than five minutes out of the water. Hard to overrate."
+    "eating_note": "Calamari doesn't get fresher than five minutes out of the water. Hard to overrate.",
+    "rarity": 2,
+    "rarity_note": "A dependable jig target most calm nights around lit water; rarely a surprise catch."
    },
    "sessions": [
     "dawn",
@@ -1877,7 +1889,9 @@
     "difficulty": 1,
     "difficulty_note": "The gateway fish. Bread on a hook basically works.",
     "eating_quality": 1,
-    "eating_note": "Currency, not dinner. Their whole career is being live bait for something bigger."
+    "eating_note": "Currency, not dinner. Their whole career is being live bait for something bigger.",
+    "rarity": 1,
+    "rarity_note": "Everywhere, all the time. The default livebait for a reason."
    },
    "sessions": [
     "dawn",
@@ -2157,7 +2171,9 @@
     "difficulty": 1,
     "difficulty_note": "Aggressive schooling fish that will happily hook themselves on a fast-worked slug.",
     "eating_quality": 2,
-    "eating_note": "SOURCED: reputation is genuinely mixed -- good if bled and iced immediately when small, strong and oily if not. Mostly caught for the fight, not the fry pan."
+    "eating_note": "SOURCED: reputation is genuinely mixed -- good if bled and iced immediately when small, strong and oily if not. Mostly caught for the fight, not the fry pan.",
+    "rarity": 3,
+    "rarity_note": "Big schools when the migration is on, largely absent outside it -- common and seasonal, not common year-round."
    },
    "sessions": [
     "dawn",
@@ -2495,7 +2511,9 @@
     "difficulty": 1,
     "difficulty_note": "Lies still on the sand and takes what drifts past. About as forgiving as fishing gets.",
     "eating_quality": 5,
-    "eating_note": "One of the most popular table fish in NSW estuaries for good reason: mild, flaky, hard to get wrong in a pan."
+    "eating_note": "One of the most popular table fish in NSW estuaries for good reason: mild, flaky, hard to get wrong in a pan.",
+    "rarity": 2,
+    "rarity_note": "One of the most commonly encountered estuary and beach predators."
    },
    "sessions": [
     "dawn",
@@ -2801,7 +2819,9 @@
     "difficulty": 5,
     "difficulty_note": "SOURCED: a notoriously subtle bite that needs a dedicated float rig and real technique. The float dips, not screams.",
     "eating_quality": 3,
-    "eating_note": "SOURCED: firm and sweet if bled immediately and iced; skip that step and it can pick up a weedy taste."
+    "eating_note": "SOURCED: firm and sweet if bled immediately and iced; skip that step and it can pick up a weedy taste.",
+    "rarity": 2,
+    "rarity_note": "Reliable in season around weed and pylons once you know where to look."
    },
    "sessions": [
     "dawn",
@@ -3127,7 +3147,9 @@
     "difficulty": 3,
     "difficulty_note": "SOURCED: small, careful mouth and a reputation as a relentless bait thief. Light gear and patience required.",
     "eating_quality": 5,
-    "eating_note": "SOURCED: regarded as second only to King George whiting on the table. About as good as it gets."
+    "eating_note": "SOURCED: regarded as second only to King George whiting on the table. About as good as it gets.",
+    "rarity": 2,
+    "rarity_note": "A dependable catch on the right sand flat through the warmer months."
    },
    "sessions": [
     "dawn",
@@ -3461,7 +3483,9 @@
     "difficulty": 4,
     "difficulty_note": "A quality reef fish takes structure, berley discipline and usually a boat. The small 'squire' are far easier.",
     "eating_quality": 5,
-    "eating_note": "The benchmark NSW plate fish. If a menu says 'today's catch', this is what everyone hopes for."
+    "eating_note": "The benchmark NSW plate fish. If a menu says 'today's catch', this is what everyone hopes for.",
+    "rarity": 4,
+    "rarity_note": "A genuine target fish, not an incidental one; usually needs a boat and the right structure."
    },
    "sessions": [
     "dawn",

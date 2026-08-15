@@ -21,8 +21,7 @@ export default function SpeciesPage() {
         <h1 className="headline">Twelve Sydney staples, from the gateway fish up.</h1>
         <p className="sechint" style={{ marginTop: 10 }}>
           the short version on every card; open FULL SPEC if you want the gear numbers. sizes and bag limits are{" "}
-          <a href="https://www.dpi.nsw.gov.au/fishing" rel="noopener">NSW DPI&apos;s</a> department, not ours. more
-          species to be added: a new fish is one config file.
+          <a href="https://www.dpi.nsw.gov.au/fishing" rel="noopener">NSW DPI&apos;s</a> department, not ours.
         </p>
       </header>
 

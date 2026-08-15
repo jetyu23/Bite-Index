@@ -21,13 +21,33 @@ const ENV_LABELS: Record<string, string> = {
   boat: "Boat",
 };
 
-type SortKey = "score" | "eating" | "difficulty";
+type SortKey = "score" | "tastiness" | "difficulty" | "rarity";
+type SortDir = "asc" | "desc";
 
 const SORT_LABELS: Record<SortKey, string> = {
   score: "Today's score",
-  eating: "Eating quality",
+  tastiness: "Tastiness",
   difficulty: "Difficulty",
+  rarity: "Rarity",
 };
+
+// Sensible per-field defaults, not one hardcoded direction for everything:
+// "goodness" metrics (score, tastiness) default high-to-low; "how much of an
+// obstacle" metrics (difficulty, rarity -- both read low as "easy to get")
+// default low-to-high. Every field stays switchable regardless of its default.
+const SORT_DEFAULT_DIR: Record<SortKey, SortDir> = {
+  score: "desc",
+  tastiness: "desc",
+  difficulty: "asc",
+  rarity: "asc",
+};
+
+function sortValue(sp: SpeciesProfile, key: SortKey, todayScores: Record<string, SpeciesResult>): number {
+  if (key === "tastiness") return sp.attributes.eating_quality;
+  if (key === "difficulty") return sp.attributes.difficulty;
+  if (key === "rarity") return sp.attributes.rarity;
+  return todayScores[sp.id]?.score ?? -1;
+}
 
 const KNOT_NAMES: Record<string, string> = {
   uni: "Uni",
@@ -62,8 +82,18 @@ export default function SpeciesExplorer({
 }) {
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("score");
+  const [sortDir, setSortDir] = useState<SortDir>(SORT_DEFAULT_DIR.score);
   const [envFilter, setEnvFilter] = useState<string | null>(null);
   const [seasonOnly, setSeasonOnly] = useState(false);
+
+  function chooseSort(k: SortKey) {
+    if (k === sortKey) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(k);
+      setSortDir(SORT_DEFAULT_DIR[k]);
+    }
+  }
 
   const inSeasonNow = (sp: SpeciesProfile) => {
     const f = seasonFactorOf(sp);
@@ -80,15 +110,12 @@ export default function SpeciesExplorer({
       return true;
     });
     list = [...list].sort((a, b) => {
-      if (sortKey === "eating") return b.attributes.eating_quality - a.attributes.eating_quality;
-      if (sortKey === "difficulty") return a.attributes.difficulty - b.attributes.difficulty;
-      const sa = todayScores[a.id]?.score ?? -1;
-      const sb = todayScores[b.id]?.score ?? -1;
-      return sb - sa;
+      const diff = sortValue(a, sortKey, todayScores) - sortValue(b, sortKey, todayScores);
+      return sortDir === "asc" ? diff : -diff;
     });
     return list;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [species, query, sortKey, envFilter, seasonOnly, todayScores, currentMonth]);
+  }, [species, query, sortKey, sortDir, envFilter, seasonOnly, todayScores, currentMonth]);
 
   return (
     <>
@@ -103,17 +130,22 @@ export default function SpeciesExplorer({
         />
         <div className="sp-ctlgroup">
           <span className="sp-ctl-label">SORT</span>
-          {(Object.keys(SORT_LABELS) as SortKey[]).map((k) => (
-            <button
-              key={k}
-              type="button"
-              className={`sp-chip ${sortKey === k ? "active" : ""}`}
-              onClick={() => setSortKey(k)}
-              aria-pressed={sortKey === k}
-            >
-              {SORT_LABELS[k]}
-            </button>
-          ))}
+          {(Object.keys(SORT_LABELS) as SortKey[]).map((k) => {
+            const active = sortKey === k;
+            return (
+              <button
+                key={k}
+                type="button"
+                className={`sp-chip ${active ? "active" : ""}`}
+                onClick={() => chooseSort(k)}
+                aria-pressed={active}
+                title={active ? `Click to reverse to ${sortDir === "asc" ? "high to low" : "low to high"}` : `Sort by ${SORT_LABELS[k]}`}
+              >
+                {SORT_LABELS[k]}
+                {active && <span className="sp-sort-dir">{sortDir === "asc" ? " ↑ low–high" : " ↓ high–low"}</span>}
+              </button>
+            );
+          })}
         </div>
         <div className="sp-ctlgroup">
           <span className="sp-ctl-label">GROUND</span>
@@ -172,10 +204,13 @@ export default function SpeciesExplorer({
 
                 <div className="sp-ratings">
                   <span title={a.eating_note}>
-                    <span className="sp-rating-label">EATING</span> {dots(a.eating_quality)}
+                    <span className="sp-rating-label">TASTINESS</span> {dots(a.eating_quality)}
                   </span>
                   <span title={a.difficulty_note}>
                     <span className="sp-rating-label">DIFFICULTY</span> {dots(a.difficulty)}
+                  </span>
+                  <span title={a.rarity_note}>
+                    <span className="sp-rating-label">RARITY</span> {dots(a.rarity)}
                   </span>
                   <span className={`diff-chip ${ds.cls}`}>{ds.label}</span>
                 </div>

@@ -799,3 +799,35 @@ distinguishable card-to-card where the first wasn't. `engine/tests.py`
 passes, `tsc --noEmit` and `next build` clean, search/sort/ground-filter
 functionally re-tested together (ground filter + text search both narrow
 the same list correctly) after the markup rewrite.
+
+### 2026-08-15 -- species page copy, rarity attribute, sort direction
+Removed the dev-facing "a new fish is one config file" line from both the
+species page and the homepage's contact-list section (same phrase, same
+problem, both reader-facing pages).
+
+Renamed "Eating" to "Tastiness" throughout the species page (sort control,
+per-row rating label); `eating_quality`/`eating_note` kept as the internal
+field names since nothing reads them as a label.
+
+Added `rarity` (1-5) as a new non-scoring species attribute, distinct from
+`difficulty`: difficulty is how hard the fish is to land once found,
+rarity is how often you encounter one at all. Hand-set for all 12 species
+against real angling knowledge (bream/yakkas/flathead common; mulloway
+genuinely uncommon; kingfish/salmon reliable only in their season, closer
+to absent outside it -- salmon explicitly common-but-seasonal rather than
+uncommon, per the distinction the user drew). Guarded the same way as
+difficulty/eating_quality: `test_profiles_valid` checks the 1-5 range and
+a written note, `test_attributes_dont_score` mutates it in memory and
+confirms the raw score doesn't move.
+
+Sort controls reworked to have an explicit direction per field rather than
+one hardcoded default: clicking an inactive field switches to it at that
+field's own default direction (score/tastiness default high-to-low,
+difficulty/rarity default low-to-high, since both read "low" as
+approachable); clicking the already-active field flips direction. Current
+direction shown inline on the active chip ("Rarity ^ low-high").
+Verified live: default rarity sort (ascending) puts Bream first, clicking
+again reverses to Mulloway first, matching the hand-set values.
+
+`engine/tests.py` passes, `tsc --noEmit` and `next build` clean, live run
+regenerated (attributes are non-scoring, so no score changed).

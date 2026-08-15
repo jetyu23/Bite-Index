@@ -147,7 +147,11 @@ def test_profiles_valid() -> None:
         check(f"species:{sp['id']} has attributes", bool(attrs))
         check(f"species:{sp['id']} difficulty in 1-5", 1 <= attrs.get("difficulty", 0) <= 5)
         check(f"species:{sp['id']} eating_quality in 1-5", 1 <= attrs.get("eating_quality", 0) <= 5)
-        check(f"species:{sp['id']} has notes", bool(attrs.get("difficulty_note")) and bool(attrs.get("eating_note")))
+        check(f"species:{sp['id']} rarity in 1-5", 1 <= attrs.get("rarity", 0) <= 5)
+        check(
+            f"species:{sp['id']} has notes",
+            bool(attrs.get("difficulty_note")) and bool(attrs.get("eating_note")) and bool(attrs.get("rarity_note")),
+        )
 
 
 def test_attributes_dont_score() -> None:
@@ -160,7 +164,7 @@ def test_attributes_dont_score() -> None:
     sessions_def = json.loads((runner.PROFILES / "factors.json").read_text())["sessions"]
     day = sample.days[0]
     before = scoring.score_profile_day(sp, day, sample, sessions_def)["score"]
-    sp["attributes"] = {"difficulty": 999, "eating_quality": -999, "junk": "should never be read"}
+    sp["attributes"] = {"difficulty": 999, "eating_quality": -999, "rarity": 999, "junk": "should never be read"}
     after = scoring.score_profile_day(sp, day, sample, sessions_def)["score"]
     check("mutating attributes never changes a species score", before == after, f"{before} vs {after}")
 

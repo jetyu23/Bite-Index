@@ -71,8 +71,7 @@ export default function Home() {
           <h2 className="sec" id="sp-h"><span className="tick" style={{ background: "var(--ochre)" }} />WHAT TO CHASE: CONTACT LIST</h2>
           <p className="sechint">
             each species scored on its own profile, then ranked · full list shown, nothing hidden ·{" "}
-            <Link href="/species">rigging guide for every contact</Link> · more species to be added: a new fish is
-            one config file, no code
+            <Link href="/species">rigging guide for every contact</Link>
           </p>
           <ContactList species={today.species} />
         </section>
