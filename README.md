@@ -81,7 +81,7 @@ scale is used and the footer says so.
 | Sun/moon | $0 — computed locally |
 | GitHub Actions | $0 — free for public repos |
 | Vercel Hobby hosting | $0 — free subdomain (`*.vercel.app`) |
-| Custom domain (optional) | ~AUD $15–25/yr, the only possible spend |
+
 
 ## Extending the model
 
