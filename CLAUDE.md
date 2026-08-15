@@ -859,3 +859,56 @@ Verified visually at 1280px and 375px with a real render, not just the
 CSS: correctly the single largest number on the page at both widths, and
 stacks cleanly to a single column under 520px. `engine/tests.py` passes,
 `tsc --noEmit` and `next build` clean.
+
+### 2026-08-15 -- fish artwork redrawn as Victorian natural-history plates
+User's reference was a natural-history engraving, the kind found in old
+fisheries reports: heavier line weight, cross-hatching for shading,
+visible fin rays, suggested scale texture, same visual language as the
+site's field-manual voice. The flat-fill blobs from the previous pass
+didn't read that way.
+
+Rebuilt `FishSilhouette.tsx` around a shared engraving toolkit rather than
+hand-drawing texture into each of 12 paths separately: an `EngraveDefs`
+component defines a diagonal-hatch pattern and a scale-arc pattern per
+fish (namespaced by species id so 12 simultaneous instances on one page
+don't collide on pattern IDs), a `Body` component clips both patterns to
+the fish's own outline (a belly rect for the hatch, a flank rect for the
+scales, both `clipPath`-intersected against the body path so texture
+never spills past the outline regardless of that species' specific
+shape), and a `Rays` helper fans thin lines from a fin's base to its tips.
+Kept every distinguishing feature from the previous pass (flathead's flat
+head, bream's spiked dorsal, snapper's forehead hump, trevally's blunt
+face, luderick's smooth spike-free profile, yakkas' shoulder spot,
+squid's tentacles) and layered the engraving treatment on top.
+
+**Two real anatomy bugs found by zooming into the actual rendered SVGs,
+not by reading the path source**: mulloway's "open mouth" mark was
+positioned at the tail end of its own body path, not the head end where
+its eye was (nose and tail were on opposite sides of the same fish, and
+the mouth detail had been drawn on the wrong one since the previous pass
+-- it just wasn't visible as a mismatch at flat-fill size). Bream's tail
+fork was drawn at x~91-97, directly on top of where its eye already was,
+leaving the actual tail end bare -- same class of bug. Both fixed by
+moving the mark to the correct end after re-deriving which end of each
+body path is actually the head from the path's own geometry, not from
+assumption.
+
+**Consistency pass**: trevally and snapper were left-facing while the
+other 10 species were right-facing -- not wrong individually (each fish's
+own head/tail were internally consistent), but inconsistent as a set,
+which undercuts the "one hand, one plate" effect the whole point of this
+redraw was chasing. Mirrored both (every x-coordinate reflected as
+`110 - x` across the shared 110-wide viewBox, y unchanged) so all 12 now
+face the same direction.
+
+Also fixed a real overflow this work exposed: `.sp-ratings` (tastiness /
+difficulty / rarity / the difficulty chip) had no wrap, and adding rarity
+as a third rating pushed it wider than 375px could hold with the chip's
+`margin-left: auto`. Added `flex-wrap` and switched to row/column gap.
+
+Verified by rendering the actual page at 2.5x device scale and reading
+individual cropped screenshots of all 12 fish, not just the SVG source --
+this is exactly how the mulloway/bream bugs and the orientation
+inconsistency were caught in the first place. Re-verified overflow-free
+at 1280/760/375px after the CSS fix. `engine/tests.py` passes,
+`tsc --noEmit` and `next build` clean.
