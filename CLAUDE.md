@@ -912,3 +912,29 @@ this is exactly how the mulloway/bream bugs and the orientation
 inconsistency were caught in the first place. Re-verified overflow-free
 at 1280/760/375px after the CSS fix. `engine/tests.py` passes,
 `tsc --noEmit` and `next build` clean.
+
+### 2026-08-19 -- hand-drawn SVGs replaced with owner-supplied artwork
+User supplied real illustrations for all 12 species (detailed pencil/
+stipple-style, transparent PNG, consistent left-facing orientation) to
+replace the engraving-style SVGs from four days earlier. Dropped in
+`web/public/fish/`, originally named after each species' common name with
+inconsistent casing and spaces ("dusky  flathead.png" -- double space,
+"silver trevally.png", etc), not the profile id.
+
+Renamed all 12 to `<id>.png` (mulloway, kingfish, bream, tailor,
+trevally, squid, yakkas, salmon, flathead, luderick, whiting, snapper)
+so the component can address them directly with no lookup table.
+Originals were 1448x1086 (a few 1600x900/1672x941), 700KB-2MB each,
+~15MB total -- far oversized for a ~150px card thumbnail. Resized to
+600px wide with `sips`, dropping total size to 2.4MB with no visible
+quality loss at display size.
+
+Replaced `FishSilhouette.tsx` entirely: the SVG engraving toolkit
+(EngraveDefs/Body/Rays) is gone, the component is now a thin wrapper
+around `<img src="/fish/<id>.png" loading="lazy">`. Widened
+`.fish-silhouette` from 96px to 148px (108px under 520px) since these
+illustrations carry real detail worth showing larger than the old
+SVGs did. Verified with a real render at 1280/760/375px: no overflow,
+transparent backgrounds sit cleanly on the paper background, consistent
+sizing across all 12 rows. `engine/tests.py` passes, `tsc --noEmit` and
+`next build` clean.

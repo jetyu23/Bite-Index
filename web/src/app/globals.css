@@ -287,8 +287,11 @@ details.why-details[open] summary::after { content: " \2212"; }
 }
 .sp-row:hover { transform: translateX(4px); border-color: var(--ink); }
 .sp-row > * { min-width: 0; }
-.fish-silhouette { flex: 0 0 96px; padding-top: 3px; }
-.fish-silhouette svg { width: 100%; height: auto; display: block; }
+.fish-silhouette { flex: 0 0 148px; padding-top: 3px; }
+.fish-silhouette img { width: 100%; height: auto; display: block; }
+@media (max-width: 520px) {
+  .fish-silhouette { flex-basis: 108px; }
+}
 .sp-row-body { flex: 1; min-width: 0; }
 .sp-row-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
 .sp-row-top h3 { font-family: var(--disp); font-size: 1.1rem; font-weight: 700; }
