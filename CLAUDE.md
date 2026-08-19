@@ -1071,3 +1071,37 @@ zoomed and confirmed hollow/separated boat bar renders correctly. Ledger
 divider and boat note verified at 375px, wraps cleanly, no clipping.
 `engine/tests.py` passes, `tsc --noEmit` and `next build` clean, no overflow
 at 1280/760/375px.
+
+### 2026-08-19 -- boat exclusion/separation reverted; root cause identified as unfinished business
+Same day, a few hours later: user pointed out the separation work above made
+boat MORE visually prominent, not less -- its own header, its own
+explanatory paragraph, a lone card apart from the group, so a reader still
+sees 71 next to overall day 34 and concludes offshore is the move regardless
+of what the divider says. More importantly: this was the third UI redesign
+in a row reacting to the same underlying fact (boat's raw floor sits above
+the other four grounds' medians) without ever fixing the fact itself. That
+fact traces to boat's heaviest factor, wind, reading from a Sydney CBD land
+point that structurally cannot register the conditions that actually shut
+offshore down -- already disclosed on the methodology page, already
+investigated for cost/feasibility, but never actually implemented or
+re-verified against whether it fixes the RANGE problem specifically (only
+span was checked previously). Reverted BEST TODAY ranking, the overall-day
+median, the ledger divider, the boat note, the hollow week-strip bar, and
+the methodology section back to how they were before that work: boat is one
+row among five again, competing normally, no separation. Kept the two
+changes from the same session that weren't boat-specific and weren't
+criticised: the week-strip hierarchy swap (overall day primary, best ground
+secondary -- fixes a real, separate "two scales stacked, wrong one big"
+problem regardless of which ground is best) and the overall-day-in-headline
+text (vs a separate box -- a display-location choice, not a boat-ranking
+one). Verified live: headline is back to "Offshore first today," ledger
+back to a single unified list with boat eligible for BEST TODAY, `engine/
+tests.py` passes, `tsc --noEmit` and `next build` clean, no overflow at
+1280/375px.
+
+User also flagged, from the same live screenshots, that the current week
+reads Poor across the board (overall day 23-51, every shore ground in the
+30s) against an earlier frequency table that put Poor at 5-12% of days, and
+asked whether the tide_range gate is over-firing on neap tides. Both this
+and the wind-source question are under investigation as separate,
+report-only items before any further change -- see the next entries.

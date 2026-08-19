@@ -96,18 +96,6 @@ h1, h2, h3 { line-height: 1.15; margin: 0; }
 .lede .hi { background: rgba(76, 122, 69, 0.16); }
 .lede .warn { background: var(--red-wash); color: var(--red); }
 
-/* ------------------------------------------------------------ ledger separation (boat) */
-/* Boat/offshore sits apart from the four shore grounds it used to compete
-   against for BEST TODAY (2026-08-19) -- its raw floor sits above every
-   other ground's raw median, so it won that contest 83% of real days
-   regardless of whether today was actually good for boat, and it's a
-   different reader decision anyway (needs a boat, not an alternative to
-   the other four). This divider is the visual line between "these four
-   compete" and "this one doesn't." */
-.ledger-sep { margin: 18px 0 10px; padding-top: 10px; border-top: 3px double var(--ink); }
-.ledger-sep-label { font-family: var(--disp); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.18em; color: var(--ink); }
-.ledger-sep .sechint { margin-top: 4px; }
-
 /* ------------------------------------------------------------ conditions log */
 .log {
   display: grid; grid-template-columns: repeat(4, 1fr);
@@ -174,10 +162,6 @@ h2.sec::after { content: ""; display: block; border-bottom: 2px solid var(--ink)
 .tag.c-harbour { color: var(--blue); border-color: var(--blue); }
 .tag.c-boat { color: #0f6e73; border-color: #0f6e73; }
 .tag.c-rock { color: var(--ink); border-color: var(--soft); }
-.scale-note {
-  display: inline-block; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.06em;
-  color: var(--soft); font-style: italic; margin-left: 9px; white-space: normal;
-}
 .win { font-family: var(--mono); font-size: 0.66rem; color: var(--soft); margin-left: 9px; white-space: normal; overflow-wrap: break-word; }
 .why { display: block; font-size: 0.9rem; color: #4a463a; margin-top: 4px; max-width: 64ch; }
 .sc { text-align: right; font-family: var(--mono); max-width: 100%; }

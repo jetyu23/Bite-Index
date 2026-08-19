@@ -12,50 +12,37 @@ import type { Day } from "@/lib/types";
    named, but visually subordinate to the number that's actually comparable
    day-to-day.
 
-   Boat/offshore is excluded from "overall day" and from competing for
-   "best ground" (2026-08-19): its raw floor sits above every other
-   ground's raw median (real 366-day archive), so it won that contest on
-   83% of real days regardless of whether that day was actually good for
-   boat -- see the methodology page. Its bar stays in the sparkline
-   (still real, still useful shape information) but rendered hollow/
-   outlined rather than filled solid, and set apart with a wider gap, so
-   it reads as "shown, not competing" rather than a sixth-of-the-cluster
-   bar implying it's directly comparable to the other four. */
+   Boat/offshore was briefly excluded from "overall day" and from the
+   "best ground" contest, with its sparkline bar drawn hollow and set
+   apart (2026-08-19). Reverted the same day: the separation made boat
+   MORE visually prominent, not less, defeating the point -- see
+   build_headline()'s docstring in scoring.py for the full history. Back
+   to five uniform bars, boat competing normally. */
 
-const SHORE_ORDER = ["rock", "beach", "estuary", "harbour"];
-const ORDER = [...SHORE_ORDER, "boat"];
+const ORDER = ["rock", "beach", "estuary", "harbour", "boat"];
 
 function Spark({ day }: { day: Day }) {
   const byId = new Map(day.environments.map((e) => [e.id, e]));
   const W = 128;
   const H = 40;
   const gap = 5;
-  const sep = 10; // extra gap setting boat apart from the shore cluster
-  const bw = (W - gap * (SHORE_ORDER.length - 1) - sep - gap) / ORDER.length;
-  let x = 0;
+  const bw = (W - gap * (ORDER.length - 1)) / ORDER.length;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={H} role="img" aria-label="Scores for each ground this day">
       {ORDER.map((id, i) => {
         const e = byId.get(id);
         const v = e?.score ?? 0;
         const h = Math.max(2, (v / 100) * H);
-        const isBoat = id === "boat";
         // Bar height is raw (this is explicitly labelled a raw-score
         // sparkline), but colour follows the same calibrated-or-raw value
         // as the tier label everywhere else, so a bar's colour always
         // agrees with what that ground's own row says.
         const t = tier(e ? (e.calibrated ?? e.score) : 0)[0];
         const col = { g: "var(--olive)", f: "var(--ochre)", p: "var(--red)", e: "var(--blue)" }[t];
-        const barX = x;
-        x += bw + (isBoat ? gap : i === SHORE_ORDER.length - 1 ? sep : gap);
         return (
           <g key={id}>
-            <rect x={barX} y={0} width={bw} height={H} fill="var(--ink)" opacity={0.05} rx={1} />
-            {isBoat ? (
-              <rect x={barX} y={H - h} width={bw} height={h} fill="none" stroke={col} strokeWidth="1.2" strokeDasharray="2 1.5" rx={1} />
-            ) : (
-              <rect x={barX} y={H - h} width={bw} height={h} fill={col} opacity={0.9} rx={1} />
-            )}
+            <rect x={i * (bw + gap)} y={H - h} width={bw} height={h} fill={col} opacity={0.9} rx={1} />
+            <rect x={i * (bw + gap)} y={0} width={bw} height={H} fill="var(--ink)" opacity={0.05} rx={1} />
           </g>
         );
       })}
@@ -65,14 +52,15 @@ function Spark({ day }: { day: Day }) {
   );
 }
 
-/* "Best" is picked by rank_score (rescaled, pooled-anchor value) among the
-   four SHORE grounds only -- boat excluded, see above. Not raw score and
-   not calibrated: raw scores aren't comparable across grounds with
-   different curve-defined baselines, so ranking by raw would just favour
-   whichever ground runs hottest by design. calibrated (2026-08-14) is
-   per-profile now -- how rare a score is FOR THAT GROUND -- so it's no
-   longer comparable across different grounds either; only rank_score
-   still is. The displayed number is still that ground's raw score. */
+/* "Best" is picked by rank_score (rescaled, pooled-anchor value), not raw
+   score and not calibrated: raw scores aren't on a comparable scale across
+   grounds with different curve-defined baselines (e.g. boat's raw ceiling
+   sits well above harbour's), so ranking by raw would just favour whichever
+   ground runs hottest by design, not whichever is actually having a
+   relatively good day. calibrated (2026-08-14) is per-profile now -- how
+   rare a score is FOR THAT GROUND -- so it's no longer comparable across
+   different grounds either; only rank_score still is. The displayed number
+   is still that ground's raw score. */
 function rank(e: { score: number; rank_score: number | null }): number {
   return e.rank_score ?? e.score;
 }
@@ -81,8 +69,7 @@ export default function WeekAhead({ days }: { days: Day[] }) {
   return (
     <div className="weekstrip">
       {days.map((d, i) => {
-        const shore = d.environments.filter((e) => e.id !== "boat");
-        const best = shore.reduce((a, b) => (rank(b) > rank(a) ? b : a));
+        const best = d.environments.reduce((a, b) => (rank(b) > rank(a) ? b : a));
         const overall = overallDay(d);
         const rockFlag = d.environments.some((e) => e.safety_flag);
         // Colour of the "best" badge reads DISPLAY (calibrated, per-ground),

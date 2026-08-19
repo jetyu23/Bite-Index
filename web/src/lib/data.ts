@@ -40,22 +40,18 @@ export function dayNum(iso: string): string {
   return String(new Date(iso + "T00:00:00").getDate());
 }
 
-/* Middle of the 4 SHORE grounds' raw scores for one day (rock, beach,
-   estuary, harbour -- boat excluded, 2026-08-19) -- "is today worth going
+/* Middle of the 5 grounds' raw scores for one day -- "is today worth going
    at all", as opposed to "where should I fish" (which the ledger/best-ground
-   pick answers). Boat is left out for the same reason it's out of the
-   BEST TODAY contest: its raw floor sits above every other ground's raw
-   median (real 366-day archive), so folding it into this median would pull
-   it the same wrong direction it pulled "best ground" -- see the
-   methodology page. Deliberately the median, not the mean: a real ground's
+   pick answers). Deliberately the median, not the mean: a real ground's
    actual score, not an average nobody's ground produced. Not tier-coloured
    anywhere it's shown -- it's a raw composite across profiles with different
    curve-defined ceilings, never rescaled against any one profile's own
-   history, so it has no defined position on the calibrated scale. */
+   history, so it has no defined position on the calibrated scale.
+
+   2026-08-19: briefly excluded boat from this median, reverted the same
+   day alongside the BEST TODAY ranking -- see build_headline()'s docstring
+   in scoring.py for why. */
 export function overallDay(day: Day): number | null {
-  const scores = day.environments
-    .filter((e) => e.id !== "boat")
-    .map((e) => e.score)
-    .sort((a, b) => a - b);
+  const scores = [...day.environments].map((e) => e.score).sort((a, b) => a - b);
   return scores.length ? scores[Math.floor((scores.length - 1) / 2)] : null;
 }
