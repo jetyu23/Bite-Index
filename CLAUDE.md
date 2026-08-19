@@ -938,3 +938,78 @@ SVGs did. Verified with a real render at 1280/760/375px: no overflow,
 transparent backgrounds sit cleanly on the paper background, consistent
 sizing across all 12 rows. `engine/tests.py` passes, `tsc --noEmit` and
 `next build` clean.
+
+### 2026-08-19 -- week strip hierarchy swap, and boat's scale is genuinely not comparable
+User flagged a live screenshot: each week-strip tile showed the best
+ground's own raw score as the large primary number ("69 OFFSHORE") with
+"overall day 41" as small text underneath -- two different scales stacked
+with no visual distinction, and the more meaningful number (the one
+actually comparable day-to-day) was the smaller one. Also flagged that
+boat leading the ledger at 72 "BEST TODAY" on a day where the other four
+grounds and the overall median all sat in the 30s was now visibly wrong,
+not just theoretically so, and asked for numbers before any fix.
+
+**Investigated boat's comparability before changing anything, as
+instructed.** Boat carries no separate tier cuts (shares the same 0/40/58/80
+`score_labels` as every profile, applied to `calibrated`) -- that part is
+fine. The real problem: boat's raw distribution barely overlaps the other
+four's at all. Real 366-day archive: boat raw min/median/max = 47/72/80
+(stdev 5.01) versus rock 24/61/75, beach 21/56/71, estuary 18/57/71,
+harbour 18/60/72 (stdev 10-12 each) -- boat's raw FLOOR sits above every
+other ground's raw MEDIAN. Checked empirically whether `rank_score`
+(pooled anchors, what actually picks "BEST TODAY") corrects for this: it
+doesn't. Boat wins BEST TODAY on 302 of 366 real days (83%), and on 100%
+of those wins boat also happens to have the literal highest raw score of
+the five -- the pooled rescale isn't distorting anything beyond what raw
+already shows, it's that boat's raw ceiling/floor structurally outrank the
+other four most of the time by profile design. Live example checked:
+today boat raw 70 (actually BELOW boat's own median of 72, a mediocre
+boat day) still beat rock/beach/estuary/harbour at raw 34-41 (genuinely
+bad days for all four). This is the same fact already logged as design
+decision #5 at the start of this project ("boat's raw ceiling sits well
+above harbour's"), now shown to also break ranking, not just naive raw
+display -- pooled rescale corrects for compression-WIDTH differences
+between profiles, not baseline-ELEVATION differences this large.
+
+Reported the numbers and five options (three from the user, two of my
+own) without implementing any of them: (A) one shared raw scale --
+doesn't actually change anything, boat already wins on raw alone 100% of
+the time it wins on rank_score; (B) stop presenting grounds as
+comparable, drop the cross-ground claim entirely; (C) exclude boat from
+the BEST TODAY contest specifically, show it as its own line; (D, mine,
+rejected) redesign boat's curves to overlap the others' range -- explicitly
+flagged as "tuning to fit a histogram," the thing this project has
+avoided every other time it came up; (E, mine) rank by percentile-within-
+own-history (`scoring.calibrate()`, the retired straight-percentile
+primitive, still in the codebase unused) instead of pooled rank_score --
+answers "unusually good for itself" rather than "highest absolute score."
+Recommended C or E, holding both for review. **Not implemented.**
+
+**Week strip hierarchy swapped** (the part that was authorised to
+proceed): overall day is now the large primary number on every tile
+(Archivo display font, `clamp(1.5rem,5vw,1.9rem)`, deliberately NOT
+tier-coloured, same reasoning as the homepage hero stat -- no defined
+position on any one profile's calibrated scale). Best ground dropped to a
+clearly-labelled secondary line ("best: 70 OFFSHORE"), still tier-coloured,
+a full step down in size. Styling treatment proposed before implementing:
+a thin double-rule under the primary number, echoing the masthead's own
+`border-bottom: 3px double`, with a small mono uppercase label beneath --
+same family of marks as the rest of the site, scaled for a 7-across strip.
+Section description copy on the homepage updated to match the new meaning.
+
+One side effect worth naming: this swap makes the boat problem from the
+investigation above impossible to miss rather than easy to miss -- every
+tile now visibly reads "best: OFFSHORE," which is honest, and exactly
+why item 2 needs a real decision rather than staying hidden behind a
+misleadingly large number.
+
+**Two real overflow bugs found and fixed while verifying, not assumed
+clean**: (1) `.weekstrip`'s tiles overflowed their grid track at 375px
+from the same CSS Grid `min-width: auto` issue fixed for `.row`/`.pod`
+weeks ago, this time triggered by the Spark SVG's intrinsic width acting
+as unshrinkable content -- fixed with `.weekstrip > * { min-width: 0 }`.
+(2) `.wk-foot`'s flex row genuinely clipped "OFFSHORE" at 375px (measured
+`scrollWidth` 110px vs `clientWidth` 83-85px, confirmed with a direct
+DOM check, not just eyeballing a screenshot) -- fixed with `flex-wrap`.
+Verified overflow-free and clip-free at 1280/760/375px after both fixes.
+`engine/tests.py` passes, `tsc --noEmit` and `next build` clean.

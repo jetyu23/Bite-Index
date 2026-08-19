@@ -362,6 +362,12 @@ footer p { margin: 0 0 8px; max-width: 90ch; }
 
 /* ------------------------------------------------------------ week strip (filmstrip) */
 .weekstrip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+/* Grid items default to min-width: auto, so a track won't shrink below its
+   content's min-content size -- an SVG's intrinsic width is exactly that
+   kind of content, and it silently pushed tiles past their track at narrow
+   widths (same root cause fixed for .row and .pod earlier). */
+.weekstrip > * { min-width: 0; }
+.wk svg { max-width: 100%; }
 .wk {
   display: block; text-decoration: none; color: inherit;
   background: var(--paper-hi); border: 1.5px solid var(--rule); padding: 10px 9px 9px;
@@ -372,10 +378,23 @@ footer p { margin: 0 0 8px; max-width: 90ch; }
 .wk-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; }
 .wk-wd { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; color: var(--soft); }
 .wk-dn { font-family: var(--disp); font-weight: 800; font-size: 1rem; color: var(--ink); }
-.wk-foot { display: flex; align-items: baseline; gap: 6px; margin-top: 6px; }
-.wk-best { font-family: var(--mono); font-weight: 600; font-size: 1.25rem; }
+/* Primary: overall day. The number every tile leads with -- raw median
+   across all five grounds, deliberately NOT tier-coloured (same reasoning
+   as the homepage hero stat: it has no defined position on any one
+   profile's calibrated scale, so colouring it would imply a comparison
+   that doesn't exist). The rule beneath echoes the masthead's own
+   border-bottom: 3px double, scaled down for a 7-across strip. */
+.wk-primary { margin-top: 7px; padding-bottom: 5px; border-bottom: 3px double var(--ink); }
+.wk-overall-num { display: block; font-family: var(--disp); font-weight: 800; font-size: clamp(1.5rem, 5vw, 1.9rem); line-height: 1; color: var(--ink); }
+.wk-overall-label { display: block; font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--soft); margin-top: 3px; }
+
+/* Secondary: best ground. Still named, still tier-coloured, but a full
+   step down in size and led by a lowercase label so it reads as "and
+   here's where," not a second headline competing with the first. */
+.wk-foot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 5px; margin-top: 7px; }
+.wk-foot-label { font-family: var(--mono); font-size: 0.6rem; color: var(--soft); }
+.wk-best { font-family: var(--mono); font-weight: 600; font-size: 1rem; }
 .wk-env { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; color: var(--soft); text-transform: uppercase; }
-.wk-overall { display: block; font-family: var(--mono); font-size: 0.58rem; color: var(--soft); margin-top: 2px; letter-spacing: 0.02em; }
 .wk-tide { display: block; font-family: var(--mono); font-size: 0.58rem; color: var(--soft); margin-top: 3px; letter-spacing: 0.06em; }
 .wk-flag { display: block; font-family: var(--mono); font-size: 0.58rem; font-weight: 700; color: var(--red); margin-top: 3px; letter-spacing: 0.06em; }
 .wk .g { color: var(--olive); } .wk .f { color: var(--ochre); } .wk .p { color: var(--red); } .wk .e { color: var(--blue); }

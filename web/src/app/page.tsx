@@ -98,7 +98,7 @@ export default function Home() {
 
         <section aria-labelledby="ol-h">
           <h2 className="sec" id="ol-h"><span className="tick" style={{ background: "var(--blue)" }} />THE WEEK AHEAD</h2>
-          <p className="sechint">each day shows all five grounds as raw-score bars (rock · beach · estuary · harbour · offshore) so you can read its shape at a glance; the big number is the best ground (ranked on a scale comparable across all five, shown as its raw score) and answers &ldquo;where should I fish&rdquo;; &ldquo;overall day&rdquo; is the middle of all five and answers &ldquo;how good is today, generally&rdquo;. dashed line = 50, for scale.</p>
+          <p className="sechint">each day shows all five grounds as raw-score bars (rock · beach · estuary · harbour · offshore) so you can read its shape at a glance; the big number is &ldquo;overall day&rdquo;, the middle of all five, and answers &ldquo;is today worth going at all&rdquo;; &ldquo;best:&rdquo; underneath names the best ground and its own raw score, and answers &ldquo;where should I fish&rdquo;. dashed line = 50, for scale.</p>
           <WeekAhead days={site.days} />
         </section>
 

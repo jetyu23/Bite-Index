@@ -3,9 +3,14 @@ import type { Day } from "@/lib/types";
 
 /* The week strip earns its space by showing the SHAPE of each day, not one
    number: a tiny bar per ground (rock/beach/estuary/harbour/offshore) so you
-   can read "beach day" vs "harbour day" vs "everything's flat" at a glance,
-   with the best ground called out below. A daily average would throw all of
-   that away, which is the whole reason we don't use one. */
+   can read "beach day" vs "harbour day" vs "everything's flat" at a glance.
+   The overall-day median is the PRIMARY number on each tile (2026-08-19 --
+   was previously the best ground's own score, with overall day as a small
+   secondary line; that had it backwards, since a ground's raw score is on
+   that ground's own scale and isn't the number that answers "is today worth
+   going at all"). Best ground is the secondary line: still useful, still
+   named, but visually subordinate to the number that's actually comparable
+   day-to-day. */
 
 const ORDER = ["rock", "beach", "estuary", "harbour", "boat"];
 
@@ -72,11 +77,17 @@ export default function WeekAhead({ days }: { days: Day[] }) {
               <span className="wk-dn">{dayNum(d.date)}</span>
             </div>
             <Spark day={d} />
+            {overall != null && (
+              <div className="wk-primary">
+                <span className="wk-overall-num">{overall}</span>
+                <span className="wk-overall-label">Overall day</span>
+              </div>
+            )}
             <div className="wk-foot">
+              <span className="wk-foot-label">best:</span>
               <span className={`wk-best ${t}`}>{best.score}</span>
               <span className="wk-env">{shortEnv(best.name)}</span>
             </div>
-            {overall != null && <span className="wk-overall">overall day {overall}</span>}
             {rockFlag ? (
               <span className="wk-flag">⚠ ROCKS</span>
             ) : (
