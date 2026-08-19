@@ -1013,3 +1013,61 @@ as unshrinkable content -- fixed with `.weekstrip > * { min-width: 0 }`.
 DOM check, not just eyeballing a screenshot) -- fixed with `flex-wrap`.
 Verified overflow-free and clip-free at 1280/760/375px after both fixes.
 `engine/tests.py` passes, `tsc --noEmit` and `next build` clean.
+
+### 2026-08-19 -- boat excluded from BEST TODAY; overall-day box folded into the headline
+User made the call from the previous entry's investigation: option C (exclude
+boat from the cross-ground contest, show it separately), not A (one shared
+scale, accept clustering -- doesn't change anything, boat wins on raw alone
+anyway) or E (percentile-within-own-history -- rejected explicitly, reopens
+the exact noise-amplification problem the pooled/per-profile rescale split
+was built to close weeks ago). Also asked for a real-world justification
+beyond the maths: offshore needs a boat, so a reader choosing between rock/
+beach/estuary/harbour is answering a different question than someone
+deciding whether to go out at all -- competing them was conceptually wrong,
+not just statistically awkward. Agreed and implemented on that basis, not
+just the numbers.
+
+**Overall-day box removed.** The bordered `.overall-day` panel between the
+headline and conditions log is gone. The number now lives inside
+`build_headline()`'s composed sentence in Python, as a plain clause before
+"Top target" ("... Overall day 34. Top target: Snapper (38)."), same typed
+voice as the rest of the headline, no separate box, no rule.
+
+**Boat excluded from BEST TODAY and overall day, backend and frontend
+together, one change each, not patched in multiple places**: `build_headline()`
+now ranks only the four shore grounds for best/second/worst and computes
+overall day as their median (not all five); `lib/data.ts`'s `overallDay()`
+(feeds the week strip) filters boat out the same way; `page.tsx`'s bestId
+selection and `WeekAhead.tsx`'s best-ground reduce both restrict to shore
+grounds too. Four call sites, one rule, applied identically everywhere
+rather than fixed in the headline and left stale in the ledger or strip.
+
+**Boat still fully scored and shown, just visually set apart**: ledger
+renders the four shore grounds (best-first, competing) then a double-rule
+divider labelled "OFFSHORE, SCORED ON ITS OWN SCALE" with a link to the
+methodology writeup, then boat's own row carrying an inline "OWN SCALE, NOT
+RANKED WITH SHORE GROUNDS" note. Week strip's sparkline keeps boat's bar
+(still real, still useful shape information) but renders it hollow/dashed
+and set apart with a wider gap from the four solid shore bars, rather than
+dropping it or drawing it identically to bars it no longer competes with --
+my call, justified as "shown, not competing" rather than losing real
+information.
+
+**Methodology page** gained a dedicated section (`id="boat"`, linked from
+both the ledger and the week-strip copy) laying out both the statistical
+finding from the investigation (boat's raw floor of 47 sits above every
+other ground's raw median; won 83% of real days; 100% overlap with "also
+had the literal highest raw score") and the conceptual one (offshore isn't
+an alternative to the other four, it's a different decision), and explicitly
+recording that percentile-within-own-history was considered and rejected,
+so a future session doesn't re-propose option E without knowing it was
+already ruled out and why.
+
+Verified: live headline confirmed correct on a real day where boat (raw 71,
+Good) would previously have dominated -- headline now reads "A tough survey
+today; rock edges it at 41. Give the harbour a miss. Overall day 34. Top
+target: Snapper (38)," boat mentioned nowhere in the ranking. Sparkline
+zoomed and confirmed hollow/separated boat bar renders correctly. Ledger
+divider and boat note verified at 375px, wraps cleanly, no clipping.
+`engine/tests.py` passes, `tsc --noEmit` and `next build` clean, no overflow
+at 1280/760/375px.

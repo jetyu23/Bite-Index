@@ -508,7 +508,19 @@ def build_headline(env_results: list[dict], species_results: list[dict], metric_
         c = e.get("rank_score")
         return c if c is not None else e["score"]
 
-    ranked = sorted(env_results, key=lambda e: -_rank(e))
+    # Boat/offshore is excluded from the "best ground" contest (2026-08-19):
+    # its raw distribution barely overlaps the other four's at all (real
+    # 366-day archive: boat's raw floor sits above every other ground's raw
+    # median), so it won BEST TODAY on 83% of real days regardless of
+    # whether that day was actually a good one for boat -- not a rescale
+    # bug, a genuine mismatch between what's being compared. It also isn't
+    # the same DECISION for a reader: rock/beach/estuary/harbour are
+    # alternatives to each other, offshore requires a boat and is a
+    # different question entirely ("should I go out today"), not a fifth
+    # option in the same race. Boat still appears in the ledger, just not
+    # in this ranking. See the methodology page for the full writeup.
+    shore = [e for e in env_results if e["id"] != "boat"]
+    ranked = sorted(shore, key=lambda e: -_rank(e))
     best, second, worst = ranked[0], ranked[1] if len(ranked) > 1 else None, ranked[-1]
 
     def name(e):
@@ -552,6 +564,16 @@ def build_headline(env_results: list[dict], species_results: list[dict], metric_
         parts.append("Stay off the rocks: swell is over the safety line.")
     elif _display(worst) < fair_min and worst["id"] != best["id"]:
         parts.append(f"Give the {name(worst)} a miss.")
+
+    # Overall day: median raw score of the same four shore grounds, not all
+    # five -- boat's inclusion would pull this the same wrong way it pulled
+    # BEST TODAY, for the same reason. Deliberately not an average: the
+    # median is a real ground's actual score, not a number nobody's ground
+    # produced (same principle as the frontend's overallDay()).
+    shore_scores = sorted(e["score"] for e in shore)
+    if shore_scores:
+        overall = shore_scores[(len(shore_scores) - 1) // 2]
+        parts.append(f"Overall day {overall}.")
 
     if species_results:
         top = species_results[0]

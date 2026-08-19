@@ -4,7 +4,7 @@ import ContactList from "@/components/ContactList";
 import EnvRow from "@/components/EnvRow";
 import TideInstrument from "@/components/TideInstrument";
 import WeekAhead from "@/components/WeekAhead";
-import { fmtDate, overallDay, site, tier } from "@/lib/data";
+import { fmtDate, site } from "@/lib/data";
 
 export default function Home() {
   const today = site.days[0];
@@ -42,26 +42,6 @@ export default function Home() {
           <p className="lede">{today.headline}</p>
         </section>
 
-        {(() => {
-          const overall = overallDay(today);
-          if (overall == null) return null;
-          const scores = today.environments.map((e) => e.score);
-          const lo = Math.min(...scores);
-          const hi = Math.max(...scores);
-          return (
-            <section className="overall-day" aria-labelledby="od-h">
-              <div className="od-num">{overall}</div>
-              <div className="od-text">
-                <h2 id="od-h">OVERALL DAY</h2>
-                <p>
-                  Median raw score across all five grounds today, answering is today worth going at all, before
-                  where. Today&apos;s five range from {lo} to {hi}; the ledger below picks the best of them.
-                </p>
-              </div>
-            </section>
-          );
-        })()}
-
         <CondLog s={s} />
 
         <TideInstrument curve={today.tide_curve} events={s.tide_events} sunrise={s.sunrise} sunset={s.sunset} />
@@ -69,21 +49,37 @@ export default function Home() {
         <section aria-labelledby="env-h">
           <h2 className="sec" id="env-h"><span className="tick" style={{ background: "var(--olive)" }} />THE LEDGER: WHERE TO FISH</h2>
           <p className="sechint">
-            all five grounds surveyed daily · same conditions, five answers (<Link href="/methodology">why</Link>) ·
+            four shore grounds surveyed daily, best one called out (<Link href="/methodology#boat">why only four</Link>) ·
             each score is raw conditions, 0–100; the line under it is a calibrated version rescaled to show how rare
             that score is for THIS ground specifically, ordinary is roughly 40 to 70 · tick on every meter marks this
             ground's own typical (median) day · open a row for the factor breakdown
           </p>
           {(() => {
-            const bestId = today.environments.reduce((a, b) =>
+            const shore = today.environments.filter((e) => e.id !== "boat");
+            const boat = today.environments.find((e) => e.id === "boat");
+            const bestId = shore.reduce((a, b) =>
               (b.rank_score ?? b.score) > (a.rank_score ?? a.score) ? b : a
             ).id;
-            const ordered = [...today.environments].sort((a, b) => {
+            const ordered = [...shore].sort((a, b) => {
               if (a.id === bestId) return -1;
               if (b.id === bestId) return 1;
               return 0;
             });
-            return ordered.map((e) => <EnvRow env={e} best={e.id === bestId} key={e.id} />);
+            return (
+              <>
+                {ordered.map((e) => <EnvRow env={e} best={e.id === bestId} key={e.id} />)}
+                {boat && (
+                  <div className="ledger-sep">
+                    <span className="ledger-sep-label">OFFSHORE &middot; SCORED ON ITS OWN SCALE</span>
+                    <p className="sechint">
+                      needs a boat, not an alternative to the four grounds above; a different decision, not a fifth
+                      contender, so it&apos;s never ranked against them (<Link href="/methodology#boat">why</Link>)
+                    </p>
+                  </div>
+                )}
+                {boat && <EnvRow env={boat} best={false} key={boat.id} />}
+              </>
+            );
           })()}
         </section>
 
@@ -98,7 +94,7 @@ export default function Home() {
 
         <section aria-labelledby="ol-h">
           <h2 className="sec" id="ol-h"><span className="tick" style={{ background: "var(--blue)" }} />THE WEEK AHEAD</h2>
-          <p className="sechint">each day shows all five grounds as raw-score bars (rock · beach · estuary · harbour · offshore) so you can read its shape at a glance; the big number is &ldquo;overall day&rdquo;, the middle of all five, and answers &ldquo;is today worth going at all&rdquo;; &ldquo;best:&rdquo; underneath names the best ground and its own raw score, and answers &ldquo;where should I fish&rdquo;. dashed line = 50, for scale.</p>
+          <p className="sechint">each day shows all five grounds as raw-score bars (rock · beach · estuary · harbour, then offshore set apart and hollow, not ranked with the other four (<Link href="/methodology#boat">why</Link>)) so you can read its shape at a glance; the big number is &ldquo;overall day&rdquo;, the middle of the four shore grounds, and answers &ldquo;is today worth going at all&rdquo;; &ldquo;best:&rdquo; underneath names the best shore ground and its own raw score, and answers &ldquo;where should I fish&rdquo;. dashed line = 50, for scale.</p>
           <WeekAhead days={site.days} />
         </section>
 

@@ -152,10 +152,46 @@ export default function MethodologyPage() {
           curve, weight and session in this model is already hand-set per profile; anchoring the number a reader
           actually sees to a shared pooled scale, while every other part of the same card was profile-specific, was
           becoming an implementation accident rather than a considered choice. Absolute cross-profile comparison
-          didn&apos;t disappear: it&apos;s what picks the &ldquo;best ground&rdquo; call-out and orders the
-          &ldquo;top targets&rdquo; list, it just isn&apos;t the number printed under each score any more. No
-          fitting, no ML either way: every anchor point is a plain percentile you can recompute yourself, and the
-          mapping between anchors is a straight line. The calibration window is printed in the footer.
+          didn&apos;t disappear: it&apos;s what picks the &ldquo;best ground&rdquo; call-out among the four shore
+          grounds (see below for why boat is no longer one of them) and orders the &ldquo;top targets&rdquo; list,
+          it just isn&apos;t the number printed under each score any more. No fitting, no ML either way: every
+          anchor point is a plain percentile you can recompute yourself, and the mapping between anchors is a
+          straight line. The calibration window is printed in the footer.
+        </p>
+
+        <h2 id="boat" style={{ margin: "30px 0 8px" }}>Why boat isn&apos;t in the BEST TODAY contest</h2>
+        <p>
+          Rock, beach, estuary and harbour compete for &ldquo;best ground&rdquo; and feed &ldquo;overall
+          day&rdquo;. Boat/offshore does not, as of 2026-08-19. Checked against the real 366-day archive first,
+          not assumed: boat&apos;s raw score never drops below 47, and every other ground&apos;s raw{" "}
+          <em>median</em> sits below that (rock 61, beach 56, estuary 57, harbour 60), so boat&apos;s worst
+          real day still outscores a typical day everywhere else. Left in the same contest, boat won &ldquo;best
+          ground&rdquo; on 302 of those 366 days (83%), and on every one of those wins it also happened to have
+          the literal highest raw score of the five. That isn&apos;t <code>rank_score</code> distorting anything:
+          it&apos;s that boat&apos;s raw ceiling and floor structurally outrank the other four most of the time,
+          by how the profile is built, the same fact already on this page as &ldquo;boat&apos;s raw ceiling sits
+          well above harbour&apos;s&rdquo;, now shown to break the ranking as well as the display.
+        </p>
+        <p>
+          There&apos;s a second reason, not just a statistical one. Rock, beach, estuary and harbour are genuine
+          alternatives to each other: a reader picks one of the four for today&apos;s session. Boat isn&apos;t an
+          alternative in that sense, it requires a boat. Someone deciding between the four shore grounds is
+          answering a different question from someone deciding whether to take a boat out at all, so racing boat
+          against the other four was conceptually off even before the numbers confirmed it was statistically off
+          too. Boat still gets a full row in the ledger, still gets scored, still gets a raw score and a
+          calibrated number exactly like the other four, it just isn&apos;t ranked against them, and the
+          ledger marks it &ldquo;own scale, not ranked&rdquo; rather than pretending otherwise. The week strip
+          shows boat&apos;s bar hollow and set apart from the four solid ones for the same reason: shown, not
+          competing.
+        </p>
+        <p>
+          One option considered and rejected: ranking every ground by its own percentile-within-history instead
+          of the shared <code>rank_score</code>, so each ground would be judged against its own past rather than
+          the others&apos;. That would answer a different question (&ldquo;is today unusual for boat
+          specifically&rdquo;) and reopens the exact noise-amplification problem the pooled/per-profile split
+          above was built to close: a small raw gap can be a large percentile gap when a distribution is
+          narrow, which boat&apos;s is. Excluding boat from a contest it can&apos;t fairly enter is the more
+          honest fix than changing the contest&apos;s rules to fit it.
         </p>
       </div>
 

@@ -16,6 +16,7 @@ export default function EnvRow({ env, best }: { env: EnvResult; best?: boolean }
       <div>
         <span className="nm">{env.name}</span>
         <span className={`tag c-${env.id}`}>{env.tag || env.tagline.toUpperCase()}</span>
+        {env.id === "boat" && <span className="scale-note">OWN SCALE, NOT RANKED WITH SHORE GROUNDS</span>}
         {!env.safety_flag && <span className="win">best: {env.best_session}, {env.best_window}</span>}
         <span className="why">{env.reason}</span>
       </div>
