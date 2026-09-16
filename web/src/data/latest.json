@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-16T07:36+10:00",
+ "generated_at": "2026-09-17T07:31+10:00",
  "source": "open-meteo",
  "calibration": {
   "applied": true,
@@ -35,654 +35,9 @@
  ],
  "days": [
   {
-   "date": "2026-09-16",
-   "weekday": "Wed",
-   "headline": "A tough survey today; offshore edges it at 56. Beach is workable. Overall day 46. Top target: Snapper (44).",
-   "summary": {
-    "sunrise": "05:53",
-    "sunset": "17:47",
-    "moon_name": "Waxing crescent",
-    "moon_illum": 0.19,
-    "tide_events": [
-     {
-      "time": "04:12",
-      "type": "low",
-      "height": -0.34
-     },
-     {
-      "time": "10:48",
-      "type": "high",
-      "height": 0.65
-     },
-     {
-      "time": "17:23",
-      "type": "low",
-      "height": -0.28
-     },
-     {
-      "time": "23:10",
-      "type": "high",
-      "height": 0.32
-     }
-    ],
-    "tide_range": 0.99,
-    "swell_max": 1.6,
-    "swell_period": 8.2,
-    "wind_max_kn": 15.0,
-    "pressure": 1027.5,
-    "pressure_trend": 8.0,
-    "rain_24h": 0.4,
-    "rain_72h": 0.4,
-    "rain_today": 0.1,
-    "sst": 17.9
-   },
-   "tide_curve": [
-    {
-     "t": "00:00",
-     "h": 0.25
-    },
-    {
-     "t": "01:00",
-     "h": 0.06
-    },
-    {
-     "t": "02:00",
-     "h": -0.12
-    },
-    {
-     "t": "03:00",
-     "h": -0.27
-    },
-    {
-     "t": "04:00",
-     "h": -0.34
-    },
-    {
-     "t": "05:00",
-     "h": -0.31
-    },
-    {
-     "t": "06:00",
-     "h": -0.18
-    },
-    {
-     "t": "07:00",
-     "h": 0.03
-    },
-    {
-     "t": "08:00",
-     "h": 0.26
-    },
-    {
-     "t": "09:00",
-     "h": 0.47
-    },
-    {
-     "t": "10:00",
-     "h": 0.62
-    },
-    {
-     "t": "11:00",
-     "h": 0.65
-    },
-    {
-     "t": "12:00",
-     "h": 0.58
-    },
-    {
-     "t": "13:00",
-     "h": 0.4
-    },
-    {
-     "t": "14:00",
-     "h": 0.18
-    },
-    {
-     "t": "15:00",
-     "h": -0.03
-    },
-    {
-     "t": "16:00",
-     "h": -0.19
-    },
-    {
-     "t": "17:00",
-     "h": -0.27
-    },
-    {
-     "t": "18:00",
-     "h": -0.26
-    },
-    {
-     "t": "19:00",
-     "h": -0.16
-    },
-    {
-     "t": "20:00",
-     "h": -0.02
-    },
-    {
-     "t": "21:00",
-     "h": 0.13
-    },
-    {
-     "t": "22:00",
-     "h": 0.26
-    },
-    {
-     "t": "23:00",
-     "h": 0.32
-    }
-   ],
-   "environments": [
-    {
-     "id": "rock",
-     "name": "Rock",
-     "tagline": "Ledges and headland washes",
-     "tag": "LEDGES & WASHES",
-     "score": 46,
-     "session_mean": 43,
-     "best_session": "dawn",
-     "calibrated": 45,
-     "rank_score": 47,
-     "raw_median": 61.0,
-     "reason": "Workable wash; onshore breeze stirring the wash. A small tide is taking the edge off today.",
-     "label": "Fair",
-     "best_window": "5am\u20138am",
-     "safety_flag": false,
-     "safety_message": null,
-     "drivers": [
-      {
-       "metric": "swell_m",
-       "label": "Swell height",
-       "value": "1.2 m swell",
-       "subscore": 73,
-       "weight_pct": 30,
-       "evidence": "strong",
-       "note": "workable wash"
-      },
-      {
-       "metric": "wind_onshore_kn",
-       "label": "Onshore wind",
-       "value": "-6 kn onshore",
-       "subscore": 76,
-       "weight_pct": 10,
-       "evidence": "moderate",
-       "note": "onshore breeze stirring the wash"
-      },
-      {
-       "metric": "swell_period_s",
-       "label": "Swell period",
-       "value": "8 s period",
-       "subscore": 75,
-       "weight_pct": 8,
-       "evidence": "strong",
-       "note": "manageable period"
-      },
-      {
-       "metric": "pressure_trend",
-       "label": "Pressure trend (24h)",
-       "value": "+8.0 hPa/24h",
-       "subscore": 29,
-       "weight_pct": 6,
-       "evidence": "moderate",
-       "note": "pressure swinging hard after a change"
-      },
-      {
-       "metric": "pressure",
-       "label": "Barometric pressure",
-       "value": "1026 hPa",
-       "subscore": 67,
-       "weight_pct": 6,
-       "evidence": "moderate",
-       "note": "settled high pressure"
-      }
-     ]
-    },
-    {
-     "id": "beach",
-     "name": "Beach",
-     "tagline": "Gutters, banks and the surf zone",
-     "tag": "GUTTERS & BANKS",
-     "score": 47,
-     "session_mean": 43,
-     "best_session": "dusk",
-     "calibrated": 49,
-     "rank_score": 48,
-     "raw_median": 56.0,
-     "reason": "Workable wash; low light; prime feeding window. A small tide is taking the edge off today.",
-     "label": "Fair",
-     "best_window": "5pm\u20138pm",
-     "safety_flag": false,
-     "safety_message": null,
-     "drivers": [
-      {
-       "metric": "swell_m",
-       "label": "Swell height",
-       "value": "1.3 m swell",
-       "subscore": 78,
-       "weight_pct": 24,
-       "evidence": "strong",
-       "note": "workable wash"
-      },
-      {
-       "metric": "light_phase",
-       "label": "Light",
-       "value": "dusk",
-       "subscore": 83,
-       "weight_pct": 16,
-       "evidence": "strong",
-       "note": "low light; prime feeding window"
-      },
-      {
-       "metric": "wind_onshore_kn",
-       "label": "Onshore wind",
-       "value": "-1 kn onshore",
-       "subscore": 60,
-       "weight_pct": 15,
-       "evidence": "moderate",
-       "note": ""
-      },
-      {
-       "metric": "swell_period_s",
-       "label": "Swell period",
-       "value": "9 s period",
-       "subscore": 66,
-       "weight_pct": 8,
-       "evidence": "strong",
-       "note": "manageable period"
-      },
-      {
-       "metric": "pressure_trend",
-       "label": "Pressure trend (24h)",
-       "value": "+8.0 hPa/24h",
-       "subscore": 29,
-       "weight_pct": 6,
-       "evidence": "moderate",
-       "note": "pressure swinging hard after a change"
-      }
-     ]
-    },
-    {
-     "id": "estuary",
-     "name": "Estuary",
-     "tagline": "Rivers, bays and the brackish reaches",
-     "tag": "RIVERS & REACHES",
-     "score": 36,
-     "session_mean": 34,
-     "best_session": "dusk",
-     "calibrated": 41,
-     "rank_score": 36,
-     "raw_median": 57.0,
-     "reason": "Low light; prime feeding window; system blown out with dirty flood water. Dead neap tide is holding the whole day back.",
-     "label": "Fair",
-     "best_window": "5pm\u20138pm",
-     "safety_flag": false,
-     "safety_message": null,
-     "drivers": [
-      {
-       "metric": "light_phase",
-       "label": "Light",
-       "value": "dusk",
-       "subscore": 77,
-       "weight_pct": 14,
-       "evidence": "strong",
-       "note": "low light; prime feeding window"
-      },
-      {
-       "metric": "rain_72h",
-       "label": "Rain (72h)",
-       "value": "0 mm/72h",
-       "subscore": 42,
-       "weight_pct": 24,
-       "evidence": "moderate",
-       "note": "system blown out with dirty flood water"
-      },
-      {
-       "metric": "pressure_trend",
-       "label": "Pressure trend (24h)",
-       "value": "+8.0 hPa/24h",
-       "subscore": 29,
-       "weight_pct": 7,
-       "evidence": "moderate",
-       "note": "pressure swinging hard after a change"
-      },
-      {
-       "metric": "pressure",
-       "label": "Barometric pressure",
-       "value": "1029 hPa",
-       "subscore": 62,
-       "weight_pct": 7,
-       "evidence": "moderate",
-       "note": "settled high pressure"
-      },
-      {
-       "metric": "sst_c",
-       "label": "Water temp",
-       "value": "17.8 \u00b0C water",
-       "subscore": 62,
-       "weight_pct": 6,
-       "evidence": "strong",
-       "note": "water temp in the zone"
-      }
-     ]
-    },
-    {
-     "id": "harbour",
-     "name": "Harbour & wharf",
-     "tagline": "Structure, pylons and deep protected water",
-     "tag": "PYLONS & EDGES",
-     "score": 39,
-     "session_mean": 37,
-     "best_session": "dusk",
-     "calibrated": 42,
-     "rank_score": 40,
-     "raw_median": 59.0,
-     "reason": "Low light; prime feeding window; runoff has coloured the water nicely. Dead neap tide is holding the whole day back.",
-     "label": "Fair",
-     "best_window": "5pm\u20138pm",
-     "safety_flag": false,
-     "safety_message": null,
-     "drivers": [
-      {
-       "metric": "light_phase",
-       "label": "Light",
-       "value": "dusk",
-       "subscore": 73,
-       "weight_pct": 16,
-       "evidence": "strong",
-       "note": "low light; prime feeding window"
-      },
-      {
-       "metric": "rain_72h",
-       "label": "Rain (72h)",
-       "value": "0 mm/72h",
-       "subscore": 65,
-       "weight_pct": 8,
-       "evidence": "moderate",
-       "note": "runoff has coloured the water nicely"
-      },
-      {
-       "metric": "pressure_trend",
-       "label": "Pressure trend (24h)",
-       "value": "+8.0 hPa/24h",
-       "subscore": 29,
-       "weight_pct": 6,
-       "evidence": "moderate",
-       "note": "pressure swinging hard after a change"
-      },
-      {
-       "metric": "sst_c",
-       "label": "Water temp",
-       "value": "17.8 \u00b0C water",
-       "subscore": 59,
-       "weight_pct": 11,
-       "evidence": "strong",
-       "note": ""
-      },
-      {
-       "metric": "wind_kn",
-       "label": "Wind speed",
-       "value": "13 kn",
-       "subscore": 56,
-       "weight_pct": 13,
-       "evidence": "strong",
-       "note": ""
-      }
-     ]
-    },
-    {
-     "id": "boat",
-     "name": "Boat & offshore",
-     "tagline": "Outside the Heads; reefs, FADs and open water",
-     "tag": "REEFS & OPEN WATER",
-     "score": 56,
-     "session_mean": 53,
-     "best_session": "dawn",
-     "calibrated": 15,
-     "rank_score": 58,
-     "raw_median": 72.0,
-     "reason": "Workable wash; settled high pressure.",
-     "label": "Poor",
-     "best_window": "5am\u20138am",
-     "safety_flag": false,
-     "safety_message": null,
-     "drivers": [
-      {
-       "metric": "swell_m",
-       "label": "Swell height",
-       "value": "1.2 m swell",
-       "subscore": 64,
-       "weight_pct": 29,
-       "evidence": "strong",
-       "note": "workable wash"
-      },
-      {
-       "metric": "pressure",
-       "label": "Barometric pressure",
-       "value": "1026 hPa",
-       "subscore": 69,
-       "weight_pct": 6,
-       "evidence": "moderate",
-       "note": "settled high pressure"
-      },
-      {
-       "metric": "pressure_trend",
-       "label": "Pressure trend (24h)",
-       "value": "+8.0 hPa/24h",
-       "subscore": 32,
-       "weight_pct": 5,
-       "evidence": "moderate",
-       "note": "pressure swinging hard after a change"
-      },
-      {
-       "metric": "light_phase",
-       "label": "Light",
-       "value": "dawn",
-       "subscore": 57,
-       "weight_pct": 10,
-       "evidence": "strong",
-       "note": ""
-      },
-      {
-       "metric": "wind_kn",
-       "label": "Wind speed",
-       "value": "12 kn",
-       "subscore": 51,
-       "weight_pct": 23,
-       "evidence": "strong",
-       "note": ""
-      }
-     ]
-    }
-   ],
-   "species": [
-    {
-     "id": "snapper",
-     "name": "Snapper",
-     "tag": "REEF STRUCTURE",
-     "score": 44,
-     "session_mean": 43,
-     "best_session": "dusk",
-     "calibrated": 45,
-     "label": "Fair",
-     "environment": "boat",
-     "environment_name": "Boat & offshore",
-     "best_window": "5pm\u20138pm",
-     "reason": "Boat & offshore, 5pm\u20138pm. Peak season; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 52
-    },
-    {
-     "id": "tailor",
-     "name": "Tailor",
-     "tag": "BEACH GUTTERS",
-     "score": 45,
-     "session_mean": 43,
-     "best_session": "dusk",
-     "calibrated": 48,
-     "label": "Fair",
-     "environment": "beach",
-     "environment_name": "Beach",
-     "best_window": "5pm\u20138pm",
-     "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; workable wash. A small tide is taking the edge off today.",
-     "rank_score": 47
-    },
-    {
-     "id": "salmon",
-     "name": "Australian salmon",
-     "tag": "SURF WORKUPS",
-     "score": 44,
-     "session_mean": 43,
-     "best_session": "dusk",
-     "calibrated": 46,
-     "label": "Fair",
-     "environment": "beach",
-     "environment_name": "Beach",
-     "best_window": "5pm\u20138pm",
-     "reason": "Beach, 5pm\u20138pm. Peak season; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 47
-    },
-    {
-     "id": "luderick",
-     "name": "Luderick (blackfish)",
-     "tag": "WEED & LEDGES",
-     "score": 44,
-     "session_mean": 43,
-     "best_session": "afternoon",
-     "calibrated": 44,
-     "label": "Fair",
-     "environment": "rock",
-     "environment_name": "Rock",
-     "best_window": "2pm\u20135pm",
-     "reason": "Rock, 2pm\u20135pm. Peak season; onshore breeze stirring the wash. A small tide is taking the edge off today.",
-     "rank_score": 46
-    },
-    {
-     "id": "squid",
-     "name": "Southern calamari",
-     "tag": "HARBOUR WEED BEDS",
-     "score": 46,
-     "session_mean": 45,
-     "best_session": "dusk",
-     "calibrated": 43,
-     "label": "Fair",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Runoff has coloured the water nicely; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 44
-    },
-    {
-     "id": "whiting",
-     "name": "Sand whiting",
-     "tag": "SAND FLATS",
-     "score": 39,
-     "session_mean": 39,
-     "best_session": "dawn",
-     "calibrated": 43,
-     "label": "Fair",
-     "environment": "beach",
-     "environment_name": "Beach",
-     "best_window": "5am\u20138am",
-     "reason": "Beach, 5am\u20138am. Peak season; workable wash. Dead neap tide is holding the whole day back.",
-     "rank_score": 44
-    },
-    {
-     "id": "yakkas",
-     "name": "Yellowtail (yakkas)",
-     "tag": "HARBOUR",
-     "score": 45,
-     "session_mean": 44,
-     "best_session": "dusk",
-     "calibrated": 45,
-     "label": "Fair",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Low light; prime feeding window; runoff has coloured the water nicely. A small tide is taking the edge off today.",
-     "rank_score": 43
-    },
-    {
-     "id": "mulloway",
-     "name": "Mulloway (jewfish)",
-     "tag": "ESTUARY HOLES",
-     "score": 44,
-     "session_mean": 43,
-     "best_session": "evening",
-     "calibrated": 44,
-     "label": "Fair",
-     "environment": "beach",
-     "environment_name": "Beach",
-     "best_window": "8pm\u201311pm",
-     "reason": "Beach, 8pm\u201311pm. Low light; prime feeding window; peak season. A small tide is taking the edge off today.",
-     "rank_score": 42
-    },
-    {
-     "id": "trevally",
-     "name": "Silver trevally",
-     "tag": "WHARF PYLONS",
-     "score": 41,
-     "session_mean": 40,
-     "best_session": "dusk",
-     "calibrated": 46,
-     "label": "Fair",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
-     "rank_score": 41
-    },
-    {
-     "id": "flathead",
-     "name": "Dusky flathead",
-     "tag": "SAND AMBUSH",
-     "score": 39,
-     "session_mean": 39,
-     "best_session": "dawn",
-     "calibrated": 43,
-     "label": "Fair",
-     "environment": "estuary",
-     "environment_name": "Estuary",
-     "best_window": "5am\u20138am",
-     "reason": "Estuary, 5am\u20138am. Peak season; low light; prime feeding window. Dead neap tide is holding the whole day back.",
-     "rank_score": 38
-    },
-    {
-     "id": "kingfish",
-     "name": "Yellowtail kingfish",
-     "tag": "HARBOUR REEFS",
-     "score": 23,
-     "session_mean": 22,
-     "best_session": "morning",
-     "calibrated": 12,
-     "label": "Poor",
-     "environment": "boat",
-     "environment_name": "Boat & offshore",
-     "best_window": "8am\u201311am",
-     "reason": "Boat & offshore, 8am\u201311am. Water temp off the mark; off season. Water below the kingfish activity threshold.",
-     "rank_score": 37
-    },
-    {
-     "id": "bream",
-     "name": "Bream",
-     "tag": "HARBOUR STRUCTURE",
-     "score": 37,
-     "session_mean": 36,
-     "best_session": "dusk",
-     "calibrated": 42,
-     "label": "Fair",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Low light; prime feeding window; pressure swinging hard after a change. Dead neap tide is holding the whole day back.",
-     "rank_score": 37
-    }
-   ]
-  },
-  {
    "date": "2026-09-17",
    "weekday": "Thu",
-   "headline": "A tough survey today; offshore edges it at 60. Give the estuary a miss. Overall day 36. Top target: Snapper (35).",
+   "headline": "A tough survey today; offshore edges it at 59. Give the estuary a miss. Overall day 35. Top target: Snapper (35).",
    "summary": {
     "sunrise": "05:52",
     "sunset": "17:47",
@@ -690,32 +45,27 @@
     "moon_illum": 0.28,
     "tide_events": [
      {
-      "time": "04:47",
+      "time": "04:50",
       "type": "low",
       "height": -0.21
      },
      {
-      "time": "11:36",
+      "time": "11:30",
       "type": "high",
       "height": 0.64
      },
      {
       "time": "18:30",
       "type": "low",
-      "height": -0.22
-     },
-     {
-      "time": "23:55",
-      "type": "high",
-      "height": 0.2
+      "height": -0.21
      }
     ],
     "tide_range": 0.84,
     "swell_max": 1.9,
-    "swell_period": 7.6,
-    "wind_max_kn": 13.0,
-    "pressure": 1030.3,
-    "pressure_trend": 4.2,
+    "swell_period": 7.5,
+    "wind_max_kn": 12.0,
+    "pressure": 1030.1,
+    "pressure_trend": 5.3,
     "rain_24h": 0.0,
     "rain_72h": 0.4,
     "rain_today": 0.0,
@@ -740,7 +90,7 @@
     },
     {
      "t": "04:00",
-     "h": -0.19
+     "h": -0.18
     },
     {
      "t": "05:00",
@@ -748,7 +98,7 @@
     },
     {
      "t": "06:00",
-     "h": -0.16
+     "h": -0.15
     },
     {
      "t": "07:00",
@@ -756,7 +106,7 @@
     },
     {
      "t": "08:00",
-     "h": 0.16
+     "h": 0.17
     },
     {
      "t": "09:00",
@@ -768,7 +118,7 @@
     },
     {
      "t": "11:00",
-     "h": 0.62
+     "h": 0.63
     },
     {
      "t": "12:00",
@@ -796,23 +146,23 @@
     },
     {
      "t": "18:00",
-     "h": -0.21
+     "h": -0.2
     },
     {
      "t": "19:00",
-     "h": -0.21
+     "h": -0.2
     },
     {
      "t": "20:00",
-     "h": -0.14
+     "h": -0.13
     },
     {
      "t": "21:00",
-     "h": -0.03
+     "h": -0.02
     },
     {
      "t": "22:00",
-     "h": 0.08
+     "h": 0.09
     },
     {
      "t": "23:00",
@@ -825,11 +175,11 @@
      "name": "Rock",
      "tagline": "Ledges and headland washes",
      "tag": "LEDGES & WASHES",
-     "score": 36,
-     "session_mean": 30,
+     "score": 35,
+     "session_mean": 29,
      "best_session": "dusk",
-     "calibrated": 30,
-     "rank_score": 36,
+     "calibrated": 28,
+     "rank_score": 35,
      "raw_median": 61.0,
      "reason": "Workable wash; low light; prime feeding window. A small tide is taking the edge off today.",
      "label": "Poor",
@@ -841,7 +191,7 @@
        "metric": "swell_m",
        "label": "Swell height",
        "value": "1.2 m swell",
-       "subscore": 73,
+       "subscore": 72,
        "weight_pct": 30,
        "evidence": "strong",
        "note": "workable wash"
@@ -859,7 +209,7 @@
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
        "value": "+4 kn onshore",
-       "subscore": 70,
+       "subscore": 69,
        "weight_pct": 10,
        "evidence": "moderate",
        "note": "onshore breeze stirring the wash"
@@ -868,7 +218,7 @@
        "metric": "swell_period_s",
        "label": "Swell period",
        "value": "7 s period",
-       "subscore": 73,
+       "subscore": 72,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
@@ -941,7 +291,7 @@
        "metric": "swell_period_s",
        "label": "Swell period",
        "value": "7 s period",
-       "subscore": 63,
+       "subscore": 62,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
@@ -977,7 +327,7 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "4 kn",
+       "value": "5 kn",
        "subscore": 76,
        "weight_pct": 12,
        "evidence": "strong",
@@ -1005,10 +355,10 @@
        "metric": "pressure",
        "label": "Barometric pressure",
        "value": "1029 hPa",
-       "subscore": 61,
+       "subscore": 62,
        "weight_pct": 7,
        "evidence": "moderate",
-       "note": ""
+       "note": "settled high pressure"
       }
      ]
     },
@@ -1018,7 +368,7 @@
      "tagline": "Structure, pylons and deep protected water",
      "tag": "PYLONS & EDGES",
      "score": 29,
-     "session_mean": 28,
+     "session_mean": 27,
      "best_session": "dusk",
      "calibrated": 25,
      "rank_score": 28,
@@ -1041,8 +391,8 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "4 kn",
-       "subscore": 78,
+       "value": "5 kn",
+       "subscore": 77,
        "weight_pct": 13,
        "evidence": "strong",
        "note": "light winds"
@@ -1081,11 +431,11 @@
      "name": "Boat & offshore",
      "tagline": "Outside the Heads; reefs, FADs and open water",
      "tag": "REEFS & OPEN WATER",
-     "score": 60,
-     "session_mean": 57,
+     "score": 59,
+     "session_mean": 56,
      "best_session": "afternoon",
-     "calibrated": 28,
-     "rank_score": 62,
+     "calibrated": 24,
+     "rank_score": 61,
      "raw_median": 72.0,
      "reason": "Light winds; settled high pressure.",
      "label": "Poor",
@@ -1103,15 +453,6 @@
        "note": "light winds"
       },
       {
-       "metric": "swell_m",
-       "label": "Swell height",
-       "value": "1.4 m swell",
-       "subscore": 54,
-       "weight_pct": 29,
-       "evidence": "strong",
-       "note": ""
-      },
-      {
        "metric": "pressure",
        "label": "Barometric pressure",
        "value": "1029 hPa",
@@ -1119,6 +460,15 @@
        "weight_pct": 6,
        "evidence": "moderate",
        "note": "settled high pressure"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "1.4 m swell",
+       "subscore": 53,
+       "weight_pct": 29,
+       "evidence": "strong",
+       "note": ""
       },
       {
        "metric": "light_phase",
@@ -1162,7 +512,7 @@
      "name": "Tailor",
      "tag": "BEACH GUTTERS",
      "score": 35,
-     "session_mean": 34,
+     "session_mean": 33,
      "best_session": "dusk",
      "calibrated": 35,
      "label": "Poor",
@@ -1200,7 +550,7 @@
      "environment_name": "Rock",
      "best_window": "2pm\u20135pm",
      "reason": "Rock, 2pm\u20135pm. Peak season; onshore breeze stirring the wash. A small tide is taking the edge off today.",
-     "rank_score": 35
+     "rank_score": 34
     },
     {
      "id": "kingfish",
@@ -1215,7 +565,7 @@
      "environment_name": "Boat & offshore",
      "best_window": "8am\u201311am",
      "reason": "Boat & offshore, 8am\u201311am. Water temp off the mark; off season. A small tide is taking the edge off today.",
-     "rank_score": 34
+     "rank_score": 33
     },
     {
      "id": "squid",
@@ -1297,7 +647,7 @@
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
      "score": 28,
-     "session_mean": 27,
+     "session_mean": 26,
      "best_session": "dusk",
      "calibrated": 27,
      "label": "Poor",
@@ -1327,7 +677,7 @@
   {
    "date": "2026-09-18",
    "weekday": "Fri",
-   "headline": "A middling day. Offshore is the pick: light winds. Give the estuary a miss. Overall day 29. Top target: Snapper (30).",
+   "headline": "A middling day. Offshore is the pick: light winds. Give the estuary a miss. Overall day 29. Top target: Snapper (31).",
    "summary": {
     "sunrise": "05:50",
     "sunset": "17:48",
@@ -1335,27 +685,32 @@
     "moon_illum": 0.38,
     "tide_events": [
      {
+      "time": "00:00",
+      "type": "high",
+      "height": 0.2
+     },
+     {
       "time": "05:38",
       "type": "low",
-      "height": -0.2
+      "height": -0.19
      },
      {
       "time": "12:30",
       "type": "high",
-      "height": 0.53
+      "height": 0.54
      },
      {
-      "time": "19:30",
+      "time": "19:38",
       "type": "low",
-      "height": -0.24
+      "height": -0.23
      }
     ],
-    "tide_range": 0.75,
+    "tide_range": 0.76,
     "swell_max": 1.0,
-    "swell_period": 8.3,
+    "swell_period": 8.2,
     "wind_max_kn": 7.0,
-    "pressure": 1026.2,
-    "pressure_trend": -2.7,
+    "pressure": 1026.0,
+    "pressure_trend": -2.6,
     "rain_24h": 0.0,
     "rain_72h": 0.4,
     "rain_today": 0.0,
@@ -1368,7 +723,7 @@
     },
     {
      "t": "01:00",
-     "h": 0.16
+     "h": 0.17
     },
     {
      "t": "02:00",
@@ -1384,15 +739,15 @@
     },
     {
      "t": "05:00",
-     "h": -0.19
+     "h": -0.18
     },
     {
      "t": "06:00",
-     "h": -0.2
+     "h": -0.19
     },
     {
      "t": "07:00",
-     "h": -0.14
+     "h": -0.13
     },
     {
      "t": "08:00",
@@ -1400,23 +755,23 @@
     },
     {
      "t": "09:00",
-     "h": 0.14
+     "h": 0.15
     },
     {
      "t": "10:00",
-     "h": 0.3
+     "h": 0.31
     },
     {
      "t": "11:00",
-     "h": 0.44
+     "h": 0.45
     },
     {
      "t": "12:00",
-     "h": 0.52
+     "h": 0.53
     },
     {
      "t": "13:00",
-     "h": 0.52
+     "h": 0.53
     },
     {
      "t": "14:00",
@@ -1432,15 +787,15 @@
     },
     {
      "t": "17:00",
-     "h": -0.02
+     "h": -0.01
     },
     {
      "t": "18:00",
-     "h": -0.16
+     "h": -0.15
     },
     {
      "t": "19:00",
-     "h": -0.23
+     "h": -0.22
     },
     {
      "t": "20:00",
@@ -1448,15 +803,15 @@
     },
     {
      "t": "21:00",
-     "h": -0.18
+     "h": -0.17
     },
     {
      "t": "22:00",
-     "h": -0.09
+     "h": -0.08
     },
     {
      "t": "23:00",
-     "h": 0.01
+     "h": 0.02
     }
    ],
    "environments": [
@@ -1465,13 +820,13 @@
      "name": "Rock",
      "tagline": "Ledges and headland washes",
      "tag": "LEDGES & WASHES",
-     "score": 32,
+     "score": 33,
      "session_mean": 31,
      "best_session": "dusk",
-     "calibrated": 22,
-     "rank_score": 31,
+     "calibrated": 24,
+     "rank_score": 32,
      "raw_median": 61.0,
-     "reason": "Workable wash; small neap tides, little water movement. A small tide is taking the edge off today.",
+     "reason": "Workable wash; low light; prime feeding window. A small tide is taking the edge off today.",
      "label": "Poor",
      "best_window": "5pm\u20138pm",
      "safety_flag": false,
@@ -1480,20 +835,11 @@
       {
        "metric": "swell_m",
        "label": "Swell height",
-       "value": "0.8 m swell",
-       "subscore": 83,
+       "value": "0.9 m swell",
+       "subscore": 85,
        "weight_pct": 30,
        "evidence": "strong",
        "note": "workable wash"
-      },
-      {
-       "metric": "tide_range",
-       "label": "Tidal range",
-       "value": "0.8 m range",
-       "subscore": 33,
-       "weight_pct": 17,
-       "evidence": "strong",
-       "note": "small neap tides, little water movement"
       },
       {
        "metric": "light_phase",
@@ -1505,10 +851,19 @@
        "note": "low light; prime feeding window"
       },
       {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "0.8 m range",
+       "subscore": 34,
+       "weight_pct": 17,
+       "evidence": "strong",
+       "note": "small neap tides, little water movement"
+      },
+      {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "+2 kn onshore",
-       "subscore": 73,
+       "value": "+1 kn onshore",
+       "subscore": 74,
        "weight_pct": 10,
        "evidence": "moderate",
        "note": "onshore breeze stirring the wash"
@@ -1517,7 +872,7 @@
        "metric": "swell_period_s",
        "label": "Swell period",
        "value": "9 s period",
-       "subscore": 65,
+       "subscore": 67,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
@@ -1530,7 +885,7 @@
      "tagline": "Gutters, banks and the surf zone",
      "tag": "GUTTERS & BANKS",
      "score": 29,
-     "session_mean": 26,
+     "session_mean": 27,
      "best_session": "dusk",
      "calibrated": 20,
      "rank_score": 28,
@@ -1554,34 +909,34 @@
        "metric": "tide_range",
        "label": "Tidal range",
        "value": "0.8 m range",
-       "subscore": 33,
+       "subscore": 34,
        "weight_pct": 16,
        "evidence": "strong",
        "note": "small neap tides, little water movement"
       },
       {
-       "metric": "wind_onshore_kn",
-       "label": "Onshore wind",
-       "value": "+2 kn onshore",
-       "subscore": 64,
-       "weight_pct": 15,
-       "evidence": "moderate",
-       "note": "onshore breeze stirring the wash"
-      },
-      {
        "metric": "swell_m",
        "label": "Swell height",
-       "value": "0.8 m swell",
-       "subscore": 56,
+       "value": "0.9 m swell",
+       "subscore": 58,
        "weight_pct": 24,
        "evidence": "strong",
        "note": ""
       },
       {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "+1 kn onshore",
+       "subscore": 63,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
        "metric": "swell_period_s",
        "label": "Swell period",
        "value": "9 s period",
-       "subscore": 65,
+       "subscore": 66,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
@@ -1593,11 +948,11 @@
      "name": "Estuary",
      "tagline": "Rivers, bays and the brackish reaches",
      "tag": "RIVERS & REACHES",
-     "score": 22,
-     "session_mean": 20,
+     "score": 23,
+     "session_mean": 21,
      "best_session": "dusk",
-     "calibrated": 13,
-     "rank_score": 18,
+     "calibrated": 15,
+     "rank_score": 20,
      "raw_median": 57.0,
      "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Poor",
@@ -1617,8 +972,8 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "5 kn",
-       "subscore": 75,
+       "value": "6 kn",
+       "subscore": 74,
        "weight_pct": 12,
        "evidence": "strong",
        "note": "light winds"
@@ -1627,7 +982,7 @@
        "metric": "tide_range",
        "label": "Tidal range",
        "value": "0.8 m range",
-       "subscore": 36,
+       "subscore": 37,
        "weight_pct": 18,
        "evidence": "strong",
        "note": "small neap tides, little water movement"
@@ -1644,8 +999,8 @@
       {
        "metric": "pressure",
        "label": "Barometric pressure",
-       "value": "1023 hPa",
-       "subscore": 69,
+       "value": "1022 hPa",
+       "subscore": 70,
        "weight_pct": 7,
        "evidence": "moderate",
        "note": "settled high pressure"
@@ -1657,11 +1012,11 @@
      "name": "Harbour & wharf",
      "tagline": "Structure, pylons and deep protected water",
      "tag": "PYLONS & EDGES",
-     "score": 23,
+     "score": 24,
      "session_mean": 22,
      "best_session": "dusk",
-     "calibrated": 14,
-     "rank_score": 20,
+     "calibrated": 16,
+     "rank_score": 21,
      "raw_median": 59.0,
      "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Poor",
@@ -1681,8 +1036,8 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "5 kn",
-       "subscore": 76,
+       "value": "6 kn",
+       "subscore": 75,
        "weight_pct": 13,
        "evidence": "strong",
        "note": "light winds"
@@ -1691,7 +1046,7 @@
        "metric": "tide_range",
        "label": "Tidal range",
        "value": "0.8 m range",
-       "subscore": 36,
+       "subscore": 37,
        "weight_pct": 23,
        "evidence": "strong",
        "note": "small neap tides, little water movement"
@@ -1722,7 +1077,7 @@
      "tagline": "Outside the Heads; reefs, FADs and open water",
      "tag": "REEFS & OPEN WATER",
      "score": 70,
-     "session_mean": 70,
+     "session_mean": 69,
      "best_session": "morning",
      "calibrated": 56,
      "rank_score": 73,
@@ -1773,7 +1128,7 @@
        "metric": "swell_period_s",
        "label": "Swell period",
        "value": "8 s period",
-       "subscore": 58,
+       "subscore": 57,
        "weight_pct": 8,
        "evidence": "strong",
        "note": ""
@@ -1786,23 +1141,23 @@
      "id": "snapper",
      "name": "Snapper",
      "tag": "REEF STRUCTURE",
-     "score": 30,
+     "score": 31,
      "session_mean": 29,
      "best_session": "dusk",
-     "calibrated": 20,
+     "calibrated": 22,
      "label": "Poor",
      "environment": "boat",
      "environment_name": "Boat & offshore",
      "best_window": "5pm\u20138pm",
      "reason": "Boat & offshore, 5pm\u20138pm. Peak season; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 51
+     "rank_score": 52
     },
     {
      "id": "kingfish",
      "name": "Yellowtail kingfish",
      "tag": "HARBOUR REEFS",
      "score": 15,
-     "session_mean": 14,
+     "session_mean": 15,
      "best_session": "afternoon",
      "calibrated": 1,
      "label": "Poor",
@@ -1816,25 +1171,40 @@
      "id": "luderick",
      "name": "Luderick (blackfish)",
      "tag": "WEED & LEDGES",
-     "score": 29,
+     "score": 30,
      "session_mean": 29,
      "best_session": "morning",
-     "calibrated": 20,
+     "calibrated": 22,
      "label": "Poor",
      "environment": "rock",
      "environment_name": "Rock",
      "best_window": "8am\u201311am",
      "reason": "Rock, 8am\u201311am. Peak season; onshore breeze stirring the wash. A small tide is taking the edge off today.",
-     "rank_score": 29
+     "rank_score": 30
+    },
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "tag": "BEACH GUTTERS",
+     "score": 29,
+     "session_mean": 28,
+     "best_session": "dusk",
+     "calibrated": 22,
+     "label": "Poor",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. A small tide is taking the edge off today.",
+     "rank_score": 28
     },
     {
      "id": "salmon",
      "name": "Australian salmon",
      "tag": "SURF WORKUPS",
-     "score": 29,
-     "session_mean": 28,
+     "score": 30,
+     "session_mean": 29,
      "best_session": "dusk",
-     "calibrated": 18,
+     "calibrated": 20,
      "label": "Poor",
      "environment": "beach",
      "environment_name": "Beach",
@@ -1843,56 +1213,56 @@
      "rank_score": 28
     },
     {
-     "id": "tailor",
-     "name": "Tailor",
-     "tag": "BEACH GUTTERS",
-     "score": 28,
-     "session_mean": 27,
-     "best_session": "dusk",
-     "calibrated": 20,
-     "label": "Poor",
-     "environment": "beach",
-     "environment_name": "Beach",
-     "best_window": "5pm\u20138pm",
-     "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 27
-    },
-    {
      "id": "squid",
      "name": "Southern calamari",
      "tag": "HARBOUR WEED BEDS",
-     "score": 32,
-     "session_mean": 31,
+     "score": 33,
+     "session_mean": 32,
      "best_session": "dusk",
-     "calibrated": 21,
+     "calibrated": 23,
      "label": "Poor",
      "environment": "harbour",
      "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Runoff has coloured the water nicely; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 26
+     "rank_score": 27
     },
     {
      "id": "mulloway",
      "name": "Mulloway (jewfish)",
      "tag": "ESTUARY HOLES",
-     "score": 28,
+     "score": 29,
      "session_mean": 28,
      "best_session": "late_night",
-     "calibrated": 13,
+     "calibrated": 15,
      "label": "Poor",
      "environment": "beach",
      "environment_name": "Beach",
      "best_window": "11pm\u20132am",
      "reason": "Beach, 11pm\u20132am. Low light; prime feeding window; small neap tides, little water movement. A small tide is taking the edge off today.",
-     "rank_score": 24
+     "rank_score": 25
+    },
+    {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 24,
+     "session_mean": 23,
+     "best_session": "afternoon",
+     "calibrated": 18,
+     "label": "Poor",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "2pm\u20135pm",
+     "reason": "Beach, 2pm\u20135pm. Workable wash; small neap tides, little water movement. Dead neap tide is holding the whole day back.",
+     "rank_score": 25
     },
     {
      "id": "yakkas",
      "name": "Yellowtail (yakkas)",
      "tag": "HARBOUR",
      "score": 30,
-     "session_mean": 29,
+     "session_mean": 30,
      "best_session": "dusk",
      "calibrated": 18,
      "label": "Poor",
@@ -1903,71 +1273,56 @@
      "rank_score": 24
     },
     {
-     "id": "whiting",
-     "name": "Sand whiting",
-     "tag": "SAND FLATS",
-     "score": 23,
-     "session_mean": 23,
-     "best_session": "morning",
-     "calibrated": 16,
-     "label": "Poor",
-     "environment": "beach",
-     "environment_name": "Beach",
-     "best_window": "8am\u201311am",
-     "reason": "Beach, 8am\u201311am. Workable wash; small neap tides, little water movement. Dead neap tide is holding the whole day back.",
-     "rank_score": 24
-    },
-    {
      "id": "trevally",
      "name": "Silver trevally",
      "tag": "WHARF PYLONS",
-     "score": 24,
-     "session_mean": 23,
+     "score": 25,
+     "session_mean": 24,
      "best_session": "dusk",
-     "calibrated": 20,
+     "calibrated": 22,
      "label": "Poor",
      "environment": "harbour",
      "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
-     "rank_score": 21
+     "rank_score": 22
     },
     {
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
-     "score": 22,
-     "session_mean": 21,
+     "score": 23,
+     "session_mean": 22,
      "best_session": "dusk",
-     "calibrated": 15,
+     "calibrated": 17,
      "label": "Poor",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
+     "environment": "estuary",
+     "environment_name": "Estuary",
      "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Small neap tides, little water movement; low light; prime feeding window. Dead neap tide is holding the whole day back.",
-     "rank_score": 18
+     "reason": "Estuary, 5pm\u20138pm. Small neap tides, little water movement; low light; prime feeding window. Dead neap tide is holding the whole day back.",
+     "rank_score": 20
     },
     {
      "id": "flathead",
      "name": "Dusky flathead",
      "tag": "SAND AMBUSH",
-     "score": 22,
-     "session_mean": 22,
+     "score": 23,
+     "session_mean": 23,
      "best_session": "dusk",
-     "calibrated": 14,
+     "calibrated": 16,
      "label": "Poor",
-     "environment": "beach",
-     "environment_name": "Beach",
+     "environment": "estuary",
+     "environment_name": "Estuary",
      "best_window": "5pm\u20138pm",
-     "reason": "Beach, 5pm\u20138pm. Small neap tides, little water movement; peak season. Dead neap tide is holding the whole day back.",
-     "rank_score": 18
+     "reason": "Estuary, 5pm\u20138pm. Peak season; small neap tides, little water movement. Dead neap tide is holding the whole day back.",
+     "rank_score": 20
     }
    ]
   },
   {
    "date": "2026-09-19",
    "weekday": "Sat",
-   "headline": "Offshore first today: light winds. Give the estuary a miss. Overall day 26. Top target: Snapper (29).",
+   "headline": "Offshore first today: light winds. Give the estuary a miss. Overall day 27. Top target: Snapper (29).",
    "summary": {
     "sunrise": "05:49",
     "sunset": "17:49",
@@ -1975,32 +1330,32 @@
     "moon_illum": 0.48,
     "tide_events": [
      {
-      "time": "01:20",
+      "time": "01:30",
       "type": "high",
-      "height": 0.14
+      "height": 0.15
      },
      {
-      "time": "06:38",
+      "time": "06:40",
       "type": "low",
-      "height": -0.13
+      "height": -0.12
      },
      {
-      "time": "13:38",
+      "time": "13:43",
       "type": "high",
-      "height": 0.55
+      "height": 0.58
      },
      {
-      "time": "20:54",
+      "time": "20:45",
       "type": "low",
-      "height": -0.19
+      "height": -0.17
      }
     ],
-    "tide_range": 0.74,
+    "tide_range": 0.75,
     "swell_max": 0.8,
     "swell_period": 9.6,
-    "wind_max_kn": 9.0,
-    "pressure": 1022.1,
-    "pressure_trend": -4.4,
+    "wind_max_kn": 10.0,
+    "pressure": 1021.7,
+    "pressure_trend": -5.5,
     "rain_24h": 0.0,
     "rain_72h": 0.0,
     "rain_today": 0.0,
@@ -2009,19 +1364,19 @@
    "tide_curve": [
     {
      "t": "00:00",
-     "h": 0.09
+     "h": 0.11
     },
     {
      "t": "01:00",
-     "h": 0.14
+     "h": 0.15
     },
     {
      "t": "02:00",
-     "h": 0.13
+     "h": 0.15
     },
     {
      "t": "03:00",
-     "h": 0.09
+     "h": 0.1
     },
     {
      "t": "04:00",
@@ -2029,15 +1384,15 @@
     },
     {
      "t": "05:00",
-     "h": -0.07
+     "h": -0.06
     },
     {
      "t": "06:00",
-     "h": -0.12
+     "h": -0.11
     },
     {
      "t": "07:00",
-     "h": -0.13
+     "h": -0.12
     },
     {
      "t": "08:00",
@@ -2045,63 +1400,63 @@
     },
     {
      "t": "09:00",
-     "h": 0.04
+     "h": 0.05
     },
     {
      "t": "10:00",
-     "h": 0.18
+     "h": 0.19
     },
     {
      "t": "11:00",
-     "h": 0.33
+     "h": 0.35
     },
     {
      "t": "12:00",
-     "h": 0.46
+     "h": 0.48
     },
     {
      "t": "13:00",
-     "h": 0.54
+     "h": 0.56
     },
     {
      "t": "14:00",
-     "h": 0.55
+     "h": 0.58
     },
     {
      "t": "15:00",
-     "h": 0.49
+     "h": 0.51
     },
     {
      "t": "16:00",
-     "h": 0.37
+     "h": 0.39
     },
     {
      "t": "17:00",
-     "h": 0.21
+     "h": 0.23
     },
     {
      "t": "18:00",
-     "h": 0.04
+     "h": 0.06
     },
     {
      "t": "19:00",
-     "h": -0.09
+     "h": -0.07
     },
     {
      "t": "20:00",
-     "h": -0.17
-    },
-    {
-     "t": "21:00",
-     "h": -0.19
-    },
-    {
-     "t": "22:00",
      "h": -0.16
     },
     {
+     "t": "21:00",
+     "h": -0.17
+    },
+    {
+     "t": "22:00",
+     "h": -0.14
+    },
+    {
      "t": "23:00",
-     "h": -0.07
+     "h": -0.05
     }
    ],
    "environments": [
@@ -2110,11 +1465,11 @@
      "name": "Rock",
      "tagline": "Ledges and headland washes",
      "tag": "LEDGES & WASHES",
-     "score": 29,
-     "session_mean": 28,
+     "score": 30,
+     "session_mean": 29,
      "best_session": "dusk",
-     "calibrated": 15,
-     "rank_score": 28,
+     "calibrated": 18,
+     "rank_score": 29,
      "raw_median": 61.0,
      "reason": "Workable wash; small neap tides, little water movement. A small tide is taking the edge off today.",
      "label": "Poor",
@@ -2125,8 +1480,8 @@
       {
        "metric": "swell_m",
        "label": "Swell height",
-       "value": "0.7 m swell",
-       "subscore": 76,
+       "value": "0.6 m swell",
+       "subscore": 74,
        "weight_pct": 30,
        "evidence": "strong",
        "note": "workable wash"
@@ -2134,8 +1489,8 @@
       {
        "metric": "tide_range",
        "label": "Tidal range",
-       "value": "0.7 m range",
-       "subscore": 32,
+       "value": "0.8 m range",
+       "subscore": 33,
        "weight_pct": 17,
        "evidence": "strong",
        "note": "small neap tides, little water movement"
@@ -2152,8 +1507,8 @@
       {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "-5 kn onshore",
-       "subscore": 76,
+       "value": "+0 kn onshore",
+       "subscore": 74,
        "weight_pct": 10,
        "evidence": "moderate",
        "note": "onshore breeze stirring the wash"
@@ -2161,7 +1516,7 @@
       {
        "metric": "pressure",
        "label": "Barometric pressure",
-       "value": "1021 hPa",
+       "value": "1020 hPa",
        "subscore": 72,
        "weight_pct": 6,
        "evidence": "moderate",
@@ -2174,11 +1529,11 @@
      "name": "Beach",
      "tagline": "Gutters, banks and the surf zone",
      "tag": "GUTTERS & BANKS",
-     "score": 26,
+     "score": 27,
      "session_mean": 24,
      "best_session": "dusk",
-     "calibrated": 14,
-     "rank_score": 24,
+     "calibrated": 16,
+     "rank_score": 25,
      "raw_median": 56.0,
      "reason": "Low light; prime feeding window; small neap tides, little water movement. A small tide is taking the edge off today.",
      "label": "Poor",
@@ -2198,8 +1553,8 @@
       {
        "metric": "tide_range",
        "label": "Tidal range",
-       "value": "0.7 m range",
-       "subscore": 32,
+       "value": "0.8 m range",
+       "subscore": 33,
        "weight_pct": 16,
        "evidence": "strong",
        "note": "small neap tides, little water movement"
@@ -2207,10 +1562,19 @@
       {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "-5 kn onshore",
-       "subscore": 57,
+       "value": "+0 kn onshore",
+       "subscore": 61,
        "weight_pct": 15,
        "evidence": "moderate",
+       "note": ""
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.6 m swell",
+       "subscore": 45,
+       "weight_pct": 24,
+       "evidence": "strong",
        "note": ""
       },
       {
@@ -2221,15 +1585,6 @@
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
-      },
-      {
-       "metric": "swell_m",
-       "label": "Swell height",
-       "value": "0.7 m swell",
-       "subscore": 46,
-       "weight_pct": 24,
-       "evidence": "strong",
-       "note": ""
       }
      ]
     },
@@ -2238,11 +1593,11 @@
      "name": "Estuary",
      "tagline": "Rivers, bays and the brackish reaches",
      "tag": "RIVERS & REACHES",
-     "score": 21,
-     "session_mean": 19,
+     "score": 22,
+     "session_mean": 20,
      "best_session": "dusk",
-     "calibrated": 10,
-     "rank_score": 16,
+     "calibrated": 13,
+     "rank_score": 18,
      "raw_median": 57.0,
      "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Poor",
@@ -2262,8 +1617,8 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "5 kn",
-       "subscore": 75,
+       "value": "2 kn",
+       "subscore": 76,
        "weight_pct": 12,
        "evidence": "strong",
        "note": "light winds"
@@ -2271,8 +1626,8 @@
       {
        "metric": "tide_range",
        "label": "Tidal range",
-       "value": "0.7 m range",
-       "subscore": 35,
+       "value": "0.8 m range",
+       "subscore": 36,
        "weight_pct": 18,
        "evidence": "strong",
        "note": "small neap tides, little water movement"
@@ -2302,13 +1657,13 @@
      "name": "Harbour & wharf",
      "tagline": "Structure, pylons and deep protected water",
      "tag": "PYLONS & EDGES",
-     "score": 22,
+     "score": 23,
      "session_mean": 21,
      "best_session": "dusk",
-     "calibrated": 12,
-     "rank_score": 18,
+     "calibrated": 14,
+     "rank_score": 20,
      "raw_median": 59.0,
-     "reason": "Low light; prime feeding window; small neap tides, little water movement. Dead neap tide is holding the whole day back.",
+     "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Poor",
      "best_window": "5pm\u20138pm",
      "safety_flag": false,
@@ -2324,22 +1679,22 @@
        "note": "low light; prime feeding window"
       },
       {
-       "metric": "tide_range",
-       "label": "Tidal range",
-       "value": "0.7 m range",
-       "subscore": 35,
-       "weight_pct": 23,
-       "evidence": "strong",
-       "note": "small neap tides, little water movement"
-      },
-      {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "5 kn",
-       "subscore": 76,
+       "value": "2 kn",
+       "subscore": 77,
        "weight_pct": 13,
        "evidence": "strong",
        "note": "light winds"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "0.8 m range",
+       "subscore": 36,
+       "weight_pct": 23,
+       "evidence": "strong",
+       "note": "small neap tides, little water movement"
       },
       {
        "metric": "tide_speed",
@@ -2353,7 +1708,7 @@
       {
        "metric": "sst_c",
        "label": "Water temp",
-       "value": "18.3 \u00b0C water",
+       "value": "18.2 \u00b0C water",
        "subscore": 63,
        "weight_pct": 11,
        "evidence": "strong",
@@ -2366,11 +1721,11 @@
      "name": "Boat & offshore",
      "tagline": "Outside the Heads; reefs, FADs and open water",
      "tag": "REEFS & OPEN WATER",
-     "score": 72,
+     "score": 71,
      "session_mean": 70,
      "best_session": "afternoon",
-     "calibrated": 62,
-     "rank_score": 76,
+     "calibrated": 59,
+     "rank_score": 74,
      "raw_median": 72.0,
      "reason": "Light winds; workable wash.",
      "label": "Good",
@@ -2381,8 +1736,8 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "4 kn",
-       "subscore": 92,
+       "value": "5 kn",
+       "subscore": 90,
        "weight_pct": 23,
        "evidence": "strong",
        "note": "light winds"
@@ -2391,7 +1746,7 @@
        "metric": "swell_m",
        "label": "Swell height",
        "value": "0.7 m swell",
-       "subscore": 80,
+       "subscore": 81,
        "weight_pct": 29,
        "evidence": "strong",
        "note": "workable wash"
@@ -2409,7 +1764,7 @@
        "metric": "swell_period_s",
        "label": "Swell period",
        "value": "10 s period",
-       "subscore": 65,
+       "subscore": 64,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
@@ -2440,7 +1795,7 @@
      "environment_name": "Boat & offshore",
      "best_window": "5pm\u20138pm",
      "reason": "Boat & offshore, 5pm\u20138pm. Peak season; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 52
+     "rank_score": 51
     },
     {
      "id": "kingfish",
@@ -2455,29 +1810,29 @@
      "environment_name": "Boat & offshore",
      "best_window": "2pm\u20135pm",
      "reason": "Boat & offshore, 2pm\u20135pm. Off season; small neap tides, little water movement. A small tide is taking the edge off today.",
-     "rank_score": 39
+     "rank_score": 38
     },
     {
      "id": "luderick",
      "name": "Luderick (blackfish)",
      "tag": "WEED & LEDGES",
-     "score": 28,
-     "session_mean": 28,
+     "score": 29,
+     "session_mean": 29,
      "best_session": "midday",
-     "calibrated": 18,
+     "calibrated": 20,
      "label": "Poor",
      "environment": "rock",
      "environment_name": "Rock",
      "best_window": "11am\u20132pm",
      "reason": "Rock, 11am\u20132pm. Peak season; onshore breeze stirring the wash. A small tide is taking the edge off today.",
-     "rank_score": 27
+     "rank_score": 28
     },
     {
      "id": "squid",
      "name": "Southern calamari",
      "tag": "HARBOUR WEED BEDS",
      "score": 32,
-     "session_mean": 30,
+     "session_mean": 31,
      "best_session": "dusk",
      "calibrated": 21,
      "label": "Poor",
@@ -2485,7 +1840,22 @@
      "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Runoff has coloured the water nicely; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 25
+     "rank_score": 26
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 28,
+     "session_mean": 27,
+     "best_session": "dusk",
+     "calibrated": 16,
+     "label": "Poor",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Peak season; low light; prime feeding window. A small tide is taking the edge off today.",
+     "rank_score": 26
     },
     {
      "id": "tailor",
@@ -2500,29 +1870,29 @@
      "environment_name": "Beach",
      "best_window": "5pm\u20138pm",
      "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; small neap tides, little water movement. A small tide is taking the edge off today.",
-     "rank_score": 24
+     "rank_score": 25
     },
     {
-     "id": "salmon",
-     "name": "Australian salmon",
-     "tag": "SURF WORKUPS",
-     "score": 27,
-     "session_mean": 26,
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "tag": "HARBOUR",
+     "score": 29,
+     "session_mean": 29,
      "best_session": "dusk",
-     "calibrated": 14,
+     "calibrated": 16,
      "label": "Poor",
-     "environment": "beach",
-     "environment_name": "Beach",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
-     "reason": "Beach, 5pm\u20138pm. Peak season; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 24
+     "reason": "Harbour & wharf, 5pm\u20138pm. Low light; prime feeding window; runoff has coloured the water nicely. A small tide is taking the edge off today.",
+     "rank_score": 23
     },
     {
      "id": "mulloway",
      "name": "Mulloway (jewfish)",
      "tag": "ESTUARY HOLES",
      "score": 27,
-     "session_mean": 26,
+     "session_mean": 27,
      "best_session": "late_night",
      "calibrated": 10,
      "label": "Poor",
@@ -2533,41 +1903,26 @@
      "rank_score": 22
     },
     {
-     "id": "yakkas",
-     "name": "Yellowtail (yakkas)",
-     "tag": "HARBOUR",
-     "score": 29,
-     "session_mean": 28,
-     "best_session": "dusk",
-     "calibrated": 16,
-     "label": "Poor",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Low light; prime feeding window; runoff has coloured the water nicely. A small tide is taking the edge off today.",
-     "rank_score": 22
-    },
-    {
      "id": "whiting",
      "name": "Sand whiting",
      "tag": "SAND FLATS",
      "score": 22,
-     "session_mean": 21,
-     "best_session": "afternoon",
+     "session_mean": 22,
+     "best_session": "dusk",
      "calibrated": 14,
      "label": "Poor",
      "environment": "beach",
      "environment_name": "Beach",
-     "best_window": "2pm\u20135pm",
-     "reason": "Beach, 2pm\u20135pm. Small neap tides, little water movement; workable wash. Dead neap tide is holding the whole day back.",
-     "rank_score": 21
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Small neap tides, little water movement; peak season. Dead neap tide is holding the whole day back.",
+     "rank_score": 22
     },
     {
      "id": "trevally",
      "name": "Silver trevally",
      "tag": "WHARF PYLONS",
      "score": 23,
-     "session_mean": 22,
+     "session_mean": 23,
      "best_session": "dusk",
      "calibrated": 18,
      "label": "Poor",
@@ -2575,14 +1930,29 @@
      "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
-     "rank_score": 19
+     "rank_score": 20
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "tag": "HARBOUR STRUCTURE",
+     "score": 22,
+     "session_mean": 21,
+     "best_session": "dusk",
+     "calibrated": 15,
+     "label": "Poor",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "5pm\u20138pm",
+     "reason": "Harbour & wharf, 5pm\u20138pm. Small neap tides, little water movement; low light; prime feeding window. Dead neap tide is holding the whole day back.",
+     "rank_score": 18
     },
     {
      "id": "flathead",
      "name": "Dusky flathead",
      "tag": "SAND AMBUSH",
      "score": 22,
-     "session_mean": 21,
+     "session_mean": 22,
      "best_session": "dusk",
      "calibrated": 14,
      "label": "Poor",
@@ -2590,22 +1960,7 @@
      "environment_name": "Estuary",
      "best_window": "5pm\u20138pm",
      "reason": "Estuary, 5pm\u20138pm. Small neap tides, little water movement; peak season. Dead neap tide is holding the whole day back.",
-     "rank_score": 17
-    },
-    {
-     "id": "bream",
-     "name": "Bream",
-     "tag": "HARBOUR STRUCTURE",
-     "score": 21,
-     "session_mean": 20,
-     "best_session": "dusk",
-     "calibrated": 13,
-     "label": "Poor",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Small neap tides, little water movement; low light; prime feeding window. Dead neap tide is holding the whole day back.",
-     "rank_score": 16
+     "rank_score": 18
     }
    ]
   },
@@ -2622,30 +1977,30 @@
      {
       "time": "02:45",
       "type": "high",
-      "height": 0.2
+      "height": 0.22
      },
      {
-      "time": "07:55",
+      "time": "07:50",
       "type": "low",
-      "height": -0.08
+      "height": -0.05
      },
      {
       "time": "14:52",
       "type": "high",
-      "height": 0.62
+      "height": 0.64
      },
      {
-      "time": "22:00",
+      "time": "21:52",
       "type": "low",
-      "height": -0.21
+      "height": -0.19
      }
     ],
     "tide_range": 0.83,
-    "swell_max": 0.7,
-    "swell_period": 8.8,
+    "swell_max": 0.8,
+    "swell_period": 9.2,
     "wind_max_kn": 9.0,
-    "pressure": 1018.3,
-    "pressure_trend": -2.4,
+    "pressure": 1018.5,
+    "pressure_trend": -1.7,
     "rain_24h": 0.0,
     "rain_72h": 0.0,
     "rain_today": 0.0,
@@ -2654,99 +2009,99 @@
    "tide_curve": [
     {
      "t": "00:00",
-     "h": 0.03
+     "h": 0.05
     },
     {
      "t": "01:00",
-     "h": 0.12
+     "h": 0.14
     },
     {
      "t": "02:00",
-     "h": 0.19
+     "h": 0.21
     },
     {
      "t": "03:00",
-     "h": 0.2
+     "h": 0.22
     },
     {
      "t": "04:00",
-     "h": 0.17
+     "h": 0.19
     },
     {
      "t": "05:00",
-     "h": 0.1
+     "h": 0.12
     },
     {
      "t": "06:00",
-     "h": 0.01
+     "h": 0.03
     },
     {
      "t": "07:00",
-     "h": -0.05
+     "h": -0.03
     },
     {
      "t": "08:00",
-     "h": -0.08
+     "h": -0.05
     },
     {
      "t": "09:00",
-     "h": -0.04
+     "h": -0.01
     },
     {
      "t": "10:00",
-     "h": 0.06
+     "h": 0.08
     },
     {
      "t": "11:00",
-     "h": 0.2
+     "h": 0.22
     },
     {
      "t": "12:00",
-     "h": 0.35
+     "h": 0.38
     },
     {
      "t": "13:00",
-     "h": 0.5
+     "h": 0.52
     },
     {
      "t": "14:00",
-     "h": 0.59
+     "h": 0.61
     },
     {
      "t": "15:00",
-     "h": 0.62
+     "h": 0.64
     },
     {
      "t": "16:00",
-     "h": 0.57
+     "h": 0.59
     },
     {
      "t": "17:00",
-     "h": 0.44
+     "h": 0.46
     },
     {
      "t": "18:00",
-     "h": 0.27
+     "h": 0.28
     },
     {
      "t": "19:00",
-     "h": 0.09
+     "h": 0.1
     },
     {
      "t": "20:00",
-     "h": -0.07
+     "h": -0.05
     },
     {
      "t": "21:00",
-     "h": -0.17
+     "h": -0.16
     },
     {
      "t": "22:00",
-     "h": -0.21
+     "h": -0.19
     },
     {
      "t": "23:00",
-     "h": -0.17
+     "h": -0.14
     }
    ],
    "environments": [
@@ -2756,7 +2111,7 @@
      "tagline": "Ledges and headland washes",
      "tag": "LEDGES & WASHES",
      "score": 38,
-     "session_mean": 36,
+     "session_mean": 35,
      "best_session": "dusk",
      "calibrated": 34,
      "rank_score": 39,
@@ -2770,8 +2125,8 @@
       {
        "metric": "swell_m",
        "label": "Swell height",
-       "value": "0.7 m swell",
-       "subscore": 78,
+       "value": "0.8 m swell",
+       "subscore": 81,
        "weight_pct": 30,
        "evidence": "strong",
        "note": "workable wash"
@@ -2788,7 +2143,7 @@
       {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "-2 kn onshore",
+       "value": "-5 kn onshore",
        "subscore": 75,
        "weight_pct": 10,
        "evidence": "moderate",
@@ -2804,13 +2159,13 @@
        "note": "small neap tides, little water movement"
       },
       {
-       "metric": "swell_period_s",
-       "label": "Swell period",
-       "value": "9 s period",
-       "subscore": 69,
-       "weight_pct": 8,
-       "evidence": "strong",
-       "note": "manageable period"
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1015 hPa",
+       "subscore": 73,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
       }
      ]
     },
@@ -2852,8 +2207,8 @@
       {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "-2 kn onshore",
-       "subscore": 59,
+       "value": "-5 kn onshore",
+       "subscore": 58,
        "weight_pct": 15,
        "evidence": "moderate",
        "note": ""
@@ -2861,20 +2216,20 @@
       {
        "metric": "swell_period_s",
        "label": "Swell period",
-       "value": "9 s period",
-       "subscore": 66,
+       "value": "10 s period",
+       "subscore": 62,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
       },
       {
-       "metric": "pressure",
-       "label": "Barometric pressure",
-       "value": "1015 hPa",
-       "subscore": 69,
-       "weight_pct": 5,
+       "metric": "pressure_trend",
+       "label": "Pressure trend (24h)",
+       "value": "-1.7 hPa/24h",
+       "subscore": 66,
+       "weight_pct": 6,
        "evidence": "moderate",
-       "note": "settled high pressure"
+       "note": "steady glass"
       }
      ]
     },
@@ -2883,11 +2238,11 @@
      "name": "Estuary",
      "tagline": "Rivers, bays and the brackish reaches",
      "tag": "RIVERS & REACHES",
-     "score": 29,
+     "score": 28,
      "session_mean": 26,
      "best_session": "dusk",
-     "calibrated": 28,
-     "rank_score": 28,
+     "calibrated": 26,
+     "rank_score": 26,
      "raw_median": 57.0,
      "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Poor",
@@ -2907,8 +2262,8 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "3 kn",
-       "subscore": 77,
+       "value": "6 kn",
+       "subscore": 73,
        "weight_pct": 12,
        "evidence": "strong",
        "note": "light winds"
@@ -2953,21 +2308,12 @@
      "calibrated": 27,
      "rank_score": 29,
      "raw_median": 59.0,
-     "reason": "Light winds; low light; prime feeding window. Dead neap tide is holding the whole day back.",
+     "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Poor",
      "best_window": "5pm\u20138pm",
      "safety_flag": false,
      "safety_message": null,
      "drivers": [
-      {
-       "metric": "wind_kn",
-       "label": "Wind speed",
-       "value": "3 kn",
-       "subscore": 79,
-       "weight_pct": 13,
-       "evidence": "strong",
-       "note": "light winds"
-      },
       {
        "metric": "light_phase",
        "label": "Light",
@@ -2976,6 +2322,15 @@
        "weight_pct": 16,
        "evidence": "strong",
        "note": "low light; prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "6 kn",
+       "subscore": 74,
+       "weight_pct": 13,
+       "evidence": "strong",
+       "note": "light winds"
       },
       {
        "metric": "tide_range",
@@ -2999,7 +2354,7 @@
        "metric": "sst_c",
        "label": "Water temp",
        "value": "18.4 \u00b0C water",
-       "subscore": 65,
+       "subscore": 64,
        "weight_pct": 11,
        "evidence": "strong",
        "note": "water temp in the zone"
@@ -3011,15 +2366,15 @@
      "name": "Boat & offshore",
      "tagline": "Outside the Heads; reefs, FADs and open water",
      "tag": "REEFS & OPEN WATER",
-     "score": 72,
+     "score": 71,
      "session_mean": 71,
-     "best_session": "midday",
-     "calibrated": 62,
-     "rank_score": 76,
+     "best_session": "morning",
+     "calibrated": 59,
+     "rank_score": 74,
      "raw_median": 72.0,
      "reason": "Light winds; workable wash.",
      "label": "Good",
-     "best_window": "11am\u20132pm",
+     "best_window": "8am\u201311am",
      "safety_flag": false,
      "safety_message": null,
      "drivers": [
@@ -3027,7 +2382,7 @@
        "metric": "wind_kn",
        "label": "Wind speed",
        "value": "3 kn",
-       "subscore": 91,
+       "subscore": 92,
        "weight_pct": 23,
        "evidence": "strong",
        "note": "light winds"
@@ -3044,20 +2399,20 @@
       {
        "metric": "pressure",
        "label": "Barometric pressure",
-       "value": "1017 hPa",
-       "subscore": 72,
+       "value": "1021 hPa",
+       "subscore": 73,
        "weight_pct": 6,
        "evidence": "moderate",
        "note": "settled high pressure"
       },
       {
-       "metric": "swell_period_s",
-       "label": "Swell period",
-       "value": "9 s period",
-       "subscore": 59,
-       "weight_pct": 8,
-       "evidence": "strong",
-       "note": ""
+       "metric": "pressure_trend",
+       "label": "Pressure trend (24h)",
+       "value": "-1.7 hPa/24h",
+       "subscore": 63,
+       "weight_pct": 5,
+       "evidence": "moderate",
+       "note": "steady glass"
       },
       {
        "metric": "light_phase",
@@ -3085,7 +2440,7 @@
      "environment_name": "Boat & offshore",
      "best_window": "5am\u20138am",
      "reason": "Boat & offshore, 5am\u20138am. Peak season; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 56
+     "rank_score": 55
     },
     {
      "id": "kingfish",
@@ -3100,7 +2455,7 @@
      "environment_name": "Boat & offshore",
      "best_window": "2pm\u20135pm",
      "reason": "Boat & offshore, 2pm\u20135pm. Off season; light winds. A small tide is taking the edge off today.",
-     "rank_score": 45
+     "rank_score": 44
     },
     {
      "id": "luderick",
@@ -3133,6 +2488,21 @@
      "rank_score": 34
     },
     {
+     "id": "tailor",
+     "name": "Tailor",
+     "tag": "BEACH GUTTERS",
+     "score": 34,
+     "session_mean": 32,
+     "best_session": "dusk",
+     "calibrated": 33,
+     "label": "Poor",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. A small tide is taking the edge off today.",
+     "rank_score": 33
+    },
+    {
      "id": "salmon",
      "name": "Australian salmon",
      "tag": "SURF WORKUPS",
@@ -3146,21 +2516,6 @@
      "best_window": "5pm\u20138pm",
      "reason": "Beach, 5pm\u20138pm. Peak season; low light; prime feeding window. A small tide is taking the edge off today.",
      "rank_score": 33
-    },
-    {
-     "id": "tailor",
-     "name": "Tailor",
-     "tag": "BEACH GUTTERS",
-     "score": 33,
-     "session_mean": 32,
-     "best_session": "dusk",
-     "calibrated": 31,
-     "label": "Poor",
-     "environment": "beach",
-     "environment_name": "Beach",
-     "best_window": "5pm\u20138pm",
-     "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 32
     },
     {
      "id": "yakkas",
@@ -3231,33 +2586,33 @@
      "best_session": "dusk",
      "calibrated": 29,
      "label": "Poor",
-     "environment": "estuary",
-     "environment_name": "Estuary",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
-     "reason": "Estuary, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. Dead neap tide is holding the whole day back.",
-     "rank_score": 28
+     "reason": "Harbour & wharf, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. Dead neap tide is holding the whole day back.",
+     "rank_score": 27
     },
     {
      "id": "flathead",
      "name": "Dusky flathead",
      "tag": "SAND AMBUSH",
-     "score": 30,
+     "score": 29,
      "session_mean": 29,
      "best_session": "dusk",
-     "calibrated": 28,
+     "calibrated": 26,
      "label": "Poor",
      "environment": "estuary",
      "environment_name": "Estuary",
      "best_window": "5pm\u20138pm",
      "reason": "Estuary, 5pm\u20138pm. Peak season; low light; prime feeding window. Dead neap tide is holding the whole day back.",
-     "rank_score": 28
+     "rank_score": 27
     }
    ]
   },
   {
    "date": "2026-09-21",
    "weekday": "Mon",
-   "headline": "A middling day. Offshore is the pick: workable wash. Rock is workable. Overall day 43. Top target: Snapper (45).",
+   "headline": "A middling day. Offshore is the pick: workable wash. Rock is workable. Overall day 45. Top target: Snapper (46).",
    "summary": {
     "sunrise": "05:46",
     "sunset": "17:50",
@@ -3265,105 +2620,105 @@
     "moon_illum": 0.69,
     "tide_events": [
      {
-      "time": "03:55",
+      "time": "03:52",
       "type": "high",
-      "height": 0.28
+      "height": 0.32
      },
      {
       "time": "09:12",
       "type": "low",
-      "height": -0.09
+      "height": -0.06
      },
      {
-      "time": "15:43",
+      "time": "15:42",
       "type": "high",
-      "height": 0.63
+      "height": 0.64
      },
      {
-      "time": "22:45",
+      "time": "22:50",
       "type": "low",
       "height": -0.35
      }
     ],
-    "tide_range": 0.98,
-    "swell_max": 0.8,
-    "swell_period": 8.3,
+    "tide_range": 0.99,
+    "swell_max": 1.1,
+    "swell_period": 9.4,
     "wind_max_kn": 14.0,
-    "pressure": 1019.7,
-    "pressure_trend": -5.0,
+    "pressure": 1019.9,
+    "pressure_trend": -5.2,
     "rain_24h": 0.0,
     "rain_72h": 0.0,
-    "rain_today": 0.0,
-    "sst": 18.1
+    "rain_today": 0.7,
+    "sst": 18.0
    },
    "tide_curve": [
     {
      "t": "00:00",
-     "h": -0.07
+     "h": -0.05
     },
     {
      "t": "01:00",
-     "h": 0.05
+     "h": 0.07
     },
     {
      "t": "02:00",
-     "h": 0.17
+     "h": 0.2
     },
     {
      "t": "03:00",
-     "h": 0.25
+     "h": 0.29
     },
     {
      "t": "04:00",
-     "h": 0.28
+     "h": 0.32
     },
     {
      "t": "05:00",
-     "h": 0.24
+     "h": 0.27
     },
     {
      "t": "06:00",
-     "h": 0.15
+     "h": 0.18
     },
     {
      "t": "07:00",
-     "h": 0.05
+     "h": 0.08
     },
     {
      "t": "08:00",
-     "h": -0.04
+     "h": -0.01
     },
     {
      "t": "09:00",
-     "h": -0.09
+     "h": -0.06
     },
     {
      "t": "10:00",
-     "h": -0.07
+     "h": -0.04
     },
     {
      "t": "11:00",
-     "h": 0.03
+     "h": 0.05
     },
     {
      "t": "12:00",
-     "h": 0.17
+     "h": 0.19
     },
     {
      "t": "13:00",
-     "h": 0.34
+     "h": 0.36
     },
     {
      "t": "14:00",
-     "h": 0.5
+     "h": 0.51
     },
     {
      "t": "15:00",
-     "h": 0.61
+     "h": 0.62
     },
     {
      "t": "16:00",
-     "h": 0.63
+     "h": 0.64
     },
     {
      "t": "17:00",
@@ -3387,7 +2742,7 @@
     },
     {
      "t": "22:00",
-     "h": -0.33
+     "h": -0.32
     },
     {
      "t": "23:00",
@@ -3400,11 +2755,11 @@
      "name": "Rock",
      "tagline": "Ledges and headland washes",
      "tag": "LEDGES & WASHES",
-     "score": 48,
-     "session_mean": 45,
+     "score": 50,
+     "session_mean": 46,
      "best_session": "dusk",
-     "calibrated": 47,
-     "rank_score": 49,
+     "calibrated": 49,
+     "rank_score": 51,
      "raw_median": 61.0,
      "reason": "Workable wash; low light; prime feeding window. A small tide is taking the edge off today.",
      "label": "Fair",
@@ -3415,8 +2770,8 @@
       {
        "metric": "swell_m",
        "label": "Swell height",
-       "value": "0.7 m swell",
-       "subscore": 79,
+       "value": "0.8 m swell",
+       "subscore": 82,
        "weight_pct": 30,
        "evidence": "strong",
        "note": "workable wash"
@@ -3433,7 +2788,7 @@
       {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "+4 kn onshore",
+       "value": "+3 kn onshore",
        "subscore": 69,
        "weight_pct": 10,
        "evidence": "moderate",
@@ -3442,8 +2797,8 @@
       {
        "metric": "swell_period_s",
        "label": "Swell period",
-       "value": "7 s period",
-       "subscore": 70,
+       "value": "9 s period",
+       "subscore": 68,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
@@ -3464,11 +2819,11 @@
      "name": "Beach",
      "tagline": "Gutters, banks and the surf zone",
      "tag": "GUTTERS & BANKS",
-     "score": 43,
-     "session_mean": 39,
+     "score": 45,
+     "session_mean": 40,
      "best_session": "dusk",
-     "calibrated": 44,
-     "rank_score": 44,
+     "calibrated": 47,
+     "rank_score": 46,
      "raw_median": 56.0,
      "reason": "Low light; prime feeding window; onshore breeze stirring the wash. A small tide is taking the edge off today.",
      "label": "Fair",
@@ -3488,20 +2843,29 @@
       {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "+4 kn onshore",
+       "value": "+3 kn onshore",
        "subscore": 67,
        "weight_pct": 15,
        "evidence": "moderate",
        "note": "onshore breeze stirring the wash"
       },
       {
-       "metric": "rain_today",
-       "label": "Rain forecast today",
-       "value": "0 mm forecast",
-       "subscore": 68,
-       "weight_pct": 5,
-       "evidence": "moderate",
-       "note": "dry session likely"
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "9 s period",
+       "subscore": 66,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.8 m swell",
+       "subscore": 54,
+       "weight_pct": 24,
+       "evidence": "strong",
+       "note": ""
       },
       {
        "metric": "tide_range",
@@ -3511,15 +2875,6 @@
        "weight_pct": 16,
        "evidence": "strong",
        "note": ""
-      },
-      {
-       "metric": "pressure",
-       "label": "Barometric pressure",
-       "value": "1023 hPa",
-       "subscore": 66,
-       "weight_pct": 5,
-       "evidence": "moderate",
-       "note": "settled high pressure"
       }
      ]
     },
@@ -3528,11 +2883,11 @@
      "name": "Estuary",
      "tagline": "Rivers, bays and the brackish reaches",
      "tag": "RIVERS & REACHES",
-     "score": 39,
+     "score": 40,
      "session_mean": 36,
      "best_session": "dusk",
-     "calibrated": 44,
-     "rank_score": 40,
+     "calibrated": 45,
+     "rank_score": 41,
      "raw_median": 57.0,
      "reason": "Low light; prime feeding window; system blown out with dirty flood water. Dead neap tide is holding the whole day back.",
      "label": "Fair",
@@ -3562,7 +2917,7 @@
        "metric": "wind_kn",
        "label": "Wind speed",
        "value": "9 kn",
-       "subscore": 66,
+       "subscore": 68,
        "weight_pct": 12,
        "evidence": "strong",
        "note": "light winds"
@@ -3571,7 +2926,7 @@
        "metric": "tide_speed",
        "label": "Tide flow",
        "value": "flow 88% of peak",
-       "subscore": 78,
+       "subscore": 79,
        "weight_pct": 6,
        "evidence": "strong",
        "note": "water moving hard"
@@ -3592,11 +2947,11 @@
      "name": "Harbour & wharf",
      "tagline": "Structure, pylons and deep protected water",
      "tag": "PYLONS & EDGES",
-     "score": 41,
+     "score": 42,
      "session_mean": 39,
      "best_session": "dusk",
-     "calibrated": 44,
-     "rank_score": 42,
+     "calibrated": 45,
+     "rank_score": 43,
      "raw_median": 59.0,
      "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Fair",
@@ -3617,28 +2972,28 @@
        "metric": "wind_kn",
        "label": "Wind speed",
        "value": "9 kn",
-       "subscore": 69,
+       "subscore": 70,
        "weight_pct": 13,
        "evidence": "strong",
        "note": "light winds"
       },
       {
-       "metric": "sst_c",
-       "label": "Water temp",
-       "value": "18.3 \u00b0C water",
-       "subscore": 63,
-       "weight_pct": 11,
-       "evidence": "strong",
-       "note": "water temp in the zone"
-      },
-      {
        "metric": "tide_speed",
        "label": "Tide flow",
        "value": "flow 88% of peak",
-       "subscore": 78,
+       "subscore": 79,
        "weight_pct": 5,
        "evidence": "strong",
        "note": "water moving hard"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "18.1 \u00b0C water",
+       "subscore": 62,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
       },
       {
        "metric": "rain_72h",
@@ -3656,11 +3011,11 @@
      "name": "Boat & offshore",
      "tagline": "Outside the Heads; reefs, FADs and open water",
      "tag": "REEFS & OPEN WATER",
-     "score": 70,
-     "session_mean": 66,
+     "score": 67,
+     "session_mean": 65,
      "best_session": "dawn",
-     "calibrated": 56,
-     "rank_score": 73,
+     "calibrated": 48,
+     "rank_score": 69,
      "raw_median": 72.0,
      "reason": "Workable wash; light winds.",
      "label": "Fair",
@@ -3671,8 +3026,8 @@
       {
        "metric": "swell_m",
        "label": "Swell height",
-       "value": "0.6 m swell",
-       "subscore": 82,
+       "value": "0.7 m swell",
+       "subscore": 80,
        "weight_pct": 29,
        "evidence": "strong",
        "note": "workable wash"
@@ -3680,29 +3035,29 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "7 kn",
-       "subscore": 84,
+       "value": "9 kn",
+       "subscore": 76,
        "weight_pct": 23,
        "evidence": "strong",
        "note": "light winds"
       },
       {
-       "metric": "pressure",
-       "label": "Barometric pressure",
-       "value": "1016 hPa",
-       "subscore": 69,
-       "weight_pct": 6,
-       "evidence": "moderate",
-       "note": "settled high pressure"
-      },
-      {
        "metric": "swell_period_s",
        "label": "Swell period",
-       "value": "9 s period",
-       "subscore": 62,
+       "value": "10 s period",
+       "subscore": 67,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1016 hPa",
+       "subscore": 68,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
       },
       {
        "metric": "light_phase",
@@ -3721,150 +3076,150 @@
      "id": "snapper",
      "name": "Snapper",
      "tag": "REEF STRUCTURE",
-     "score": 45,
+     "score": 46,
      "session_mean": 45,
      "best_session": "evening",
-     "calibrated": 46,
+     "calibrated": 47,
      "label": "Fair",
      "environment": "boat",
      "environment_name": "Boat & offshore",
      "best_window": "8pm\u201311pm",
      "reason": "Boat & offshore, 8pm\u201311pm. Peak season; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 60
+     "rank_score": 58
     },
     {
      "id": "luderick",
      "name": "Luderick (blackfish)",
      "tag": "WEED & LEDGES",
-     "score": 45,
-     "session_mean": 45,
+     "score": 46,
+     "session_mean": 46,
      "best_session": "midday",
-     "calibrated": 46,
+     "calibrated": 47,
      "label": "Fair",
      "environment": "rock",
      "environment_name": "Rock",
      "best_window": "11am\u20132pm",
      "reason": "Rock, 11am\u20132pm. Peak season; onshore breeze stirring the wash. A small tide is taking the edge off today.",
-     "rank_score": 47
-    },
-    {
-     "id": "kingfish",
-     "name": "Yellowtail kingfish",
-     "tag": "HARBOUR REEFS",
-     "score": 26,
-     "session_mean": 24,
-     "best_session": "afternoon",
-     "calibrated": 18,
-     "label": "Poor",
-     "environment": "boat",
-     "environment_name": "Boat & offshore",
-     "best_window": "2pm\u20135pm",
-     "reason": "Boat & offshore, 2pm\u20135pm. Off season; water temp off the mark. A small tide is taking the edge off today.",
-     "rank_score": 46
+     "rank_score": 49
     },
     {
      "id": "squid",
      "name": "Southern calamari",
      "tag": "HARBOUR WEED BEDS",
-     "score": 49,
+     "score": 50,
      "session_mean": 48,
      "best_session": "dusk",
-     "calibrated": 47,
+     "calibrated": 48,
      "label": "Fair",
      "environment": "harbour",
      "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Runoff has coloured the water nicely; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 46
+     "rank_score": 47
     },
     {
      "id": "tailor",
      "name": "Tailor",
      "tag": "BEACH GUTTERS",
-     "score": 44,
-     "session_mean": 41,
+     "score": 45,
+     "session_mean": 42,
      "best_session": "dusk",
-     "calibrated": 47,
+     "calibrated": 48,
      "label": "Fair",
      "environment": "beach",
      "environment_name": "Beach",
      "best_window": "5pm\u20138pm",
      "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 45
+     "rank_score": 46
     },
     {
      "id": "salmon",
      "name": "Australian salmon",
      "tag": "SURF WORKUPS",
-     "score": 44,
-     "session_mean": 42,
+     "score": 45,
+     "session_mean": 43,
      "best_session": "dusk",
-     "calibrated": 46,
+     "calibrated": 47,
      "label": "Fair",
      "environment": "beach",
      "environment_name": "Beach",
      "best_window": "5pm\u20138pm",
      "reason": "Beach, 5pm\u20138pm. Peak season; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 45
+     "rank_score": 46
     },
     {
      "id": "yakkas",
      "name": "Yellowtail (yakkas)",
      "tag": "HARBOUR",
-     "score": 46,
-     "session_mean": 45,
+     "score": 47,
+     "session_mean": 46,
      "best_session": "dusk",
-     "calibrated": 46,
+     "calibrated": 48,
      "label": "Fair",
      "environment": "harbour",
      "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Low light; prime feeding window; runoff has coloured the water nicely. A small tide is taking the edge off today.",
-     "rank_score": 44
-    },
-    {
-     "id": "mulloway",
-     "name": "Mulloway (jewfish)",
-     "tag": "ESTUARY HOLES",
-     "score": 44,
-     "session_mean": 43,
-     "best_session": "evening",
-     "calibrated": 44,
-     "label": "Fair",
-     "environment": "estuary",
-     "environment_name": "Estuary",
-     "best_window": "8pm\u201311pm",
-     "reason": "Estuary, 8pm\u201311pm. Low light; prime feeding window; peak season. A small tide is taking the edge off today.",
-     "rank_score": 43
-    },
-    {
-     "id": "trevally",
-     "name": "Silver trevally",
-     "tag": "WHARF PYLONS",
-     "score": 42,
-     "session_mean": 41,
-     "best_session": "dusk",
-     "calibrated": 47,
-     "label": "Fair",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
-     "rank_score": 43
+     "rank_score": 45
     },
     {
      "id": "whiting",
      "name": "Sand whiting",
      "tag": "SAND FLATS",
-     "score": 41,
-     "session_mean": 40,
+     "score": 42,
+     "session_mean": 41,
      "best_session": "dusk",
-     "calibrated": 45,
+     "calibrated": 46,
      "label": "Fair",
      "environment": "beach",
      "environment_name": "Beach",
      "best_window": "5pm\u20138pm",
      "reason": "Beach, 5pm\u20138pm. Workable wash; peak season. Dead neap tide is holding the whole day back.",
+     "rank_score": 45
+    },
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "tag": "ESTUARY HOLES",
+     "score": 45,
+     "session_mean": 44,
+     "best_session": "evening",
+     "calibrated": 45,
+     "label": "Fair",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "8pm\u201311pm",
+     "reason": "Estuary, 8pm\u201311pm. Low light; prime feeding window; peak season. A small tide is taking the edge off today.",
+     "rank_score": 44
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "tag": "WHARF PYLONS",
+     "score": 43,
+     "session_mean": 42,
+     "best_session": "dusk",
+     "calibrated": 48,
+     "label": "Fair",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "5pm\u20138pm",
+     "reason": "Harbour & wharf, 5pm\u20138pm. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
+     "rank_score": 44
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "tag": "HARBOUR REEFS",
+     "score": 25,
+     "session_mean": 24,
+     "best_session": "afternoon",
+     "calibrated": 16,
+     "label": "Poor",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "2pm\u20135pm",
+     "reason": "Boat & offshore, 2pm\u20135pm. Off season; water temp off the mark. Water below the kingfish activity threshold.",
      "rank_score": 43
     },
     {
@@ -3880,29 +3235,29 @@
      "environment_name": "Estuary",
      "best_window": "5pm\u20138pm",
      "reason": "Estuary, 5pm\u20138pm. Peak season; low light; prime feeding window. Dead neap tide is holding the whole day back.",
-     "rank_score": 41
+     "rank_score": 42
     },
     {
      "id": "bream",
      "name": "Bream",
      "tag": "HARBOUR STRUCTURE",
-     "score": 39,
+     "score": 40,
      "session_mean": 38,
      "best_session": "dusk",
-     "calibrated": 44,
+     "calibrated": 45,
      "label": "Fair",
      "environment": "estuary",
      "environment_name": "Estuary",
      "best_window": "5pm\u20138pm",
      "reason": "Estuary, 5pm\u20138pm. Low light; prime feeding window; settled high pressure. Dead neap tide is holding the whole day back.",
-     "rank_score": 40
+     "rank_score": 41
     }
    ]
   },
   {
    "date": "2026-09-22",
    "weekday": "Tue",
-   "headline": "Offshore first today: workable wash. Rock is workable. Overall day 46. Top target: Snapper (50).",
+   "headline": "A middling day. Offshore is the pick: workable wash. Rock is workable. Overall day 44. Top target: Snapper (48).",
    "summary": {
     "sunrise": "05:45",
     "sunset": "17:51",
@@ -3915,26 +3270,31 @@
       "height": 0.25
      },
      {
-      "time": "10:10",
+      "time": "10:07",
       "type": "low",
-      "height": -0.23
+      "height": -0.22
      },
      {
-      "time": "16:35",
+      "time": "16:36",
       "type": "high",
-      "height": 0.62
+      "height": 0.65
+     },
+     {
+      "time": "23:20",
+      "type": "low",
+      "height": -0.4
      }
     ],
-    "tide_range": 1.05,
-    "swell_max": 0.7,
-    "swell_period": 8.3,
-    "wind_max_kn": 8.0,
-    "pressure": 1026.5,
-    "pressure_trend": 10.1,
-    "rain_24h": 0.0,
-    "rain_72h": 0.0,
+    "tide_range": 1.03,
+    "swell_max": 1.1,
+    "swell_period": 7.3,
+    "wind_max_kn": 9.0,
+    "pressure": 1029.7,
+    "pressure_trend": 12.5,
+    "rain_24h": 1.3,
+    "rain_72h": 1.3,
     "rain_today": 1.8,
-    "sst": 18.1
+    "sst": 18.0
    },
    "tide_curve": [
     {
@@ -3967,11 +3327,11 @@
     },
     {
      "t": "07:00",
-     "h": 0.07
+     "h": 0.08
     },
     {
      "t": "08:00",
-     "h": -0.06
+     "h": -0.05
     },
     {
      "t": "09:00",
@@ -3979,59 +3339,59 @@
     },
     {
      "t": "10:00",
-     "h": -0.23
+     "h": -0.22
     },
     {
      "t": "11:00",
-     "h": -0.2
+     "h": -0.19
     },
     {
      "t": "12:00",
-     "h": -0.09
+     "h": -0.07
     },
     {
      "t": "13:00",
-     "h": 0.09
+     "h": 0.11
     },
     {
      "t": "14:00",
-     "h": 0.29
-    },
-    {
-     "t": "15:00",
-     "h": 0.48
-    },
-    {
-     "t": "16:00",
-     "h": 0.6
-    },
-    {
-     "t": "17:00",
-     "h": 0.61
-    },
-    {
-     "t": "18:00",
-     "h": 0.51
-    },
-    {
-     "t": "19:00",
      "h": 0.32
     },
     {
+     "t": "15:00",
+     "h": 0.51
+    },
+    {
+     "t": "16:00",
+     "h": 0.63
+    },
+    {
+     "t": "17:00",
+     "h": 0.64
+    },
+    {
+     "t": "18:00",
+     "h": 0.55
+    },
+    {
+     "t": "19:00",
+     "h": 0.36
+    },
+    {
      "t": "20:00",
-     "h": 0.09
+     "h": 0.13
     },
     {
      "t": "21:00",
-     "h": -0.15
+     "h": -0.1
     },
     {
      "t": "22:00",
-     "h": -0.34
+     "h": -0.29
     },
     {
      "t": "23:00",
-     "h": -0.44
+     "h": -0.39
     }
    ],
    "environments": [
@@ -4040,11 +3400,11 @@
      "name": "Rock",
      "tagline": "Ledges and headland washes",
      "tag": "LEDGES & WASHES",
-     "score": 50,
-     "session_mean": 47,
+     "score": 49,
+     "session_mean": 48,
      "best_session": "dawn",
-     "calibrated": 49,
-     "rank_score": 51,
+     "calibrated": 48,
+     "rank_score": 50,
      "raw_median": 61.0,
      "reason": "Workable wash; low light; prime feeding window. A small tide is taking the edge off today.",
      "label": "Fair",
@@ -4055,8 +3415,8 @@
       {
        "metric": "swell_m",
        "label": "Swell height",
-       "value": "0.5 m swell",
-       "subscore": 69,
+       "value": "0.6 m swell",
+       "subscore": 73,
        "weight_pct": 30,
        "evidence": "strong",
        "note": "workable wash"
@@ -4073,8 +3433,8 @@
       {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "+3 kn onshore",
-       "subscore": 70,
+       "value": "+4 kn onshore",
+       "subscore": 69,
        "weight_pct": 10,
        "evidence": "moderate",
        "note": "onshore breeze stirring the wash"
@@ -4083,7 +3443,7 @@
        "metric": "swell_period_s",
        "label": "Swell period",
        "value": "8 s period",
-       "subscore": 74,
+       "subscore": 73,
        "weight_pct": 8,
        "evidence": "strong",
        "note": "manageable period"
@@ -4091,7 +3451,7 @@
       {
        "metric": "pressure_trend",
        "label": "Pressure trend (24h)",
-       "value": "+10.1 hPa/24h",
+       "value": "+12.5 hPa/24h",
        "subscore": 22,
        "weight_pct": 6,
        "evidence": "moderate",
@@ -4105,12 +3465,12 @@
      "tagline": "Gutters, banks and the surf zone",
      "tag": "GUTTERS & BANKS",
      "score": 44,
-     "session_mean": 40,
+     "session_mean": 41,
      "best_session": "dusk",
      "calibrated": 46,
      "rank_score": 45,
      "raw_median": 56.0,
-     "reason": "Low light; prime feeding window; swell out of range. A small tide is taking the edge off today.",
+     "reason": "Low light; prime feeding window; onshore breeze stirring the wash. A small tide is taking the edge off today.",
      "label": "Fair",
      "best_window": "5pm\u20138pm",
      "safety_flag": false,
@@ -4126,19 +3486,10 @@
        "note": "low light; prime feeding window"
       },
       {
-       "metric": "swell_m",
-       "label": "Swell height",
-       "value": "0.5 m swell",
-       "subscore": 39,
-       "weight_pct": 24,
-       "evidence": "strong",
-       "note": "swell out of range"
-      },
-      {
        "metric": "wind_onshore_kn",
        "label": "Onshore wind",
-       "value": "+3 kn onshore",
-       "subscore": 66,
+       "value": "+4 kn onshore",
+       "subscore": 69,
        "weight_pct": 15,
        "evidence": "moderate",
        "note": "onshore breeze stirring the wash"
@@ -4146,20 +3497,29 @@
       {
        "metric": "pressure_trend",
        "label": "Pressure trend (24h)",
-       "value": "+10.1 hPa/24h",
+       "value": "+12.5 hPa/24h",
        "subscore": 22,
        "weight_pct": 6,
        "evidence": "moderate",
        "note": "pressure swinging hard after a change"
       },
       {
-       "metric": "swell_period_s",
-       "label": "Swell period",
-       "value": "10 s period",
-       "subscore": 63,
-       "weight_pct": 8,
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.7 m swell",
+       "subscore": 46,
+       "weight_pct": 24,
        "evidence": "strong",
-       "note": "manageable period"
+       "note": ""
+      },
+      {
+       "metric": "rain_today",
+       "label": "Rain forecast today",
+       "value": "2 mm forecast",
+       "subscore": 65,
+       "weight_pct": 5,
+       "evidence": "moderate",
+       "note": "dry session likely"
       }
      ]
     },
@@ -4168,11 +3528,11 @@
      "name": "Estuary",
      "tagline": "Rivers, bays and the brackish reaches",
      "tag": "RIVERS & REACHES",
-     "score": 42,
-     "session_mean": 40,
+     "score": 41,
+     "session_mean": 38,
      "best_session": "dusk",
-     "calibrated": 47,
-     "rank_score": 43,
+     "calibrated": 46,
+     "rank_score": 42,
      "raw_median": 57.0,
      "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Fair",
@@ -4192,38 +3552,38 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "5 kn",
-       "subscore": 75,
+       "value": "7 kn",
+       "subscore": 73,
        "weight_pct": 12,
        "evidence": "strong",
        "note": "light winds"
       },
       {
-       "metric": "rain_72h",
-       "label": "Rain (72h)",
-       "value": "0 mm/72h",
-       "subscore": 41,
-       "weight_pct": 24,
-       "evidence": "moderate",
-       "note": "system blown out with dirty flood water"
-      },
-      {
        "metric": "pressure_trend",
        "label": "Pressure trend (24h)",
-       "value": "+10.1 hPa/24h",
+       "value": "+12.5 hPa/24h",
        "subscore": 22,
        "weight_pct": 7,
        "evidence": "moderate",
        "note": "pressure swinging hard after a change"
       },
       {
-       "metric": "pressure",
-       "label": "Barometric pressure",
-       "value": "1026 hPa",
-       "subscore": 65,
-       "weight_pct": 7,
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "1 mm/72h",
+       "subscore": 44,
+       "weight_pct": 24,
        "evidence": "moderate",
-       "note": "settled high pressure"
+       "note": "system blown out with dirty flood water"
+      },
+      {
+       "metric": "tide_speed",
+       "label": "Tide flow",
+       "value": "flow 61% of peak",
+       "subscore": 63,
+       "weight_pct": 6,
+       "evidence": "strong",
+       "note": "water moving hard"
       }
      ]
     },
@@ -4232,11 +3592,11 @@
      "name": "Harbour & wharf",
      "tagline": "Structure, pylons and deep protected water",
      "tag": "PYLONS & EDGES",
-     "score": 46,
-     "session_mean": 44,
+     "score": 43,
+     "session_mean": 41,
      "best_session": "dusk",
-     "calibrated": 49,
-     "rank_score": 47,
+     "calibrated": 46,
+     "rank_score": 44,
      "raw_median": 59.0,
      "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
      "label": "Fair",
@@ -4256,8 +3616,8 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "5 kn",
-       "subscore": 76,
+       "value": "7 kn",
+       "subscore": 73,
        "weight_pct": 13,
        "evidence": "strong",
        "note": "light winds"
@@ -4265,7 +3625,7 @@
       {
        "metric": "pressure_trend",
        "label": "Pressure trend (24h)",
-       "value": "+10.1 hPa/24h",
+       "value": "+12.5 hPa/24h",
        "subscore": 22,
        "weight_pct": 6,
        "evidence": "moderate",
@@ -4274,16 +3634,16 @@
       {
        "metric": "sst_c",
        "label": "Water temp",
-       "value": "18.1 \u00b0C water",
-       "subscore": 62,
+       "value": "18.0 \u00b0C water",
+       "subscore": 61,
        "weight_pct": 11,
        "evidence": "strong",
-       "note": "water temp in the zone"
+       "note": ""
       },
       {
        "metric": "rain_72h",
        "label": "Rain (72h)",
-       "value": "0 mm/72h",
+       "value": "1 mm/72h",
        "subscore": 65,
        "weight_pct": 8,
        "evidence": "moderate",
@@ -4296,14 +3656,14 @@
      "name": "Boat & offshore",
      "tagline": "Outside the Heads; reefs, FADs and open water",
      "tag": "REEFS & OPEN WATER",
-     "score": 71,
-     "session_mean": 68,
+     "score": 67,
+     "session_mean": 65,
      "best_session": "dawn",
-     "calibrated": 59,
-     "rank_score": 74,
+     "calibrated": 48,
+     "rank_score": 69,
      "raw_median": 72.0,
      "reason": "Workable wash; light winds.",
-     "label": "Good",
+     "label": "Fair",
      "best_window": "5am\u20138am",
      "safety_flag": false,
      "safety_message": null,
@@ -4311,8 +3671,8 @@
       {
        "metric": "swell_m",
        "label": "Swell height",
-       "value": "0.5 m swell",
-       "subscore": 83,
+       "value": "0.6 m swell",
+       "subscore": 81,
        "weight_pct": 29,
        "evidence": "strong",
        "note": "workable wash"
@@ -4320,8 +3680,8 @@
       {
        "metric": "wind_kn",
        "label": "Wind speed",
-       "value": "6 kn",
-       "subscore": 87,
+       "value": "9 kn",
+       "subscore": 74,
        "weight_pct": 23,
        "evidence": "strong",
        "note": "light winds"
@@ -4338,7 +3698,7 @@
       {
        "metric": "pressure_trend",
        "label": "Pressure trend (24h)",
-       "value": "+10.1 hPa/24h",
+       "value": "+12.5 hPa/24h",
        "subscore": 24,
        "weight_pct": 5,
        "evidence": "moderate",
@@ -4347,8 +3707,8 @@
       {
        "metric": "pressure",
        "label": "Barometric pressure",
-       "value": "1026 hPa",
-       "subscore": 69,
+       "value": "1028 hPa",
+       "subscore": 66,
        "weight_pct": 6,
        "evidence": "moderate",
        "note": "settled high pressure"
@@ -4361,130 +3721,55 @@
      "id": "snapper",
      "name": "Snapper",
      "tag": "REEF STRUCTURE",
-     "score": 50,
-     "session_mean": 50,
-     "best_session": "dusk",
-     "calibrated": 52,
+     "score": 48,
+     "session_mean": 47,
+     "best_session": "dawn",
+     "calibrated": 50,
      "label": "Fair",
      "environment": "boat",
      "environment_name": "Boat & offshore",
-     "best_window": "5pm\u20138pm",
-     "reason": "Boat & offshore, 5pm\u20138pm. Peak season; water temp in the zone. A small tide is taking the edge off today.",
-     "rank_score": 63
+     "best_window": "5am\u20138am",
+     "reason": "Boat & offshore, 5am\u20138am. Peak season; water temp in the zone. A small tide is taking the edge off today.",
+     "rank_score": 59
     },
     {
      "id": "squid",
      "name": "Southern calamari",
      "tag": "HARBOUR WEED BEDS",
-     "score": 55,
-     "session_mean": 53,
+     "score": 52,
+     "session_mean": 50,
      "best_session": "dusk",
-     "calibrated": 54,
+     "calibrated": 50,
      "label": "Fair",
      "environment": "harbour",
      "environment_name": "Harbour & wharf",
      "best_window": "5pm\u20138pm",
      "reason": "Harbour & wharf, 5pm\u20138pm. Runoff has coloured the water nicely; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 52
+     "rank_score": 49
     },
     {
      "id": "luderick",
      "name": "Luderick (blackfish)",
      "tag": "WEED & LEDGES",
-     "score": 49,
-     "session_mean": 49,
+     "score": 47,
+     "session_mean": 47,
      "best_session": "afternoon",
-     "calibrated": 50,
+     "calibrated": 48,
      "label": "Fair",
      "environment": "rock",
      "environment_name": "Rock",
      "best_window": "2pm\u20135pm",
      "reason": "Rock, 2pm\u20135pm. Peak season; onshore breeze stirring the wash. A small tide is taking the edge off today.",
-     "rank_score": 51
-    },
-    {
-     "id": "yakkas",
-     "name": "Yellowtail (yakkas)",
-     "tag": "HARBOUR",
-     "score": 50,
-     "session_mean": 49,
-     "best_session": "dusk",
-     "calibrated": 51,
-     "label": "Fair",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Low light; prime feeding window; runoff has coloured the water nicely. A small tide is taking the edge off today.",
      "rank_score": 49
-    },
-    {
-     "id": "kingfish",
-     "name": "Yellowtail kingfish",
-     "tag": "HARBOUR REEFS",
-     "score": 28,
-     "session_mean": 27,
-     "best_session": "dawn",
-     "calibrated": 22,
-     "label": "Poor",
-     "environment": "boat",
-     "environment_name": "Boat & offshore",
-     "best_window": "5am\u20138am",
-     "reason": "Boat & offshore, 5am\u20138am. Low light; prime feeding window; off season. Water below the kingfish activity threshold.",
-     "rank_score": 48
-    },
-    {
-     "id": "trevally",
-     "name": "Silver trevally",
-     "tag": "WHARF PYLONS",
-     "score": 46,
-     "session_mean": 45,
-     "best_session": "dusk",
-     "calibrated": 51,
-     "label": "Fair",
-     "environment": "harbour",
-     "environment_name": "Harbour & wharf",
-     "best_window": "5pm\u20138pm",
-     "reason": "Harbour & wharf, 5pm\u20138pm. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
-     "rank_score": 47
-    },
-    {
-     "id": "salmon",
-     "name": "Australian salmon",
-     "tag": "SURF WORKUPS",
-     "score": 47,
-     "session_mean": 46,
-     "best_session": "dawn",
-     "calibrated": 49,
-     "label": "Fair",
-     "environment": "beach",
-     "environment_name": "Beach",
-     "best_window": "5am\u20138am",
-     "reason": "Beach, 5am\u20138am. Peak season; low light; prime feeding window. A small tide is taking the edge off today.",
-     "rank_score": 47
-    },
-    {
-     "id": "mulloway",
-     "name": "Mulloway (jewfish)",
-     "tag": "ESTUARY HOLES",
-     "score": 48,
-     "session_mean": 47,
-     "best_session": "evening",
-     "calibrated": 48,
-     "label": "Fair",
-     "environment": "estuary",
-     "environment_name": "Estuary",
-     "best_window": "8pm\u201311pm",
-     "reason": "Estuary, 8pm\u201311pm. Low light; prime feeding window; peak season. A small tide is taking the edge off today.",
-     "rank_score": 46
     },
     {
      "id": "tailor",
      "name": "Tailor",
      "tag": "BEACH GUTTERS",
-     "score": 46,
+     "score": 45,
      "session_mean": 45,
      "best_session": "dusk",
-     "calibrated": 49,
+     "calibrated": 48,
      "label": "Fair",
      "environment": "beach",
      "environment_name": "Beach",
@@ -4493,49 +3778,764 @@
      "rank_score": 46
     },
     {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "tag": "HARBOUR",
+     "score": 48,
+     "session_mean": 47,
+     "best_session": "dusk",
+     "calibrated": 49,
+     "label": "Fair",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "5pm\u20138pm",
+     "reason": "Harbour & wharf, 5pm\u20138pm. Low light; prime feeding window; runoff has coloured the water nicely. A small tide is taking the edge off today.",
+     "rank_score": 46
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 46,
+     "session_mean": 45,
+     "best_session": "dusk",
+     "calibrated": 48,
+     "label": "Fair",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Peak season; low light; prime feeding window. A small tide is taking the edge off today.",
+     "rank_score": 46
+    },
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "tag": "ESTUARY HOLES",
+     "score": 47,
+     "session_mean": 46,
+     "best_session": "evening",
+     "calibrated": 47,
+     "label": "Fair",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "8pm\u201311pm",
+     "reason": "Estuary, 8pm\u201311pm. Low light; prime feeding window; peak season. A small tide is taking the edge off today.",
+     "rank_score": 45
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "tag": "WHARF PYLONS",
+     "score": 44,
+     "session_mean": 43,
+     "best_session": "dawn",
+     "calibrated": 49,
+     "label": "Fair",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "5am\u20138am",
+     "reason": "Harbour & wharf, 5am\u20138am. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
+     "rank_score": 45
+    },
+    {
      "id": "whiting",
      "name": "Sand whiting",
      "tag": "SAND FLATS",
-     "score": 45,
-     "session_mean": 45,
+     "score": 43,
+     "session_mean": 43,
      "best_session": "midday",
-     "calibrated": 49,
+     "calibrated": 47,
      "label": "Fair",
      "environment": "beach",
      "environment_name": "Beach",
      "best_window": "11am\u20132pm",
-     "reason": "Beach, 11am\u20132pm. Peak season; workable wash. Dead neap tide is holding the whole day back.",
-     "rank_score": 46
+     "reason": "Beach, 11am\u20132pm. Workable wash; peak season. Dead neap tide is holding the whole day back.",
+     "rank_score": 45
     },
     {
-     "id": "bream",
-     "name": "Bream",
-     "tag": "HARBOUR STRUCTURE",
-     "score": 43,
-     "session_mean": 41,
-     "best_session": "dusk",
-     "calibrated": 48,
-     "label": "Fair",
-     "environment": "estuary",
-     "environment_name": "Estuary",
-     "best_window": "5pm\u20138pm",
-     "reason": "Estuary, 5pm\u20138pm. Low light; prime feeding window; pressure swinging hard after a change. Dead neap tide is holding the whole day back.",
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "tag": "HARBOUR REEFS",
+     "score": 26,
+     "session_mean": 25,
+     "best_session": "dawn",
+     "calibrated": 18,
+     "label": "Poor",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "5am\u20138am",
+     "reason": "Boat & offshore, 5am\u20138am. Low light; prime feeding window; water temp off the mark. Water below the kingfish activity threshold.",
      "rank_score": 44
     },
     {
      "id": "flathead",
      "name": "Dusky flathead",
      "tag": "SAND AMBUSH",
-     "score": 44,
-     "session_mean": 44,
+     "score": 43,
+     "session_mean": 42,
      "best_session": "dusk",
-     "calibrated": 48,
+     "calibrated": 47,
      "label": "Fair",
      "environment": "estuary",
      "environment_name": "Estuary",
      "best_window": "5pm\u20138pm",
      "reason": "Estuary, 5pm\u20138pm. Peak season; low light; prime feeding window. Dead neap tide is holding the whole day back.",
-     "rank_score": 44
+     "rank_score": 43
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "tag": "HARBOUR STRUCTURE",
+     "score": 41,
+     "session_mean": 39,
+     "best_session": "dusk",
+     "calibrated": 46,
+     "label": "Fair",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "5pm\u20138pm",
+     "reason": "Estuary, 5pm\u20138pm. Low light; prime feeding window; pressure swinging hard after a change. Dead neap tide is holding the whole day back.",
+     "rank_score": 42
+    }
+   ]
+  },
+  {
+   "date": "2026-09-23",
+   "weekday": "Wed",
+   "headline": "Offshore first today: workable wash. Rock holds too. Overall day 55. Top target: Snapper (59).",
+   "summary": {
+    "sunrise": "05:44",
+    "sunset": "17:52",
+    "moon_name": "Waxing gibbous",
+    "moon_illum": 0.87,
+    "tide_events": [
+     {
+      "time": "05:24",
+      "type": "high",
+      "height": 0.4
+     },
+     {
+      "time": "11:00",
+      "type": "low",
+      "height": -0.25
+     },
+     {
+      "time": "17:12",
+      "type": "high",
+      "height": 0.71
+     }
+    ],
+    "tide_range": 1.17,
+    "swell_max": 0.6,
+    "swell_period": 7.7,
+    "wind_max_kn": 11.0,
+    "pressure": 1029.8,
+    "pressure_trend": 2.1,
+    "rain_24h": 2.2,
+    "rain_72h": 3.5,
+    "rain_today": 4.1,
+    "sst": 18.1
+   },
+   "tide_curve": [
+    {
+     "t": "00:00",
+     "h": -0.37
+    },
+    {
+     "t": "01:00",
+     "h": -0.26
+    },
+    {
+     "t": "02:00",
+     "h": -0.08
+    },
+    {
+     "t": "03:00",
+     "h": 0.13
+    },
+    {
+     "t": "04:00",
+     "h": 0.3
+    },
+    {
+     "t": "05:00",
+     "h": 0.39
+    },
+    {
+     "t": "06:00",
+     "h": 0.38
+    },
+    {
+     "t": "07:00",
+     "h": 0.28
+    },
+    {
+     "t": "08:00",
+     "h": 0.12
+    },
+    {
+     "t": "09:00",
+     "h": -0.06
+    },
+    {
+     "t": "10:00",
+     "h": -0.19
+    },
+    {
+     "t": "11:00",
+     "h": -0.25
+    },
+    {
+     "t": "12:00",
+     "h": -0.19
+    },
+    {
+     "t": "13:00",
+     "h": -0.04
+    },
+    {
+     "t": "14:00",
+     "h": 0.18
+    },
+    {
+     "t": "15:00",
+     "h": 0.42
+    },
+    {
+     "t": "16:00",
+     "h": 0.61
+    },
+    {
+     "t": "17:00",
+     "h": 0.71
+    },
+    {
+     "t": "18:00",
+     "h": 0.67
+    },
+    {
+     "t": "19:00",
+     "h": 0.51
+    },
+    {
+     "t": "20:00",
+     "h": 0.27
+    },
+    {
+     "t": "21:00",
+     "h": -0.01
+    },
+    {
+     "t": "22:00",
+     "h": -0.28
+    },
+    {
+     "t": "23:00",
+     "h": -0.46
+    }
+   ],
+   "environments": [
+    {
+     "id": "rock",
+     "name": "Rock",
+     "tagline": "Ledges and headland washes",
+     "tag": "LEDGES & WASHES",
+     "score": 59,
+     "session_mean": 56,
+     "best_session": "dawn",
+     "calibrated": 59,
+     "rank_score": 61,
+     "raw_median": 61.0,
+     "reason": "Workable wash; low light; prime feeding window. A small tide is taking the edge off today.",
+     "label": "Good",
+     "best_window": "5am\u20138am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.6 m swell",
+       "subscore": 72,
+       "weight_pct": 30,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 74,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light; prime feeding window"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "+4 kn onshore",
+       "subscore": 68,
+       "weight_pct": 10,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "8 s period",
+       "subscore": 71,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": "manageable period"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.2 m range",
+       "subscore": 55,
+       "weight_pct": 17,
+       "evidence": "strong",
+       "note": ""
+      }
+     ]
+    },
+    {
+     "id": "beach",
+     "name": "Beach",
+     "tagline": "Gutters, banks and the surf zone",
+     "tag": "GUTTERS & BANKS",
+     "score": 54,
+     "session_mean": 49,
+     "best_session": "dusk",
+     "calibrated": 57,
+     "rank_score": 56,
+     "raw_median": 56.0,
+     "reason": "Low light; prime feeding window; onshore breeze stirring the wash. A small tide is taking the edge off today.",
+     "label": "Fair",
+     "best_window": "5pm\u20138pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 83,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light; prime feeding window"
+      },
+      {
+       "metric": "wind_onshore_kn",
+       "label": "Onshore wind",
+       "value": "+7 kn onshore",
+       "subscore": 74,
+       "weight_pct": 15,
+       "evidence": "moderate",
+       "note": "onshore breeze stirring the wash"
+      },
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.6 m swell",
+       "subscore": 43,
+       "weight_pct": 24,
+       "evidence": "strong",
+       "note": "swell out of range"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1028 hPa",
+       "subscore": 62,
+       "weight_pct": 5,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      },
+      {
+       "metric": "rain_today",
+       "label": "Rain forecast today",
+       "value": "4 mm forecast",
+       "subscore": 62,
+       "weight_pct": 5,
+       "evidence": "moderate",
+       "note": "dry session likely"
+      }
+     ]
+    },
+    {
+     "id": "estuary",
+     "name": "Estuary",
+     "tagline": "Rivers, bays and the brackish reaches",
+     "tag": "RIVERS & REACHES",
+     "score": 52,
+     "session_mean": 50,
+     "best_session": "dusk",
+     "calibrated": 57,
+     "rank_score": 53,
+     "raw_median": 57.0,
+     "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
+     "label": "Fair",
+     "best_window": "5pm\u20138pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 77,
+       "weight_pct": 14,
+       "evidence": "strong",
+       "note": "low light; prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "11 kn",
+       "subscore": 62,
+       "weight_pct": 12,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.2 m range",
+       "subscore": 58,
+       "weight_pct": 18,
+       "evidence": "strong",
+       "note": ""
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1028 hPa",
+       "subscore": 63,
+       "weight_pct": 7,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "18.3 \u00b0C water",
+       "subscore": 65,
+       "weight_pct": 6,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      }
+     ]
+    },
+    {
+     "id": "harbour",
+     "name": "Harbour & wharf",
+     "tagline": "Structure, pylons and deep protected water",
+     "tag": "PYLONS & EDGES",
+     "score": 55,
+     "session_mean": 53,
+     "best_session": "dusk",
+     "calibrated": 57,
+     "rank_score": 57,
+     "raw_median": 59.0,
+     "reason": "Low light; prime feeding window; light winds. Dead neap tide is holding the whole day back.",
+     "label": "Fair",
+     "best_window": "5pm\u20138pm",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dusk",
+       "subscore": 73,
+       "weight_pct": 16,
+       "evidence": "strong",
+       "note": "low light; prime feeding window"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "11 kn",
+       "subscore": 66,
+       "weight_pct": 13,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "sst_c",
+       "label": "Water temp",
+       "value": "18.3 \u00b0C water",
+       "subscore": 64,
+       "weight_pct": 11,
+       "evidence": "strong",
+       "note": "water temp in the zone"
+      },
+      {
+       "metric": "rain_72h",
+       "label": "Rain (72h)",
+       "value": "4 mm/72h",
+       "subscore": 66,
+       "weight_pct": 8,
+       "evidence": "moderate",
+       "note": "runoff has coloured the water nicely"
+      },
+      {
+       "metric": "tide_range",
+       "label": "Tidal range",
+       "value": "1.2 m range",
+       "subscore": 56,
+       "weight_pct": 23,
+       "evidence": "strong",
+       "note": ""
+      }
+     ]
+    },
+    {
+     "id": "boat",
+     "name": "Boat & offshore",
+     "tagline": "Outside the Heads; reefs, FADs and open water",
+     "tag": "REEFS & OPEN WATER",
+     "score": 72,
+     "session_mean": 70,
+     "best_session": "dawn",
+     "calibrated": 62,
+     "rank_score": 76,
+     "raw_median": 72.0,
+     "reason": "Workable wash; light winds.",
+     "label": "Good",
+     "best_window": "5am\u20138am",
+     "safety_flag": false,
+     "safety_message": null,
+     "drivers": [
+      {
+       "metric": "swell_m",
+       "label": "Swell height",
+       "value": "0.6 m swell",
+       "subscore": 82,
+       "weight_pct": 29,
+       "evidence": "strong",
+       "note": "workable wash"
+      },
+      {
+       "metric": "wind_kn",
+       "label": "Wind speed",
+       "value": "5 kn",
+       "subscore": 88,
+       "weight_pct": 23,
+       "evidence": "strong",
+       "note": "light winds"
+      },
+      {
+       "metric": "light_phase",
+       "label": "Light",
+       "value": "dawn",
+       "subscore": 76,
+       "weight_pct": 10,
+       "evidence": "strong",
+       "note": "low light; prime feeding window"
+      },
+      {
+       "metric": "pressure",
+       "label": "Barometric pressure",
+       "value": "1030 hPa",
+       "subscore": 65,
+       "weight_pct": 6,
+       "evidence": "moderate",
+       "note": "settled high pressure"
+      },
+      {
+       "metric": "swell_period_s",
+       "label": "Swell period",
+       "value": "8 s period",
+       "subscore": 58,
+       "weight_pct": 8,
+       "evidence": "strong",
+       "note": ""
+      }
+     ]
+    }
+   ],
+   "species": [
+    {
+     "id": "snapper",
+     "name": "Snapper",
+     "tag": "REEF STRUCTURE",
+     "score": 59,
+     "session_mean": 58,
+     "best_session": "dusk",
+     "calibrated": 63,
+     "label": "Good",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "5pm\u20138pm",
+     "reason": "Boat & offshore, 5pm\u20138pm. Peak season; water temp in the zone. A small tide is taking the edge off today.",
+     "rank_score": 68
+    },
+    {
+     "id": "squid",
+     "name": "Southern calamari",
+     "tag": "HARBOUR WEED BEDS",
+     "score": 61,
+     "session_mean": 59,
+     "best_session": "dawn",
+     "calibrated": 61,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "5am\u20138am",
+     "reason": "Harbour & wharf, 5am\u20138am. Runoff has coloured the water nicely; low light; prime feeding window. A small tide is taking the edge off today.",
+     "rank_score": 60
+    },
+    {
+     "id": "luderick",
+     "name": "Luderick (blackfish)",
+     "tag": "WEED & LEDGES",
+     "score": 58,
+     "session_mean": 57,
+     "best_session": "morning",
+     "calibrated": 60,
+     "label": "Good",
+     "environment": "rock",
+     "environment_name": "Rock",
+     "best_window": "8am\u201311am",
+     "reason": "Rock, 8am\u201311am. Peak season; onshore breeze stirring the wash. A small tide is taking the edge off today.",
+     "rank_score": 60
+    },
+    {
+     "id": "yakkas",
+     "name": "Yellowtail (yakkas)",
+     "tag": "HARBOUR",
+     "score": 58,
+     "session_mean": 57,
+     "best_session": "dawn",
+     "calibrated": 61,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "5am\u20138am",
+     "reason": "Harbour & wharf, 5am\u20138am. Low light; prime feeding window; runoff has coloured the water nicely. A small tide is taking the edge off today.",
+     "rank_score": 58
+    },
+    {
+     "id": "mulloway",
+     "name": "Mulloway (jewfish)",
+     "tag": "ESTUARY HOLES",
+     "score": 58,
+     "session_mean": 58,
+     "best_session": "evening",
+     "calibrated": 59,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "8pm\u201311pm",
+     "reason": "Estuary, 8pm\u201311pm. Low light; prime feeding window; peak season. A small tide is taking the edge off today.",
+     "rank_score": 57
+    },
+    {
+     "id": "trevally",
+     "name": "Silver trevally",
+     "tag": "WHARF PYLONS",
+     "score": 56,
+     "session_mean": 55,
+     "best_session": "dawn",
+     "calibrated": 62,
+     "label": "Good",
+     "environment": "harbour",
+     "environment_name": "Harbour & wharf",
+     "best_window": "5am\u20138am",
+     "reason": "Harbour & wharf, 5am\u20138am. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
+     "rank_score": 57
+    },
+    {
+     "id": "salmon",
+     "name": "Australian salmon",
+     "tag": "SURF WORKUPS",
+     "score": 56,
+     "session_mean": 55,
+     "best_session": "dawn",
+     "calibrated": 60,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5am\u20138am",
+     "reason": "Beach, 5am\u20138am. Peak season; low light; prime feeding window. A small tide is taking the edge off today.",
+     "rank_score": 57
+    },
+    {
+     "id": "tailor",
+     "name": "Tailor",
+     "tag": "BEACH GUTTERS",
+     "score": 55,
+     "session_mean": 54,
+     "best_session": "dusk",
+     "calibrated": 59,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5pm\u20138pm",
+     "reason": "Beach, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. A small tide is taking the edge off today.",
+     "rank_score": 56
+    },
+    {
+     "id": "whiting",
+     "name": "Sand whiting",
+     "tag": "SAND FLATS",
+     "score": 54,
+     "session_mean": 54,
+     "best_session": "dawn",
+     "calibrated": 59,
+     "label": "Good",
+     "environment": "beach",
+     "environment_name": "Beach",
+     "best_window": "5am\u20138am",
+     "reason": "Beach, 5am\u20138am. Low light; prime feeding window; peak season. Dead neap tide is holding the whole day back.",
+     "rank_score": 56
+    },
+    {
+     "id": "bream",
+     "name": "Bream",
+     "tag": "HARBOUR STRUCTURE",
+     "score": 53,
+     "session_mean": 51,
+     "best_session": "dusk",
+     "calibrated": 58,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "5pm\u20138pm",
+     "reason": "Estuary, 5pm\u20138pm. Low light; prime feeding window; water temp in the zone. Dead neap tide is holding the whole day back.",
+     "rank_score": 54
+    },
+    {
+     "id": "flathead",
+     "name": "Dusky flathead",
+     "tag": "SAND AMBUSH",
+     "score": 54,
+     "session_mean": 53,
+     "best_session": "afternoon",
+     "calibrated": 58,
+     "label": "Good",
+     "environment": "estuary",
+     "environment_name": "Estuary",
+     "best_window": "2pm\u20135pm",
+     "reason": "Estuary, 2pm\u20135pm. Peak season; water temp in the zone. Dead neap tide is holding the whole day back.",
+     "rank_score": 54
+    },
+    {
+     "id": "kingfish",
+     "name": "Yellowtail kingfish",
+     "tag": "HARBOUR REEFS",
+     "score": 35,
+     "session_mean": 32,
+     "best_session": "afternoon",
+     "calibrated": 37,
+     "label": "Poor",
+     "environment": "boat",
+     "environment_name": "Boat & offshore",
+     "best_window": "2pm\u20135pm",
+     "reason": "Boat & offshore, 2pm\u20135pm. Off season; light winds. Water below the kingfish activity threshold.",
+     "rank_score": 53
     }
    ]
   }
